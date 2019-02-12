@@ -6,11 +6,17 @@
 	html {
 		font-family: Georgia, serif
 	}
-
-	.col-mid {
-		float: center;
-		padding: 50px;
-		width: 70%;
+	[class*="col-"] {
+		float: left;
+		padding: 15px;
+		width: 80%;
+	}
+	@media only screen and (min-width: 1024px) {
+		.col-1 {width: 5%}
+		.col-bar {width: 20%}
+		.col-2 {width: 5%}
+		.col-mid {width: 65%}
+		.col-3 {width: 5%}
 	}
 </style>
 
@@ -22,39 +28,42 @@
 <body>
 
 
+<div class="col-bar">
+	<h1>Personal.</h1>
+</div>
+
 <div class="col-mid">
-
-<p align="left">
-
-    <h1>Personal.</h1>
-    
-    <br><br>
     <img src="profile.jpg" width="100" height="100">
 
     <br>
     I'm <b>CHEN, TIANLE</b>
         (<a href="https://translate.google.com/#auto/en/%E9%99%88%E5%A4%A9%E4%B9%90" target="_blank">pronounced here</a>),
-        a PhD student at the University of Toronto in the Department of Statistical Sciences.
-    My interests are in Applied Machine Learning, specifically applications in retail and financial services.
+        a PhD student in <i>Statistics</i> at the <i>University of Toronto</i>.
+    <br>
+    My interests are in <i>Applied Machine Learning</i>, specifically applications in <i>retail and financial services</i>.
+    <br>
     Check out my <a href="https://tianle91.github.io/Resume.pdf" target="_blank">resume</a>.
-</p>
+</div>
 
 
-<br><br>
-<p align="left">
+<div class="col-bar">
+	<h1>Publications.</h1>
+</div>
 
-    <h1>Publications.</h1>
-
+<div class="col-mid">
     <h2>Joint Forecasting of Purchase Times for Individuals</h2>
     <!--author-->
     <b>Chen, T.</b>, Keng, B., Moreno, J. (2018)
     <!--title-->
+    <br>
     <i>Multivariate Arrival Times with Recurrent Neural Networks for Personalized Demand Forecasting</i>
     <!--publish-->
     <br>
     Published in Proceedings of IEEE International Conference on Data Mining 2018 DMS Workshop.
+    <br>
     Check out the GitHub repository at 
         <a href="https://github.com/tianle91/matrnn" target="_blank">github.com/tianle91/matrnn</a>.
+    <br>
     Arxiv copy 
         <a href="http://arxiv.org/abs/1812.11444" target="_blank">here</a>.
 
@@ -62,59 +71,54 @@
     <!--author-->
     Badescu, A.L., <b>Chen, T.</b>, Lin, X.S., & Tang, D. (2018)
     <!--title-->
+    <br>
     <i>A Marked Cox model for the Number of IBNR Claims: Estimation and Application</i>
     <!--publish-->
     <br>
     Submitted to ASTIN Bulletin.
+    <br>
     Repository for demo code available by request.
+</div>
 
-</p>
 
-
-<br><br>
-<p align="left">
+<div class="col-bar">
     <h1> Contact. </h1>
-    
+</div>
+
+<div class="col-mid">
     <h2>Email:</h2>
-
-
     <br>
     Gmail
         <a href="pgp_gmail.txt" target="_blank">PGP</a>
-
     <br> 
     <img src="email_gmail.jpg" height="30">
 
     <br>
     Utstat
         <a href="pgp_utstat.txt" target="_blank">PGP</a>
-
     <br>
     <img src="email_utstat.png" height="30">
-
     
     <h2>Social Media:</h2>
     <br> 
     Tweets <a href="http://twitter.com/tianlegit" target="_blank">@tianlegit</a>.
     LinkedIn <a href="http://www.linkedin.com/in/tianlechen" target="_blank">here</a>.
+</div>
 
-</p>
 
+<div class="col-bar">
+    <h1> Misc. </h1>
+</div>
 
-<br><br>
-<p align="left">
-    <h1> Miscellaneous. </h1>
-
+<div class="col-mid">
     <br>
-    Mine Monero (for me):
-        <a href="https://authedmine.com/media/miner.html?key=w6aE8f2V1B1Kl69q3JhL5sAFshvETlwg" target="_blank">here</a>.
-    Monero <a href="xmrpbkey.txt" target="_blank">public key</a>.
+    Mine Monero <a href="https://authedmine.com/media/miner.html?key=w6aE8f2V1B1Kl69q3JhL5sAFshvETlwg" target="_blank">for me</a>.
+    Send Monero <a href="xmrpbkey.txt" target="_blank">to me</a>.
   
     <br>
     Web design inspired by <a href="http://www.berkshirehathaway.com" target="blank">www.berkshirehathaway.com</a>.
-</p>
-
 </div>
+
 
 </body>
 </html> 
