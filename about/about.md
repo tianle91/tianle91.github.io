@@ -67,3 +67,10 @@ Kanchana P., <b>Chen T.</b> (2021).
 - CORS 2021
 
 <img src="talks/consistent_promotions.png" alt="consistent promotions" width="200"/>
+
+
+# Others
+
+I love trains
+
+<img src="factorio.jpg" alt="factorio" width="400"/>
