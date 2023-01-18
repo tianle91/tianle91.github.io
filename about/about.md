@@ -7,6 +7,11 @@ If you're curious:
 
 # Past time projects
 
+## [tianle91/simple-folder-management](https://github.com/tianle91/simple-folder-management)
+Automatically move folders to a pre-defined subfolder using keywords.
+
+<img src="projects/sfm.png" alt="simple-folder-management" width="300"/>
+
 
 ## [tianle91/image-deduplication](https://github.com/tianle91/image-deduplication)
 Use perceptual hashing to deduplicate images!
