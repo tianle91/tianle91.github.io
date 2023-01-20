@@ -69,6 +69,7 @@ They differ on the following aspects:
 - Less impact on surroundings: Managing inputs and outputs for opposite-side approach requires infrastructure on both ends.
 
 Summary of the approaches:
+
 | Input and output sides | Extensible | Simple | Less impact on surroundings | 
 | ---- | ---- | ---- | --- |
 | Same side | ✅ | ❌ | ✅ | 
