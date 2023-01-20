@@ -125,3 +125,5 @@ If you just need to move things in bulk from one location to another, it's much 
 Trains need fuel and can be blocked by limited throughput of the rail network caused by signaling and rail network design. Also, with more and more train stations, your factory space starts to become more train than factory. After a while you're playing Train Tycoon instead of Factorio, but that can be fun too.
 
 ![train network](07c_train_network.png)
+
+We'll end it here with this really cool [train guide](https://steamcommunity.com/sharedfiles/filedetails/?id=2737259470).
