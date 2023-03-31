@@ -1,3 +1,13 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GB6DWWMD6X');
+</script>
+
 # Why can’t I just cron my batch pipeline?
 
 > So many batch pipeline orchestrators, which one to use? (hint: not cron)
