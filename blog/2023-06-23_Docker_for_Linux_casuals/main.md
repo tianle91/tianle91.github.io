@@ -37,7 +37,7 @@ Here's basically everything you need to know about creating a container.
 | terminology | `docker run ...` | `docker-compose.yaml` | description |
 | ---- | ---- | ---- | ---- | 
 | image | `docker run IMAGE` | `image: ...` | A base environment for your application. Many applications have pre-made docker images such as `ubuntu`, `linuxserver/sonarr`. Chances are if the application supports linux, then a docker image exists for that application. | 
-| ports | `docker run --expose` | `ports: ...` | Makes a port available to be reached on the host so that you can interact with the application through `localhost:port_number`. Typically used for interfaces. | 
+| ports | `docker run --expose` | `ports: ...` | Makes a port available to be reached on the host so that you can interact with the application through `localhost:port_number` (i.e. type this address into your browser). Typically used for interfaces. Also sometimes required for other applications to reach this application externally. | 
 | volumes | `docker run --volume` | `volumes: ...` | Makes a path on the host available to the application so that reads and writes are reflected on the host. Can be used to persist application states through container recreation. |
 | environment variables | `docker run --env` | `environment: ...` | Sets environment variables required by the application. |
 
