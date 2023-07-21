@@ -11,6 +11,7 @@
 [about](about/about.md)
 
 # Blog
+- [2023-07-21 RAID is a compromise](blog/2023-07-21_RAID_is_a_compromise/main.md)
 - [2023-06-23 Docker for Linux casuals](blog/2023-06-23_Docker_for_Linux_casuals/main.md)
 - [2023-01-20 Un-Spaghetti My Factorio!](blog/2023-01-20_Un_Spaghetti_My_Factorio/main.md)
 - [2022-09-19 Why can’t I just cron my batch pipeline?](blog/2022-09-19_Why_Cant_I_Just_Cron/main.md)
