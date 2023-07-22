@@ -8,7 +8,7 @@
   gtag('config', 'G-GB6DWWMD6X');
 </script>
 
-[about](about/about.md)
+[About](about/about.md)
 
 # Blog
 - [2023-07-21 RAID is a compromise](blog/2023-07-21_RAID_is_a_compromise/main.md)
