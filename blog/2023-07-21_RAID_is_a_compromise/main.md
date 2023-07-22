@@ -10,7 +10,7 @@ If you ever needed to use a bunch of disks as a single disk, then you might have
 
 
 ## RAID can lower the risk of data loss in a system
-This is a plot of failure probabilities (vertical axis is log) (produced by [notebook](blog/2023-07-21_RAID_is_a_compromise/disk_failure.ipynb)):
+This is a plot of failure probabilities (vertical axis is log) (here's the [notebook](https://github.com/tianle91/tianle91.github.io/blob/master/blog/2023-07-21_RAID_is_a_compromise/disk_failure.ipynb) that produced the plots):
 ![raid failure probabilities](01_raid_failure.png)
 
 We can see that Mirror (RAID-1) enjoys a lower failure probability than a single drive for any number of drives in the array. After all, the number of drives in the mirror array *is equivalent to the number of backups*. 
