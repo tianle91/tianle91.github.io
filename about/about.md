@@ -17,6 +17,19 @@ If you're curious:
 
 # Past time projects
 
+
+## [stonks.tchen.xyz](http://stonks.tchen.xyz)
+Stonks! EPS is the one true measure.
+
+<img src="projects/stonks.png" alt="stonks" width="300"/>
+
+
+## [dinesafe.tchen.xyz](http://dinesafe.tchen.xyz)
+Dinesafe TO but wrapped in a ui.
+
+<img src="projects/dinesafe.png" alt="dinesafe" width="300"/>
+
+
 ## [tianle91/simple-folder-management](https://github.com/tianle91/simple-folder-management)
 Automatically move folders to a pre-defined subfolder using keywords.
 
