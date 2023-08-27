@@ -1,3 +1,13 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GB6DWWMD6X');
+</script>
+
 # RAID is a compromise
 If you ever needed to use a bunch of disks as a single disk, then you might have heard of RAID. This [wikipedia article](https://en.wikipedia.org/wiki/Standard_RAID_levels) is a good reference for a few commonly used RAID types.
 
