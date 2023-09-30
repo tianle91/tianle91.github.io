@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Computations on Distributed Datasets"
-tags: coding data
+tags: newhire coding data
 ---
 
 # Computations on Distributed Datasets
