@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Money from first principles"
+tags: fun
 ---
 
 # Money from first principles

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Why Can’t I Just Cron My Batch Pipeline?"
+tags: coding data
 ---
 
 # Why Can’t I Just Cron My Batch Pipeline?

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Docker for linux casuals"
+tags: coding
 ---
 
 # Docker for linux casuals

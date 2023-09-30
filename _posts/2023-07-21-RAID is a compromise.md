@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "RAID is a compromise"
+tags: hardware
 ---
 
 # RAID is a compromise

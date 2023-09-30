@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "New Final Final (2) Copy: Ideas in Version Control"
+tags: coding
 ---
 
 # New Final Final (2) Copy: Ideas in Version Control

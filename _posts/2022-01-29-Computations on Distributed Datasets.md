@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Computations on Distributed Datasets"
+tags: coding data
 ---
 
 # Computations on Distributed Datasets

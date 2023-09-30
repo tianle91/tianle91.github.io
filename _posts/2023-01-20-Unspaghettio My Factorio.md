@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Un-Spaghettio My Factorio!"
+tags: fun
 ---
 
 # Un-Spaghettio My Factorio!
