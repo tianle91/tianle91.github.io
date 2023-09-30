@@ -66,5 +66,9 @@ To summarize, here’s a few things to look out for (on top of running through t
 
 
 ### Trifecta of orchestration
+Remember that orchestration requires all of the following (ideally distinct entities):
+- A job orchestrator
+- Dependency graph
+- Job outputs
 
-![Trifecta of orchestration](/assets/posts/2022-09-19/03_trifecta_of_orchestration.png)
+<img src="/assets/posts/2022-09-19/03_trifecta_of_orchestration.png" alt="trifecta of orchestration" width="400"/>
