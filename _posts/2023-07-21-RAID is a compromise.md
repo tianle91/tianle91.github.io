@@ -16,7 +16,7 @@ If you ever needed to use a bunch of disks as a single disk, then you might have
 
 
 ## RAID can lower the risk of data loss in a system
-This is a plot of failure probabilities (vertical axis is log) (here's the [notebook](https://github.com/tianle91/tianle91.github.io/blob/master/blog/2023-07-21_RAID_is_a_compromise/disk_failure.ipynb) that produced the plots):
+This is a plot of failure probabilities (vertical axis is log) (here's the [notebook](https://github.com/tianle91/tianle91.github.io/blob/master/assets/posts/2023-07-21/disk_failure.ipynb) that produced the plots):
 
 ![raid failure probabilities](/assets/posts/2023-07-21/01_raid_failure.png)
 
