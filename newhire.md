@@ -9,12 +9,14 @@
 </script>
 
 # New Hire Readings
-{% for tag in site.tags %}
-  {% if tag[0] == "newhire" %}
-    <ul>
-        {% for post in tag[1] %}
-        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-        {% endfor %}
-    </ul>
-  {% endif %}
-{% endfor %}
+<ul>
+  {% for tag in site.tags %}
+    {% if tag[0] == "newhire" %}
+      {% for post in tag[1] %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+</ul>
