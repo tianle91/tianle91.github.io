@@ -31,7 +31,7 @@ ASTIN Bulletin 2019.
 
 ## All You Need is Consistent Promotions
 
-Kanchana P., <b>Chen T.</b> (2021).
+Kanchana P., **Chen T.** (2021).
 [YouTube (CORS 2021)](https://www.youtube.com/watch?v=q7gsFr0SZok)
 - Toronto Machine Learning Society - ML In Retail (2021-04-21).
 - POMS 2021 - Global Supply Chain Management track (2021-05-04).
