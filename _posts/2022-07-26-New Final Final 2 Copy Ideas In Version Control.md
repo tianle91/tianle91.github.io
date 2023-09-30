@@ -7,18 +7,18 @@ tags: coding
 # New Final Final (2) Copy: Ideas in Version Control
 There comes a time in every project when one has to come to terms with the mess that they have made. The number of files are sprawling and each of them claims to be the most recent version and somehow none of them has exactly what you need. What exactly happened here?
 
-![frustrating names](/assets/2022-07-26/01_frustrating_names.jpg)
+![frustrating names](/assets/posts/2022-07-26/01_frustrating_names.jpg)
 
 You ask a software developer and turns out you need this thing called “Version Control”. Right before your friend started saying “Git”, you muted the chat — the best course of action IMO. However, the idea seems useful. There are so many versions and it would certainly make sense to control them... whatever that means.
 
 ## What’s Version Control anyway?
 We want to track changes in a document or project in a sequential way. One way of creating a sequence can be achieved by sorting the files by “Date Modified”, which reveals that the top-most file is the most recently modified one.
 
-![sort by modified](/assets/2022-07-26/02_sort_by_modified.jpg)
+![sort by modified](/assets/posts/2022-07-26/02_sort_by_modified.jpg)
 
 However, projects can get complicated and changes do not necessarily stack on top of each other cleanly. Perhaps the most recently modified file was a change that didn’t work out! We do not want to use that file.
 
-![flow chart](/assets/2022-07-26/03_flowchart.jpg)
+![flow chart](/assets/posts/2022-07-26/03_flowchart.jpg)
 
 A flow chart would show a much better sequence of versions — not only the changes but also the reverting of changes (i.e. undo). You can also see that some versions branched off from others, resulting in two children versions on which further changes have been made. Now you’re better able to pick and choose the state of the file (or project) you want to continue working on and use.
 
@@ -26,7 +26,7 @@ A flow chart would show a much better sequence of versions — not only the chan
 
 ## Branches
 
-![branches](/assets/2022-07-26/04_branches.jpg)
+![branches](/assets/posts/2022-07-26/04_branches.jpg)
 
 The sequences of changes above are typically organized into “branches” for convenience. A branch is a sequence of states wherein each state in a branch can only be followed by another state in the same branch. One can create a new branch from any state on another branch.
 
@@ -47,7 +47,7 @@ However, not all CICD are equal — some are much more expensive and risky than 
 
 ## The Canonical Branch
 
-![canonical branch](/assets/2022-07-26/05_canonical_branch.jpg)
+![canonical branch](/assets/posts/2022-07-26/05_canonical_branch.jpg)
 
 In this model of collaboration, everyone refers to a single branch of the project. This is commonly known as `main`, `master`, etc. 
 
@@ -67,7 +67,7 @@ There can be Integration checks set up to run on any development branches as wel
 ## Concurrent changes
 In the process of working on the project, users might make concurrent changes. This is often a pain point in collaboration due to potential incompatibilities of the changes they might introduce.
 
-![concurrent changes](/assets/2022-07-26/06_concurrent_changes.jpg)
+![concurrent changes](/assets/posts/2022-07-26/06_concurrent_changes.jpg)
 
 In the following example, you see that both Tim and Sam started working on the project at “Main” but Tim added his changes to “Main” first, causing the branch to progress to “Main1”. At this time, Sam decides to add his changes to the main branch. There can potentially be changes made by Sam which are not compatible with the changes made by Tim. 
 

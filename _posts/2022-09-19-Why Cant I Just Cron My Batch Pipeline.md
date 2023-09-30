@@ -8,7 +8,7 @@ tags: coding data
 
 > So many batch pipeline orchestrators, which one to use? (hint: not cron)
 
-![so many orchestrators](/assets/2022-09-19/01_so_many_orchestrators.png)
+![so many orchestrators](/assets/posts/2022-09-19/01_so_many_orchestrators.png)
 
 
 Say you’ve created an application to extract value out of data, now you need to rerun a series of steps periodically to generate new data for your application, taking new data as input each time it was rerun. Figuratively, you want to create a pipe, though which new data can flow, a pipeline, if you will.
@@ -28,7 +28,7 @@ In many cases, some jobs depend on prior jobs succeeding. One way to solve this 
 
 Basically it's just a gantt chart, where downstream tasks start and we cross out fingers and hope everything upstream has already completed.
 
-![gantt](/assets/2022-09-19/02_gantt.jpg)
+![gantt](/assets/posts/2022-09-19/02_gantt.jpg)
 
 The downsides of this approach is that it can be an involved process to benchmark past runtimes and set appropriate schedules. However, a schedule that works for most of the historical runtimes can also be too loose and take a much longer time than expected. On the other hand, a tight schedule is prone to changes caused by jobs taking longer than anticipated.
 
@@ -67,4 +67,4 @@ To summarize, here’s a few things to look out for (on top of running through t
 
 ### Trifecta of orchestration
 
-![Trifecta of orchestration](/assets/2022-09-19/03_trifecta_of_orchestration.png)
+![Trifecta of orchestration](/assets/posts/2022-09-19/03_trifecta_of_orchestration.png)
