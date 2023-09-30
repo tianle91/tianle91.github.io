@@ -1,3 +1,8 @@
+---
+layout: post
+title:  "Money from first principles"
+---
+
 # A market 
 A market is made up by participants. Participants have a pre-determined set of trades. A trade is fully determined by the quantity of a particular good that is given up in return for a quantity of another good.
 
