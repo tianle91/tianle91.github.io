@@ -8,7 +8,7 @@
   gtag('config', 'G-GB6DWWMD6X');
 </script>
 
-# New Hire Readings
+# New Hire Selected Readings
 <ul>
   {% for tag in site.tags %}
     {% if tag[0] == "newhire" %}

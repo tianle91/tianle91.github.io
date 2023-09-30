@@ -11,6 +11,7 @@
 [About](/about.md)
 
 # Blog
+[New hire selected readings](/newhire.md)
 <ul>
   {% for post in site.posts %}
     <li>
