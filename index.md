@@ -8,7 +8,7 @@
   gtag('config', 'G-GB6DWWMD6X');
 </script>
 
-[About](about/about.md)
+[About](/about.md)
 
 # Blog
 <ul>
