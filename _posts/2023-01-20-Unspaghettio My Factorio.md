@@ -6,13 +6,13 @@ title:  "Un-Spaghettio My Factorio!"
 # Un-Spaghettio My Factorio!
 So some time ago I picked up Factorio on steam some time ago. The goal of the game is to gather resources and build tools, transportation, production and automation to bootstrap your way eventually to construct a rocket. There isn't one single playstyle or winning strategy so there's really good replay value... so naturally I *played it for a bit*.
 
-![play time](01_play_time.png)
+![play time](/assets/2023-01-20/01_play_time.png)
 
 
 ## Spaghetti
 In the official website, you'll find some images of *spaghetti*. Here's an example:
 
-![spaghetti](02_spaghetti.jpg)
+![spaghetti](/assets/2023-01-20/02_spaghetti.jpg)
 
 It's really easy to make a spaghetti! As the game progresses, just connect all the inputs to the consumers and outputs to their downstream consumers with the shortest path possible. Do that for a couple of production lines and you've made yourself an instant spaghetti. Some say a spaghetti is beautiful, others say it's a the bane of their existence... but hey, everyone has made one before.
 
@@ -27,7 +27,7 @@ Basically, spaghettis are nice to look at but bad to touch because...
 
 There must be a better way!
 
-![must be a better way](03_must_be_a_better_way.jpg)
+![must be a better way](/assets/2023-01-20/03_must_be_a_better_way.jpg)
 
 
 ## What's an anti-spaghetti?
@@ -43,7 +43,7 @@ Since electronic circuits are one of the most used intermediate components in Fa
 
 Let's reconsider what a electronic circuit production requires:
 
-![electronic circuit flowchart](04a_eg_dag.png)
+![electronic circuit flowchart](/assets/2023-01-20/04a_eg_dag.png)
 
 Some notable features of this recipe are:
 1. Only 2 inputs are required (iron plates and copper plates)
@@ -62,11 +62,11 @@ Some designs put inputs on the same side as outputs while others have them on op
 
 Same-side approach with 3 input lanes and a single output lane on the same side.
 
-![same side](05b_same_side.png)
+![same side](/assets/2023-01-20/05b_same_side.png)
 
 Opposite-side approach with 3 input lanes on the left and a single output lane on the right (in the middle vertically).
 
-![opposite side](05a_opposite_side.png)
+![opposite side](/assets/2023-01-20/05a_opposite_side.png)
 
 They differ on the following aspects:
 - Extensible: For same side approach, production can be extended by adding more to the opposite end. 
@@ -86,7 +86,7 @@ We want our setup to have as few bottlenecks as possible. Bottlenecks indicate w
 
 We'll start with [this great resource](https://kirkmcdonald.github.io/calc.html#tab=graph&data=1-1-19&items=electronic-circuit:f:1) to visualize the rates required to produce 60 electronic circuits per minute.
 
-![circuit rates](04b_eg_rates.png)
+![circuit rates](/assets/2023-01-20/04b_eg_rates.png)
 
 Let's bear in mind these ratios:
 - For every iron plate, we need 1.5 copper plates - the optimal ratio of copper to iron inputs is therefore 3:2. We can start with just 1:1 ratio and then add more copper and iron inputs later as we expand production.
@@ -95,7 +95,7 @@ Let's bear in mind these ratios:
 
 An optimal setup looks like the following:
 
-![circuit assemblers](06_circuit_assemblers.png)
+![circuit assemblers](/assets/2023-01-20/06_circuit_assemblers.png)
 
 Top two input lanes are copper and the bottom input is iron. The bottom-most lane carries the output electronic circuits. The source blueprint is available [here](https://www.factorio.school/view/-ND8sYSaE9kfSGD-6Hzd).
 
@@ -105,30 +105,30 @@ Once we've created a efficient blueprint for production, we'll need to connect t
 
 A bus is a collection of lanes (or belts in Factorio). Here's how it looks like:
 
-![bus](07_bus.png)
+![bus](/assets/2023-01-20/07_bus.png)
 
 The bus primary refers to the parallel collection of lanes carrying inputs and outputs. The example starts with a 5-lane input on the left with the addition of a new lane (electronic circuits) on the right, creating a 6-lane bus. Lanes are split off to lead into a production area and outputs are merged back into the bus.
 
 Trains are the best way to transport bulk items over long distances. You'll have to load and unload items to and from trains though, which makes it not a free lunch. Busses and trains differ in some significant ways that we'll discuss below.
 
-![train](07_train.png)
+![train](/assets/2023-01-20/07_train.png)
 
 
 #### Ease of integration
 It's much easier to put things into and out of busses. Loading and offloading for trains takes up much more space compared to the bus example above. Here's an example on loading a train, which requires balancing (splitters) and buffers (inserters and chests).
 
-![train load](07a_train.png)
+![train load](/assets/2023-01-20/07a_train.png)
 
 
 #### Space efficiency
 If you just need to move things in bulk from one location to another, it's much more efficient to use trains. They shrink the intermediate bus lanes which can get really wide into a couple of tiles wide (i.e. the width of a train track). Here's an example of replacing a 5-lane wide bus with a 5-carriage long train:
 
-![bus to train](07b_bus_to_train.png)
+![bus to train](/assets/2023-01-20/07b_bus_to_train.png)
 
 
 #### Complexity
 Trains need fuel and can be blocked by limited throughput of the rail network caused by signaling and rail network design. Also, with more and more train stations, your factory space starts to become more train than factory. After a while you're playing Train Tycoon instead of Factorio, but that can be fun too.
 
-![train network](07c_train_network.png)
+![train network](/assets/2023-01-20/07c_train_network.png)
 
 We'll end it here with this really cool [train guide](https://steamcommunity.com/sharedfiles/filedetails/?id=2737259470).

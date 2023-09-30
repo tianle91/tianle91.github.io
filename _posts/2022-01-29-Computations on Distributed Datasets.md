@@ -8,7 +8,7 @@ title:  "Computations on Distributed Datasets"
 
 Imagine that you need to run some computation on a dataset and if you try to load the dataset, your laptop runs out of memory! What you’d really like is a laptop with more memory, but the best your manager can do is just another identical laptop. Now, theoretically you have double the total memory and computational power. But how do you actually use both machines? Your manager assures you that it’s possible but before he can say more, he rushes off for his next meeting.
 
-![two laptops no work](01_two_laptops_no_work.jpg)
+![two laptops no work](/assets/2022-01-29/01_two_laptops_no_work.jpg)
 
 
 ## Partitioning
@@ -24,7 +24,7 @@ for row_number, row in dataset:
 ```
 Voila! We find that splitting the dataset into two allows each piece to be loaded into their respective laptops without running out of memory. We can now think about how to perform computation on these dataset pieces.
 
-![divide and conquer](02_divide_and_conquer.jpg)
+![divide and conquer](/assets/2022-01-29/02_divide_and_conquer.jpg)
 
 In general, splitting up a large dataset into smaller ones is known as “partitioning”. Partitions should be small enough to be loaded into each worker (that’s a laptop in this example).
 
@@ -52,7 +52,7 @@ count_values(dataset) = count_1 + count_2
 ```
 This means that to obtain the counts over the entire dataset, we do not need to load the entire dataset. Instead, we can load up partitions of the dataset and run the computation on each partition. Then we can simply add the counts to obtain the result.
 
-![map and reduce](03_map_and_reduce.jpg)
+![map and reduce](/assets/2022-01-29/03_map_and_reduce.jpg)
 
 
 ## Map and Reduce

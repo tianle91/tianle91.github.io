@@ -6,7 +6,7 @@ title:  "Docker for linux casuals"
 # Docker for linux casuals
 Many moons ago I recall installing Ubuntu on my home PC because I was sick of Windows, the only operating system I had used up to that point. Even though Ubuntu was (and still is) a mainsteam flavour of Linux, I found that it was pretty rare that an application I need got installed with zero issues. So I promptly formatted my hard drive and reinstalled Windows and it wasn't until MacOS that a Unix-based operating system became my daily driver.
 
-![01_no_linux_yes_windows](01_no_linux_yes_windows.png)
+![01_no_linux_yes_windows](/assets/2023-06-23/01_no_linux_yes_windows.png)
 
 However, a lot of things have happened since then. But mainly, these two trends have significantly simplified application development.
 1. Every interface is now browser-based.
@@ -14,7 +14,7 @@ However, a lot of things have happened since then. But mainly, these two trends 
 
 Now, deploying an application on any linux environment is easy so long as there's docker installed. That means you can run the same thing on a Windows desktop (via WSL), a MacOS laptop, an AWS server, a Synology NAS or even a Raspberry Pi.
 
-![02_docker](02_docker.png)
+![02_docker](/assets/2023-06-23/02_docker.png)
 
 ## What is Docker? 
 Docker is a way to run applications in an isolated environment (like a virtual machine) without the overhead of a VM.
@@ -27,7 +27,7 @@ For the full specification, see the official documentation [docker run](https://
 
 Here's basically everything you need to know about creating a container.
 
-![03 container](03_container.png)
+![03 container](/assets/2023-06-23/03_container.png)
 
 | terminology | `docker run ...` | `docker-compose.yaml` | description |
 | ---- | ---- | ---- | ---- | 

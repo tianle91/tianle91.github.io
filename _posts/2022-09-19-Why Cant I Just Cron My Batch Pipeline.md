@@ -7,7 +7,7 @@ title:  "Why Can’t I Just Cron My Batch Pipeline?"
 
 > So many batch pipeline orchestrators, which one to use? (hint: not cron)
 
-![so many orchestrators](01_so_many_orchestrators.png)
+![so many orchestrators](/assets/2022-09-19/01_so_many_orchestrators.png)
 
 
 Say you’ve created an application to extract value out of data, now you need to rerun a series of steps periodically to generate new data for your application, taking new data as input each time it was rerun. Figuratively, you want to create a pipe, though which new data can flow, a pipeline, if you will.
@@ -27,7 +27,7 @@ In many cases, some jobs depend on prior jobs succeeding. One way to solve this 
 
 Basically it's just a gantt chart, where downstream tasks start and we cross out fingers and hope everything upstream has already completed.
 
-![gantt](02_gantt.jpg)
+![gantt](/assets/2022-09-19/02_gantt.jpg)
 
 The downsides of this approach is that it can be an involved process to benchmark past runtimes and set appropriate schedules. However, a schedule that works for most of the historical runtimes can also be too loose and take a much longer time than expected. On the other hand, a tight schedule is prone to changes caused by jobs taking longer than anticipated.
 
@@ -62,3 +62,8 @@ To summarize, here’s a few things to look out for (on top of running through t
 - Idempotent jobs: Jobs can fail and when they do, we want to know that they’ll give the same outputs each time they’re rerun.
 - DAG checking: Typically your orchestrator of choice checks for non-circular dependencies and you wouldn’t need to worry about it too much if your jobs make logical sense.
 - Monitoring solutions: What are the failure modes you want to identify and how will you want to be notified?
+
+
+### Trifecta of orchestration
+
+![Trifecta of orchestration](/assets/2022-09-19/03_trifecta_of_orchestration.png)
