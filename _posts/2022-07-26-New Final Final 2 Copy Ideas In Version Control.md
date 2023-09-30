@@ -1,12 +1,7 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GB6DWWMD6X');
-</script>
+---
+layout: post
+title:  "New Final Final (2) Copy: Ideas in Version Control"
+---
 
 # New Final Final (2) Copy: Ideas in Version Control
 There comes a time in every project when one has to come to terms with the mess that they have made. The number of files are sprawling and each of them claims to be the most recent version and somehow none of them has exactly what you need. What exactly happened here?

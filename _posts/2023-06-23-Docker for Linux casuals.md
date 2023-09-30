@@ -1,12 +1,7 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GB6DWWMD6X');
-</script>
+---
+layout: post
+title:  "Docker for linux casuals"
+---
 
 # Docker for linux casuals
 Many moons ago I recall installing Ubuntu on my home PC because I was sick of Windows, the only operating system I had used up to that point. Even though Ubuntu was (and still is) a mainsteam flavour of Linux, I found that it was pretty rare that an application I need got installed with zero issues. So I promptly formatted my hard drive and reinstalled Windows and it wasn't until MacOS that a Unix-based operating system became my daily driver.

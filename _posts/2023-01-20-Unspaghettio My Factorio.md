@@ -1,14 +1,9 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+---
+layout: post
+title:  "Un-Spaghettio My Factorio!"
+---
 
-  gtag('config', 'G-GB6DWWMD6X');
-</script>
-
-# Un-Spaghetti My Factorio!
+# Un-Spaghettio My Factorio!
 So some time ago I picked up Factorio on steam some time ago. The goal of the game is to gather resources and build tools, transportation, production and automation to bootstrap your way eventually to construct a rocket. There isn't one single playstyle or winning strategy so there's really good replay value... so naturally I *played it for a bit*.
 
 ![play time](01_play_time.png)
