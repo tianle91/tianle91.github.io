@@ -1,13 +1,3 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GB6DWWMD6X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GB6DWWMD6X');
-</script>
-
 If you're curious:
 - How to pronounce [Tianle Chen](https://translate.google.com/#auto/en/%E9%99%88%E5%A4%A9%E4%B9%90)
 - Reach me by [tianlechen@gmail.com](mailto:tianlechen@gmail.com)
