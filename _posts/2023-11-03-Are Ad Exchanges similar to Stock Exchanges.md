@@ -123,5 +123,10 @@ As far as I can tell, the ad market is not that interesting on the supply side s
 > The only interesting ad-related piece that sellers need to figure out is ad scoring.
 
 ## What does an ad exchange do? 
-- Ask for bids from multiple buyers 
-- Collect bids and send to sellers
+We now have the following pieces of an ad market:
+- **Ad creatives** The content of an ad.
+- **Ad targeting** Where the ad should be shown.
+- **Bidding** The amount buyers are willing to pay for an ad to be shown on *specific site* to a *specific set of users*. 
+- **Ad scoring** The willingness of a seller to display an ad (independent of ad bid).
+
+The role of an ad exchange is therefore to put everything together and match buyers with sellers. 
