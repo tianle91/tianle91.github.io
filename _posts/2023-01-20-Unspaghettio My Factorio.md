@@ -5,7 +5,7 @@ tags: fun
 ---
 
 # Un-Spaghettio My Factorio!
-So some time ago I picked up Factorio on steam some time ago. The goal of the game is to gather resources and build tools, transportation, production and automation to bootstrap your way eventually to construct a rocket. There isn't one single playstyle or winning strategy so there's really good replay value... so naturally I *played it for a bit*.
+So some time ago I picked up Factorio on steam some time ago. The goal of the game is to gather resources and build tools, transportation, production and automation to bootstrap your way eventually to construct a rocket. There isn't one single play style or winning strategy, so there's excellent replay value... so naturally I *played it for a bit*.
 
 ![play time](/assets/posts/2023-01-20/01_play_time.png)
 
@@ -15,20 +15,20 @@ In the official website, you'll find some images of *spaghetti*. Here's an examp
 
 ![spaghetti](/assets/posts/2023-01-20/02_spaghetti.jpg)
 
-It's really easy to make a spaghetti! As the game progresses, just connect all the inputs to the consumers and outputs to their downstream consumers with the shortest path possible. Do that for a couple of production lines and you've made yourself an instant spaghetti. Some say a spaghetti is beautiful, others say it's a the bane of their existence... but hey, everyone has made one before.
+It's really easy to make a spaghetti! As the game progresses, just connect all the inputs to the consumers and outputs to their downstream consumers with the shortest path possible. Do that for a couple of production lines, and you've made yourself an instant spaghetti. Some say a spaghetti is beautiful, others say it's the bane of their existence... but hey, everyone has made one before.
 
 
 ## What's wrong with it? 
 A sprawling mess is hard to manage - once you've made a spaghetti, you can't unmake it without destroying everything. If a part of it needs to be changed, there's very little working room to do so. Changing one part of the spaghetti often takes out more parts than expected and doing so comes with a high likelihood of killing your factory.
 
-Basically, spaghettis are nice to look at but bad to touch because...
+Basically, spaghetti are nice to look at but bad to touch because...
 - Complex dependencies - Where do inputs come from? Where do outputs go? Everything's lost in the ether of the spaghetti.
-- Wasted resources - It was already enough trouble making the machinery to produce a new item fit into the spaghett. Nobody has time to make sure that it's functioning efficiently.
-- Hard to scale - What if I need more electronic circuits? How can I make sure more inputs are available and how can I put down additional assemblers to create more outputs? 
+- Wasted resources - It was already enough trouble making the machinery to produce a new item fit into the spaghetti. Nobody has time to make sure that it's functioning efficiently.
+- Hard to scale - What if I need more electronic circuits? How can I make sure more inputs are available, and how can I put down additional assemblers to create more outputs? 
 
 There must be a better way!
 
-![must be a better way](/assets/posts/2023-01-20/03_must_be_a_better_way.jpg)
+![there must be a better way](/assets/posts/2023-01-20/03_must_be_a_better_way.jpg)
 
 
 ## What's an anti-spaghetti?
@@ -102,7 +102,7 @@ Top two input lanes are copper and the bottom input is iron. The bottom-most lan
 
 
 ## Buses vs Trains
-Once we've created a efficient blueprint for production, we'll need to connect them up together. Connecting things together is the main goal of the mid to late game, when the macro-logisitics dominate gameplay. Busses and trains are the primary tools to solve this problem.
+Once we've created a efficient blueprint for production, we'll need to connect them up together. Connecting things together is the main goal of the mid to late game, when the macro logistics dominate gameplay. Busses and trains are the primary tools to solve this problem.
 
 A bus is a collection of lanes (or belts in Factorio). Here's how it looks like:
 

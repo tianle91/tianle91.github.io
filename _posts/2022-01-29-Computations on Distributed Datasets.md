@@ -5,9 +5,9 @@ tags: newhire coding data
 ---
 
 # Computations on Distributed Datasets
-> Overview on the whys and how's of computations on distributed datasets — and what’s this Map Reduce thing anyway?
+> Overview on the "why's" and "how's" of computations on distributed datasets — and what’s this Map-Reduce thing anyway?
 
-Imagine that you need to run some computation on a dataset and if you try to load the dataset, your laptop runs out of memory! What you’d really like is a laptop with more memory, but the best your manager can do is just another identical laptop. Now, theoretically you have double the total memory and computational power. But how do you actually use both machines? Your manager assures you that it’s possible but before he can say more, he rushes off for his next meeting.
+Imagine that you need to run some computation on a dataset and if you try to load the dataset, your laptop runs out of memory! What you’d really like is a laptop with more memory, but the best your manager can do is just another identical laptop. Now, theoretically you have double the total memory and computational power. But how do you actually use both machines? Your manager assures you that it’s possible, but before he can say more, he rushes off for his next meeting.
 
 ![two laptops no work](/assets/posts/2022-01-29/01_two_laptops_no_work.jpg)
 

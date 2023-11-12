@@ -7,7 +7,7 @@ tags: fun
 # Money from first principles
 Here will briefly discuss the functions of money from first principles.
 
-# A market 
+# A market
 A market is made up by participants. Participants have a pre-determined set of trades. A trade is fully determined by the quantity of a particular good that is given up in return for a quantity of another good.
 
 Each participant wants to achieve the following competing objectives:
@@ -17,12 +17,12 @@ Each participant wants to achieve the following competing objectives:
 # Fully connected market
 For the sake of simplicity let's assume that the number of parties is always much larger than the variety of goods in the market. Consider the simplest case of having only two goods in the market, then any party can trade a good for any other good directly in a single barter trade. But what if there are more than two goods? 
 
-## Direct trades are inefficient but Indirect trades are costly
+## Direct trades are inefficient, but Indirect trades are costly
 If there are `N` goods in a system, the first good `g_1` needs parties willing to trade `g_2, g_3, ... g_N` for it (`N-1` pairs). Likewise for `g_2`, we need `N-2` pairs since everything else is the same except that the `(g_1, g_2)` pair is already accounted for. The number of trading pairs required is thus `O(N^2)` - so this is increasingly less likely to be the case as the number of goods in the market increases. 
 
 > Trades can be split up using any number of intermediate goods. 
 
-This significantly reduces the number of pairwise trades necessary. The market therefore only need the pairs `(g_1, g_2), (g_2, g_3), ... (g_{N-1}, g_N)`, which is `O(N)`, which is much more likely to occur than if we're restricted to direct trades. However, the tradeoff here is that instead of completing the trade directly in 1 transaction, we need `O(N)` number of transactions in the worst case to completing the trade. Furthermore, demand for well-connected goods also increases. 
+This significantly reduces the number of pairwise trades necessary. The market therefore only need the pairs `(g_1, g_2), (g_2, g_3), ... (g_{N-1}, g_N)`, which is `O(N)`, which is much more likely to occur than if we're restricted to direct trades. However, the trade-off here is that instead of completing the trade directly in 1 transaction, we need `O(N)` number of transactions in the worst case to completing the trade. Furthermore, demand for well-connected goods also increases. 
 
 # Money increases liquidity and competition
 > Intermediate goods don't need to be actual goods.
@@ -48,13 +48,13 @@ Of course, the ratio at which goods are exchangeable for money is defined by the
 Traditionally, any form of physical money issued by the central authority money has the following properties
 - It doesn't degrade easily and can be reused from trade to trade. 
 - Costs of transporting money is much smaller than transporting goods. 
-- It's fungible so its use cannot be restricted. 
+- It's fungible, so its use cannot be restricted. 
 
 If the goods that money can exchange for stays relatively the same over time, parties may be willing to exchange goods for money right now with the expectation that money can be used to exchanged for other goods in the future. Even though agreements can be made between willing parties to that effect, the use of money enables anyone to enter into such an arrangement and standardizes such agreements. 
 
-When a sale of a good for money occurs today, what happens is a tradeoff wherein, the seller obtains:
+When a sale of a good for money occurs today, what happens is a trade-off wherein, the seller obtains:
 - The value of a good today, in exchange for the value of the same good in the future.
 - Optionality in the goods they want to buy in the future, in exchange for the amount of goods they can buy in the future. 
-Both tradeoffs depend on the market conditions today and the future but the future is much more uncertain than that today.
+Both trade-offs depend on the market conditions today and the future, but the future is much more uncertain than that today.
 
-Value is determined by an ordered and weighed basket of goods a party desires. This may vary across parties. However the main determinant of trade outcomes is the goods produced by each party. 
+Value is determined by an ordered and weighed basket of goods a party desires. This may vary across parties. However, the main determinant of trade outcomes is the goods produced by each party. 
