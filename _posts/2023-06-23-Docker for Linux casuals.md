@@ -4,8 +4,8 @@ title:  "Docker for linux casuals"
 tags: coding
 ---
 
-# Docker for linux casuals
-Many moons ago I recall installing Ubuntu on my home PC because I was sick of Windows, the only operating system I had used up to that point. Even though Ubuntu was (and still is) a mainsteam flavour of Linux, I found that it was pretty rare that an application I need got installed with zero issues. So I promptly formatted my hard drive and reinstalled Windows and it wasn't until MacOS that a Unix-based operating system became my daily driver.
+# Docker for Linux casuals
+Many moons ago I recall installing Ubuntu on my home PC because I was sick of Windows, the only operating system I had used up to that point. Even though Ubuntu was (and still is) a mainstream flavor of Linux, I found that it was pretty rare that an application I need got installed with zero issues. So I promptly formatted my hard drive and reinstalled Windows, and it wasn't until macOS that a Unix-based operating system became my daily driver.
 
 ![01_no_linux_yes_windows](/assets/posts/2023-06-23/01_no_linux_yes_windows.png)
 
@@ -13,14 +13,14 @@ However, a lot of things have happened since then. But mainly, these two trends 
 1. Every interface is now browser-based.
 2. Every application is docker.
 
-Now, deploying an application on any linux environment is easy so long as there's docker installed. That means you can run the same thing on a Windows desktop (via WSL), a MacOS laptop, an AWS server, a Synology NAS or even a Raspberry Pi.
+Now, deploying an application on any Linux environment is easy so long as there's docker installed. That means you can run the same thing on a Windows desktop (via WSL), a macOS laptop, an AWS server, a Synology NAS or even a Raspberry Pi.
 
 ![02_docker](/assets/posts/2023-06-23/02_docker.png)
 
 ## What is Docker? 
 Docker is a way to run applications in an isolated environment (like a virtual machine) without the overhead of a VM.
 This is possible because the host machine (where docker is installed) uses resource isolation tricks to create spaces for applications to run (aka container).
-Gone are the days when linux users have to deal with endless application setup tweaks to make things work on your specific flavour of linux. 
+Gone are the days when Linux users have to deal with endless application setup tweaks to make things work on your specific flavor of Linux. 
 
 ## Using a single container
 You can create a container using `docker run IMAGE` or `docker-compose up` with a configured `docker-compose.yaml` in your working directory.
@@ -32,8 +32,8 @@ Here's basically everything you need to know about creating a container.
 
 | terminology | `docker run ...` | `docker-compose.yaml` | description |
 | ---- | ---- | ---- | ---- | 
-| image | `docker run IMAGE` | `image: ...` | A base environment for your application. Many applications have pre-made docker images such as `ubuntu`, `linuxserver/sonarr`. Chances are if the application supports linux, then a docker image exists for that application. | 
-| ports | `docker run --expose` | `ports: ...` | Makes a port available to be reached on the host so that you can interact with the application through `localhost:port_number` (i.e. type this address into your browser). Typically used for interfaces. Also sometimes required for other applications to reach this application externally. | 
+| image | `docker run IMAGE` | `image: ...` | A base environment for your application. Many applications have pre-made docker images such as `ubuntu`, `linuxserver/sonarr`. Chances are if the application supports Linux, then a docker image exists for that application. | 
+| ports | `docker run --expose` | `ports: ...` | Makes a port available to be reached on the host so that you can interact with the application through `localhost:port_number` (i.e. type this address into your browser). Typically used for interfaces. Also, sometimes required for other applications to reach this application externally. | 
 | volumes | `docker run --volume` | `volumes: ...` | Makes a path on the host available to the application so that reads and writes are reflected on the host. Can be used to persist application states through container recreation. |
 | environment variables | `docker run --env` | `environment: ...` | Sets environment variables required by the application. |
 
@@ -55,4 +55,4 @@ When running `docker-compose up` with the above-mentioned `docker-compose.yaml`,
 Once containers are created and running, you'll need to do some maintenance.
 - `docker ps` is a good way to find a list of containers and what they're running, as well as the ports they've exposed (you can't expose have multiple container exposing the same ports).
 - `docker logs` gets you the logs from containers. If you find that some containers are unexpectedly stopped or always restarting, you'd want to check the logs to figure out why. 
-- `docker exec -it` is useful if you can't figure out why the container isn't working and you need to "go in" and figure out interactively what's going on. Typically you only need to do this if you're developing an image and can't replicate the issue on your development environment.
+- `docker exec -it` is useful if you can't figure out why the container isn't working, and you need to "go in" and figure out interactively what's going on. Typically, you only need to do this if you're developing an image and can't replicate the issue on your development environment.

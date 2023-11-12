@@ -37,7 +37,7 @@ This quantity of ads is spread across the total number of active internet users 
 > Nasdaq trades are **a thousand times** less diverse than that in ad markets.
 
 ## They're also cheap
-On the other hand, advertising revenue in the US is $480 billion in 2022. This figure is reached in a single day on Nasdaq, where the trading volume for 2023-11-09 is already 240 billion usd.
+On the other hand, advertising revenue in the US is $480 billion in 2022. This figure is reached in a single day on Nasdaq, where the trading volume for 2023-11-09 is already 240 billion USD.
 
 |      | Daily Revenue | Daily Number of Trades | Revenue per Trade | 
 | ---- | ------------- | ---------------------- | ----------------- |
@@ -139,7 +139,7 @@ In the [Protected Audience Webinar](https://docs.google.com/presentation/d/1T0pK
 
 ![protected audience overview](/assets/posts/2023-11-03/protected_audience_overview.png)
 
-These steps in the middle of the sequence diagram are particularly insightful in describing the role of Publishers, Buyers, Sellers and Ad Exchanges in conducting an auction. Note that Ad Exchanges are not in the diagram because the Protected Audience API but the diagram shows the roles in the current online advertising landscape.
+These steps in the middle of the sequence diagram are particularly insightful in describing the role of Publishers, Buyers, Sellers and Ad Exchanges in conducting an auction. Note that Ad Exchanges are not in the diagram because the Protected Audience API, but the diagram shows the roles in the current online advertising landscape.
 
 | Step | Description | Currently done by | 
 | ---- | ----------- | ----------------- |

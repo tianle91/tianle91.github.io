@@ -5,14 +5,14 @@ tags: newhire coding
 ---
 
 # New Final Final (2) Copy: Ideas in Version Control
-There comes a time in every project when one has to come to terms with the mess that they have made. The number of files are sprawling and each of them claims to be the most recent version and somehow none of them has exactly what you need. What exactly happened here?
+There comes a time in every project when one has to come to terms with the mess that they have made. The number of files is increasing, and each file claims to be the most recent version and somehow none of them has exactly what you need. What exactly happened here?
 
 ![frustrating names](/assets/posts/2022-07-26/01_frustrating_names.jpg)
 
-You ask a software developer and turns out you need this thing called “Version Control”. Right before your friend started saying “Git”, you muted the chat — the best course of action IMO. However, the idea seems useful. There are so many versions and it would certainly make sense to control them... whatever that means.
+You ask a software developer and turns out you need this thing called “Version Control”. Right before your friend started saying “Git”, you muted the chat — the best course of action IMO. However, the idea seems useful. There are so many versions, and it would certainly make sense to control them... whatever that means.
 
 ## What’s Version Control anyway?
-We want to track changes in a document or project in a sequential way. One way of creating a sequence can be achieved by sorting the files by “Date Modified”, which reveals that the top-most file is the most recently modified one.
+We want to track changes in a document or project sequentially. One way of creating a sequence can be achieved by sorting the files by “Date Modified”, which reveals that the top-most file is the most recently modified one.
 
 ![sort by modified](/assets/posts/2022-07-26/02_sort_by_modified.jpg)
 
@@ -22,7 +22,7 @@ However, projects can get complicated and changes do not necessarily stack on to
 
 A flow chart would show a much better sequence of versions — not only the changes but also the reverting of changes (i.e. undo). You can also see that some versions branched off from others, resulting in two children versions on which further changes have been made. Now you’re better able to pick and choose the state of the file (or project) you want to continue working on and use.
 
-> A Version Control system tracks changes in the state of a project in a sequential manner, including any reverts and branching.
+> A Version Control system tracks changes in the state of a project sequentially, including any reverts and branching.
 
 ## Branches
 
@@ -40,9 +40,9 @@ There are generally two types of automated processes:
 - Integration — making sure that any changes are “good” (e.g. spell checks, editor reviews)
 - Deployment — propagating the project changes to anywhere that needs it (e.g. reorganizing production lines, sending a new book to print).
 
-The automated part makes it “continuous”, giving you what’s commonly known as Continuous Integration and Continuous Deployment (CICD).
+The automated part makes it “continuous”, giving you what’s commonly known as Continuous Integration and Continuous Deployment (CI/CD).
 
-However, not all CICD are equal — some are much more expensive and risky than others. This brings us to the next idea in Version Control: The Canonical Branch.
+However, not all CI/CD are equal — some are much more expensive and risky than others. This brings us to the next idea in Version Control: The Canonical Branch.
 
 
 ## The Canonical Branch
@@ -58,7 +58,7 @@ This assumption makes it possible to collaborate with other members of a project
 Book editions are examples of *The Canonical Branch*. Publishers, readers as well as the Authors of the books organize themselves by referring to a particular edition of a book. While authors may make changes from one edition of the book to the other, these generally don’t matter to other users of the book until they make it into a new edition. Publishers print and market certain editions of the book. Teachers and readers referred to book editions when communicating about which version of the book to use.
 
 
-## CICD
+## CI/CD
 Since *The Canonical Branch* is the single reference for all users and developers of the project, it makes sense for many developers to automatically Deploy changes (i.e. propagating changes to all users of the project) from *The Canonical Branch* once a series of Integration checks (i.e. checks that the changes are “good”) have passed. Depending on the project, the Deploy step can get arbitrarily complex — ranging from doing nothing, uploading a compiled/exported version of the project to slowly switching over some live services to the new version while monitoring for any uncaught errors.
 
 There can be Integration checks set up to run on any development branches as well, to ensure that the person working on new changes is aware of any breaking changes. Deploy steps are often not included by default in development branches due to the amount of changes and the high likelihood that something is broken while changes are taking place.

@@ -26,7 +26,7 @@ Recovering from intermittent errors is easy — a simple retry will do. Ensuring
 ### Dependencies
 In many cases, some jobs depend on prior jobs succeeding. One way to solve this issue with crontab is simply to observe past runtimes and schedule downstream jobs after their upstream jobs are completed.
 
-Basically it's just a gantt chart, where downstream tasks start and we cross out fingers and hope everything upstream has already completed.
+Basically it's just a Gantt chart, where downstream tasks start, and we cross our fingers and hope everything upstream has already completed.
 
 ![gantt](/assets/posts/2022-09-19/02_gantt.jpg)
 
@@ -36,7 +36,7 @@ A common way to manage dependencies is to explicitly specify dependencies is to 
 
 Just specifying these relationships doesn’t mean that the jobs are set up in a way that can actually be run, since there may be cyclical dependencies. If one plots out the dependencies between jobs, with jobs forming nodes and their upstream requirements as the edges, they should form a DAG (i.e. a directed acyclic graph) — meaning that there should be no cycles (i.e. jobs eventually requiring itself). 
 
-This DAG represents the same dependencies as the gantt chart above.
+This DAG represents the same dependencies as the Gantt chart above.
 
 ```mermaid
 graph LR
@@ -46,7 +46,7 @@ B --> D
 C --> D
 ```
 
-[This example](https://leetcode.com/problems/course-schedule/) on leetcode solves this problem.
+[This example](https://leetcode.com/problems/course-schedule/) on Leetcode solves this problem.
 
 
 ## Monitoring
@@ -59,14 +59,14 @@ There are a few main areas of monitoring (i.e. group-managed emails or notificat
 
 ## What to look out for
 To summarize, here’s a few things to look out for (on top of running through the documentation):
-- Time-based scheduling: Batch jobs typically need to happen at a set frequency — a standard way of specifying this such as cron is essential.
+- Time-based scheduling: Batch jobs typically need to happen at a set frequency — a standard way of specifying this such as Cron is essential.
 - Idempotent jobs: Jobs can fail and when they do, we want to know that they’ll give the same outputs each time they’re rerun.
 - DAG checking: Typically your orchestrator of choice checks for non-circular dependencies and you wouldn’t need to worry about it too much if your jobs make logical sense.
-- Monitoring solutions: What are the failure modes you want to identify and how will you want to be notified?
+- Monitoring solutions: What are the failure modes you want to identify, and how will you want to be notified?
 
 
 ### Trifecta of orchestration
-Remember that orchestration requires all of the following (ideally distinct entities):
+Remember that orchestration requires all the following (ideally distinct entities):
 - A job orchestrator
 - Dependency graph
 - Job outputs

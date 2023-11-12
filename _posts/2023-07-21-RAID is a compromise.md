@@ -24,13 +24,13 @@ We can see that Mirror (RAID-1) enjoys a lower failure probability than a single
 
 > But maybe you've heard that [RAID is NOT a backup!](https://www.raidisnotabackup.com)? 
 
-Of course, RAID offers zero protection from programs writing the wrong data to disk and also your hardware device just breaking down. As your risk during these scenarios would be the same whether or not you used RAID, we will not be factoring this in the discussion.
+Of course, RAID offers zero protection from programs writing the wrong data to disk and also your hardware device just breaking down. As your risk during these scenarios would be the same whether you used RAID, we will not be factoring this in the discussion.
 
 You can also find that RAID-4 and RAID-5 enjoy lower failure probability but only up to a certain number of drives. For RAID-4 this is 3 drives whereas it's 5 drives for RAID-5. This is because for RAID-4 ([unraid does this](https://docs.unraid.net/unraid-os/manual/storage-management#parity-disks)), the parity is on only one drive whereas for RAID-5, the parity is on all drives. It is therefore recommended that one uses distributed parity (RAID-5) whenever possible since the number of drives sacrificed is the same. 
 
 
 ## RAID is a compromise
-All RAID setups compromise on space efficiency. Adding more drives to RAID-1 only increases the number of backups so the space efficiency only decreases the more drives you add. For RAID-4/5 there's only one parity drive so space efficiency trends closer to 100% as you increase the number of drives in the array. 
+All RAID setups compromise on space efficiency. Adding more drives to RAID-1 only increases the number of backups, so the space efficiency only decreases the more drives you add. For RAID-4/5 there's only one parity drive so space efficiency trends closer to 100% as you increase the number of drives in the array. 
 
 Here's a plot:
 
@@ -40,7 +40,7 @@ If you combine failure probabilities and space efficiency to produce a single co
 
 ![raid overall](/assets/posts/2023-07-21/03_raid_overall.png)
 
-However, for distributed RAID types (i.e. Striped RAID-0, RAID-4/5), you can enjoy improved read write speeds at the cost of space efficiency. So if that's your usecase then this might be a compromise that works for you.
+However, for distributed RAID types (i.e. Striped RAID-0, RAID-4/5), you can enjoy improved read write speeds at the cost of space efficiency. So if that's your use case then this might be a compromise that works for you.
 
 | Name | Use Case | 
 | --- | --- |
