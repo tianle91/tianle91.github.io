@@ -152,4 +152,6 @@ Finally we should note that the role of an ad exchange is to make sure that all 
 - The number of buyers who may participate in the auctions is limited and so is the set of all possible ads that each buyer can produce bids for ([source](https://github.com/WICG/turtledove/blob/594a47a486aba70ab7c89cf90ffe1211355ae8cd/FLEDGE.md?plain=1#L252-L257)). 
 - Bid generation also needs to complete within 50-500 ms ([source](https://github.com/WICG/turtledove/blob/594a47a486aba70ab7c89cf90ffe1211355ae8cd/FLEDGE.md?plain=1#L380))
 
-The plan now is to offload much of the Ad Exchange functionality to users' Chrome browsers in the name of privacy. Maybe the users will be happy enough with the privacy aspect that they'll ignore the fact that they're **literally running ad auctions to sell ads to themselves**?
+The plan now is to offload much of the Ad Exchange functionality to users' Chrome browsers in the name of privacy. Maybe the users will be happy enough with the privacy aspect that they'll ignore the fact that **they're literally running ad auctions to sell ads to themselves**?
+
+But that's another topic for another day.
