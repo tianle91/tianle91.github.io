@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Are Ad Exchanges similar to Stock Exchanges?"
-tags: hardware
+tags: ads
 ---
 
 # Are Ad Exchanges similar to Stock Exchanges?
@@ -41,7 +41,7 @@ On the other hand, advertising revenue in the US is $480 billion in 2022. This f
 
 |      | Daily Revenue | Daily Number of Trades | Revenue per Trade | 
 | ---- | ------------- | ---------------------- | ----------------- |
-| Internet Ads |  $1.3 billion | 400 billion | $0.003 | 
+| Internet Ads |  $1.3 billion | 400 billion | $0.003 (Multiply by 1000 to get a CPM of $3. But in reality CPMs can range between $0.30 and $3) |
 | Nasdaq | $240 billion | 33 million | $7000 |
 
 > The amount of revenue per Nasdaq trade is **1 million times greater** than that of an internet ad.
@@ -125,7 +125,7 @@ As far as I can tell, the ad market is not that interesting on the supply side s
 That being saide, this is just an optional piece since publishers always have the option to auction the ad slot to the highest bidder. Publishers may also offload the work to supply-side platforms.
 
 # What does an ad exchange do? 
-We now have the following pieces of an ad market:
+We now have the following pieces of an ad market from the demand and supply sides:
 - **Ad creatives** The content of an ad.
 - **Ad targeting** Where the ad should be shown.
 - **Bidding** The amount advertisers are willing to pay for an ad to be shown on *specific site* to a *specific set of users*. 
@@ -133,11 +133,13 @@ We now have the following pieces of an ad market:
 
 ![ad exchange](/assets/posts/2023-11-03/ad_exchange.png)
 
-The role of an ad exchange is therefore to put everything together and match advertisers with publishers. I have never worked with an ad exchange before and do not know their internal workings. However, we're lucky in that as part of the cookieless initiative, Google is taking themselves out of the ad exchange business. In the [Protected Audience Webinar](https://docs.google.com/presentation/d/1T0pK0ri3R_8C9R1PNMiPanz4lMVFg7A-JyZBT5Tf12M/view#slide=id.g284502389b9_2_241), we can see what Google thinks.
+The role of an ad exchange is therefore to put everything together and match advertisers with publishers. But how exactly does that happen?
+
+In the [Protected Audience Webinar](https://docs.google.com/presentation/d/1T0pK0ri3R_8C9R1PNMiPanz4lMVFg7A-JyZBT5Tf12M/view#slide=id.g284502389b9_2_241), the Chrome team describes a future in which auctions can be conducted without individually-identifiable information ever leaving the user's browser. They also showed the steps required to connect Publishers (who host a website), Buyers (who help advertisers buy ads) and Sellers (who help publishers connect to buyers).
 
 ![protected audience overview](/assets/posts/2023-11-03/protected_audience_overview.png)
 
-Traditionally, an ad exchange sits between Sellers and Buyers (often taking on both roles). The cookieless initiative offloads quite a bit of work done by Sellers, Buyers and Ad Exchanges to the Browser so that privacy can be preserved. We see now that the browser will:
+These steps in the middle of the sequence diagram are particularly insightful in describing the role of Publishers, Buyers, Sellers and Ad Exchanges in conducting an auction.
 
 | Step | Description | Currently done by | 
 | ---- | ----------- | ----------------- |
@@ -146,4 +148,8 @@ Traditionally, an ad exchange sits between Sellers and Buyers (often taking on b
 | 7, 8 | Use scoring signals and scoring logic to generate score. | Sellers |
 | 9 | Choose highest scoring bid from sellers' scores, concluding the auction. | Ad Exchanges |
 
-Finally we should note that the role of an ad exchange is to make sure that all these steps are executed within a pre-determined amount of time (in milliseconds). For example, bidding algorithms are expected in ~100ms and similarly for scoring algorithms.
+Finally we should note that the role of an ad exchange is to make sure that all these steps are executed within a pre-determined amount of time (in milliseconds). This is done by optimizing the list of bidders and enforcing restrictions on the time taken for bidding and scoring algorithms.
+- The number of buyers who may participate in the auctions is limited and so is the set of all possible ads that each buyer can produce bids for ([source](https://github.com/WICG/turtledove/blob/594a47a486aba70ab7c89cf90ffe1211355ae8cd/FLEDGE.md?plain=1#L252-L257)). 
+- Bid generation also needs to complete within 50-500 ms ([source](https://github.com/WICG/turtledove/blob/594a47a486aba70ab7c89cf90ffe1211355ae8cd/FLEDGE.md?plain=1#L380))
+
+The plan now is to offload much of the Ad Exchange functionality to users' Chrome browsers in the name of privacy. Maybe the users' will be happy enough with the privacy aspect of it that they don't realize they're actually helping other parties serve ads to themselves?
