@@ -28,20 +28,23 @@ Here are some numbers to set a baseline for the size of a market:
 Now, how many ads are there in a day? We don't have specific numbers but let's try to think about the problem with a few key numbers: 
 - There are 400 million internet users in North America in 2022
 - The average person in the US views over 100 page views in a day
-- There's probably about 10 ads on a page
+- There's about 10 ads on a page
 
-Multiplying the above brings us to about 400 billion ads per day, easily dominating all the other markets we looked at above.
+Multiplying the above brings us to about **400 billion ads per day**, easily dominating all the other markets we looked at above.
 
-This quantity of ads is spread across the total number of active internet users (400 million) and the pages they viewed in a day (~100). Even though page views are likely to be concentrated around a few popular websites, the total cross product of users and pages is likely to still be on the scale of 40 billion (i.e. 400 million users x 100 pages / user).
+This quantity of ads is spread across the total number of active internet users (400 million) and the pages they viewed in a day (100), bringing us to about 10 ads per user, page pair. In comparison, Nasdaq had 33 million trades on 2023-11-09 over less than 2,500 stocks, which gives us 10,000 trades per stock. Thus the number of trades to number of assets (stocks, or user-page pairs) for Nasdaq is 1000x that for online ads.
 
-> There are about 400 billion ads / day over 40 billion user, page pairs. 
-
-To contextualize this figure, there are only 33 million trades on Nasdaq on 2023-11-09 over less than 2,500 stocks. The ratio of the number of trades to the number assets is 13200:1 for Nasdaq compared to 10:1 for ads (on the scale of number of ads per page), indicating that the diversity of ad trades is at least compared 1000x higher compared to stocks.
+> Nasdaq trades are **a thousand times** less diverse than that in ad markets.
 
 ## They're also cheap
-On the other hand, advertising revenue in the US is $300 billion in 2021. This figure is reached in a single day on Nasdaq, where the trading volume for 2023-11-09 is already 240 billion usd.
+On the other hand, advertising revenue in the US is $480 billion in 2022. This figure is reached in a single day on Nasdaq, where the trading volume for 2023-11-09 is already 240 billion usd.
 
-> Ad opportunities are 1000x more diverse, but brings in 400x less revenue.
+|      | Daily Revenue | Daily Number of Trades | Revenue per Trade | 
+| ---- | ------------- | ---------------------- | ----------------- |
+| Internet Ads |  $1.3 billion | 400 billion | $0.003 | 
+| Nasdaq | $240 billion | 33 million | $7000 |
+
+> The amount of revenue per Nasdaq trade is **1 million times greater** than that of an internet ad.
 
 ## And vanish faster than the latest internet fad
 Stock delistings are rare and usually makes the news but internet fads come and go every week. Ad opportunities vanish faster you can say "Mississipi" five times. 
@@ -50,11 +53,13 @@ Pages need to load quickly to avoid losing users. Pages that take more than 5 se
 
 For real-time bidding, the response deadline is about 100ms ([source](https://developers.google.com/authorized-buyers/rtb/peer-guide)), which is on the same scale of high-frequency stock trading. However, there's generally no need to sell a stock within milliseconds (as is the case for ads) and sell orders can be active for days on the stock exchange.
 
+> Ads have to settle **within milliseconds** compared to hours or days for stocks.
+
 ## TLDR
 Compared to stock trades:
-1. Ad opportunities are 1000x more diverse
-2. But brings in 400x less revenue
-3. And ads have to sell within milliseconds compared to hours or days.
+1. Ad opportunities are 1,000x more diverse
+2. But brings in 1,000,000th of revenue
+3. And ads have to settle within milliseconds compared to hours or days.
 
 # What does it mean for bidding?
 It immediately follows from the above that pricing such a large number of ads quickly and cheaply is not a easy problem to solve. 
