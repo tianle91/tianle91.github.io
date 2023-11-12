@@ -97,10 +97,11 @@ A platform charging by impressions or clicks typically take on the spread betwee
 > Ad platforms are therefore incentivized to optimize spend.
 
 #### Bidding algorithms are usually very simple
-In [bid adjustments](https://support.google.com/google-ads/answer/2732132), one can see that bids can be adjusted based on a variety of factors such as device type, time of day or whether a user is in a specific location. These influce the final bid value in a multiplicative way, as follows:
+Bids can be adjusted based on a variety of factors such as device type, time of day or whether a user is in a specific location ([source](https://support.google.com/google-ads/answer/2732132)). These influence the final bid value in a multiplicative way, as follows:
 ```
 bid_value = starting_bid * adjustment_factor_A * adjustment_factor_B * ...
 ```
+Typically demand-side platforms (which advertisers interact with) run these algorithms and send bids to ad exchanges. Some even allow advertisers to modify these algorithms themselves.
 
 The main advantages of this method are:
 - Starting bids and individual adjustments can all be changed independently. 
