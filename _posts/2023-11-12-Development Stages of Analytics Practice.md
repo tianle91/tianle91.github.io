@@ -4,6 +4,8 @@ title:  "Development Stages of Analytics Practice"
 tags: management
 ---
 
+TODO: Publish analytical platform post and describe persona required. Also introduce idea of tooling to enable end to end ownership to tackle dilution of responsibility issues. Target banks as audiences.
+
 
 **
 
