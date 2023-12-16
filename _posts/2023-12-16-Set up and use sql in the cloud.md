@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Set up and use SQL in the cloud"
-tags: data
+tags: data tutorial
 ---
 
 # Set up and use SQL in the cloud
@@ -12,6 +12,8 @@ In the following example, I will be using a small Kaggle dataset to outline the 
 
 You'll need to be comfortable with [Jupyter](https://jupyter.org) and [Pandas](https://pandas.pydata.org) for this tutorial.
 After this tutorial, you can apply all the SQL skills you have on hand.
+
+You can find [this notebook](https://colab.research.google.com/drive/1yJZ-16izUwepOp-6nxjPCYWeKWTgQiju?usp=sharing) which has all the code used in this tutorial.
 
 
 ## Download a Kaggle dataset.
@@ -92,7 +94,7 @@ train.to_gbq(destination_table='taxi_fare.train', project_id='<your-project-id>'
 
 
 ## Doing analysis in BigQuery.
-We can now [read from BigQuery using Pandas](https://cloud.google.com/bigquery/docs/pandas-gbq-migration) in a similar way.
+We can now [read from BigQuery using Pandas](https://pandas.pydata.org/docs/reference/api/pandas.read_gbq.html) in a similar way.
 The following should give you all the rows in `train.csv`:
 
 ```python
