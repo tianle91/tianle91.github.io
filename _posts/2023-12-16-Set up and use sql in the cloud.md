@@ -35,11 +35,11 @@ Otherwise, you should see a splash screen to enable BigQuery. Follow the instruc
 Since we'll need to create tables for querying, we'll need to create a dataset (this is analogous to databases or schemas in SQL).
 To do this, go to the BigQuery Studio page and select "Create dataset" when clicking on the dots to the right of your project name. 
 
-<img src="/assets/posts/2023-12-16/gcp_bq_dataset_create.png" alt="google cloud bigquery" height="300"/>
+<img src="/assets/posts/2023-12-16/gcp_bq_dataset_create.png" alt="create dataset in big query" height="300"/>
 
-Let's use `taxi_fare` for "Dataset Id" and you should now see the following screen in your Explorer tab (see that `tax_fare` is now nested below your project id):
+Let's use `taxi_fare` for "Dataset Id" and you should now see the following screen in your Explorer tab (see that `taxi_fare` is now nested below your project id):
 
-<img src="/assets/posts/2023-12-16/gcp_bq_dataset_main.png" alt="google cloud bigquery" height="400"/>
+<img src="/assets/posts/2023-12-16/gcp_bq_dataset_main.png" alt="taxi_fare dataset is now in dashboard" height="400"/>
 
 Now we should be able to create and modify tables in the `taxi_fare` dataset.
 
@@ -69,7 +69,7 @@ Now we should see `taxi_fare.test` created and populated (try playing around wit
 ### Ingesting the Kaggle files
 But the Kaggle files are on your computer! You can use the sidebar option to upload them to the Colab runtime like so (you should see the files show up below "sample_data" once you've uploaded the files): 
 
-<img src="/assets/posts/2023-12-16/colab_upload_files.png" alt="ingested two rows" height="300"/>
+<img src="/assets/posts/2023-12-16/colab_upload_files.png" alt="upload files to colab" height="300"/>
 
 These files should now be available in your working directory so the following should show you the top few rows of `train.csv`:
 
@@ -100,3 +100,5 @@ The following should give you all the rows in `train.csv`:
 ```python
 pd.read_gbq("SELECT * FROM taxi_fare.train", project_id='kaggle-390719', dialect="standard").head()
 ```
+
+<img src="/assets/posts/2023-12-16/load_from_bq.png" alt="loaded from big query" height="200"/>
