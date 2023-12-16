@@ -45,8 +45,7 @@ Now we should be able to create and modify tables in the `taxi_fare` dataset.
 
 ## Ingest dataset into BigQuery.
 We'll be using [Colab notebooks](https://colab.research.google.com) to do this since they have [Google Cloud SDK](https://cloud.google.com/sdk?hl=en) pre-installed so it's easy to interact with Google Cloud resources.
-You can, of course install them locally.
-More specifically, we'll be using the [BigQuery python client](https://cloud.google.com/python/docs/reference/bigquery/latest).
+You can, of course install them locally but we'll skip that in this tutorial.
 
 Make sure you're logged into the same Google account as your Google Cloud so that credentials are automatically populated (you'll receive a prompt to do so).
 
