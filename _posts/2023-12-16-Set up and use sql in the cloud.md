@@ -20,7 +20,7 @@ You can find [this notebook](https://colab.research.google.com/drive/1yJZ-16izUw
 Grab the following files from 
 [Taxi Trip Fare Prediction](https://www.kaggle.com/datasets/nani123456789/taxi-trip-fare-prediction) on Kaggle (you'll need an account for this):
 
-<img src="../assets/posts/2023-12-16/kaggle_files.png" alt="kaggle files" height="100"/>
+<img src="/assets/posts/2023-12-16/kaggle_files.png" alt="kaggle files" height="100"/>
 
 
 ## Create and enable BigQuery on Google Cloud.
@@ -28,18 +28,18 @@ Make sure you have BigQuery enabled on your Google Cloud project.
 You'll need to set up a Google Cloud account (see [Getting Started](https://cloud.google.com/docs/get-started)) and [create a project](https://developers.google.com/workspace/guides/create-project).
 You should see the screen below when you visit `https://console.cloud.google.com/bigquery?project=<your-project-id>`:
 
-<img src="../assets/posts/2023-12-16/gcp_bq_main.png" alt="google cloud bigquery" height="300"/>
+<img src="/assets/posts/2023-12-16/gcp_bq_main.png" alt="google cloud bigquery" height="300"/>
 
 Otherwise, you should see a splash screen to enable BigQuery. Follow the instructions to do so.
 
 Since we'll need to create tables for querying, we'll need to create a dataset (this is analogous to databases or schemas in SQL).
 To do this, go to the BigQuery Studio page and select "Create dataset" when clicking on the dots to the right of your project name. 
 
-<img src="../assets/posts/2023-12-16/gcp_bq_dataset_create.png" alt="google cloud bigquery" height="300"/>
+<img src="/assets/posts/2023-12-16/gcp_bq_dataset_create.png" alt="google cloud bigquery" height="300"/>
 
 Let's use `taxi_fare` for "Dataset Id" and you should now see the following screen in your Explorer tab (see that `tax_fare` is now nested below your project id):
 
-<img src="../assets/posts/2023-12-16/gcp_bq_dataset_main.png" alt="google cloud bigquery" height="400"/>
+<img src="/assets/posts/2023-12-16/gcp_bq_dataset_main.png" alt="google cloud bigquery" height="400"/>
 
 Now we should be able to create and modify tables in the `taxi_fare` dataset.
 
@@ -63,13 +63,13 @@ df.to_gbq(destination_table='taxi_fare.test', project_id='<your-project-id>', if
 
 Now we should see `taxi_fare.test` created and populated (try playing around with "Query" on the interface).
 
-<img src="../assets/posts/2023-12-16/ingested_two_rows.png" alt="ingested two rows" height="300"/>
+<img src="/assets/posts/2023-12-16/ingested_two_rows.png" alt="ingested two rows" height="300"/>
 
 
 ### Ingesting the Kaggle files
 But the Kaggle files are on your computer! You can use the sidebar option to upload them to the Colab runtime like so (you should see the files show up below "sample_data" once you've uploaded the files): 
 
-<img src="../assets/posts/2023-12-16/colab_upload_files.png" alt="ingested two rows" height="300"/>
+<img src="/assets/posts/2023-12-16/colab_upload_files.png" alt="ingested two rows" height="300"/>
 
 These files should now be available in your working directory so the following should show you the top few rows of `train.csv`:
 
