@@ -8,6 +8,8 @@ tags: data tutorial
 Most people have limits on the computational capacity they have access to.
 Here I'll describe steps to set up a SQL database on the cloud where, instead of paying for a brand new computer, one can pay only for what they use.
 
+<img src="/assets/posts/2023-12-16/cover.jpg" alt="kaggle files" height="300"/>
+
 In the following example, I will be using a small Kaggle dataset to outline the steps which one would take to populate a SQL database and do analysis in the cloud.
 
 You'll need to be comfortable with [Jupyter](https://jupyter.org) and [Pandas](https://pandas.pydata.org) for this tutorial.
