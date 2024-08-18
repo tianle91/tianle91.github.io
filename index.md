@@ -8,7 +8,7 @@
 # Blog
 <ul>
   {% for post in site.posts %}
-    {% if post.hidden != true %}
+    {% if post.hidden == null or post.hidden == false %}
       <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
       </li>
