@@ -2,27 +2,18 @@
 
 [publications](publications.md)
 
+
 # Blog
 <ul>
   {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
+    {% if tag[0] != "noshow" %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
   {% endfor %}
 </ul>
 
-## New hire selected readings
-<ul>
-  {% for tag in site.tags %}
-    {% if tag[0] == "newhire" %}
-      {% for post in tag[1] %}
-        <li>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </li>
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
-</ul>
 
 # About
 I consider these to be appropriate levels of sharing:
