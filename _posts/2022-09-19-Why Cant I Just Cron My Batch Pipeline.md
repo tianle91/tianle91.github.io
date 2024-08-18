@@ -2,11 +2,11 @@
 layout: post
 title:  "Why Can’t I Just Cron My Batch Pipeline?"
 tags: newhire coding data
+excerpt_separator: <!--more-->
 ---
 
-# Why Can’t I Just Cron My Batch Pipeline?
-
-> So many batch pipeline orchestrators, which one to use? (hint: not cron)
+So many batch pipeline orchestrators, which one to use? (hint: not cron)
+<!--more-->
 
 ![so many orchestrators](/assets/posts/2022-09-19/01_so_many_orchestrators.png)
 

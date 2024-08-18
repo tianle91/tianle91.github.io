@@ -2,10 +2,11 @@
 layout: post
 title:  "Docker for linux casuals"
 tags: coding
+excerpt_separator: <!--more-->
 ---
 
-# Docker for Linux casuals
 Many moons ago I recall installing Ubuntu on my home PC because I was sick of Windows, the only operating system I had used up to that point. Even though Ubuntu was (and still is) a mainstream flavor of Linux, I found that it was pretty rare that an application I need got installed with zero issues. So I promptly formatted my hard drive and reinstalled Windows, and it wasn't until macOS that a Unix-based operating system became my daily driver.
+<!--more-->
 
 ![01_no_linux_yes_windows](/assets/posts/2023-06-23/01_no_linux_yes_windows.png)
 

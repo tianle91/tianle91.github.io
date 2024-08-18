@@ -2,10 +2,11 @@
 layout: post
 title:  "Un-Spaghettio My Factorio!"
 tags: fun
+excerpt_separator: <!--more-->
 ---
 
-# Un-Spaghettio My Factorio!
 So some time ago I picked up Factorio on steam some time ago. The goal of the game is to gather resources and build tools, transportation, production and automation to bootstrap your way eventually to construct a rocket. There isn't one single play style or winning strategy, so there's excellent replay value... so naturally I *played it for a bit*.
+<!--more-->
 
 ![play time](/assets/posts/2023-01-20/01_play_time.png)
 

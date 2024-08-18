@@ -2,10 +2,11 @@
 layout: post
 title:  "New Final Final (2) Copy: Ideas in Version Control"
 tags: newhire coding
+excerpt_separator: <!--more-->
 ---
 
-# New Final Final (2) Copy: Ideas in Version Control
 There comes a time in every project when one has to come to terms with the mess that they have made. The number of files is increasing, and each file claims to be the most recent version and somehow none of them has exactly what you need. What exactly happened here?
+<!--more-->
 
 ![frustrating names](/assets/posts/2022-07-26/01_frustrating_names.jpg)
 

@@ -2,11 +2,12 @@
 layout: post
 title:  "Set up and use SQL in the cloud"
 tags: data tutorial
+excerpt_separator: <!--more-->
 ---
 
-# Set up and use SQL in the cloud
 Most people have limits on the computational capacity they have access to.
 Here I'll describe steps to set up a SQL database on the cloud where, instead of paying for a brand new computer, one can pay only for what they use.
+<!--more-->
 
 <img src="/assets/posts/2023-12-16/cover.jpg" alt="kaggle files" height="300"/>
 

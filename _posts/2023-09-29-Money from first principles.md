@@ -2,12 +2,13 @@
 layout: post
 title:  "Money from first principles"
 tags: fun
+excerpt_separator: <!--more-->
 ---
 
-# Money from first principles
-Here will briefly discuss the functions of money from first principles.
+Here will briefly discuss the functions of money from first principles, starting from the basic premise of a market.
+<!--more-->
 
-# A market
+# Market
 A market is made up by participants. Participants have a pre-determined set of trades. A trade is fully determined by the quantity of a particular good that is given up in return for a quantity of another good.
 
 Each participant wants to achieve the following competing objectives:

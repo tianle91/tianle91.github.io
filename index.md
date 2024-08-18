@@ -11,6 +11,7 @@
     {% if post.hidden == null or post.hidden == false %}
       <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
+        {{ post.excerpt }}
       </li>
     {% endif %}
   {% endfor %}

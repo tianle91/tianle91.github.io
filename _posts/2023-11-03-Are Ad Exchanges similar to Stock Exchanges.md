@@ -2,10 +2,11 @@
 layout: post
 title:  "Are Ad Exchanges similar to Stock Exchanges?"
 tags: ads
+excerpt_separator: <!--more-->
 ---
 
-# Are Ad Exchanges similar to Stock Exchanges?
 Ad exchanges sit between people who want to buy ads (advertisers) and those who wish to sell their ad spots (publishers). They help publishers maximize the value of each ad spot by collecting bids and ads from advertisers. 
+<!--more-->
 
 ![ad exchange role](/assets/posts/2023-11-03/ad_exchange_role.png)
 

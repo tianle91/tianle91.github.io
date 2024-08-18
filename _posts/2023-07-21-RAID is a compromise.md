@@ -2,10 +2,11 @@
 layout: post
 title:  "RAID is a compromise"
 tags: hardware
+excerpt_separator: <!--more-->
 ---
 
-# RAID is a compromise
 If you ever needed to use a bunch of disks as a single disk, then you might have heard of RAID. This [wikipedia article](https://en.wikipedia.org/wiki/Standard_RAID_levels) is a good reference for a few commonly used RAID types.
+<!--more-->
 
 | Name | Usable Disk Size | Redundant Disks | Description | 
 | --- | --- | --- | --- | 
