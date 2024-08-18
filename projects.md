@@ -1,5 +1,7 @@
-# Projects
-
+---
+layout: post
+title:  "Projects"
+---
 
 ## [stonks.tchen.xyz](http://stonks.tchen.xyz)
 Stonks! EPS is the one true measure.

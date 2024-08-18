@@ -1,5 +1,7 @@
-# Publications
-
+---
+layout: post
+title:  "Publications"
+---
 
 ## Product Matching Lessons and Recommendations from a Real World Application
 Foxcroft J., Antonie L., **Chen T.**, Padmanabhan K. and Keng B. (2021).
