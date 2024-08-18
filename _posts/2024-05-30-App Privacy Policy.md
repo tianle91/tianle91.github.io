@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "App Privacy Policy"
-tags: noshow
+hidden: true
 ---
 
 # App Privacy Policy
