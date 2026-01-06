@@ -1,15 +1,14 @@
 ---
 layout: post
 title:  "No such thing as an ad!"
-tags: newhire
+tags: ads
 excerpt_separator: <!--more-->
 ---
 
 ???
 <!--more-->
 
-# No such thing as an advertisement
-
+# No such thing as an ad
 *Disclaimer: these opinions do not reflect those of my employer and are mine alone*
 
 The most popular content platforms that we see today have ads. As users, it's rather frustrating to have ads or sponsored content show up on your content feed. However, these ads are what incentivizes these platforms to host the content that you want to see as well as train recommendation algorithms that identify the content that is most suited to you. 
@@ -19,6 +18,8 @@ So how do these platforms decide what kind of ads to show you? And are personali
 We'll start by taking a look at how the basic business model of current content platforms is formed, then at how Youtubers take on sponsored content as a microcosm of the decisions a content platform has to make. Finally, we'll take a peek into Google's (now defunct) plans to decentralize online ads as well as an quick intro to how you can have privacy-preserving personalization. 
 
 But first let's explore how most content providers ended up with advertising as their main business model.
+
+
 # How ads took over the world
 Newspapers used to be how most people got their "content". They had either a subscription or pay-per-view model but all of them had advertisements or "classified ads", usually in the less browsed half of the papers.
 
@@ -36,7 +37,7 @@ Some less scrupulous sites also had pop-up ads and misleading buttons, which tur
 *Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which old school billboards weren't able to accomplish. Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sold the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
 
 
-## Balancing users against advertisers
+## Users v advertisers
 Ad-supported content platforms need to balance the needs of these two parties in their ads system: 
 1. Users - content and recommendation algorithms must be able to consistently attract enough users to the platform. The attention from these users (i.e. viewership) can then be resold to third parties (i.e. advertisers) through third party content (i.e. ads). 
 2. Advertisers - ads should be reach users who are most likely to buy their products or services (or other activities upstream of purchases). 
@@ -88,12 +89,31 @@ So the answer seems to be no! However, this comes with some caveats:
 1. Positioning of these ads - clustering these ads after the "hook" (when interest in the main content is high) and after the main content is a common strategy to balance watch times and ad load. 
 2. Relevance of the ads to the viewer - are users ok with seeing these ads? LTT viewers are typically tech enthusiasts and are already likely to be in interested in related topics such as DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders) and PIA (vpn for the privacy conscious). Ads which are less relevant to the audience can reduce the ad volume however. For example, [this dyson sponsored video being one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
-All parties want ads which are relevant to the users, so long as parties involved have the tools necessary to achieve this. Examples include providing ad targeting settings for advertisers and providing ways for users to signal their interest (e.g. subscriptions, topics of interest, likes, etc.). 
+The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
 
-However, the ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. While this scenario is great for advertisers, it certainly doesn't result in revenue for the content provider. 
 
+# Goldilocks zone of advertising
+We'll look at the relevance of third-party content from the advertiser's side.
+I'll be using advertiser and 3P (third-party) interchangeably since they're the third-party from the perspective of the content creator and viewer relationship.
+As such we can see ads as third party content which may be shown along with first party content (i.e. the video that users want to see) at the discretion of the content generator.
+
+There's an equilibrium in terms of 3P content relevance as we'll break down later:
+![Goldilocks zone of advertising](/assets/posts/2026-01-06/goldilocks_zone_of_advertising.png)
+
+On the right side is what we discussed earlier.
+Advertisers generally do not need to pay for 3P content that may be indistinguishable from organic content (e.g. new camera gear releases for a Youtube channel focusing on camera gear reviews).
+In these cases, there may be concerns other than content relevance which dominates this segment of content (e.g. limited access to new product, company imposes embargo timelines due to testing variations).
+Of note here is that what can be relevant organic content in on channel might be irrelevant content on another channel (e.g. content about dyson vacuums in a tech channel vs in a robovacs channel).
+
+
+## Setting a baseline for 3P content 
 From the content provider's perspective, it's much more reasonable to set a baseline for third party content. One such example comes from an indie tech Youtuber I enjoy, [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), who describes trust as being ["more valuable than any brand deal"](http://www.youtube.com/watch?v=PME4LZMDtK0&t=308). This observation is true regardless of whether you trust her as a person or that this just makes good business sense, since the amount of ad dollars you can command is directly influenced by the users who wants to watch the content. 
 
 ![An honest conversation about sponsorships from Becca](https://www.youtube.com/watch?v=PME4LZMDtK0) 
 
 
+## Audience-based Relevance 
+The base of relevance stems from what the viewers want to (or are okay with) watch.
+As such, there are more forms of relevance than just the niche that the channel is focusing on.
+TODO chart about multi-dimensional relevance
+ 
