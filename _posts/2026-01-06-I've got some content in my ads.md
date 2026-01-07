@@ -1,24 +1,22 @@
 ---
 layout: post
-title:  "No such thing as an ad!"
+title: I've got some content in my ads!
 tags: ads
 excerpt_separator: <!--more-->
 ---
-
-???
+Why do you get the kind of ads that you do and why are there so many of them?
+Is there no limit to the amount of ads they can stuff in your face?
+Here we'll look at a few of my favourite Youtubers as examples of how content providers make these decisions.
 <!--more-->
 
-# No such thing as an ad
+# I've got some content in my ads!
 *Disclaimer: these opinions do not reflect those of my employer and are mine alone*
 
 The most popular content platforms that we see today have ads. As users, it's rather frustrating to have ads or sponsored content show up on your content feed. However, these ads are what incentivizes these platforms to host the content that you want to see as well as train recommendation algorithms that identify the content that is most suited to you. 
 
 So how do these platforms decide what kind of ads to show you? And are personalized ads actually good for you (privacy concerns aside)? 
 
-We'll start by taking a look at how the basic business model of current content platforms is formed, then at how Youtubers take on sponsored content as a microcosm of the decisions a content platform has to make. Finally, we'll take a peek into Google's (now defunct) plans to decentralize online ads as well as an quick intro to how you can have privacy-preserving personalization. 
-
-But first let's explore how most content providers ended up with advertising as their main business model.
-
+We'll start by taking a look at how the ad-supported business model came about. Then we'll see what Youtubers and sponsored content on their channels can tell us about how they decide what ads to take and how many of them to put in their videos.
 
 # How ads took over the world
 Newspapers used to be how most people got their "content". They had either a subscription or pay-per-view model but all of them had advertisements or "classified ads", usually in the less browsed half of the papers.
@@ -34,10 +32,9 @@ Some less scrupulous sites also had pop-up ads and misleading buttons, which tur
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
-*Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which old school billboards weren't able to accomplish. Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sold the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
+*Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which old school billboards weren't able to accomplish. Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sells the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
 
-
-## Users v advertisers
+## Users V Advertisers
 Ad-supported content platforms need to balance the needs of these two parties in their ads system: 
 1. Users - content and recommendation algorithms must be able to consistently attract enough users to the platform. The attention from these users (i.e. viewership) can then be resold to third parties (i.e. advertisers) through third party content (i.e. ads). 
 2. Advertisers - ads should be reach users who are most likely to buy their products or services (or other activities upstream of purchases). 
@@ -79,7 +76,7 @@ Breaking down the 3 ad spots (not including Youtube injected ones i.e. AdSense, 
 2. Clear LTT screwdrivers (merch, 55% of revenue)
 3. Private Internet Access (sponsorships, 21% of revenue)
 
-From LTT's perspective, these 3 ad slots make absolute sense. From viewers' perspective though, perhaps even one ad may seem too much for some (hence the existence of ad blockers like [AdGuard](https://adguard.com/en/welcome.html) and services such as [SponsorBlock](https://sponsor.ajay.app)), so the question for us regarding user needs is really "how harmful is having 3 ad slots for users"? 
+From LTT's perspective, these 3 ad slots make absolute sense. From viewers' perspective though, perhaps even one ad may seem too much for some (hence the existence of ad blockers like [AdGuard](https://adguard.com/en/welcome.html) and services such as [SponsorBlock](https://sponsor.ajay.app)), so the question for us regarding user needs is really "how harmful is having these 3 ads for users"? 
 
 The evidence we can find here (other than the [post ranting about 3 ads in 12 minutes](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/)) is minimal. For example, there are no signs that the channel subscriber counts have been negatively affected by that video posted on Dec 30th 2025 according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
 
@@ -92,7 +89,7 @@ So the answer seems to be no! However, this comes with some caveats:
 The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
 
 
-# Goldilocks zone of advertising
+# Goldilocks zone of relevance
 We'll look at the relevance of third-party content from the advertiser's side.
 I'll be using advertiser and 3P (third-party) interchangeably since they're the third-party from the perspective of the content creator and viewer relationship.
 As such we can see ads as third party content which may be shown along with first party content (i.e. the video that users want to see) at the discretion of the content generator.
@@ -116,4 +113,8 @@ From the content provider's perspective, it's much more reasonable to set a base
 The base of relevance stems from what the viewers want to (or are okay with) watch.
 As such, there are more forms of relevance than just the niche that the channel is focusing on.
 TODO chart about multi-dimensional relevance
- 
+
+
+# Strategic ad placements
+Not all ads are created equal
+TODO 
