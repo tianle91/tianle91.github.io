@@ -12,29 +12,42 @@ Here we'll look at a few of my favourite Youtubers as examples of how content pr
 # I've got some content in my ads!
 *Disclaimer: these opinions do not reflect those of my employer and are mine alone*
 
-The most popular content platforms that we see today have ads. As users, it's rather frustrating to have ads or sponsored content show up on your content feed. However, these ads are what incentivizes these platforms to host the content that you want to see as well as train recommendation algorithms that identify the content that is most suited to you. 
+The most popular content that we see today come with ads in some form.
+As users, it's rather frustrating to have ads or sponsored content show up on your content feed.
+But servers aren't free and ads are what incentivize people to produce and host content to entertain and/or inform you.
 
-So how do these platforms decide what kind of ads to show you? And are personalized ads actually good for you (privacy concerns aside)? 
+So what influences the quantity and type of ads you see? 
 
-We'll start by taking a look at how the ad-supported business model came about. Then we'll see what Youtubers and sponsored content on their channels can tell us about how they decide what ads to take and how many of them to put in their videos.
+We'll first backtrack a bit my looking at how the modern ad-supported business model came about.
+Then we'll take a look at my favourite Youtubers and see what hints they can give us about how to fit sponsored content into their videos.
+Finally we can come up with a couple of principles that are broadly applicable to most ad-supported creators or platforms.
 
 # How ads took over the world
-Newspapers used to be how most people got their "content". They had either a subscription or pay-per-view model but all of them had advertisements or "classified ads", usually in the less browsed half of the papers.
+The OG "content" used to be newspapers that people paid physical cash for, usually at the time of purchase.
 
 ![newspaper stands](https://inhabitat.com/wp-content/blogs.dir/1/files/2023/05/1336747_81_118551_mbaoiLBrD-889x593.jpg)
 
-Some time in the 2000s though, "free" newspapers started gaining traction. They differed in that it didn't cost the readers anything but were instead supported primarily by the advertisers. Of course, that meant that ads took up much more space in the papers, often up to 50% and no longer being relegated to the back half. 
+Some time in the 2000s though, "free" newspapers started gaining traction. 
+These papers had substantially more ads than traditional paid newspapers, often with as much as 50% ads in the headliner articles.
+Yet, they were popular since "free" is just too good of a deal and you'll still get something to do in the train.
 
 ## Online advertising 
-As mobile phones and cellular plans dug their claws into society, newspapers started losing more ground to websites, which operate on a similar model to the free newspapers. The easiest way for these websites to start earning revenue is to introduce ads. 
+As PCs, then later mobile phones and cellular plans caught on, newspapers started losing more ground to websites.
+While some web content were locked behind a paywall, the most successful ones were those which just gave out content for free.
+Most of their revenue came from ads instead, operating on a business model similar to the "free" newspapers that we talked about earlier.
 
-Some less scrupulous sites also had pop-up ads and misleading buttons, which turned users away from those sites but not before charging advertisers for the click. However, even the sites that are most severely lacking in scruples would need some way of getting users to even visit their sites in the first place. There was a period of time when the answer is just SEO (i.e. gaming the search engine algorithms) but Google's [PageRank](https://en.wikipedia.org/wiki/PageRank)and its successors made this significantly more difficult (they have user retention problems of their own, back when they had competition anyways). 
+This was also a time of some genuinely annoying pop-up ads and misleading buttons, which resulted in users being really annoyed with those websites, swearing to never visit them again... not without ad blockers!
+These scummy websites relied on SEO and shady deals with other equally scummy webistes to maintain a stream of new and oblivious users who can be relied on to generate clicks for which they can earn ad revenue.
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
-*Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which old school billboards weren't able to accomplish. Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sells the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
+However, Google's [PageRank](https://en.wikipedia.org/wiki/PageRank) algorithm, its successors as well as LLM web crawlers have increased the difficulty of diverting traffic to turd content.
+Luckily for us, this means that most of the time, in order to make any money selling ads, you need to have good (enough) content to attract viewership.
+But too much bad ads though, users start to flip the figurative table, click the ❌ button or maybe swear to never visit the website again.
 
-## Users V Advertisers
+*Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which newspaper ads weren't able to accomplish (not directly anyway, some ran surveys and questionnaires but you can image how that went). Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sells the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
+
+# Users V Advertisers
 Ad-supported content platforms need to balance the needs of these two parties in their ads system: 
 1. Users - content and recommendation algorithms must be able to consistently attract enough users to the platform. The attention from these users (i.e. viewership) can then be resold to third parties (i.e. advertisers) through third party content (i.e. ads). 
 2. Advertisers - ads should be reach users who are most likely to buy their products or services (or other activities upstream of purchases). 
@@ -52,7 +65,6 @@ I like to call this the "Fundamental Problems of (ad-supported) Content Platform
 
 How platforms reach these decisions are a closely-guarded secret, but we can take a look at Youtubers, who are in some ways a microcosm of ad-supported content platforms, even if some of them are a one-person show. 
 
-
 # Youtubers and sponsored content
 Youtubers tend to run ads on their videos on top of the platform inserted ads. They are a proxy of content platform because of these similarities:
 1. They need to maintain viewership with some core audience segment in order to establish consistent and valuable viewership. 
@@ -62,7 +74,6 @@ We'll try to answer some of these questions below by looking at a few Youtubers.
 1. How much of user attention should be resold?
 2. What kind of third party content should fill the monetized attention? 
 3. How much should third parties pay for the privilege of showing their content? 
-
 
 ## Does LinusTechTips have too many ads?
 [@LinusTechTips](https://www.youtube.com/@LinusTechTips) is one of the top tech Youtubers who runs a multi-million dollar company primarily built on his Youtube channels. However, a [recent post](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/) on [r/LinusTechTips](https://www.reddit.com/r/LinusTechTips/) complained about too many ads (3 ad segments in a 13 minute video). I believe they're referring to [this video about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) posted on Dec 30th 2025. Looking at the [SponsorBlock](https://sponsor.ajay.app) view, we can see that those ads took up about 23% of the video.
