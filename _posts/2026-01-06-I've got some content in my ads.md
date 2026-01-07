@@ -16,6 +16,8 @@ The most popular content that we see today come with ads in some form.
 As users, it's rather frustrating to have ads or sponsored content show up on your content feed.
 But servers aren't free and ads are what incentivize people to produce and host content to entertain and/or inform you.
 
+![two unskippable ads](https://img-9gag-fun.9cache.com/photo/aoy6oDX_700bwp.webp)
+
 So what influences the quantity and type of ads you see? 
 
 We'll first backtrack a bit my looking at how the modern ad-supported business model came about.
@@ -84,11 +86,11 @@ Is possibly watching up to 5 ads per video too much ads though?
 If we listen to only the viewers' feedback then content creators will have no table on the food.
 So what's the breakdown here and how much are these ads contributing to [@LinusTechTips](https://www.youtube.com/@LinusTechTips)'s top-line?
 
-But here's what we know:
-* LTT did not provide any specific numbers on their yearly revenue but they did quote a $100 million valuation for a potential acquisition back in 2023. This is typically a multiple of yearly revenue. The multiple for digital media can reach 10x. 
+LTT doesn’t provide explicit figures but they’ve dropped a bunch of (publicly available) breadcrumbs for us:
+* They did quoted a $100 million valuation figure for a potential acquisition back in 2023. This is typically a multiple of yearly revenue. The multiple for digital media can reach 10x. 
 * In their [revenue breakdowns video](https://www.youtube.com/watch?v=GeCP-0nuziE), we [see percentages](http://www.youtube.com/watch?v=GeCP-0nuziE&t=106). AdSense (i.e. Youtube-injected ads) only makes up about 14% of their revenue and that most of their revenue comes from their "merch" (i.e. products from their team, making up 55% of the revenue) and sponsorships (i.e. third party products or services, making up 21%). 
 * Also in that video, some isolated Adsense figures were shown. Their biggest standard video earned [$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375) whereas their biggest "Short" earned only [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365).
-* The channel had about [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447) so this means that AdSense can be up to $1.7 million. Since AdSense makes up 14% of revenue, we get a rough estimate of yearly revenue at $12 million, which aligns with the 10x multiple for their acquisition valuation figures in 2023.
+* The channel had about [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447) so this means that AdSense can be up to ~$1.5 million. Since AdSense makes up 14% of revenue, we get a rough estimate of yearly revenue at ~$10 million, which aligns with the 10x multiple for their acquisition valuation figures in 2023.
 
 Let's look at the ad spots again in the 13 minute video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o), which got 1.3 million views as of 2025-01-06 and assume (unrealistically) that their yearly revenue gets broken down proportionally by view counts:
 1. DBrand, their channel sponsor: Sponsorships (21% of revenue) ~$2k
@@ -96,37 +98,38 @@ Let's look at the ad spots again in the 13 minute video [about RAM prices](https
 3. Private Internet Access: Sponsorships (21% of revenue) ~$2k
 4. Adsense (14% of revenue) ~$1.3k
 
-From LTT's perspective, this number of ads slots in a typical video make absolute sense!
+From LTT's perspective, they can expect up to $15k worth of revenue from the ads setup, so this absolutely makes sense!
 So why don't they add more ads?
 
 ## How much is too much?
 As we saw earlier, viewers often rant about watching too many ads.
-The most annoyed viewers may download ad blockers like [AdGuard](https://adguard.com/en/welcome.html) which skips Youtube-injected ads while others may install [SponsorBlock](https://sponsor.ajay.app) to skip parts of the video which are sponsored.
+But do they stop watching these videos or unsubscribe? 
 
-Even so, there's little evidence to sugges that the current ad load is too much.
-Looking at channel subscriber counts, they've pretty much been going up for the last few years or so according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
+There's little evidence to suggest that this is happening when looking at channel subscriber counts. The trend has pretty much being increasing for the last few years or so according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
 
 ![LTT Total subs increasing consistently](/assets/posts/2026-01-06/LTT_total_subs.png)
 
 Around the time of release of the [video in question](https://www.youtube.com/watch?v=iRvyRo5Fk0o) (i.e. Dec 30th 2025), there's certainly no dip in subscriber counts.
 The only major dip in subscriber count was in 2023 July, when they were mired in controversy due to an expose by a competing Youtube channel, throwing their ethics into question and hurting viewer trust according to [this CBC report](https://www.cbc.ca/news/canada/british-columbia/linus-tech-tips-youtube-controversy-1.6940087).
 
+*Aside: That being said, these counts could be artificially high because of viewers bypassing these ads. The most annoyed viewers may download ad blockers like [AdGuard](https://adguard.com/en/welcome.html) which skips Youtube-injected ads while others may install [SponsorBlock](https://sponsor.ajay.app) to skip parts of the video which are sponsored. But not everyone is motivated all the time on all devices so this point may be mostly moot (but Linus would still argue that [AdBlock is theft](https://m.youtube.com/watch?v=a-PH2GUy_zM&t=71)).*
+
 Even so, these are only proxy metrics for the revenue they derive from AdSense.
 Sponsorship revenue, for example, is determined mostly by how much the advertiser is willing to pay for the ad placement.
 This is in turn influenced by how much these companies' marketing department thinks the return on investment on that ad is going to be, details of which can start to get extremely hairy (a good metric here can be advertiser budgets).
 
 Despite the complexity, the ability of the creator or platform to command ad revenue in the long term mainly stems from these factors:
-1. Size of audience (i.e. subscriber count, view counts)
-2. ...multiplied by the amount of attention that can be commanded at the discretion of the creator or platform (i.e. e.g. watch time)
-3. ...multiplied by the disposable income of audience and willingness to spend on related goods and services (i.e. demographics, geographical location, income)
+1. Size of audience (i.e. subscriber count, view counts) (depends on content quality and content-platform fit)
+2. ...multiplied by the amount of attention that can be commanded at the discretion of the creator or platform (i.e. watch time, video completion rate) (depends on content type and platform)
+3. ...multiplied by the disposable income of audience and willingness to spend on related goods and services (i.e. demographics, geographical location, reported income) (depends on the content niche, language and cultural references etc)
 
 While each creator or platform may have different ethical and sponsorship standards, their long term survival (if dominated by ads) is primarily determined by these factors above.
-So long as ads do not pose a significant risk to the above factors, there's endless limit to *innovation*.
+So long as ads do not pose a significant risk to the above factors, there's endless limit to *innovation*… Yikes! 
 
-
-# Ads and how they get served
-1. Positioning of these ads - clustering these ads after the "hook" (when interest in the main content is high) and after the main content is a common strategy to balance watch times and ad load. 
-2. Relevance of the ads to the viewer - are users ok with seeing these ads? LTT viewers are typically tech enthusiasts and are already likely to be in interested in related topics such as DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders) and PIA (vpn for the privacy conscious). Ads which are less relevant to the audience can reduce the ad volume however. For example, [this dyson sponsored video being one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
+# Selling out with style and discretion
+Assuming that the creators or platform decides to play the game of maximizing long term ad revenue, they’d want to optimize for these things 
+1. Strategic ad placement - clustering these ads after the "hook" (when interest in the main content is high) and after the main content is a common strategy to balance watch times and ad load. This can also lead to sneaky ads for some less ethical channels. 
+2. Increasing ads relevance - are users ok with seeing these ads? LTT viewers are typically tech enthusiasts and are already likely to be in interested in related topics such as DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders) and PIA (vpn for the privacy conscious). Ads which are less relevant to the audience can reduce the ad volume however. For example, [this dyson sponsored video being one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
 The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
 
