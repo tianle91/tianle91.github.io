@@ -48,22 +48,19 @@ But too much bad ads though, users start to flip the figurative table, click the
 *Aside: Online advertising also had the extra benefit of being attributable to purchase decisions, which newspaper ads weren't able to accomplish (not directly anyway, some ran surveys and questionnaires but you can image how that went). Ever heard of the old saying about marketing dollars, that "half of my marketing budget is wasted, but the problem is that I don't know which half"? Online advertising sells the promise that you can now tell which half is wasted... or can you? We'll talk about this in another post...*
 
 # Users V Advertisers
-Ad-supported content platforms need to balance the needs of these two parties in their ads system: 
-1. Users - content and recommendation algorithms must be able to consistently attract enough users to the platform. The attention from these users (i.e. viewership) can then be resold to third parties (i.e. advertisers) through third party content (i.e. ads). 
-2. Advertisers - ads should be reach users who are most likely to buy their products or services (or other activities upstream of purchases). 
+It's certainly easy to stuff the entire webpage with ads as a quick way to maybe double or triple the ads revenue, but the gravy train would only run for a few days at most before users and search engines wise up to the sudden drop in content quality.
+So how does one balance the need to sell out to pay the bills and the need to maintain or acquire an audiences with which to sell out?
 
-Leaning too much towards users can lead to insufficient income to keep employees paid whereas too much ads can result in a loss of users and therefore less valuable attention to be resold for advertisers. 
-
-The platform therefore needs to perform a balancing act, which basically boils down to the following decisions:
+Here's a rough sketch of (inter-related) decisions that need to be made:
 1. How much of user attention should be resold?
-2. What kind of third party content should fill the monetized attention? Not all ads that are valuable to advertisers are also valuable to users (and by extension, the long term health of the platform).
-3. How much should third parties pay for the privilege of showing their content? This should come naturally as a function of the two prior decisions in conjunction with the amount of value advertisers place on the ad itself. 
+2. What kind of ads should fill the monetized attention?
+3. How much should advertisers pay for those ads?
 
-I like to call this the "Fundamental Problems of (ad-supported) Content Platforms" aka FPCP, with the assumption that ad-supported being pretty much the defacto business model of content platforms these days. 
+Finally, how do we know if we're doing a good job?
 
-*Aside: User and advertiser retention can be measured as a measure of success for the balancing act described above. For example, user and advertiser churn (i.e. inactivity after X days) are typically bad outcomes whereas increased user time spent on the platform, increased weekly/monthly user counts as well as advertiser budgets can be perceived as positive outcomes.*
-
-How platforms reach these decisions are a closely-guarded secret, but we can take a look at Youtubers, who are in some ways a microcosm of ad-supported content platforms, even if some of them are a one-person show. 
+Since these are often trade secrets, the details on how creators or platforms do this is often not available for scrutiny.
+But some Youtubers (especially those who build their platform on trust and transparency) can be quite forthcoming with things like their revenue sources and dollars.
+So we'll take a look at my favourite Youtube channels and how they make money.
 
 # Youtubers and sponsored content
 Youtubers tend to run ads on their videos on top of the platform inserted ads. They are a proxy of content platform because of these similarities:
@@ -98,6 +95,11 @@ So the answer seems to be no! However, this comes with some caveats:
 2. Relevance of the ads to the viewer - are users ok with seeing these ads? LTT viewers are typically tech enthusiasts and are already likely to be in interested in related topics such as DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders) and PIA (vpn for the privacy conscious). Ads which are less relevant to the audience can reduce the ad volume however. For example, [this dyson sponsored video being one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
 The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
+
+
+## How do we know if we're doing a good job
+
+*Aside: User and advertiser retention can be measured as a measure of success for the balancing act described above. For example, user and advertiser churn (i.e. inactivity after X days) are typically bad outcomes whereas increased user time spent on the platform, increased weekly/monthly user counts as well as advertiser budgets can be perceived as positive outcomes.*
 
 
 # Goldilocks zone of relevance
