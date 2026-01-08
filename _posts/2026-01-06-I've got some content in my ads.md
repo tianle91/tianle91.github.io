@@ -89,8 +89,8 @@ So what's the breakdown here and how much are these ads contributing to [@LinusT
 LTT doesn’t provide explicit figures but they’ve dropped a bunch of (publicly available) breadcrumbs for us:
 * They did quoted a $100 million valuation figure for a potential acquisition back in 2023. This is typically a multiple of yearly revenue. The multiple for digital media can reach 10x. 
 * In their [revenue breakdowns video](https://www.youtube.com/watch?v=GeCP-0nuziE), we [see percentages](http://www.youtube.com/watch?v=GeCP-0nuziE&t=106). AdSense (i.e. Youtube-injected ads) only makes up about 14% of their revenue and that most of their revenue comes from their "merch" (i.e. products from their team, making up 55% of the revenue) and sponsorships (i.e. third party products or services, making up 21%). 
-* Also in that video, some isolated Adsense figures were shown. Their biggest standard video earned [$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375) whereas their biggest "Short" earned only [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365).
-* The channel had about [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447) so this means that AdSense can be up to ~$1.5 million. Since AdSense makes up 14% of revenue, we get a rough estimate of yearly revenue at ~$10 million, which aligns with the 10x multiple for their acquisition valuation figures in 2023.
+* Also in that video, some isolated Adsense figures were shown. Their biggest standard video earned [\$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375) whereas their biggest "Short" earned only [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365).
+* The channel had about [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447) so this means that AdSense can be up to ~$1.5 million. Since AdSense makes up 14% of revenue, we get a rough estimate of **yearly revenue at ~$10 million**, which aligns with the 10x multiple for their acquisition valuation figures in 2023.
 
 Let's look at the ad spots again in the 13 minute video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o), which got 1.3 million views as of 2025-01-06 and assume (unrealistically) that their yearly revenue gets broken down proportionally by view counts:
 1. DBrand, their channel sponsor: Sponsorships (21% of revenue) ~$2k
@@ -133,7 +133,6 @@ Assuming that the creators or platform decides to play the game of maximizing lo
 
 The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
 
-
 # Goldilocks zone of relevance
 We'll look at the relevance of third-party content from the advertiser's side.
 I'll be using advertiser and 3P (third-party) interchangeably since they're the third-party from the perspective of the content creator and viewer relationship.
@@ -147,18 +146,13 @@ Advertisers generally do not need to pay for 3P content that may be indistinguis
 In these cases, there may be concerns other than content relevance which dominates this segment of content (e.g. limited access to new product, company imposes embargo timelines due to testing variations).
 Of note here is that what can be relevant organic content in on channel might be irrelevant content on another channel (e.g. content about dyson vacuums in a tech channel vs in a robovacs channel).
 
-
 ## Setting a baseline for 3P content 
 From the content provider's perspective, it's much more reasonable to set a baseline for third party content. One such example comes from an indie tech Youtuber I enjoy, [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), who describes trust as being ["more valuable than any brand deal"](http://www.youtube.com/watch?v=PME4LZMDtK0&t=308). This observation is true regardless of whether you trust her as a person or that this just makes good business sense, since the amount of ad dollars you can command is directly influenced by the users who wants to watch the content. 
-
-![An honest conversation about sponsorships from Becca](https://www.youtube.com/watch?v=PME4LZMDtK0) 
-
 
 ## Audience-based Relevance 
 The base of relevance stems from what the viewers want to (or are okay with) watch.
 As such, there are more forms of relevance than just the niche that the channel is focusing on.
 TODO chart about multi-dimensional relevance
-
 
 # Strategic ad placements
 Not all ads are created equal
