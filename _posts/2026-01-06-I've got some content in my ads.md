@@ -55,7 +55,7 @@ However, this amount of technical complexity is not necessary to understand what
 Let's start by looking at Youtubers instead.
 
 # Youtubers and sponsored content
-Youtubers these days often allow Youtube itself to inject ads to their videos.
+Youtubers these days often allow Youtube itself to inject ads into their videos.
 On top of those ads, many of those with big followings also run sponsored content.
 We'll focus on the latter as a way to understand what dynamics influence their decisions and hopefully we can see that the same dynamics also affect larger players like Google search and Youtube ads.
 
@@ -69,9 +69,7 @@ The [SponsorBlock](https://sponsor.ajay.app) view shows that those ads take up a
 
 ## How much is LTT earning per ad?
 If we listen to only the viewers' feedback then content creators will have no table on the food.
-Clearly, these ads are only there because they benefit LTT.
 So what's the breakdown here and how much are these ads contributing to [@LinusTechTips](https://www.youtube.com/@LinusTechTips)'s top-line?
-
 LTT doesn’t provide explicit figures but they’ve dropped a bunch of (publicly available) breadcrumbs for us:
 * They did quoted a $100 million valuation figure for a potential acquisition back in 2023. This is typically a multiple of yearly revenue. The multiple for digital media can reach 10x. 
 * In their [revenue breakdowns video](https://www.youtube.com/watch?v=GeCP-0nuziE), we [see percentages](http://www.youtube.com/watch?v=GeCP-0nuziE&t=106). AdSense (i.e. Youtube-injected ads) only makes up about 14% of their revenue and that most of their revenue comes from their "merch" (i.e. products from their team, making up 55% of the revenue) and sponsorships (i.e. third party products or services, making up 21%). 
@@ -88,7 +86,7 @@ From LTT's perspective, they can expect **up to $15k worth of revenue** from the
 
 # Long term ads revenue depends on viewers
 The growth of viewership is essential to the long term viability of those ads on the Youtube channel.
-Higher viewership is directed related to influence that LTT can choose to resell to advertisers who may be interested in telling viewers about their newest product or service.
+Higher viewership is directly correlate with influence that LTT can choose to resell to advertisers who may be interested in telling viewers about their newest product or service.
 
 Too many ads would risk the channel losing viewership and thereby influence, resulting in fewer advertisers who want to have an opportunity to get featured in an LTT video.
 Revisiting the topic of [3 ad segments in a 12 minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/), we can see little evidence of a dampening to their long term subscribership around the time of video release on Dec 30th 2025 according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
@@ -96,6 +94,7 @@ Revisiting the topic of [3 ad segments in a 12 minute video](https://www.reddit.
 ![LTT Total subs increasing consistently](/assets/posts/2026-01-06/LTT_total_subs.png)
 
 The only major dip in subscriber count was in 2023 July, when they were mired in controversy due to an expose by a competing Youtube channel, throwing their ethics into question and hurting viewer trust according to [this CBC report](https://www.cbc.ca/news/canada/british-columbia/linus-tech-tips-youtube-controversy-1.6940087).
+This was, of course, endangered their ad revenue and long term viability as a digital media company, prompting an [apology video](https://www.youtube.com/watch?v=0cTpTMl8kFY) in which they promised a multitude of measures to win back viewer trust and credibility.
 
 *Aside: These counts could be lower if ad blockers like [AdGuard](https://adguard.com/en/welcome.html) (skips Youtube-injected ads) or [SponsorBlock](https://sponsor.ajay.app) (skips sponsored segments) do not exist. When LTT pitches to advertisers, it would be in their interest to point to these counts without the above caveat.*
 
@@ -113,11 +112,11 @@ So how do marketers or advertisers decide how much money to throw at Youtube cha
 
 If you've heard of the [Drake equation](https://en.wikipedia.org/wiki/Drake_equation), the answer is surprisingly simple:
 
-> Amount of marketing dollars ~ Number of Views * Probability of Purchase per View * Amount of Revenue per Purchase
+> Amount of marketing dollars ~ Number of Views * Probability of (Incremental) Purchase per View * Amount of Revenue per Purchase
 
 However, also similar to the [Drake equation](https://en.wikipedia.org/wiki/Drake_equation), the real complexity arises in the terms of the equation itself instead of the equation. 
 * Number of Views - It's usually hard to predict how much views the video will get prior to the video release, although proxies such as subscriber count and viewership of similar past videos can be good alternatives.
-* Probability of Purchase per View - This is the incremental probability of purchase, compared against the baseline of not spending this marketing budget. This can be difficult to do perfectly, which is why there's typically a discount code that Youtubers will ask you to use (an a small discount to incentivize you to use it) so that their marketers can attempt to measure this effect. 
+* Probability of (Incremental) Purchase per View - This is the likelihood of a purchase after watching the video that wouldn't have happened otherwise. The computation of this number is the most complex part of ad attribution and can be difficult to estimate in a statistically sound way. This is also why there's typically a discount code that Youtubers will ask you to use... to make it easier for marketers to estimate this figure.
 * Amount of Revenue per Purchase - High ticket items such as cars can justify higher marketing budgets, which is why some automotive Youtubers do not need as much views to survive.
 
 Here's the sneaky part - Youtubers are still incentivized to drive more sales for advertisers because doing so successfully means higher marketing budgets in the future (if the marketers are also doing a good job)... without losing viewers, that is.
@@ -127,35 +126,34 @@ Here's the sneaky part - Youtubers are still incentivized to drive more sales fo
 # When is an ad not an ad?
 Fixing the above variables, the last element of the game is to increase the amount of ad slots in the video. 
 Going back to the topic of [3 ad segments in a 12 minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/), we see that LTT went with the two strategies to increase viewer retention:
-1. Strategic ad placement - clustering these ads after the "hook" (when interest in the main content is high) and after the main content is a common strategy to balance watch times and ad load. This can also lead to sneaky ads for some less ethical channels. 
+1. Strategic ad placement - clustering these ads after the "hook" (when interest in the main content is high) and after the main content is a common strategy to balance watch times and ad load. This can also lead to sneaky ads for some less ethical channels. I'll skip this section since the best practices are format-dependent (i.e. the same strategy for standard Youtube videos may not work for TikTok, Youtube shorts or other types of media).
 2. Relevant and high quality ads - ideally the ads are relevant to the users. LTT viewers are typically tech enthusiasts and are already likely to be in interested in related topics such as DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders) and PIA (vpn for the privacy conscious). Ads which are less relevant to the audience can reduce the ad volume however. For example, [this dyson sponsored video being one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
-The ideal ad is one that is so relevant to viewers' interests so as to be indistinguishable from organic content. However, in this case, an advertiser wouldn't even need to pay for the content. So what gives?
+But if the ad is so relevant to viewers interests and high quality, what makes it different from the main content that the Youtube channel is producing anyway?
+In that case, why would an advertiser even need to pay to be in the video?
 
-## Strategic ad placements
-Not all ads are created equal
-TODO 
+## Goldilocks zone of ad relevance
+We can plot two lines on the horizontal axis of third party content (3PC) relevance, differentiating it from ads since ads are typically paid for.
+1. Willingness of third party (i.e. advertiser, 3P) to pay for placement of the 3PC.
+2. Likelihood of content producer featuring the content without 3P having to pay.
 
-## Relevant and high quality ads
-We'll look at the relevance of third-party content from the advertiser's side.
-I'll be using advertiser and 3P (third-party) interchangeably since they're the third-party from the perspective of the content creator and viewer relationship.
-As such we can see ads as third party content which may be shown along with first party content (i.e. the video that users want to see) at the discretion of the content generator.
-
-There's an equilibrium in terms of 3P content relevance as we'll break down later:
 ![Goldilocks zone of advertising](/assets/posts/2026-01-06/goldilocks_zone_of_advertising.png)
 
-On the right side is what we discussed earlier.
-Advertisers generally do not need to pay for 3P content that may be indistinguishable from organic content (e.g. new camera gear releases for a Youtube channel focusing on camera gear reviews).
-In these cases, there may be concerns other than content relevance which dominates this segment of content (e.g. limited access to new product, company imposes embargo timelines due to testing variations).
-Of note here is that what can be relevant organic content in on channel might be irrelevant content on another channel (e.g. content about dyson vacuums in a tech channel vs in a robovacs channel).
+So the middle part is where ad revenue comes from, satisfying both conditions:
+* Not so relevant that creators would want to feature the content anyway regardless of the advertiser paying (i.e. Probability of (Incremental) Purchase per View is low). Examples of this include product reviews for channels featuring gear discussions such as photography channels covering a new camera launch.
+* Not so low quality or irrelevant to risk long term viewership (e.g. scam content or low quality product). There are also channels such as [@Coffeezilla](https://www.youtube.com/Coffeezilla) who make a living out of exposing unethical sponsorships, which is an interesting meta play.
 
-### Setting a baseline for 3P content 
-From the content provider's perspective, it's much more reasonable to set a baseline for third party content. One such example comes from an indie tech Youtuber I enjoy, [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), who describes trust as being ["more valuable than any brand deal"](http://www.youtube.com/watch?v=PME4LZMDtK0&t=308). This observation is true regardless of whether you trust her as a person or that this just makes good business sense, since the amount of ad dollars you can command is directly influenced by the users who wants to watch the content. 
+This is why the strategy for creators hover around maximizing the use of this zone through the following mechanisms:
+* Setting a baseline for 3P content: One such example comes from an indie tech Youtuber I enjoy, [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), who publically shares guidelines [in this video about sponsorships](http://www.youtube.com/watch?v=PME4LZMDtK0) such as "No paid reviews", "Feeling comfortable with her audience spending money on feature products", "Not reviewing a device during a brand-sponsored trip" to build trust with her audience as well as to set expectations upfront with advertisers.
+* Audience-based Relevance: The ad doesn't have to be limited to the content that it is being featured alongside. As long as some proportion of viewers can be expected to stay tuned, it's likely the ad stands a chance of being featured. Youtube shares aggregate demographic data such as gender, age, broad geographical distribution as well as (topic-based) interests of channel audiences which makes this easier. For example, a video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) featuring ads of screwdrivers and a VPN may be a good idea because PC builders are likely to be interested in both. However, a DBrand ad (a phone case or skin maker) is also fair game because the audience (i.e. young, male) may also interested in protecting their phones with some edgy skins.
+* High quality ads: You've seen good ads and the best of them seem to transcend the product they're selling. This example from LTT shows that at the vey least, they're [trying](https://youtu.be/3yO0m8X0xn4?si=ImkTR22omqaHSCjm&t=490).
 
-### Ads that you might not skip right away
-TODO funny ads from LTT
+![LTT warthunder ad](/assets/posts/2026-01-06/LTT_warthunder_ad.png)
 
-### Audience-based Relevance 
-The base of relevance stems from what the viewers want to (or are okay with) watch.
-As such, there are more forms of relevance than just the niche that the channel is focusing on.
-TODO chart about multi-dimensional relevance
+# TLDR
+To recap, 
+1. Ads are necessary evils as a result of free content.
+2. Creators must balance ad density with viewer retention. 
+3. Amount of marketing dollars ~ Number of Views * Probability of (Incremental) Purchase per View * Amount of Revenue per Purchase
+4. High-quality, relevant ads are more tolerable and effective than irrelevant ones.
+5. Effective advertising lives in a middle ground—content that is relevant enough to interest viewers, but not so central that the creator would have covered it for free.
