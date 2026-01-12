@@ -2,6 +2,7 @@
 layout: post
 title: I've got some content in my ads!
 tags: ads
+hidden: true
 excerpt_separator: <!--more-->
 ---
 Why do you get the kind of ads that you do and why are there so many of them?
