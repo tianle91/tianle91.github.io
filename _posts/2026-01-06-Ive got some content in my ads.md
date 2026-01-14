@@ -187,4 +187,3 @@ To recap:
 4. Strategic ad placements, limiting ad load, and selecting for relevant ads reduce impact on long-term viewership.
 5. Relevant ads are correlated with both higher profitability as well as lower impact on long-term viewership.
 6. However, there's a tradeoff between ad relevance and advertisers' willingness to pay. This results in most featured ads being in a middle spot of ad relevance.
-
