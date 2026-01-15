@@ -138,31 +138,19 @@ Let's recall that the goal of the creator (with regards to ad load and ad types)
 The ads strategy that LTT went with is as follows:
 1. **Strategic ad placement** - clustering these ads after the "hook" (when interest in the main content is high) and after the main content increases user retention.
 2. **Limiting ad load** - 20% ad load is still quite normal compared to traditional TV shows, where prime time shows can contain up to 8 minutes of ads per half hour (i.e., ~25%) [src](https://www.quora.com/How-many-commercials-are-in-a-30-minute-show#:~:text=Most%20TV%20half%2Dhour%20show,(rarely)%2060%20second%20commercials.)
-3. **Relevant and high-quality ads** - ads that engage users are more likely to result in longer view lengths and reduce loss of subscribers.
+3. **Relevant and high-quality ads** - ads that engage users are more likely to result in longer view lengths and reduce loss of subscribers. On the other side, ads which are less relevant to the audience can result in user frustration. For example, a Dyson sponsored video is [one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
 The first two strategies are difficult to scale since they are constrained by the amount of content available to publish.
 Even if the creator has a massive backlog of content available and resources to produce them, the amount of user attention is typically limited (there's only so much time in a day during which users watch YouTube).
 
 *Aside: The limited amount of attention per day is the reason why most online ad campaigns attempt to evenly pace the campaign spend (i.e., make sure that spend is spread evenly across campaign dates).*
 
-## The best ad is no ad
-As mentioned earlier, ads which are so well-produced and relevant to the audience solve both the long-term viewership problem as well as increase the rate of return on marketing budgets.
+This leaves us with **relevant and high-quality ads**.
 
-You can see [this example](https://youtu.be/3yO0m8X0xn4?si=ImkTR22omqaHSCjm&t=490) from LTT showing how they're trying to create high-quality ads (unironically).
-
-![LTT warthunder ad](/assets/posts/2026-01-06/LTT_warthunder_ad.png)
-
-But the next best thing are ads which are relevant to the users.
-
-For the LTT example, we know that viewers are typically tech enthusiasts and are already likely to be interested in tech-related topics.
-As such DBrand phone cases (with phone circuit board skins), LTT screwdrivers (marketed as being built for PC builders), and PIA (VPN for the privacy conscious) are likely to both reduce viewership attrition as well as increase return on marketing budgets.
-
-On the other side, ads which are less relevant to the audience can result in user frustration.
-For example, a Dyson sponsored video is [one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
-
-## But the best ads also don't command ad revenue
-If an ad is so relevant that it's not perceived as an ad, why would advertisers need to pay the creator?
+But if an ad is so relevant that it's not perceived as an ad, why would advertisers need to pay the creator?
 YouTube is a free and open platform and businesses maintain their own channels and regularly upload ads to their own channels.
+
+## A sweet spot between willingness to pay and relevance
 In this section, we'll describe how this dynamic influences the types of ads you'll see.
 
 We can plot two lines on the horizontal axis of third-party content (3PC) relevance, differentiating it from ads since ads are typically paid for:
@@ -171,13 +159,45 @@ We can plot two lines on the horizontal axis of third-party content (3PC) releva
 
 ![Goldilocks zone of advertising](/assets/posts/2026-01-06/goldilocks_zone_of_advertising.png)
 
-So the middle part is where ad revenue comes from, satisfying both conditions:
-* **Not so relevant** that creators would want to feature the content anyway regardless of the advertiser paying (i.e., Probability of (Incremental) Purchase per View is low). Examples of this include product reviews for channels featuring gear discussions such as photography channels covering a new camera launch.
-* **Not so low-quality or irrelevant** to risk long-term viewership (e.g., scam content or low-quality products). There are also channels such as [@Coffeezilla](https://www.youtube.com/Coffeezilla) who make a living out of exposing unethical sponsorships, which is an interesting meta play.
+So the middle part (the sweet spot) is where ad revenue comes from, satisfying both conditions:
+* Not so relevant that creators would want to feature the content anyway **without the advertiser having to pay** (i.e., Probability of (Incremental) Purchase per View is low). Examples of this include product reviews for channels featuring gear discussions such as photography channels covering a new camera launch. Creators may even be willing to pay for access to these new products (e.g. some creators pay to attend the Consumer Electronics Show, where new and exciting tech gadgets may be released).
+* Not so low-quality or irrelevant to **risk long-term viewership** (e.g., scam content or low-quality products). Channels with scummy ads or poor ethics can also be exposed by channels such as [@Coffeezilla](https://www.youtube.com/Coffeezilla), which is an interesting meta play. An indie tech YouTuber I enjoy [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace) is upfront with [her policy for sponsorships](http://www.youtube.com/watch?v=PME4LZMDtK0) such as "No paid reviews", "Feeling comfortable with her audience spending money on featured products", "Not reviewing a device during a brand-sponsored trip" to build trust with her audience as well as to set expectations upfront with advertisers.
 
-This is why the strategy for creators hovers around maximizing the use of this zone through the following mechanisms:
-* **Setting a baseline for 3P content**: One such example comes from an indie tech YouTuber I enjoy, [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), who publicly shares guidelines [in this video about sponsorships](http://www.youtube.com/watch?v=PME4LZMDtK0) such as "No paid reviews", "Feeling comfortable with her audience spending money on featured products", "Not reviewing a device during a brand-sponsored trip" to build trust with her audience as well as to set expectations upfront with advertisers.
-* **Audience-based relevance**: The ad doesn't have to be limited to the content that it is being featured alongside. As long as some proportion of viewers can be expected to stay tuned, it's likely the ad stands a chance of being featured. YouTube shares aggregate demographic data such as gender, age, broad geographical distribution, as well as (topic-based) interests of channel audiences, which makes this easier. For example, a video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) featuring ads for screwdrivers and a VPN may be a good idea because PC builders are likely to be interested in both. However, a DBrand ad (a phone case or skin maker) is also fair game because the audience (i.e., young, male) may also be interested in protecting their phones with some edgy skins.
+## Maximizing the sweet spot
+Given that creators do not have direct leverage over the willingness of advertisers to pay, they have to make the best use of the sweet spot identified above.
+
+We'll look at two examples below (with caveats).
+
+### Better produced ads
+Even if the content itself doesn't line up with the audience well, the production quality can improve the viewing experience enough to make it more watchable (than say, just reading from the advertiser-provided script).
+Even obvious ads can go viral ([Long long man](https://www.youtube.com/watch?v=6-1Ue0FFrHY) is one such example).
+
+Here's [an example](https://youtu.be/qklfd81ceeY?si=BI8RZ1NaTepPPvQ-&t=959) from another LTT video incorporating an element from traditional TV ads - a jingle!
+
+![LTT jingle screenshot](/assets/posts/2026-01-06/LTT_jingle_screenshot.png)
+
+Which seemed to be received quite positively as of when I'm writing this.
+
+![LTT jingle comments](/assets/posts/2026-01-06/LTT_jingle_comments.png)
+
+*Aside: Better produced ads have varying degrees of success in the modern ecosystem. The days of live TV are gone, along with the unskippable ads. [SponsorBlock](https://sponsor.ajay.app) for example, helps viewers skip these sections altogether. However, for other content providers such as Netflix, Twitch, unskippable ads are still here, meaning that high quality ads might still have a shot.*
+
+### Audience-based relevance
+Ads don't have to be limited to same topic as the main content.
+Featuring ads from related content or even unrelated topics that appeals to the audience increases the pool of marketing dollars that are eligible to bid for the ad spot, increasing the creator's revenue.
+
+YouTube shares aggregate demographic data such as gender, age, broad geographical distribution, as well as (topic-based) interests of channel audiences, which makes this easier for creators to do this.
+
+Let's go back to the earlier video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) and revisit the sponsored ads with the observation that LTT viewers are likely to be **male, young, interested in technology**:
+1. DBrand - a tech accessories brand with features that appeal to enthusiasts such as the [teardown series](https://dbrand.com/shop/limited-edition/teardown), featuring skins that expose the underlying circuit boards
+2. Clear LTT screwdrivers - their [in-house screwdriver](https://global.lttstore.com/products/screwdriver?srsltid=AfmBOooUn8dXylPtUTVslNhmfRWlZdX_GEkkM-eyghsvJVCvoiMjahut), specially designed for PC builders, because they're "making the best screwdriver with PC building in mind"
+3. Private Internet Access - appeal to the privacy conscious who do not want their internet activity tracked by "nefarious actors".
+
+[This example](https://youtu.be/3yO0m8X0xn4?si=ImkTR22omqaHSCjm&t=490) from LTT shows how they're trying to appeal to a mostly male audience with another product that's popular with males (i.e. Warthunder, which is a war simulation game).
+
+![LTT warthunder ad](/assets/posts/2026-01-06/LTT_warthunder_ad.png)
+
+*Aside: This can lead to a downwards spiral as creators who are desperate for ad dollars may feel pressured to introduce lower relevance ads to fill the ad spots (possibly including scummy businesses), resulting in loss in viewership which further reduces the ad spot prices they can command.*
 
 # TL;DR
 To recap:
@@ -187,3 +207,4 @@ To recap:
 4. Strategic ad placements, limiting ad load, and selecting for relevant ads reduce impact on long-term viewership.
 5. Relevant ads are correlated with both higher profitability as well as lower impact on long-term viewership.
 6. However, there's a tradeoff between ad relevance and advertisers' willingness to pay. This results in most featured ads being in a middle spot of ad relevance.
+7. To maximize ad revenue in the sweet spot, creators can attempt strategies such as producing higher-quality ads and/or broaden the kinds of eligible ads by identifying audience interests.
