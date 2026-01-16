@@ -12,6 +12,8 @@ Here, we'll look at some YouTubers to see how they make these decisions.
 # I've got some content in my ads!
 *Disclaimer: These opinions do not reflect those of my employer and are mine alone.*
 
+**Quick take:** Creators balance ad revenue with viewer retention by strategically placing relevant ads in a "sweet spot"—not so relevant they'd feature it for free, but not so irrelevant they lose viewers. We'll examine LinusTechTips' economics to show how this works.
+
 The most popular content that we see today comes with ads in some form.
 As users, it's rather frustrating to have ads or sponsored content show up on your content feed.
 But servers aren't free and ads are what incentivize people to produce and host content to entertain and/or inform you.
@@ -25,24 +27,20 @@ To understand what kind of ads and how many get shown, we'll examine the revenue
 
 # How ads took over the world
 The OG "content" used to be newspapers that people would pay for at newspaper stands with coins.
-Now ads are everywhere and all three entities mentioned in the previous sentence can be considered as endangered species.
-
-Coincidence? I think not!
+Now ads are everywhere and all three entities mentioned in the previous sentence can be considered as endangered species. Coincidence? I think not!
 
 ![newspaper stands](https://inhabitat.com/wp-content/blogs.dir/1/files/2023/05/1336747_81_118551_mbaoiLBrD-889x593.jpg)
 
-I think it all started sometime in the 2000s, with "free" newspapers starting to show up alongside the paid ones.
-Commuters started grabbing those over newspapers you'd have to pay for, even though these papers had substantially more ads.
-However, it's pretty hard to beat "free", especially since the breaking news would show up in every single newspaper anyway.
-The innovation here is that the revenue of these "free" newspapers comes primarily from advertisers instead of readers, thereby allowing these papers to scale viewership much faster than paid newspapers.
+In the 2000s, "free" newspapers started appearing alongside paid ones. Commuters grabbed those instead, despite having substantially more ads—because it's hard to beat "free."
+
+**The key innovation:** Revenue came from advertisers instead of readers, allowing these papers to scale viewership much faster than paid newspapers.
 
 ## Online advertising
-At the same time, PCs (later mobile phones and cellular plans) were also gaining popularity such that even these free newspapers started losing ground to websites.
-The most visited websites operated on very similar ad-supported models, giving out content in exchange for putting some ads on the webpage that the users might click on.
+As PCs and mobile phones gained popularity, even free newspapers lost ground to websites operating on similar ad-supported models.
 
-Some of the scummy websites gained notoriety for flooding their pages with annoying pop-up ads and misleading buttons.
-Users would often avoid these websites entirely, although they might still brave these traps and snares if they wanted the content bad enough.
-Even then, we intuitively understood that the amount and type of ads on a website are related to the kind of content the website hosts.
+Scummy websites flooded pages with pop-up ads and misleading buttons. Users avoided these sites—unless they wanted the content badly enough.
+
+**The key insight:** Even then, we intuitively understood that the amount and type of ads on a website relate to the kind of content it hosts.
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
@@ -71,12 +69,28 @@ The [SponsorBlock](https://sponsor.ajay.app) view shows that those ads take up a
 
 ## How much is LTT earning per ad?
 If we listened only to viewers' feedback, content creators would have no food on the table.
+
 So what's the breakdown, and how much are these ads contributing to [@LinusTechTips](https://www.youtube.com/@LinusTechTips)'s top line?
-LTT doesn't provide explicit figures, but they've dropped a bunch of (publicly available) breadcrumbs for us:
-* They quoted a $100 million valuation figure for a potential acquisition back in 2023. This is typically a multiple of yearly revenue. The multiple for digital media can reach 10×.
-* In their [revenue breakdowns video](https://www.youtube.com/watch?v=GeCP-0nuziE), we [see percentages](http://www.youtube.com/watch?v=GeCP-0nuziE&t=106). AdSense (i.e., YouTube-injected ads) only makes up about 14% of their revenue, and most of their revenue comes from their "merch" (i.e., products from their team, making up 55% of the revenue) and sponsorships (i.e., third-party products or services, making up 21%). 
-* Also in that video, some isolated AdSense figures were shown. Their biggest standard video earned [\$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375), whereas their biggest "Short" earned only [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365).
-* The channel had about [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447), so this means that AdSense can be up to ~$1.5 million. Since AdSense makes up 14% of revenue, we get a rough estimate of **yearly revenue at ~$10 million**, which aligns with the 10× multiple for their acquisition valuation figures in 2023.
+
+LTT doesn't provide explicit figures, but they've dropped publicly available breadcrumbs:
+
+**Valuation clues:**
+* $100 million valuation quoted for potential acquisition in 2023
+* Digital media valuations typically use 10× yearly revenue multiple
+* This suggests ~$10 million in yearly revenue
+
+**Revenue breakdown** (from their [revenue video](https://www.youtube.com/watch?v=GeCP-0nuziE)):
+* **55%** - Merch (their own products)
+* **21%** - Sponsorships (third-party products/services)
+* **14%** - AdSense (YouTube-injected ads)
+* **10%** - Other
+
+**AdSense math:**
+* Standard videos: [\$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375)
+* Shorts: [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365)
+* Channel total: [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447)
+* AdSense revenue: ~$1.5 million (14% of total)
+* **Total estimated yearly revenue: ~$10 million** ✓
 
 Let's look at the ad spots again in the 13-minute video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o), which got 1.3 million views as of Jan 6, 2025, and assume (unrealistically) that their yearly revenue gets broken down proportionally by view counts:
 1. DBrand, their channel sponsor: Sponsorships (21% of revenue) ~$2k
@@ -115,14 +129,31 @@ So how do marketers or advertisers decide how much money to throw at YouTube cha
 ## Drake equation for marketing budgets
 If you've heard of the [Drake equation](https://en.wikipedia.org/wiki/Drake_equation), the answer is surprisingly simple:
 
-> Amount of marketing dollars ~ Number of Views * Probability of (Incremental) Purchase per View * Amount of Revenue per Purchase
+> **Amount of marketing dollars ~ Number of Views × Probability of (Incremental) Purchase per View × Amount of Revenue per Purchase**
 
-However, similar to the [Drake equation](https://en.wikipedia.org/wiki/Drake_equation), the real complexity arises in the terms of the equation itself rather than in the equation as a whole. 
-* Number of Views - It's usually hard to predict how many views a video will get prior to release, although proxies such as subscriber count and viewership of similar past videos can be good alternatives.
-* Probability of (Incremental) Purchase per View - This is the likelihood of a purchase after watching the video that wouldn't have happened otherwise. The computation of this number is the most complex part of ad attribution and can be difficult to estimate in a statistically sound way. This is also why there's typically a discount code that YouTubers will ask you to use—to make it easier for marketers to estimate this figure.
-* Amount of Revenue per Purchase - High ticket items such as cars can justify higher marketing budgets, which is why some automotive Youtubers do not need as many views to survive.
+However, similar to the Drake equation, the real complexity arises in the terms themselves:
 
-Here's the sneaky part: YouTubers are still incentivized to drive more sales for advertisers because doing so successfully **means higher marketing budgets in the future** (if the marketers are also doing a good job)—without losing viewers, that is.
+**Number of Views**
+* Hard to predict before release
+* Proxies: subscriber count, past video performance
+
+**Probability of (Incremental) Purchase per View**
+* The likelihood of a purchase that wouldn't have happened otherwise
+* Most complex part of ad attribution
+* This is why YouTubers give you discount codes—to track this metric!
+
+**Amount of Revenue per Purchase**
+* High-ticket items (cars) justify higher marketing budgets
+* Why automotive YouTubers don't need as many views to survive
+
+**Worked example:** Let's say Private Internet Access sponsors the LTT RAM video:
+* Views: 1.3 million
+* Conversion rate: 0.1% use the discount code (1,300 purchases)
+* Revenue per purchase: $40/year subscription
+* Total incremental revenue: $52,000
+* If they paid LTT $2,000 for the spot, that's a 26× return on ad spend!
+
+This is why **YouTubers are incentivized to drive sales** for advertisers—success means higher marketing budgets in the future.
 
 *Aside: For LTT, it's in their interest to discourage viewers from using ad blockers (e.g., by claiming [AdBlock is theft](https://m.youtube.com/watch?v=a-PH2GUy_zM&t=71)) even if they risk alienating their viewers. That's because users who don't see ads can't meaningfully contribute to positive returns on marketing spend.*
 
@@ -198,6 +229,34 @@ Let's go back to the earlier video [about RAM prices](https://www.youtube.com/wa
 ![LTT warthunder ad](/assets/posts/2026-01-06/LTT_warthunder_ad.png)
 
 *Aside: This can lead to a downward spiral as creators desperate for ad dollars may feel pressured to introduce lower-relevance ads to fill the ad spots (possibly including scummy businesses), resulting in loss of viewership, which further reduces the ad spot prices they can command.*
+
+# What this means for smaller creators
+If you're just starting out or have a smaller channel, the same principles apply—but with different constraints:
+
+**Build trust first, monetize later**
+* Your early viewers are your most valuable asset
+* Introducing low-quality ads too early can permanently damage credibility
+* Consider waiting until you have 10k+ engaged subscribers before aggressive monetization
+
+**Focus on relevance over revenue**
+* Turn down sponsorships that don't align with your audience
+* One good sponsorship relationship beats ten mediocre ones
+* Your recommendation becomes less valuable each time you promote something irrelevant
+
+**Use sponsorships to improve content quality**
+* Revenue should fund better equipment, editing, or research time
+* Better content → more views → higher future sponsorship rates
+* Don't extract all revenue as profit initially
+
+**Start with affiliate links instead of sponsored segments**
+* Less intrusive than in-video ads
+* Easier to test what your audience actually wants
+* Build credibility before asking for their time (watching ads)
+
+**Document your policies upfront**
+* Like [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), be transparent about what you will/won't promote
+* Sets expectations with both viewers and potential sponsors
+* Makes it easier to say "no" to misaligned opportunities
 
 # TL;DR
 To recap:
