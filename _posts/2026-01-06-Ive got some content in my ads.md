@@ -1,15 +1,14 @@
 ---
 layout: post
-title: I've got some content in my ads!
+title: How YouTubers Balance Ad Revenue and Viewer Retention
 tags: ads
 hidden: false
 excerpt_separator: <!--more-->
 ---
-Why do you get the kind of ads that you do, and why are there so many of them?
-Here, we'll look at some YouTubers to see how they make these decisions.
+Creators face a delicate tradeoff: ads must be relevant enough to avoid alienating viewers, but not so relevant they'd feature them for free. Using LinusTechTips' economics as a case study, we'll explore the "sweet spot" that maximizes ad revenue while preserving long-term viewership.
 <!--more-->
 
-# I've got some content in my ads!
+# How YouTubers Balance Ad Revenue and Viewer Retention
 *Disclaimer: These opinions do not reflect those of my employer and are mine alone.*
 
 **Quick take:** Creators balance ad revenue with viewer retention by strategically placing relevant ads in a "sweet spot"—not so relevant they'd feature it for free, but not so irrelevant they lose viewers. We'll examine LinusTechTips' economics to show how this works.
