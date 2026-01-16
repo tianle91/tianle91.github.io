@@ -13,20 +13,19 @@ Creators face a delicate tradeoff: ads must be relevant enough to avoid alienati
 
 **Quick take:** Creators balance ad revenue with viewer retention by strategically placing relevant ads in a "sweet spot"—not so relevant they'd feature it for free, but not so irrelevant they lose viewers. We'll examine LinusTechTips' economics to show how this works.
 
-The most popular content that we see today comes with ads in some form.
-As users, it's rather frustrating to have ads or sponsored content show up on your content feed.
-But servers aren't free and ads are what incentivize people to produce and host content to entertain and/or inform you.
+Content creators face a paradox: while audiences prefer ad-free experiences, advertising revenue funds the content production that attracts those same audiences.
+This creates a delicate equilibrium where creators must carefully calibrate their monetization strategy.
 
 ![two unskippable ads](https://img-9gag-fun.9cache.com/photo/aoy6oDX_700bwp.webp)
 
-So what influences the quantity and type of ads you see? 
+Understanding what influences the quantity and type of ads requires examining both the creator's revenue needs and the viewer's tolerance threshold.
+The answer lies in optimizing a narrow "sweet spot" between these competing pressures. 
 
-We'll do a quick recap of how ads took over the world over the last couple of decades.
-To understand what kind of ads and how many get shown, we'll examine the revenue of some YouTubers and see what drives sponsored content on their channels.
+To understand the current state of online advertising, we'll first examine how ad-supported content evolved over the past few decades, then dive into the specific economics of YouTube creators to reveal what drives their sponsorship decisions.
 
 # How ads took over the world
-The OG "content" used to be newspapers that people would pay for at newspaper stands with coins.
-Now ads are everywhere and all three entities mentioned in the previous sentence can be considered as endangered species. Coincidence? I think not!
+Traditional newspapers operated on a simple model: readers paid directly for content at newsstands.
+This direct payment model created a clear value exchange, but it also limited distribution to those willing and able to pay.
 
 ![newspaper stands](https://inhabitat.com/wp-content/blogs.dir/1/files/2023/05/1336747_81_118551_mbaoiLBrD-889x593.jpg)
 
@@ -37,12 +36,14 @@ In the 2000s, "free" newspapers started appearing alongside paid ones. Commuters
 ## Online advertising
 As PCs and mobile phones gained popularity, even free newspapers lost ground to websites operating on similar ad-supported models.
 
-Scummy websites flooded pages with pop-up ads and misleading buttons. Users avoided these sites—unless they wanted the content badly enough.
-Even then, we intuitively understood that the amount and type of ads on a website relate to the kind of content it hosts.
+Early internet advertising revealed an important principle: **ad quality and quantity signal content value**.
+Low-quality sites with excessive pop-ups and misleading ads repelled users, while premium content providers maintained stricter ad standards to preserve their audience.
+
+This dynamic established a crucial feedback loop: content quality correlates with ad restraint, which in turn preserves viewership and enables sustainable monetization.
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
-These ads underwent a major evolution, going from ad hoc partnerships between websites (i.e. publishers) and advertisers (i.e. marketers) to a whole slew of automated bidding and attribution systems over the last couple of decades.
+Even though online advertising is an interesting topic, it has become too complex to reason able, having undergone a major evolution from ad hoc partnerships to a whole slew of automated bidding and attribution systems over the last couple of decades.
 
 ![lumascape display ads](https://bidscube.com/wp-content/uploads/2023/11/6231d4f89bb3333c82c7f9ed_Ad-Exchange.png)
 
@@ -256,11 +257,15 @@ If you're just starting out or have a smaller channel, the same principles apply
 * Makes it easier to say "no" to misaligned opportunities
 
 # TL;DR
-To recap:
-1. Ads are necessary evils as a result of free content.
-2. Creators need to choose ads that maximize ad revenue and minimize impact on long-term viewership.
-3. Ad revenue depends on marketing dollars, which ultimately depend on the profitability of the ad spot.
-4. Strategic ad placements, limiting ad load, and selecting relevant ads reduce impact on long-term viewership.
-5. Relevant ads are correlated with both higher profitability and lower impact on long-term viewership.
-6. However, there's a tradeoff between ad relevance and advertisers' willingness to pay. This results in most featured ads being in a middle spot of ad relevance.
-7. To maximize ad revenue in the sweet spot, creators can attempt strategies such as producing higher-quality ads and/or broadening the kinds of eligible ads by identifying audience interests.
+
+Creators must maximize ad revenue while preserving viewer trust for sustainable monetization.
+
+**Relevance constraints**
+- Too relevant → advertisers won't pay (creators would feature it anyway)
+- Too irrelevant → viewers leave (destroying long-term revenue)
+- Sweet spot → relevant enough to engage, novel enough to command payment
+
+**Optimization levers:**
+- Place ads when engagement is highest (after hooks/main content)
+- Limit ad load to ~20% for video content
+- Match ads to audience interests, not just content topics
