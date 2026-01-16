@@ -33,14 +33,13 @@ Now ads are everywhere and all three entities mentioned in the previous sentence
 
 In the 2000s, "free" newspapers started appearing alongside paid ones. Commuters grabbed those instead, despite having substantially more ads—because it's hard to beat "free."
 
-**The key innovation:** Revenue came from advertisers instead of readers, allowing these papers to scale viewership much faster than paid newspapers.
+*Key innovation: Revenue came from advertisers instead of readers, allowing these papers to scale viewership much faster than paid newspapers.*
 
 ## Online advertising
 As PCs and mobile phones gained popularity, even free newspapers lost ground to websites operating on similar ad-supported models.
 
 Scummy websites flooded pages with pop-up ads and misleading buttons. Users avoided these sites—unless they wanted the content badly enough.
-
-**The key insight:** Even then, we intuitively understood that the amount and type of ads on a website relate to the kind of content it hosts.
+Even then, we intuitively understood that the amount and type of ads on a website relate to the kind of content it hosts.
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
@@ -139,8 +138,7 @@ However, similar to the Drake equation, the real complexity arises in the terms 
 
 **Probability of (Incremental) Purchase per View**
 * The likelihood of a purchase that wouldn't have happened otherwise
-* Most complex part of ad attribution
-* This is why YouTubers give you discount codes—to track this metric!
+* Most complex part of ad attribution (this is why YouTubers give you discount codes—to track this metric!)
 
 **Amount of Revenue per Purchase**
 * High-ticket items (cars) justify higher marketing budgets
