@@ -5,13 +5,12 @@ tags: ads
 hidden: false
 excerpt_separator: <!--more-->
 ---
-Creators face a delicate tradeoff: ads must be relevant enough to avoid alienating viewers, but not so relevant they'd feature them for free. Using LinusTechTips' economics as a case study, we'll explore the "sweet spot" that maximizes ad revenue while preserving long-term viewership.
+Creators face a delicate tradeoff: ads must be relevant enough to avoid alienating viewers, but not so relevant they'd feature them for free.
+Using LinusTechTips' economics as a case study, we'll explore the "sweet spot" that maximizes ad revenue while preserving long-term viewership.
 <!--more-->
 
 # How YouTubers Balance Ad Revenue and Viewer Retention
 *Disclaimer: These opinions do not reflect those of my employer and are mine alone.*
-
-**Quick take:** Creators balance ad revenue with viewer retention by strategically placing relevant ads in a "sweet spot"—not so relevant they'd feature it for free, but not so irrelevant they lose viewers. We'll examine LinusTechTips' economics to show how this works.
 
 Content creators face a paradox: while audiences prefer ad-free experiences, advertising revenue funds the content production that attracts those same audiences.
 This creates a delicate equilibrium where creators must carefully calibrate their monetization strategy.
@@ -43,20 +42,17 @@ This dynamic established a crucial feedback loop: content quality correlates wit
 
 ![internet ads](https://miro.medium.com/v2/resize:fit:1300/0*jnk0_FJWQf_7Z4j4.jpg)
 
-Even though online advertising is an interesting topic, it has become too complex to reason able, having undergone a major evolution from ad hoc partnerships to a whole slew of automated bidding and attribution systems over the last couple of decades.
+Even though online advertising is an interesting topic, it has become too complex to reason about, having undergone a major evolution from ad hoc partnerships to a whole slew of automated bidding and attribution systems over the last couple of decades.
 
 ![lumascape display ads](https://bidscube.com/wp-content/uploads/2023/11/6231d4f89bb3333c82c7f9ed_Ad-Exchange.png)
 
 *Aside: Online advertising also enabled user tracking, promising marketers that FINALLY, they'll be able to tell which half of their marketing spend was wasted. But realizing this promise always seemed to be one technical innovation away. We'll talk about this in another post.*
 
-However, this amount of technical complexity is not necessary to understand what kind of ads and what type of ads gets shown to you.
-Let's start by looking at Youtubers instead.
+Youtuber ad economics, on the other hand, a microcosm of the larger ad marketplace since they need to make the same decisions between retention (i.e. long term viewers) and monetization (i.e. ad revenue).
 
 # YouTubers and sponsored content
-YouTubers these days often allow YouTube itself to inject ads into their videos.
-On top of those ads, many of those with big followings also run sponsored content.
-We'll focus on the latter to understand what influences their decisions, because these are tradeoffs made by the creators themselves, not by a black-box optimization like AdSense.
-However, the same tradeoffs apply to automated ad systems.
+On top of YouTube-injected ads, YouTubers also run sponsored content.
+These kinds of ads are useful for understanding what influences their decisions, as these tradeoffs are made by the creators themselves, not by a black-box optimization like AdSense (which runs the YouTube-injected ads).
 
 ## Does LinusTechTips have too many ads?
 [@LinusTechTips](https://www.youtube.com/@LinusTechTips) (i.e. LTT) is one of the top tech YouTubers who runs a multi-million dollar digital media company making money from these YouTube channels.
@@ -68,23 +64,21 @@ The [SponsorBlock](https://sponsor.ajay.app) view shows that those ads take up a
 
 ## How much is LTT earning per ad?
 If we listened only to viewers' feedback, content creators would have no food on the table.
-
 So what's the breakdown, and how much are these ads contributing to [@LinusTechTips](https://www.youtube.com/@LinusTechTips)'s top line?
-
 LTT doesn't provide explicit figures, but they've dropped publicly available breadcrumbs:
 
-**Valuation clues:**
+**Yearly revenue clues from a potential acquisition**
 * $100 million valuation quoted for potential acquisition in 2023
 * Digital media valuations typically use 10× yearly revenue multiple
 * This suggests ~$10 million in yearly revenue
 
-**Revenue breakdown** (from their [revenue video](https://www.youtube.com/watch?v=GeCP-0nuziE)):
+**Revenue proportions breakdown from their [video](https://www.youtube.com/watch?v=GeCP-0nuziE)**
 * **55%** - Merch (their own products)
 * **21%** - Sponsorships (third-party products/services)
 * **14%** - AdSense (YouTube-injected ads)
 * **10%** - Other
 
-**AdSense math:**
+**Back of the envelope maths using AdSense dollars**
 * Standard videos: [\$2k per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=375)
 * Shorts: [$100 per million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=365)
 * Channel total: [850 million views](http://www.youtube.com/watch?v=GeCP-0nuziE&t=447)
@@ -97,7 +91,8 @@ Let's look at the ad spots again in the 13-minute video [about RAM prices](https
 3. Private Internet Access: Sponsorships (21% of revenue) ~$2k
 4. AdSense (14% of revenue) ~$1.3k
 
-From LTT's perspective, they can expect **up to $15k in revenue** from these ads, which absolutely explains why these ads are there—so why don't they add more ads?
+From LTT's perspective, they can expect **up to $15k in revenue** from these ads in that single video, which absolutely explains why these ads are there.
+So why don't they add more ads?
 
 # Long-term ad revenue depends on viewers
 The growth of viewership is essential to the long-term viability of those ads on the YouTube channel.
@@ -138,13 +133,12 @@ However, similar to the Drake equation, the real complexity arises in the terms 
 
 **Probability of (Incremental) Purchase per View**
 * The likelihood of a purchase that wouldn't have happened otherwise
-* Most complex part of ad attribution (this is why YouTubers give you discount codes—to track this metric!)
+* Most complex part of ad attribution (this is why YouTubers give you discount codes—to track this metric!) requiring some intense statistical knowledge. If you're curious about what technical issues are involved here, see [this video on Mixed Media Modelling](https://www.youtube.com/watch?v=Xnq_q_b5l8U) by Google Ads.
 
 **Amount of Revenue per Purchase**
-* High-ticket items (cars) justify higher marketing budgets
-* Why automotive YouTubers don't need as many views to survive
+* Higher-ticket items justify higher marketing budgets - this is why automotive YouTubers typically don't need as many views to survive.
 
-**Worked example:** Let's say Private Internet Access sponsors the LTT RAM video:
+### Example: Private Internet Access sponsoring the LTT RAM video:
 * Views: 1.3 million
 * Conversion rate: 0.1% use the discount code (1,300 purchases)
 * Revenue per purchase: $40/year subscription
@@ -156,7 +150,7 @@ This is why **YouTubers are incentivized to drive sales** for advertisers—succ
 *Aside: For LTT, it's in their interest to discourage viewers from using ad blockers (e.g., by claiming [AdBlock is theft](https://m.youtube.com/watch?v=a-PH2GUy_zM&t=71)) even if they risk alienating their viewers. That's because users who don't see ads can't meaningfully contribute to positive returns on marketing spend.*
 
 # The game that creators play
-Let's revisit the initial discussion about [3 ad segments in a 12-minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/).
+Let's revisit the initial discussion about [3 ad segments in a 12-minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/) to put everything together into a cohesive strategy.
 
 ![LTT 3ads sponsorblock view](/assets/posts/2026-01-06/LTT_3ads_sponsorblock.jpg)
 
@@ -174,10 +168,13 @@ Even if the creator has a massive backlog of content available and resources to 
 
 *Aside: The limited amount of attention per day is the reason why most online ad campaigns attempt to evenly pace the campaign spend (i.e., make sure that spend is spread evenly across campaign dates).*
 
-This leaves us with **relevant and high-quality ads**.
+This leaves us with **relevant and high-quality ads**, which at first glance, seems to achieve both objectives at the same time.
 
 But if an ad is so relevant that it's not perceived as an ad, why would advertisers need to pay the creator?
 YouTube is a free and open platform, and businesses maintain their own channels and regularly upload ads to them.
+The key here is that **advertisers may not need to pay** for the most relevant ads (or third party content) to be placed.
+
+*Aside: this problem can also be viewed as low "Probability of (Incremental) Purchase per View" from the perspective of deciding whether to bid for an ad spot on the video.*
 
 ## A sweet spot between willingness to pay and relevance
 In this section, we'll describe how this dynamic influences the types of ads you'll see.
@@ -199,7 +196,7 @@ We'll look at two examples below (with caveats).
 
 ### Better produced ads
 Even if the content itself doesn't line up with the audience well, the production quality can improve the viewing experience enough to make it more watchable (than say, just reading from the advertiser-provided script).
-Even obvious ads can go viral (e.g., [Long long man](https://www.youtube.com/watch?v=6-1Ue0FFrHY)).
+Even obvious ads can go viral (e.g., [Long long man](https://www.youtube.com/watch?v=6-1Ue0FFrHY) went rival for a couple of months due to its absurdity).
 
 Here's [an example](https://youtu.be/qklfd81ceeY?si=BI8RZ1NaTepPPvQ-&t=959) from another LTT video incorporating an element from traditional TV ads: a jingle!
 
@@ -228,44 +225,10 @@ Let's go back to the earlier video [about RAM prices](https://www.youtube.com/wa
 
 *Aside: This can lead to a downward spiral as creators desperate for ad dollars may feel pressured to introduce lower-relevance ads to fill the ad spots (possibly including scummy businesses), resulting in loss of viewership, which further reduces the ad spot prices they can command.*
 
-# What this means for smaller creators
-If you're just starting out or have a smaller channel, the same principles apply—but with different constraints:
-
-**Build trust first, monetize later**
-* Your early viewers are your most valuable asset
-* Introducing low-quality ads too early can permanently damage credibility
-* Consider waiting until you have 10k+ engaged subscribers before aggressive monetization
-
-**Focus on relevance over revenue**
-* Turn down sponsorships that don't align with your audience
-* One good sponsorship relationship beats ten mediocre ones
-* Your recommendation becomes less valuable each time you promote something irrelevant
-
-**Use sponsorships to improve content quality**
-* Revenue should fund better equipment, editing, or research time
-* Better content → more views → higher future sponsorship rates
-* Don't extract all revenue as profit initially
-
-**Start with affiliate links instead of sponsored segments**
-* Less intrusive than in-video ads
-* Easier to test what your audience actually wants
-* Build credibility before asking for their time (watching ads)
-
-**Document your policies upfront**
-* Like [@BeccaFarsace](https://www.youtube.com/@BeccaFarsace), be transparent about what you will/won't promote
-* Sets expectations with both viewers and potential sponsors
-* Makes it easier to say "no" to misaligned opportunities
-
 # TL;DR
-
-Creators must maximize ad revenue while preserving viewer trust for sustainable monetization.
-
-**Relevance constraints**
-- Too relevant → advertisers won't pay (creators would feature it anyway)
-- Too irrelevant → viewers leave (destroying long-term revenue)
-- Sweet spot → relevant enough to engage, novel enough to command payment
-
-**Optimization levers:**
-- Place ads when engagement is highest (after hooks/main content)
-- Limit ad load to ~20% for video content
-- Match ads to audience interests, not just content topics
+If you skipped to the end, here's what I think you can take away:
+* Creators must maximize ad revenue while preserving viewer trust for sustainable monetization.
+* Ad revenue depends on success of marketing dollars, which is ultimately determined by how much creators can influence viewers to contribute to the marketers' revenue.
+* High relevance ads seem to achieve both goals (i.e. maximizing return on marketing as well as retaining viewership), but advertisers may not be willing to pay for placement (i.e. creators may want to feature the content for free), leading most ads to be in a middle zone.
+* As such most ads feature two characteristics in terms of relevance, resulting in a sweet spot for ad revenue: first, not so low relevance that long term viewership is endangered, not so high relevance that advertisers need not pay for it to be featured.
+* The meta play here is to maximize the amount of these sweet spot ads that can be featured (e.g. audience-based relevance) and minimizing the impact on viewership retention (e.g. by better produced ads).
