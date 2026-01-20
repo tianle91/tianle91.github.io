@@ -48,17 +48,17 @@ Even though online advertising is an interesting topic, it has become too comple
 
 *Aside: Online advertising also enabled user tracking, promising marketers that FINALLY, they'll be able to tell which half of their marketing spend was wasted. But realizing this promise always seemed to be one technical innovation away. We'll talk about this in another post.*
 
-Youtuber ad economics, on the other hand, a microcosm of the larger ad marketplace since they need to make the same decisions between retention (i.e. long term viewers) and monetization (i.e. ad revenue).
+YouTuber ad economics, on the other hand, is a microcosm of the larger ad marketplace since they need to make the same decisions between retention (i.e., long-term viewers) and monetization (i.e., ad revenue).
 
 # YouTubers and sponsored content
 On top of YouTube-injected ads, YouTubers also run sponsored content.
-These kinds of ads are useful for understanding what influences their decisions, as these tradeoffs are made by the creators themselves, not by a black-box optimization like AdSense (which runs the YouTube-injected ads).
+These kinds of ads are useful for understanding what influences their decisions, as these trade-offs are made by the creators themselves, not by a black-box optimization like AdSense (which runs the YouTube-injected ads).
 
 ## Does LinusTechTips have too many ads?
-[@LinusTechTips](https://www.youtube.com/@LinusTechTips) (i.e. LTT) is one of the top tech YouTubers who runs a multi-million dollar digital media company making money from these YouTube channels.
+[@LinusTechTips](https://www.youtube.com/@LinusTechTips) (i.e., LTT) is one of the top tech YouTubers who runs a multi-million dollar digital media company making money from these YouTube channels.
 
 A [recent rant](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/) on [r/LinusTechTips](https://www.reddit.com/r/LinusTechTips/) complained about too many ads: 3 ad segments in a 13-minute video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) posted on Dec 30, 2025.
-The [SponsorBlock](https://sponsor.ajay.app) view shows that those ads take up almost 1/5th of the total video length, excluding the typical 2× 15-30s worth of YouTube-injected ads.
+The [SponsorBlock](https://sponsor.ajay.app) view shows that those ads take up almost one-fifth of the total video length, excluding the typical two 15-30 second YouTube-injected ads.
 
 ![LTT 3ads sponsorblock view](/assets/posts/2026-01-06/LTT_3ads_sponsorblock.jpg)
 
@@ -69,7 +69,7 @@ LTT doesn't provide explicit figures, but they've dropped publicly available bre
 
 **Yearly revenue clues from a potential acquisition**
 * $100 million valuation quoted for potential acquisition in 2023
-* Digital media valuations typically use 10× yearly revenue multiple
+* Digital media valuations typically use a 10× yearly revenue multiple
 * This suggests ~$10 million in yearly revenue
 
 **Revenue proportions breakdown from their [video](https://www.youtube.com/watch?v=GeCP-0nuziE)**
@@ -99,7 +99,7 @@ The growth of viewership is essential to the long-term viability of those ads on
 Higher viewership is directly correlated with the influence that LTT can resell to advertisers who may be interested in telling viewers about their newest product or service.
 
 Too many ads would risk the channel losing viewership and thereby influence, resulting in fewer advertisers who want to have an opportunity to get featured in an LTT video.
-Revisiting the topic of [3 ad segments in a 12-minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/), we can see little evidence of dampening in their long-term subscribership around the time of the video's release on Dec 30, 2025, according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
+Revisiting the topic of [3 ad segments in a 12-minute video](https://www.reddit.com/r/LinusTechTips/comments/1pztlu0/3_ad_segments_in_a_12_minute_video_is_insane/), we can see little evidence of a dampening in their long-term subscribership around the time of the video's release on Dec 30, 2025, according to [SocialBlade.com](https://socialblade.com/youtube/handle/linustechtips).
 
 ![LTT Total subs increasing consistently](/assets/posts/2026-01-06/LTT_total_subs.png)
 
@@ -109,8 +109,8 @@ This endangered their ad revenue and long-term viability as a digital media comp
 *Aside: These counts could be lower if ad blockers like [AdGuard](https://adguard.com/en/welcome.html) (skips YouTube-injected ads) or [SponsorBlock](https://sponsor.ajay.app) (skips sponsored segments) did not exist. When LTT pitches to advertisers, it would be in their interest to point to these counts without the above caveat.*
 
 ## But viewership is not ad revenue
-Somewhat counter-intuitively, viewership is more a measure of cost rather than revenue for YouTubers.
-High-quality content, while almost always correlated with high viewership, is certainly guaranteed to burn a hole in the pocket.
+Somewhat counterintuitively, viewership is more a measure of cost rather than revenue for YouTubers.
+High-quality content, while almost always correlated with high viewership, is certainly guaranteed to burn a hole in their pockets.
 
 Luckily for us, LTT has another video detailing that [an average video might take up to 60 hours](https://www.youtube.com/watch?v=Us7qSE44XOg) of work to produce.
 Assuming their staff gets paid $20 per hour, this means a lower limit of $1,800 per video (good thing they seem to come out profitable!).
@@ -133,10 +133,10 @@ However, similar to the Drake equation, the real complexity arises in the terms 
 
 **Probability of (Incremental) Purchase per View**
 * The likelihood of a purchase that wouldn't have happened otherwise
-* Most complex part of ad attribution (this is why YouTubers give you discount codes—to track this metric!) requiring some intense statistical knowledge. If you're curious about what technical issues are involved here, see [this video on Mixed Media Modelling](https://www.youtube.com/watch?v=Xnq_q_b5l8U) by Google Ads.
+* Most complex part of ad attribution (this is why YouTubers give you discount codes—to track this metric!), requiring some intense statistical knowledge. If you're curious about what technical issues are involved here, see [this video on Mixed Media Modelling](https://www.youtube.com/watch?v=Xnq_q_b5l8U) by Google Ads.
 
 **Amount of Revenue per Purchase**
-* Higher-ticket items justify higher marketing budgets - this is why automotive YouTubers typically don't need as many views to survive.
+* Higher-ticket items justify higher marketing budgets—this is why automotive YouTubers typically don't need as many views to survive.
 
 ### Example: Private Internet Access sponsoring the LTT RAM video:
 * Views: 1.3 million
@@ -158,10 +158,10 @@ Let's recall that the creator's goal (with regard to ad load and ad types) is to
 1. Maximize the return on marketing spend to incentivize larger marketing budgets in the future.
 2. Minimize the impact of these ads on long-term viewership.
 
-The ads strategy that LTT went with is as follows:
-1. **Strategic ad placement** - clustering these ads after the "hook" (when interest in the main content is high) and after the main content increases user retention.
-2. **Limiting ad load** - 20% ad load is still quite normal compared to traditional TV shows, where prime-time shows can contain up to 8 minutes of ads per half hour (i.e., ~25%) [src](https://www.quora.com/How-many-commercials-are-in-a-30-minute-show#:~:text=Most%20TV%20half%2Dhour%20show,(rarely)%2060%20second%20commercials.)
-3. **Relevant and high-quality ads** - ads that engage users are more likely to result in longer view lengths and reduce subscriber loss. On the flip side, ads that are less relevant to the audience can result in user frustration. For example, a Dyson sponsored video is [one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
+The ad strategy that LTT went with is as follows:
+1. **Strategic ad placement**—clustering these ads after the "hook" (when interest in the main content is high) and after the main content increases user retention.
+2. **Limiting ad load**—20% ad load is still quite normal compared to traditional TV shows, where prime-time shows can contain up to 8 minutes of ads per half hour (i.e., ~25%) [src](https://www.quora.com/How-many-commercials-are-in-a-30-minute-show#:~:text=Most%20TV%20half%2Dhour%20show,(rarely)%2060%20second%20commercials.)
+3. **Relevant and high-quality ads**—ads that engage users are more likely to result in longer view lengths and reduce subscriber loss. On the flip side, ads that are less relevant to the audience can result in user frustration. For example, a Dyson-sponsored video is [one of the most disliked](https://www.reddit.com/r/LinusTechTips/comments/15i23rk/what_is_ltts_most_disliked_video/#:~:text=They%20didn't%20put%20it,would%20be%20nothing%20but%20Dyson.).
 
 The first two strategies are difficult to scale since they are constrained by the amount of content available to publish.
 Even if the creator has a massive backlog of content available and resources to produce them, the amount of user attention is typically limited (there's only so much time in a day during which users watch YouTube).
@@ -172,7 +172,7 @@ This leaves us with **relevant and high-quality ads**, which at first glance, se
 
 But if an ad is so relevant that it's not perceived as an ad, why would advertisers need to pay the creator?
 YouTube is a free and open platform, and businesses maintain their own channels and regularly upload ads to them.
-The key here is that **advertisers may not need to pay** for the most relevant ads (or third party content) to be placed.
+The key here is that **advertisers may not need to pay** for the most relevant ads (or third-party content) to be placed.
 
 *Aside: this problem can also be viewed as low "Probability of (Incremental) Purchase per View" from the perspective of deciding whether to bid for an ad spot on the video.*
 
@@ -180,8 +180,8 @@ The key here is that **advertisers may not need to pay** for the most relevant a
 In this section, we'll describe how this dynamic influences the types of ads you'll see.
 
 We can plot two lines on the horizontal axis of third-party content (3PC) relevance, differentiating it from ads since ads are typically paid for:
-1. **Willingness of third party (i.e., advertiser, 3P) to pay for placement of the 3PC** - Low-relevance 3P content can often come from bad businesses or desperate marketers, neither of which is good for long-term viewership.
-2. **Likelihood of content producer featuring the content without 3P having to pay** - High-relevance 3P content is typically similar to organic content, and some creators would even pay to have access (instead of advertisers paying).
+1. **Willingness of third-party (i.e., advertiser, 3P) to pay for placement of the 3PC**—Low-relevance 3P content can often come from bad businesses or desperate marketers, neither of which is good for long-term viewership.
+2. **Likelihood of content producer featuring the content without 3P having to pay**—High-relevance 3P content is typically similar to organic content, and some creators would even pay to have access (instead of advertisers paying).
 
 ![Goldilocks zone of advertising](/assets/posts/2026-01-06/goldilocks_zone_of_advertising.png)
 
@@ -194,30 +194,30 @@ Given that creators do not have direct leverage over the willingness of advertis
 
 We'll look at two examples below (with caveats).
 
-### Better produced ads
-Even if the content itself doesn't line up with the audience well, the production quality can improve the viewing experience enough to make it more watchable (than say, just reading from the advertiser-provided script).
-Even obvious ads can go viral (e.g., [Long long man](https://www.youtube.com/watch?v=6-1Ue0FFrHY) went rival for a couple of months due to its absurdity).
+### Better-produced ads
+Even if the content itself doesn't align well with the audience, the production quality can improve the viewing experience enough to make it more watchable (than, say, just reading from the advertiser-provided script).
+Even obvious ads can go viral (e.g., [Long long man](https://www.youtube.com/watch?v=6-1Ue0FFrHY) went viral for a couple of months due to its absurdity).
 
 Here's [an example](https://youtu.be/qklfd81ceeY?si=BI8RZ1NaTepPPvQ-&t=959) from another LTT video incorporating an element from traditional TV ads: a jingle!
 
 ![LTT jingle screenshot](/assets/posts/2026-01-06/LTT_jingle_screenshot.png)
 
-Which seemed to be received quite positively as of when I'm writing this.
+It seemed to be received quite positively as of when I'm writing this.
 
 ![LTT jingle comments](/assets/posts/2026-01-06/LTT_jingle_comments.png)
 
-*Aside: Better produced ads have varying degrees of success in the modern ecosystem. The days of live TV are gone, along with unskippable ads. [SponsorBlock](https://sponsor.ajay.app), for example, helps viewers skip these sections altogether. However, for other content providers such as Netflix and Twitch, unskippable ads are still here, meaning that high-quality ads might still have a shot.*
+*Aside: Better-produced ads have varying degrees of success in the modern ecosystem. The days of live TV are gone, along with unskippable ads. [SponsorBlock](https://sponsor.ajay.app), for example, helps viewers skip these sections altogether. However, for other content providers such as Netflix and Twitch, unskippable ads are still here, meaning that high-quality ads might still have a shot.*
 
 ### Audience-based relevance
 Ads don't have to be limited to the same topic as the main content.
 Featuring ads from related or even unrelated topics that appeal to the audience increases the pool of marketing dollars eligible to bid for the ad spot, increasing the creator's revenue.
 
-YouTube shares aggregate demographic data such as gender, age, broad geographical distribution, as well as (topic-based) interests of channel audiences, which makes this easier for creators to do this.
+YouTube shares aggregate demographic data such as gender, age, broad geographical distribution, and (topic-based) interests of channel audiences, which makes it easier for creators to do this.
 
 Let's go back to the earlier video [about RAM prices](https://www.youtube.com/watch?v=iRvyRo5Fk0o) and revisit the sponsored ads, noting that LTT viewers are likely to be **male, young, and interested in technology**:
-1. DBrand - a tech accessories brand with features that appeal to enthusiasts such as the [teardown series](https://dbrand.com/shop/limited-edition/teardown), featuring skins that expose the underlying circuit boards
-2. Clear LTT screwdrivers - their [in-house screwdriver](https://global.lttstore.com/products/screwdriver?srsltid=AfmBOooUn8dXylPtUTVslNhmfRWlZdX_GEkkM-eyghsvJVCvoiMjahut), specially designed for PC builders, because they're "making the best screwdriver with PC building in mind"
-3. Private Internet Access - appeals to the privacy-conscious who do not want their internet activity tracked by "nefarious actors"
+1. DBrand—a tech accessories brand with features that appeal to enthusiasts such as the [teardown series](https://dbrand.com/shop/limited-edition/teardown), featuring skins that expose the underlying circuit boards
+2. Clear LTT screwdrivers—their [in-house screwdriver](https://global.lttstore.com/products/screwdriver?srsltid=AfmBOooUn8dXylPtUTVslNhmfRWlZdX_GEkkM-eyghsvJVCvoiMjahut), specially designed for PC builders, because they're "making the best screwdriver with PC building in mind"
+3. Private Internet Access—appeals to the privacy-conscious who do not want their internet activity tracked by "nefarious actors"
 
 [This example](https://youtu.be/3yO0m8X0xn4?si=ImkTR22omqaHSCjm&t=490) from LTT shows how they're trying to appeal to a mostly male audience with another product that's popular with males (i.e., War Thunder, a war simulation game).
 
