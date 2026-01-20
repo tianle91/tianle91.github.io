@@ -228,7 +228,7 @@ Let's go back to the earlier video [about RAM prices](https://www.youtube.com/wa
 # TL;DR
 If you skipped to the end, here's what I think you can take away:
 * Creators must maximize ad revenue while preserving viewer trust for sustainable monetization.
-* Ad revenue depends on success of marketing dollars, which is ultimately determined by how much creators can influence viewers to contribute to the marketers' revenue.
+* Ad revenue depends on the success of marketing dollars, which is ultimately determined by how much creators can influence viewers to contribute to the marketers' revenue.
 * High relevance ads seem to achieve both goals (i.e. maximizing return on marketing as well as retaining viewership), but advertisers may not be willing to pay for placement (i.e. creators may want to feature the content for free), leading most ads to be in a middle zone.
-* As such most ads feature two characteristics in terms of relevance, resulting in a sweet spot for ad revenue: first, not so low relevance that long term viewership is endangered, not so high relevance that advertisers need not pay for it to be featured.
-* The meta play here is to maximize the amount of these sweet spot ads that can be featured (e.g. audience-based relevance) and minimizing the impact on viewership retention (e.g. by better produced ads).
+* As such, most ads feature two characteristics in terms of relevance, resulting in a sweet spot for ad revenue: not so low in relevance that long-term viewership is endangered, yet not so high in relevance that advertisers need not pay for it to be featured.
+* The meta play here is to maximize the number of these sweet spot ads that can be featured (e.g. audience-based relevance) and minimize their impact on viewership retention (e.g. by better-produced ads).
