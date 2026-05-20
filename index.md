@@ -1,7 +1,5 @@
 [About](about.md)
 
-[Projects](projects.md)
-
 [Publications](publications.md)
 
 
