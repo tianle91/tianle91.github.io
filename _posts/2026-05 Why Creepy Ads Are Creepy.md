@@ -9,3 +9,5 @@ You might remember talking to your friends about buying a new pair of shoes, and
 Is there a microphone in your phone recording every conversation you have? 
 No, but it gets pretty close.
 <!--more-->
+
+https://developers.google.com/display-video/protected-audience/ssp-guide

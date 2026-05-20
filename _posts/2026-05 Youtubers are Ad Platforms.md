@@ -9,3 +9,5 @@ These days you can't go through a Youtube video without ads.
 More often than not, you'll see ads inserted by these Youtubers themselves. 
 How do they choose what ads to put in a video and how much to charge for them?
 <!--more-->
+
+_posts/2026-01-06-Ive got some content in my ads.md
