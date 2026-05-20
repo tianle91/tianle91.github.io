@@ -2,7 +2,7 @@
 layout: post
 title: How Paying for Ads Changed
 tags: ads
-hidden: false
+hidden: true
 excerpt_separator: <!--more-->
 ---
 Ads used to be pay-for-placement where advertisers pay for spots on publications.

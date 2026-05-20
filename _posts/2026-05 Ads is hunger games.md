@@ -2,7 +2,7 @@
 layout: post
 title: Ads marketplace is hunger games
 tags: ads
-hidden: false
+hidden: true
 excerpt_separator: <!--more-->
 ---
 Many parties compete against each other for ads. 
