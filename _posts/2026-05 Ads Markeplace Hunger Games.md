@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ads marketplace is hunger games
+title: Ads Markeplace Hunger Games
 tags: ads
 hidden: true
 excerpt_separator: <!--more-->
