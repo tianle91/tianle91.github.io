@@ -2,6 +2,7 @@
 layout: post
 title:  "Money from first principles"
 tags: fun
+hidden: true
 excerpt_separator: <!--more-->
 ---
 
