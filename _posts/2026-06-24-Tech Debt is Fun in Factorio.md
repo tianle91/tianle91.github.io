@@ -2,6 +2,7 @@
 layout: post
 title:  "Tech Debt is Fun in Factorio"
 tags: fun coding
+hidden: true
 excerpt_separator: <!--more-->
 ---
 
