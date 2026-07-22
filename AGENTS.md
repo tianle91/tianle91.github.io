@@ -5,16 +5,20 @@ the site: see [README.md](README.md).
 
 ## What this repo is
 
-A zero-config Jekyll site on the **legacy** GitHub Pages builder — no `Gemfile`, no
-`.github/workflows`, nothing to install. GitHub builds it server-side from `master` at
-the repo root. Verify with:
+A zero-config Jekyll site on the **legacy** GitHub Pages builder — no `Gemfile`,
+nothing to install. GitHub builds it server-side from `master` at the repo root.
+Verify with:
 
 ```bash
 gh api repos/tianle91/tianle91.github.io/pages   # build_type: legacy, source: master /
 ```
 
-Do not add a `Gemfile`, a Pages workflow, or a local build step without a reason to
-leave the zero-config setup — the tradeoff is that the constraints below are fixed.
+Do not add a `Gemfile`, a Pages **build/deploy** workflow, or a local build step
+without a reason to leave the zero-config setup — the tradeoff is that the constraints
+below are fixed. Note: `.github/workflows/checks.yml` exists, but it is a plain CI
+**check** (it runs `scripts/sync_staticsites.py --check` and validates post filenames);
+it does not build or deploy the site, so `build_type` stays `legacy`. Keeping that
+workflow non-deploying is the line not to cross.
 
 Layout: `_posts/` (blog), `_config.yml` (only sets the GA property), `index.md`,
 `about.md`, `publications.md`, `assets/`, `CNAME` (`tianle91.com`), and the
