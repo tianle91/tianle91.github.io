@@ -52,9 +52,13 @@ Two constraints the legacy builder imposes — both will silently break the site
 
 ## Gotchas
 
-- **[index.md](index.md) has no YAML front matter yet is still Liquid-processed** — its
-  `{% for post in site.posts %}` loop renders on the live site. Don't "fix" the missing
-  front matter; verify against the deployed page before assuming otherwise.
+- **Every `.md` file here is Liquid-rendered, even without YAML front matter** — the
+  build enables `jekyll-optional-front-matter`. That is why [index.md](index.md)'s
+  {% raw %}`{% for post in site.posts %}`{% endraw %} loop renders despite having no front
+  matter; don't "fix" that. It also means **this file is rendered**: any Liquid tag you
+  write in these docs, even inside backticks or a fenced block, is parsed, and an
+  unbalanced one fails the whole site build. Wrap literal tags in a Liquid `raw` block
+  (and note you cannot nest one inside another, so document `raw` itself in prose).
 - The front-page loop skips posts with `hidden: true`, which most posts currently set.
   A post that doesn't show up is usually hidden, not broken.
 - `resume.html` is a `<meta http-equiv="refresh">` stub to a Google Doc, not a page.
