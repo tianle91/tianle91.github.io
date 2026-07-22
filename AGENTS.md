@@ -32,7 +32,7 @@ existing clone with `git submodule update --init`.
 ## The StaticSites submodule
 
 `StaticSites/` is a gitlink to [tianle91/StaticSites](https://github.com/tianle91/StaticSites),
-pinned to a commit. That repo builds four self-contained sites and commits each one's
+pinned to a commit. That repo builds five self-contained sites and commits each one's
 `output/<project>.html`; this site just serves those files. The links in
 [index.md](index.md) point at the submodule's real paths
 (`/StaticSites/<project>/output/<project>.html`) because files inside a submodule can't
@@ -71,12 +71,13 @@ There is no local build, so verify against the deployed site. After pushing to `
 gh api repos/tianle91/tianle91.github.io/pages/builds/latest --jq '.status, .commit, .error.message'
 curl -s https://tianle91.com/ | grep -A5 -i interactive
 for u in union-station-transit-isochrone toronto-vulnerable-services-map \
-         ontario-physiotherapy-clinics-map margin-sp500-m2-visualization; do
+         toronto-dinesafe-map ontario-physiotherapy-clinics-map \
+         margin-sp500-m2-visualization; do
   curl -s -o /dev/null -w "$u %{http_code}\n" "https://tianle91.com/StaticSites/$u/output/$u.html"
 done
 ```
 
-Expect `built` on your commit with a null error, and `200` for all four maps. To confirm
+Expect `built` on your commit with a null error, and `200` for all five maps. To confirm
 a submodule change will build *before* pushing, reproduce the builder's anonymous fetch:
 
 ```bash
