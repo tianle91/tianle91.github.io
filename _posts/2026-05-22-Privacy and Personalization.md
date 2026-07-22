@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-05-22 15:51:25 -0400
 title: Privacy and Personalization
 tags: privacy, ads, google
 hidden: true

@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-05-20 08:36:25 -0400
 title: Why Creepy Ads Are Creepy
 tags: ads
 hidden: true

@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-05-20 08:33:41 -0400
 title: Youtubers are Ad Platforms
 tags: ads
 hidden: true
