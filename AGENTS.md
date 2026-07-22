@@ -32,12 +32,27 @@ existing clone with `git submodule update --init`.
 ## The StaticSites submodule
 
 `StaticSites/` is a gitlink to [tianle91/StaticSites](https://github.com/tianle91/StaticSites),
-pinned to a commit. That repo builds five self-contained sites and commits each one's
+pinned to a commit. That repo builds several self-contained sites and commits each one's
 `output/<project>.html`; this site just serves those files. The links in
 [index.md](index.md) point at the submodule's real paths
 (`/StaticSites/<project>/output/<project>.html`) because files inside a submodule can't
 be given Jekyll front matter from here, so they can't be given prettier permalinks
 without wrapper pages.
+
+The **Interactive** list in [index.md](index.md) is generated, not hand-edited: the
+block between the `<!-- staticsites:start -->` / `<!-- staticsites:end -->` markers is
+rewritten by [scripts/sync_staticsites.py](scripts/sync_staticsites.py) from the
+submodule's `StaticSites/sites.json` manifest. To pull new/renamed sites and refresh the
+list in one step:
+
+```bash
+python3 scripts/sync_staticsites.py --update-submodule   # bump submodule + regenerate
+python3 scripts/sync_staticsites.py --check              # CI/pre-commit: fail if stale
+```
+
+The script also verifies every manifest link resolves and flags any built site missing
+from the manifest, so drift can't slip through. Edit the site titles/blurbs in
+StaticSites (each project's `pyproject.toml`), not here.
 
 Two constraints the legacy builder imposes — both will silently break the site:
 
@@ -48,7 +63,7 @@ Two constraints the legacy builder imposes — both will silently break the site
   get copied into the published site as inert static files. That is harmless — no
   `_config.yml` `exclude` is needed — but it means editing files under `StaticSites/`
   from this repo is never the right move. Change them in StaticSites, push, then bump
-  the pointer here (`git submodule update --remote StaticSites`).
+  the pointer here (`python3 scripts/sync_staticsites.py --update-submodule`).
 
 ## Gotchas
 
