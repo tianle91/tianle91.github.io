@@ -1,0 +1,3 @@
+[submodule "StaticSites"]
+	path = StaticSites
+	url = https://github.com/tianle91/StaticSites.git
