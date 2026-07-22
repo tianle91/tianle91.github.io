@@ -24,7 +24,7 @@
 - [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
   — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
-  — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed), searchable by name / type / address.
+  — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
 - [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
   — shelters, warming & respite centres, drop-ins, harm reduction, housing supports.
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
