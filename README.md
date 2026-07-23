@@ -48,13 +48,16 @@ To publish a change to one of them: commit and push it in StaticSites first, the
 this repo point at the new version.
 
 ```bash
-git submodule update --remote StaticSites
-git commit -am 'bump StaticSites'
-git push
+make publish   # bump the submodule, regenerate index.md, commit and push
+make verify    # after a minute: Pages build status + every map returns 200
 ```
 
-To add a *new* map to the front page, do the same, then add a bullet to the
-**Interactive** list in [index.md](index.md).
+`make` on its own lists the targets. If you'd rather look before committing, `make
+update` does the bump and regeneration and stops there.
+
+A *new* map needs nothing extra: the **Interactive** list in [index.md](index.md) is
+generated from StaticSites' own manifest, so `make publish` picks it up. Edit its
+title and blurb in StaticSites, not here.
 
 > **StaticSites must stay a public repo.** This site uses the legacy GitHub Pages
 > builder, which fetches submodules anonymously over HTTPS. If StaticSites is made

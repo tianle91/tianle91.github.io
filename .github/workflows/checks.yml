@@ -24,19 +24,12 @@ jobs:
         with:
           python-version: "3.x"
 
-      # index.md's Interactive list must match the StaticSites manifest, and every
-      # linked map must resolve. Fails if someone bumps the submodule without
-      # regenerating (run: python3 scripts/sync_staticsites.py).
+      # index.md's Interactive list must match the StaticSites manifest and every
+      # linked map must resolve; Jekyll silently ignores posts whose filename
+      # isn't YYYY-MM-DD-title. Both live in the Makefile so `make check` locally
+      # is exactly what CI runs.
       - name: StaticSites manifest is in sync
-        run: python3 scripts/sync_staticsites.py --check
+        run: make check-sync
 
-      # Jekyll silently ignores posts whose filename isn't YYYY-MM-DD-title, so
-      # guard against that whole class of "post never publishes" bug.
       - name: Post filenames are Jekyll-valid
-        run: |
-          bad=$(ls _posts | grep -vE '^[0-9]{4}-[0-9]{2}-[0-9]{2}-' || true)
-          if [ -n "$bad" ]; then
-            echo "::error::These _posts filenames don't match YYYY-MM-DD-title and won't publish:"
-            echo "$bad"
-            exit 1
-          fi
+        run: make check-posts

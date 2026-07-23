@@ -15,10 +15,11 @@ gh api repos/tianle91/tianle91.github.io/pages   # build_type: legacy, source: m
 
 Do not add a `Gemfile`, a Pages **build/deploy** workflow, or a local build step
 without a reason to leave the zero-config setup — the tradeoff is that the constraints
-below are fixed. Note: `.github/workflows/checks.yml` exists, but it is a plain CI
-**check** (it runs `scripts/sync_staticsites.py --check` and validates post filenames);
-it does not build or deploy the site, so `build_type` stays `legacy`. Keeping that
-workflow non-deploying is the line not to cross.
+below are fixed. Two things that look like a build but aren't: `Makefile` only wraps
+submodule/index chores and checks (`make` lists them), and
+`.github/workflows/checks.yml` is a plain CI **check** that calls those same targets.
+Neither builds or deploys the site, so `build_type` stays `legacy`. Keeping both
+non-deploying is the line not to cross.
 
 Layout: `_posts/` (blog), `_config.yml` (only sets the GA property), `index.md`,
 `about.md`, `publications.md`, `assets/`, `CNAME` (`tianle91.com`), and the
@@ -50,8 +51,9 @@ submodule's `StaticSites/sites.json` manifest. To pull new/renamed sites and ref
 list in one step:
 
 ```bash
-python3 scripts/sync_staticsites.py --update-submodule   # bump submodule + regenerate
-python3 scripts/sync_staticsites.py --check              # CI/pre-commit: fail if stale
+make update    # python3 scripts/sync_staticsites.py --update-submodule
+make publish   # the above, then commit + push
+make check     # what CI runs: --check plus the post-filename guard
 ```
 
 The script also verifies every manifest link resolves and flags any built site missing
@@ -67,7 +69,7 @@ Two constraints the legacy builder imposes — both will silently break the site
   get copied into the published site as inert static files. That is harmless — no
   `_config.yml` `exclude` is needed — but it means editing files under `StaticSites/`
   from this repo is never the right move. Change them in StaticSites, push, then bump
-  the pointer here (`python3 scripts/sync_staticsites.py --update-submodule`).
+  the pointer here (`make update`).
 
 ## Gotchas
 
@@ -87,16 +89,10 @@ Two constraints the legacy builder imposes — both will silently break the site
 There is no local build, so verify against the deployed site. After pushing to `master`:
 
 ```bash
-gh api repos/tianle91/tianle91.github.io/pages/builds/latest --jq '.status, .commit, .error.message'
-curl -s https://tianle91.com/ | grep -A5 -i interactive
-for u in union-station-transit-isochrone toronto-vulnerable-services-map \
-         toronto-dinesafe-map ontario-physiotherapy-clinics-map \
-         margin-sp500-m2-visualization; do
-  curl -s -o /dev/null -w "$u %{http_code}\n" "https://tianle91.com/StaticSites/$u/output/$u.html"
-done
+make verify   # Pages build status, then every map in sites.json over HTTP
 ```
 
-Expect `built` on your commit with a null error, and `200` for all five maps. To confirm
+Expect `built` on your commit with no error, and `200` for every map. To confirm
 a submodule change will build *before* pushing, reproduce the builder's anonymous fetch:
 
 ```bash
