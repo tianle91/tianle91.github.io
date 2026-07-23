@@ -19,6 +19,8 @@
 # Interactive
 
 <!-- staticsites:start — generated from StaticSites/sites.json by scripts/sync_staticsites.py; do not edit by hand -->
+- [Free cash flow vs. the macro backdrop](/StaticSites/fcf-macro-indicators/output/fcf-macro-indicators.html)
+  — quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.
 - [Margin debt vs. the S&P 500](/StaticSites/margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html)
   — FINRA margin debt against the S&P 500, M2, CPI, and PPI, rebased to a chosen anchor date.
 - [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
@@ -30,7 +32,7 @@
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
   — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
 
-Source for all five: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
+Source for all six: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
 <!-- staticsites:end -->
 
 
