@@ -25,14 +25,18 @@
   — FINRA margin debt against the S&P 500, M2, CPI, and PPI, rebased to a chosen anchor date.
 - [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
   — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
+- [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
+  — the complete active permit register, searchable by address and permit number, with status, type, and year filters.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
   — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
 - [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
   — shelters, warming & respite centres, drop-ins, harm reduction, housing supports.
+- [TRCA flood plain map](/StaticSites/trca-flood-plain-map/output/trca-flood-plain-map.html)
+  — TRCA riverine flood plains and attributed floodline boundaries, filterable by watershed and mapped source.
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
   — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
 
-Source for all six: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
+Source for all eight: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
 <!-- staticsites:end -->
 
 
