@@ -27,6 +27,8 @@
   — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
 - [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
   — the complete active permit register, searchable by address and permit number, with status, type, and year filters.
+- [Toronto reported crime map](/StaticSites/toronto-crime-map/output/toronto-crime-map.html)
+  — approximate Toronto Police crime locations with offence, date and neighbourhood filters, plus homicide and shooting layers.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
   — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
 - [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
@@ -36,7 +38,7 @@
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
   — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
 
-Source for all eight: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
+Source for all nine: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
 <!-- staticsites:end -->
 
 
