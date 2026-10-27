@@ -28,7 +28,7 @@
 - [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
   — the complete active permit register, searchable by address and permit number, with status, type, and year filters.
 - [Toronto reported crime map](/StaticSites/toronto-crime-map/output/toronto-crime-map.html)
-  — approximate Toronto Police crime locations with offence, date and neighbourhood filters, plus homicide and shooting layers.
+  — Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
   — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
 - [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
