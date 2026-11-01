@@ -19,6 +19,8 @@
 # Interactive
 
 <!-- staticsites:start — generated from StaticSites/sites.json by scripts/sync_staticsites.py; do not edit by hand -->
+- [Ontario Mortgage Stress](/StaticSites/canada-mortgage-stress/output/canada-mortgage-stress.html)
+  — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plotted over their shared available period.
 - [Free cash flow vs. the macro backdrop](/StaticSites/fcf-macro-indicators/output/fcf-macro-indicators.html)
   — quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.
 - [Margin debt vs. the S&P 500](/StaticSites/margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html)
@@ -26,7 +28,7 @@
 - [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
   — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
 - [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
-  — the complete active permit register, searchable by address and permit number, with status, type, and year filters.
+  — the complete active permit register, searchable by address, with status, type, and year filters.
 - [Toronto reported crime map](/StaticSites/toronto-crime-map/output/toronto-crime-map.html)
   — Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
@@ -38,7 +40,7 @@
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
   — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
 
-Source for all nine: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
+Source for all 10: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
 <!-- staticsites:end -->
 
 
