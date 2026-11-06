@@ -1,52 +1,50 @@
-[About](about.md)
+---
+layout: default
+title: Tianle Chen
+nav_url: /
+---
+<section class="home-intro">
+  <p class="eyebrow">Apps · Maps · Writing</p>
+  <h1>Hi, I’m Tianle.</h1>
+  <p>I build apps as tchdevs, explore data through interactive tools, and write about technology.</p>
+</section>
 
-[Publications](publications.md)
+<section aria-labelledby="apps-title">
+  <div class="section-heading"><h2 id="apps-title">Apps by tchdevs</h2><a href="/apps/">Explore the apps →</a></div>
+  <div class="home-apps">
+    {% for app in site.data.apps %}{% if app.featured %}
+    <article class="home-app">
+      <img src="/assets/apps/{{ app.slug }}.jpg" width="64" height="64" alt="">
+      <div><h3><a href="/apps/#{{ app.slug }}">{{ app.name }}</a></h3><p>{{ app.summary }}</p></div>
+    </article>
+    {% endif %}{% endfor %}
+  </div>
+</section>
 
-[Apps](/apps/)
+<section id="interactive" aria-labelledby="interactive-title">
+  <div class="section-heading"><h2 id="interactive-title">Interactive</h2><a href="/interactive/">All maps &amp; charts →</a></div>
+  <div class="project-previews">
+    <article class="project-preview">
+      <a href="/StaticSites/us-canada-yield-curves/output/us-canada-yield-curves.html"><img src="/StaticSites/us-canada-yield-curves/tests/snapshots/desktop.jpg" width="720" height="405" alt="Preview of US and Canada government yield curves" loading="lazy"></a>
+      <h3><a href="/StaticSites/us-canada-yield-curves/output/us-canada-yield-curves.html">US &amp; Canada yield curves</a></h3>
+      <p>Compare government bond yields across maturities and historical dates.</p>
+    </article>
+    <article class="project-preview">
+      <a href="/StaticSites/toronto-crime-map/output/toronto-crime-map.html"><img src="/StaticSites/toronto-crime-map/tests/snapshots/desktop.jpg" width="720" height="405" alt="Preview of Toronto reported crime by location" loading="lazy"></a>
+      <h3><a href="/StaticSites/toronto-crime-map/output/toronto-crime-map.html">Toronto reported crime</a></h3>
+      <p>Explore police-reported incidents by location and offence type.</p>
+    </article>
+  </div>
+</section>
 
-
-# Blog
-<ul>
-  {% for post in site.posts %}
-    {% if post.hidden == null or post.hidden == false %}
-      <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        {{ post.excerpt }}
-      </li>
-    {% endif %}
-  {% endfor %}
-</ul>
-
-
-# Interactive
-
-<!-- staticsites:start — generated from StaticSites/sites.json by scripts/sync_staticsites.py; do not edit by hand -->
-- [Ontario Mortgage Stress](/StaticSites/canada-mortgage-stress/output/canada-mortgage-stress.html)
-  — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plotted over their shared available period.
-- [Free cash flow vs. the macro backdrop](/StaticSites/fcf-macro-indicators/output/fcf-macro-indicators.html)
-  — quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.
-- [Margin debt vs. the S&P 500](/StaticSites/margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html)
-  — FINRA margin debt against the S&P 500, M2, CPI, and PPI, rebased to a chosen anchor date.
-- [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
-  — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
-- [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
-  — the complete active permit register, searchable by address, with status, type, and year filters.
-- [Toronto reported crime map](/StaticSites/toronto-crime-map/output/toronto-crime-map.html)
-  — Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.
-- [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
-  — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
-- [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
-  — shelters, warming & respite centres, drop-ins, harm reduction, housing supports.
-- [TRCA flood plain map](/StaticSites/trca-flood-plain-map/output/trca-flood-plain-map.html)
-  — TRCA riverine flood plains and attributed floodline boundaries, filterable by watershed and mapped source.
-- [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
-  — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
-- [US & Canada government bond yield curves](/StaticSites/us-canada-yield-curves/output/us-canada-yield-curves.html)
-  — Compare nominal government bond yields from 1 month to the long end on the latest shared trading date.
-
-Source for all 11: [StaticSites source](https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)
-<!-- staticsites:end -->
-
-
-# Misc
-467KkRS4G1ZLnvNLk83TZ3E2QZMUW37w4h5gKJNCKCA6Xmsx1rLKbezMU7N3mmHtJUC8o88HMWK6jYkBzMXsm9iq4hdVo6j
+{% assign visible_posts = site.posts | where_exp: "post", "post.hidden == nil or post.hidden == false" %}
+{% if visible_posts.size > 0 %}
+<section id="blog" aria-labelledby="writing-title">
+  <div class="section-heading"><h2 id="writing-title">Recent writing</h2><a href="/writing/">All writing →</a></div>
+  <ul class="writing-list">
+    {% for post in visible_posts limit:3 %}
+    <li><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time><h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

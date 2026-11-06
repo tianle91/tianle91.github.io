@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate index.md's Interactive list from StaticSites/sites.json.
+"""Regenerate interactive.md's project directory from StaticSites/sites.json.
 
 Usage:
   scripts/sync_staticsites.py          # regenerate from the committed manifest
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-INDEX = REPO / "index.md"
+DIRECTORY = REPO / "interactive.md"
 MANIFEST = REPO / "StaticSites" / "sites.json"
 STATIC_SITES = REPO / "StaticSites"
 
@@ -24,10 +24,27 @@ ENDMARK = "<!-- staticsites:end -->"
 
 def render(sites: list[dict]) -> str:
     """Build the generated block (between, not including, the markers)."""
+    groups = {"Maps": [], "Economics & Finance": [], "Other projects": []}
+    finance = {"canada-mortgage-stress", "fcf-macro-indicators",
+               "margin-sp500-m2-visualization", "us-canada-yield-curves"}
+    for site in sites:
+        slug = site["output"].split("/", 1)[0]
+        if slug in finance:
+            group = "Economics & Finance"
+        elif slug.endswith("-map") or slug == "union-station-transit-isochrone":
+            group = "Maps"
+        else:
+            group = "Other projects"
+        groups[group].append(site)
     lines = []
-    for s in sites:
-        lines.append(f"- [{s['title']}](/StaticSites/{s['output']})")
-        lines.append(f"  — {s['description']}")
+    for title, projects in groups.items():
+        if not projects:
+            continue
+        lines.extend([f"## {title}", ""])
+        for s in projects:
+            lines.append(f"- [{s['title']}](/StaticSites/{s['output']})")
+            lines.append(f"  — {s['description']}")
+        lines.append("")
     n = len(sites)
     count = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
              6: "six", 7: "seven", 8: "eight", 9: "nine"}.get(n, str(n))
@@ -40,7 +57,7 @@ def render(sites: list[dict]) -> str:
 def splice(text: str, block: str) -> str:
     """Replace the content between the markers with `block`."""
     if STARTMARK not in text or ENDMARK not in text:
-        sys.exit("index.md is missing the staticsites markers; add them once by hand.")
+        sys.exit("interactive.md is missing the staticsites markers; add them once by hand.")
     pre, rest = text.split(STARTMARK, 1)
     _, post = rest.split(ENDMARK, 1)
     return f"{pre}{STARTMARK}\n{block}\n{ENDMARK}{post}"
@@ -67,7 +84,7 @@ def verify(sites: list[dict]) -> list[str]:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
-                    help="do not write; exit nonzero if index.md is stale or verification fails")
+                    help="do not write; exit nonzero if interactive.md is stale or verification fails")
     args = ap.parse_args()
 
     sites = json.loads(MANIFEST.read_text())
@@ -79,20 +96,20 @@ def main() -> None:
             print(f"  - {p}", file=sys.stderr)
         sys.exit(1)
 
-    current = INDEX.read_text()
+    current = DIRECTORY.read_text()
     updated = splice(current, render(sites))
 
     if args.check:
         if updated != current:
-            sys.exit("index.md is out of date; run scripts/sync_staticsites.py")
-        print(f"index.md is up to date ({len(sites)} sites).")
+            sys.exit("interactive.md is out of date; run scripts/sync_staticsites.py")
+        print(f"interactive.md is up to date ({len(sites)} sites).")
         return
 
     if updated == current:
-        print(f"index.md already current ({len(sites)} sites); nothing to do.")
+        print(f"interactive.md already current ({len(sites)} sites); nothing to do.")
     else:
-        INDEX.write_text(updated)
-        print(f"index.md regenerated with {len(sites)} sites.")
+        DIRECTORY.write_text(updated)
+        print(f"interactive.md regenerated with {len(sites)} sites.")
 
 
 if __name__ == "__main__":

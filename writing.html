@@ -1,0 +1,18 @@
+---
+layout: default
+title: Writing
+nav_url: /writing/
+width: reading
+permalink: /writing/
+---
+<header class="page-heading"><p class="eyebrow">Notes &amp; essays</p><h1>Writing</h1><p>Thoughts on technology, data, and building things.</p></header>
+{% assign visible_posts = site.posts | where_exp: "post", "post.hidden == nil or post.hidden == false" %}
+<ul class="writing-list">
+  {% for post in visible_posts %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%B %-d, %Y' }}</time>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p>{{ post.excerpt | strip_html | truncatewords: 36 }}</p>
+  </li>
+  {% endfor %}
+</ul>

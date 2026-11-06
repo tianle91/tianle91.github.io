@@ -1,0 +1,45 @@
+---
+layout: default
+title: Interactive
+nav_url: /interactive/
+page_class: project-directory
+permalink: /interactive/
+---
+<header class="page-heading">
+  <p class="eyebrow">Maps &amp; data</p>
+  <h1>Interactive</h1>
+  <p>Explore local places and economic data through maps and charts. Each project includes its data sources and observation dates.</p>
+</header>
+
+<!-- staticsites:start — generated from StaticSites/sites.json by scripts/sync_staticsites.py; do not edit by hand -->
+## Maps
+
+- [Ontario OHIP physiotherapy clinics](/StaticSites/ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html)
+  — the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.
+- [Toronto building permits](/StaticSites/toronto-building-permits-map/output/toronto-building-permits-map.html)
+  — the complete active permit register, searchable by address, with status, type, and year filters.
+- [Toronto reported crime map](/StaticSites/toronto-crime-map/output/toronto-crime-map.html)
+  — Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.
+- [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
+  — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
+- [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
+  — shelters, warming & respite centres, drop-ins, harm reduction, housing supports.
+- [TRCA flood plain map](/StaticSites/trca-flood-plain-map/output/trca-flood-plain-map.html)
+  — TRCA riverine flood plains and attributed floodline boundaries, filterable by watershed and mapped source.
+- [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
+  — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
+
+## Economics & Finance
+
+- [Ontario Mortgage Stress](/StaticSites/canada-mortgage-stress/output/canada-mortgage-stress.html)
+  — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plotted over their shared available period.
+- [Free cash flow vs. the macro backdrop](/StaticSites/fcf-macro-indicators/output/fcf-macro-indicators.html)
+  — quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.
+- [Margin debt vs. the S&P 500](/StaticSites/margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html)
+  — FINRA margin debt against the S&P 500, M2, CPI, and PPI, rebased to a chosen anchor date.
+- [US & Canada government bond yield curves](/StaticSites/us-canada-yield-curves/output/us-canada-yield-curves.html)
+  — Compare nominal government bond yields from 1 month to the long end on the latest shared trading date.
+
+
+Source for all 11: [StaticSites source](https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)
+<!-- staticsites:end -->

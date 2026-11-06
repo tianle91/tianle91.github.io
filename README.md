@@ -33,8 +33,11 @@ The post is live a minute or two after you push.
 ## Pages that aren't blog posts
 
 - [about.md](about.md), [publications.md](publications.md) — edit directly.
-- [index.md](index.md) — the front page: the nav links, the **Interactive** list, and
-  the Misc section.
+- [index.md](index.md) — the front page with featured apps, projects, and writing.
+- [apps.html](apps.html) — app portfolio, using metadata in `_data/apps.json`.
+- [interactive.md](interactive.md) — generated project directory.
+- [writing.html](writing.html) — visible blog posts.
+- `_layouts/`, `_includes/`, and `assets/css/site.css` — shared theme and navigation.
 - `assets/` — images. Reference them as `/assets/...`.
 
 ## Publishing an updated map or chart
@@ -48,8 +51,8 @@ From `StaticSites/`, edit the project and run its build and tests as described i
 outputs together. From this repository's root:
 
 ```bash
-make sync      # regenerate the homepage list after metadata/project changes
-make check     # homepage and post checks, plus all static project tests/builds
+make sync      # regenerate the project directory after metadata/project changes
+make check     # directory and post checks, plus all static project tests/builds
 ```
 
 Open one PR in this repository. Merging to `master` publishes the committed HTML

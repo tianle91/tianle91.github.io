@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Publications"
+nav_url: /about.html
 ---
 
 ## Product Matching Lessons and Recommendations from a Real World Application

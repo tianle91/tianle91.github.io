@@ -6,6 +6,7 @@ from fetch_data import validate_dataset
 from staticsites.assets import ASSETS
 from staticsites.assets import script_json
 from staticsites.pipeline import write_if_changed
+from staticsites.theme import embed_site_theme
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / 'data'
@@ -26,7 +27,7 @@ def build():
         html = html.replace(marker, value)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     target = OUT_DIR / 'canada-mortgage-stress.html'
-    write_if_changed(target, html)
+    write_if_changed(target, embed_site_theme(html))
     return target
 
 

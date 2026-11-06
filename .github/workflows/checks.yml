@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      # index.md's Interactive list must match the StaticSites manifest and every
+      # interactive.md's project directory must match the StaticSites manifest and every
       # linked map must resolve; Jekyll silently ignores posts whose filename
       # isn't YYYY-MM-DD-title. Both live in the Makefile so `make check` locally
       # is exactly what CI runs.

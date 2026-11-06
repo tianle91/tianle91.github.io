@@ -737,8 +737,433 @@ summary {
 
     </style>
     <style></style>
-  </head>
-  <body>
+  <style>:root {
+  color-scheme: light;
+  --site-paper: #f8f7f3;
+  --site-surface: #fff;
+  --site-ink: #292637;
+  --site-muted: #625e70;
+  --site-accent: #5942bf;
+  --site-line: #e2dfe7;
+}
+* {
+  box-sizing: border-box;
+}
+body.site-page, body.site-tool {
+  margin: 0;
+  background: var(--site-paper);
+  color: var(--site-ink);
+  font: 17px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.site-page a {
+  color: var(--site-accent);
+  text-underline-offset: 4px;
+}
+.site-page a:hover {
+  text-decoration-thickness: 2px;
+}
+.site-page a:focus-visible, .site-header a:focus-visible {
+  outline: 3px solid var(--site-accent);
+  outline-offset: 4px;
+}
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 3000;
+  padding: 10px 16px;
+  background: #fff;
+  color: var(--site-accent);
+}
+.skip-link:focus {
+  top: 8px;
+}
+.site-header {
+  flex-shrink: 0;
+  margin: 0;
+  background: var(--site-surface);
+  border-bottom: 1px solid var(--site-line);
+}
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  max-width: 1176px;
+  padding: 16px 28px;
+  margin: 0 auto;
+}
+.site-header .site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--site-ink);
+  font-size: 17px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-brand img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-header .site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  color: var(--site-muted);
+  text-decoration: none;
+}
+.site-header .site-nav a:hover, .site-header .site-nav a[aria-current="page"] {
+  color: var(--site-accent);
+}
+.site-header .site-nav a[aria-current="page"] {
+  box-shadow: inset 0 -2px var(--site-accent);
+}
+.site-main {
+  max-width: 1176px;
+  margin: 0 auto;
+  padding: 56px 28px 72px;
+  min-height: 60vh;
+}
+.site-main.reading-width {
+  max-width: 796px;
+}
+.site-main img {
+  max-width: 100%;
+  height: auto;
+}
+.site-main h1, .site-main h2, .site-main h3 {
+  line-height: 1.2;
+  font-weight: 650;
+}
+.site-main h1 {
+  font-size: clamp(32px, 5vw, 46px);
+  letter-spacing: -1.3px;
+  margin: 0 0 20px;
+}
+.site-main h2 {
+  font-size: 25px;
+  letter-spacing: -.5px;
+  margin: 42px 0 20px;
+}
+.site-main h3 {
+  font-size: 20px;
+  letter-spacing: -.3px;
+  margin: 0 0 10px;
+}
+.site-main p {
+  margin: 0 0 18px;
+}
+.site-main .eyebrow {
+  color: var(--site-accent);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  font-weight: 650;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+.page-heading {
+  margin-bottom: 36px;
+  max-width: 760px;
+}
+.page-heading > p:last-child {
+  color: var(--site-muted);
+  font-size: 19px;
+}
+.home-intro {
+  max-width: 740px;
+  padding: 12px 0 20px;
+}
+.home-intro h1 {
+  font-size: clamp(38px, 6vw, 60px);
+  letter-spacing: -2px;
+}
+.home-intro > p:last-child {
+  color: var(--site-muted);
+  font-size: 21px;
+}
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 44px 0 20px;
+}
+.site-main .section-heading h2 {
+  margin: 0;
+}
+.section-heading > a {
+  font-size: 14px;
+  white-space: nowrap;
+}
+.home-apps, .project-previews {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.home-app {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--site-line);
+  border-radius: 14px;
+  background: var(--site-surface);
+}
+.home-app img {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+}
+.home-app p {
+  color: var(--site-muted);
+  font-size: 15px;
+  margin: 0;
+}
+.home-app h3 a {
+  text-decoration: none;
+  color: var(--site-ink);
+}
+.home-app h3 a:hover {
+  color: var(--site-accent);
+  text-decoration: underline;
+}
+.project-preview {
+  border-bottom: 1px solid var(--site-line);
+  padding-bottom: 16px;
+}
+.project-preview > a {
+  display: block;
+}
+.project-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--site-line);
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+.project-preview p {
+  color: var(--site-muted);
+  font-size: 15px;
+}
+.project-directory > h2 {
+  margin-top: 44px;
+}
+.project-directory ul {
+  list-style: none;
+  padding: 0;
+}
+.project-directory li {
+  border-bottom: 1px solid var(--site-line);
+  padding: 20px 0;
+  color: var(--site-muted);
+}
+.project-directory li a {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.project-directory > p:last-child {
+  font-size: 14px;
+  margin-top: 30px;
+}
+.writing-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.writing-list li {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--site-line);
+}
+.writing-list time {
+  display: block;
+  font-size: 13px;
+  color: var(--site-muted);
+  margin-bottom: 6px;
+}
+.writing-list h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+.writing-list p {
+  font-size: 16px;
+  color: var(--site-muted);
+  margin-bottom: 0;
+}
+.prose h2 {
+  margin-top: 40px;
+}
+.prose h3 {
+  margin-top: 30px;
+}
+.prose li {
+  margin: 8px 0;
+}
+.prose pre {
+  padding: 20px;
+  background: #eeecf2;
+  border-radius: 8px;
+  overflow: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.prose :not(pre) > code {
+  background: #eeecf2;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: .88em;
+  overflow-wrap: anywhere;
+}
+.prose blockquote {
+  border-left: 3px solid var(--site-line);
+  padding-left: 20px;
+  margin-left: 0;
+  color: var(--site-muted);
+}
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.prose th, .prose td {
+  padding: 10px 14px;
+  border: 1px solid var(--site-line);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--site-line);
+  margin: 32px 0;
+}
+.prose img {
+  display: block;
+  margin: 24px 0;
+}
+.site-footer {
+  max-width: 1176px;
+  margin: 0 auto;
+  padding: 24px 28px 32px;
+  border-top: 1px solid var(--site-line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--site-muted);
+}
+.site-footer div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+/* Shared navigation and UI palette, embedded into standalone tool outputs. */
+body.site-tool {
+  --paper: var(--site-paper);
+  --surface: var(--site-surface);
+  --ink: var(--site-ink);
+  --muted: var(--site-muted);
+  --line: var(--site-line);
+  --accent: var(--site-accent);
+  --soft: #f0eef5;
+  color-scheme: light;
+  font-size: 14px;
+}
+.site-tool > main:not(.explorer-layout) {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 28px;
+}
+.site-tool .explorer-header {
+  background: var(--site-surface);
+  color: var(--site-ink);
+  border-bottom: 1px solid var(--site-line);
+  padding: 14px 22px;
+}
+.site-tool .explorer-header p, .site-tool .explorer-header #snapshot-date {
+  color: var(--site-muted);
+}
+.site-tool .hint, .site-tool footer {
+  font-size: 12px;
+}
+.site-tool input[type="checkbox"] {
+  accent-color: var(--site-accent);
+}
+@media (max-width: 640px) {
+  .site-header-inner {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    padding: 12px 18px 6px;
+  }
+  .site-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .site-main {
+    padding: 32px 18px 48px;
+  }
+  .site-main h1 {
+    letter-spacing: -1px;
+  }
+  .home-intro > p:last-child {
+    font-size: 19px;
+  }
+  .home-apps, .project-previews {
+    grid-template-columns: 1fr;
+  }
+  .home-app {
+    padding: 20px;
+    gap: 16px;
+  }
+  .section-heading {
+    margin-top: 32px;
+  }
+  .site-main .section-heading h2 {
+    font-size: 23px;
+  }
+  .site-footer {
+    padding: 24px 18px;
+  }
+  .site-tool > main:not(.explorer-layout) {
+    padding: 24px 16px;
+  }
+  .site-tool .site-header-inner {
+    padding-top: 8px;
+  }
+}
+</style>
+</head>
+  <body class="site-tool">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="https://tianle91.com/" aria-label="Tianle Chen home">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIHJvbGU9ImltZyIgYXJpYS1sYWJlbGxlZGJ5PSJ0aXRsZSI+Cjx0aXRsZSBpZD0idGl0bGUiPnRjaGRldnMg4oCUIHRjIG1vbm9ncmFtPC90aXRsZT4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiYWNrZ3JvdW5kIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzY1NTBFQyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzMzMjQ2RSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JhY2tncm91bmQpIi8+CjxwYXRoIGQ9Ik0zNTUuMCAzMjguMCBMMzU1LjAgNTc3LjAgQzM1NS4wIDYzMS4wIDM4OS4wIDY1OC4wIDQzOS4wIDYzNS4wIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkY5RUUiIHN0cm9rZS13aWR0aD0iNjYuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0yNzcuMCA0MzAuMCBMNDQxLjAgNDMwLjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRjlFRSIgc3Ryb2tlLXdpZHRoPSI2Ni4wIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTcwNS4wIDQ1My4wIEM2NTAuMCA0MDguMCA1MzYuMCA0MjYuMCA1MzYuMCA1MzYuMCBDNTM2LjAgNjQ5LjAgNjUwLjAgNjY4LjAgNzA1LjAgNjIyLjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRjlFRSIgc3Ryb2tlLXdpZHRoPSI2Ni4wIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHJlY3QgeD0iNzM3LjAiIHk9IjYwNy4wIiB3aWR0aD0iMzguMCIgaGVpZ2h0PSI2Ni4wIiByeD0iMTAuMCIgZmlsbD0iI0ZGQzg1QSIvPgo8L3N2Zz4=" width="34" height="34" alt="">
+      <span>Tianle Chen</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="https://tianle91.com/apps/">Apps</a>
+      <a href="https://tianle91.com/interactive/" aria-current="page">Interactive</a>
+      <a href="https://tianle91.com/writing/">Writing</a>
+      <a href="https://tianle91.com/about.html">About</a>
+    </nav>
+  </div>
+</header>
+
     <header class="explorer-header">
       <div>
         <h1>Toronto & Ontario services</h1>
@@ -746,7 +1171,7 @@ summary {
       </div>
       <div id="snapshot-date"></div>
     </header>
-    <main class="explorer-layout">
+    <main id="main-content" tabindex="-1" class="explorer-layout">
       <aside
         id="panel"
         class="explorer-sidebar"

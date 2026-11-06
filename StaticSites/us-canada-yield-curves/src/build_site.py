@@ -4,6 +4,7 @@ from pathlib import Path
 
 from staticsites.assets import ASSETS, script_json
 from staticsites.pipeline import write_if_changed
+from staticsites.theme import embed_site_theme
 from fetch_data import validate_dataset
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,7 +35,7 @@ def build():
     for marker, value in [('__STYLE__', style), ('__DATA__', script_json(data)), ('__APP__', behavior)]:
         page = page.replace(marker, value)
     target = ROOT / 'output/us-canada-yield-curves.html'
-    write_if_changed(target, page)
+    write_if_changed(target, embed_site_theme(page))
     return target
 
 
