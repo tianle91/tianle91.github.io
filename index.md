@@ -2,6 +2,8 @@
 
 [Publications](publications.md)
 
+[Apps](/apps/)
+
 
 # Blog
 <ul>

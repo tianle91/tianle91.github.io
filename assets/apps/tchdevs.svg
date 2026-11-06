@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+<title id="title">tchdevs — tc monogram</title>
+<defs><linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6550EC"/><stop offset="1" stop-color="#33246E"/></linearGradient></defs>
+<rect width="1024" height="1024" fill="url(#background)"/>
+<path d="M355.0 328.0 L355.0 577.0 C355.0 631.0 389.0 658.0 439.0 635.0" fill="none" stroke="#FFF9EE" stroke-width="66.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M277.0 430.0 L441.0 430.0" fill="none" stroke="#FFF9EE" stroke-width="66.0" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M705.0 453.0 C650.0 408.0 536.0 426.0 536.0 536.0 C536.0 649.0 650.0 668.0 705.0 622.0" fill="none" stroke="#FFF9EE" stroke-width="66.0" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="737.0" y="607.0" width="38.0" height="66.0" rx="10.0" fill="#FFC85A"/>
+</svg>
