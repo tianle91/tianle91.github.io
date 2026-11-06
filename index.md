@@ -37,7 +37,7 @@ nav_url: /
   </div>
 </section>
 
-{% assign visible_posts = site.posts | where_exp: "post", "post.hidden == nil or post.hidden == false" %}
+{% assign visible_posts = site.posts | where_exp: "post", "post.hidden != true" %}
 {% if visible_posts.size > 0 %}
 <section id="blog" aria-labelledby="writing-title">
   <div class="section-heading"><h2 id="writing-title">Recent writing</h2><a href="/writing/">All writing →</a></div>

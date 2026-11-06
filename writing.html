@@ -6,7 +6,7 @@ width: reading
 permalink: /writing/
 ---
 <header class="page-heading"><p class="eyebrow">Notes &amp; essays</p><h1>Writing</h1><p>Thoughts on technology, data, and building things.</p></header>
-{% assign visible_posts = site.posts | where_exp: "post", "post.hidden == nil or post.hidden == false" %}
+{% assign visible_posts = site.posts | where_exp: "post", "post.hidden != true" %}
 <ul class="writing-list">
   {% for post in visible_posts %}
   <li>
