@@ -1,0 +1,147 @@
+# Toronto & Ontario Vulnerable-Services Map
+
+An interactive Leaflet map of city/provincial services for vulnerable
+populations: emergency shelter access, warming & winter respite centres,
+food/drop-ins, harm reduction, and housing supports. Companion to
+[Toronto Vulnerable Services Sources](./data/SOURCES.md).
+
+## Visual snapshots
+
+[Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·
+[Mobile (390 × 844)](tests/snapshots/mobile.jpg)
+
+Regenerate both review images explicitly:
+
+```sh
+make snapshot-browser  # one-time headless Chromium download; repeat after Playwright upgrades
+make snapshots         # rebuild from committed inputs, then capture both views
+```
+
+The shared capture helper serves this project on a temporary loopback port and uses fresh,
+light-mode Chromium contexts with no search or user location. Mobile uses touch
+emulation and the compact panel; browser chrome and the on-screen keyboard are
+excluded. It waits for initialization, fonts, loaded tiles and settled map motion.
+Both captures must succeed before existing images are replaced. Images are visual
+review references, not automated pixel comparisons; upstream map tiles can change.
+
+Snapshot capture needs network access to the page's map scripts and tiles. It
+never refreshes committed data or installs browsers automatically. Ordinary
+`make`, `make test` and `make data` do not capture snapshots. Python dependencies
+remain locked in the repository-root environment. On Linux, install Chromium's
+[manual system prerequisites](https://playwright.dev/python/docs/browsers#install-system-dependencies)
+if required; these targets do not install OS packages. Recapture after visual
+changes and commit the reviewed images with them.
+
+## Map controls
+
+The desktop sidebar puts search and the matching count above **Layers**,
+**Results**, and **Data sources** tabs. On phones, the same controls live in an
+expandable bottom panel. Search and selected layers determine both the count
+and results; layer badges show matches available before layer selection. Results
+list up to 50 matches; narrow the search to find a specific feature.
+
+On phones, the compact panel keeps search and counts visible. **Show results & filters**
+expands it; **Show more map** folds it down. Focusing search also expands the
+panel. It follows the visible viewport when the keyboard opens, and Search/Enter
+dismisses the keyboard. Source links remain available under **Data sources**.
+Long location details open in a scrollable mobile dialog with a persistent close
+button; short map labels remain anchored popups. Desktop keeps its sidebar and popups.
+
+Use **Center on my location** (◎) to request browser location and show its
+accuracy circle, or **Fit matching features** (⛶) to frame the current selection.
+Location is requested only after a click and stays in browser memory. HTTPS or
+localhost is needed for location in most browsers. Denied, unavailable and timed
+out requests show a message and can be retried. The **Provenance** footer opens
+source links, snapshot information and accuracy caveats.
+
+
+## Run
+
+```bash
+make        # builds output/toronto-vulnerable-services-map.html from data/ (offline)
+make data   # geocodes addresses + pulls EVERY shelter location, then rebuilds (needs internet)
+make open   # builds and opens it in your browser
+```
+
+`make` uses only the Python standard library — no dependencies, no network.
+`make data` is the enrichment step: it geocodes the curated addresses into
+accurate pins and adds every distinct shelter location from the Open Data API
+as its own toggleable layer. Results are cached on disk (`data/geocode_cache.json`),
+so re-runs are fast and reproducible; commit the cache and `data/shelters.json` to
+share the geocoded data. Open `output/toronto-vulnerable-services-map.html` in any browser; internet is needed
+only for map tiles and the live stats panel.
+
+The main count is matching service locations. Live shelter occupancy is a
+separate expandable readout in Results and is independent of search/layers.
+Search names, addresses, service types and notes. Shelter pins are a committed
+snapshot; the live occupancy date is displayed separately.
+
+## What's on the map
+
+* **Marker layers** (toggle on/off, colour-coded): Intake & walk-in, Warming
+  centres, Winter respite, Food & drop-in, Harm reduction. Click a marker for
+  the address, notes, and a link to the source.
+* **Live shelter stats panel** — fetches the latest *Daily Shelter & Overnight
+  Service Occupancy* snapshot from the [Toronto Open Data CKAN API](https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/)
+  client-side and shows people served / programs / locations for the most
+  recent date. Degrades gracefully when offline.
+* **Directories & data** — links to the non-mappable sources (211, Central
+  Intake, RGI/community-housing waitlists, PiT counts, etc.).
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `data/services.json` | Curated locations (coords) + directory links — **edit this to update the map** |
+| `src/build_map.py` | Generator: merges curated + cache + shelters into the HTML template |
+| `src/fetch_data.py` | Network step (`make data`): geocodes addresses, pulls shelter locations |
+| `data/geocode_cache.json` | Address → `[lat, lon]` cache produced by `make data` (commit it) |
+| `data/shelters.json` | Geocoded shelter locations produced by `make data` (commit it) |
+| `output/toronto-vulnerable-services-map.html` | Generated output (committed so it works without a build) |
+| `Makefile` | `make` builds, `make data` enriches, `make open` opens, `make clean` removes output |
+
+## Caveats
+
+* Curated marker coordinates start **approximate** (derived from street
+  addresses). Run `make data` once to replace them with geocoded coordinates.
+* Warming/respite sites are **seasonal** — confirm status on the live City
+  pages before relying on a pin.
+* Harm-reduction sites are volatile (several Ontario sites closed/relocated in
+  2025); pins are flagged "verify".
+* The Open Data set has addresses but no coordinates, so `make data` geocodes
+  each distinct shelter location (via Nominatim, cached) before pinning it.
+  Until you run it, only the curated locations appear and the stats panel +
+  dataset link represent the full system.
+
+Both the data refresh and live statistics compare the newest occupancy date in
+each active resource. Annual archive names can sort after the live table, so
+resource names are not used to decide which snapshot is current.
+
+## Refresh and dependencies
+
+This project includes the repository's [shared Python/uv Make template](../python-project.mk).
+Its own Makefile defines artifact inputs, rendering rules, and any configuration
+overrides. Build inside the repository checkout so the shared template is available.
+
+`make system-deps` installs [uv](https://formulae.brew.sh/formula/uv)
+on macOS using [Homebrew](https://brew.sh), which must already be installed.
+On other platforms, install those tools manually before `make deps` / `make data`.
+System installation runs only when explicitly requested; other targets never
+invoke it. Credentials must be supplied separately.
+
+`make deps` installs the repository's complete locked Python environment, including
+test dependencies, when it is new or the dependency manifests change. `make data`
+uses the same setup before fetching all required upstream inputs. Repeated commands
+reuse the environment; they do not attempt repairs. To reinstall from scratch, run
+`make clean-deps && make deps` (`clean-venv` remains an alias). Missing or stale
+locks fail without being rewritten.
+Dependency setup may require network access; installed builds/tests are offline.
+`make data` obtains every required input and rebuilds outputs automatically.
+Unchanged upstream content preserves data timestamps; missing generated files are
+restored. Required-source failures retain previous datasets and return an error.
+
+Shared build-time components and the single Python environment are documented
+in the [repo README](../README.md). Project `make clean-deps` removes that shared
+environment, not a private environment. Add dependencies at the repository root;
+`site.toml` holds listing metadata and `pytest.ini` configures this project’s tests.
+The generated HTML remains standalone and embeds its application assets/data.

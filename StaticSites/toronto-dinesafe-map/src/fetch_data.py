@@ -1,0 +1,351 @@
+#!/usr/bin/env python3
+"""Network step (`make data`): pull DineSafe from Toronto Open Data and reduce it
+to one map pin per establishment (its latest inspection + status), writing a
+compact, committable data/dinesafe.json.
+
+DineSafe is Toronto Public Health's food-safety inspection program. The Open Data
+resource has **one row per infraction/inspection line**, which is far too large
+and too fine-grained to map directly, so this step collapses it to one record per
+establishment:
+
+  - status            : Establishment Status of its most recent inspection
+                        (Pass / Conditional Pass / Closed)
+  - last_inspection   : that inspection's date
+  - infractions       : how many infraction lines that inspection recorded
+  - inspections       : the full timeline (newest first) - each inspection's
+                        date, status, and the individual infractions it recorded
+                        (description, severity, and the action ordered), so the
+                        map's sidebar can show inspection detail and history
+
+Coordinates: the DineSafe rows carry Latitude/Longitude for most establishments;
+where they are missing or unparseable we fall back to geocoding the address with
+OpenStreetMap Nominatim (cached in data/geocode_cache.json), the same approach
+the other maps in this repo use.
+
+Requires internet. Re-run with `make data` whenever you want fresher inspections.
+The result is committed so that `make` and `make test` build offline.
+"""
+import datetime
+import csv
+import json
+import pathlib
+import tempfile
+import sys
+import time
+
+import requests
+from geopy.extra.rate_limiter import RateLimiter
+from geopy.geocoders import Nominatim
+from staticsites.pipeline import write_if_changed
+from staticsites.sources import ckan_action
+from staticsites.geocoding import nominatim
+from staticsites.pipeline import cached_lookup
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent  # project root (src/ is one level down)
+DATA_DIR = ROOT / "data"
+OUT_PATH = DATA_DIR / "dinesafe.json"
+CACHE_PATH = DATA_DIR / "geocode_cache.json"
+
+CKAN = "https://ckan0.cf.opendata.inter.prod-toronto.ca"
+DATASET = "dinesafe"
+SOURCE_PAGE = "https://open.toronto.ca/dataset/dinesafe/"
+USER_AGENT = "toronto-dinesafe-map/1.0 (+https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)"
+
+# RateLimiter sleeps between calls for us, keeping this inside Nominatim's
+# 1 request/second policy. Only hit when a row is missing coordinates.
+_nominatim, _lookup = nominatim(USER_AGENT)
+
+cache = json.loads(CACHE_PATH.read_text(encoding="utf-8")) if CACHE_PATH.exists() else {}
+
+
+
+
+
+def save_cache() -> None:
+    write_if_changed(CACHE_PATH, json.dumps(cache, indent=2, ensure_ascii=False))
+
+
+def geocode(address):
+    if not address:
+        return None
+    def lookup():
+        loc = _lookup(address, country_codes="ca", exactly_one=True)
+        return [loc.latitude, loc.longitude] if loc else None
+    return cached_lookup(cache, address, lookup, save_cache)
+
+
+
+def ckan(action, **params):
+    return ckan_action(CKAN, action, params, user_agent=USER_AGENT, get=requests.get, timeout=120, attempts=3, sleep=time.sleep)
+
+
+def active_resource_id() -> str:
+    """The current, datastore-active DineSafe resource (the queryable table)."""
+    pkg = ckan("package_show", id=DATASET)
+    active = [r for r in pkg["resources"] if r.get("datastore_active")]
+    if not active:
+        raise RuntimeError("No datastore-active resource on the DineSafe dataset.")
+    # Prefer the most recently modified active resource.
+    active.sort(key=lambda r: r.get("last_modified") or r.get("created") or "")
+    return active[-1]["id"]
+
+
+def exact_count(rid):
+    result = ckan("datastore_search", resource_id=rid, limit=0)
+    total = result.get("total")
+    if result.get("total_was_estimated") or type(total) is not int or total <= 0:
+        raise RuntimeError("Cannot confirm exact DineSafe source count.")
+    return total
+
+
+def bulk_records(rid):
+    """Recover from failing API pages using the catalogue's complete CSV.
+
+    Datastore dumps can be silently truncated, so use the published export and
+    validate against an exact live count before allowing normalization/publication.
+    """
+    resources = ckan("package_show", id=DATASET)["resources"]
+    exports = [r for r in resources if r.get("name", "").lower() == "dinesafe.csv"]
+    if len(exports) != 1:
+        raise RuntimeError("Cannot identify unique official DineSafe CSV.")
+    expected = exact_count(rid)
+    for attempt in range(3):
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                path = pathlib.Path(directory) / "dinesafe.csv"
+                with requests.get(exports[0]["url"], stream=True, timeout=(30, 180)) as response:
+                    response.raise_for_status()
+                    with path.open("wb") as stream:
+                        for block in response.iter_content(1024 * 1024):
+                            stream.write(block)
+                with path.open(encoding="utf-8-sig", newline="") as stream:
+                    reader = csv.DictReader(stream)
+                    if not {"estId", "inspectionDate", "inspectionStatus", "address"}.issubset(reader.fieldnames or []):
+                        raise RuntimeError("Unexpected DineSafe CSV schema.")
+                    rows = list(reader)
+                if any(None in row or None in row.values() for row in rows):
+                    raise RuntimeError("Malformed DineSafe CSV row.")
+                if len(rows) != expected or exact_count(rid) != expected:
+                    raise RuntimeError("Incomplete or changing DineSafe export; retry make data.")
+                return rows
+        except requests.RequestException:
+            if attempt == 2:
+                raise
+            time.sleep(2 ** attempt)
+
+
+def iter_records(rid, batch=10000):
+    # Buffer a whole source before returning it: a failing later page must never
+    # leak rows into the CSV fallback and duplicate the first pages.
+    try:
+        expected = exact_count(rid)
+        rows = list(datastore_records(rid, batch))
+        if len(rows) != expected or exact_count(rid) != expected:
+            raise RuntimeError("Incomplete or changing DineSafe datastore.")
+        return iter(rows)
+    except (requests.RequestException, RuntimeError) as error:
+        print(f"Datastore unavailable ({error}); trying official CSV export.")
+        return iter(bulk_records(rid))
+
+
+def datastore_records(rid, batch=10000):
+    """Page through every row of a datastore resource."""
+    offset = 0
+    while True:
+        res = ckan("datastore_search", resource_id=rid, limit=batch, offset=offset)
+        records = res.get("records", [])
+        if not records:
+            if res.get("total", offset) > offset:
+                raise RuntimeError("Incomplete DineSafe response; existing dataset retained.")
+            break
+        for rec in records:
+            yield rec
+        offset += len(records)
+        total = res.get("total")
+        print(f"  ...{offset}" + (f"/{total}" if total else "") + " rows")
+        if total is not None and offset >= total:
+            break
+
+
+def _get(rec, *names):
+    """First non-empty value among possible column spellings."""
+    for n in names:
+        if n in rec and rec[n] not in (None, ""):
+            return rec[n]
+    return None
+
+
+def _clean_address(addr) -> str:
+    """Upstream fills an absent unit/suite with the literal token "None"
+    (e.g. "1 Blue Jays Way None M5V 1J4"). Drop those tokens and tidy whitespace
+    so pins and directions links read cleanly."""
+    if not addr:
+        return ""
+    return " ".join(p for p in str(addr).split() if p != "None")
+
+
+def _clean(val):
+    """Trim a cell, treating the CKAN "None"/"NA" placeholders as empty."""
+    if val is None:
+        return ""
+    s = str(val).strip()
+    return "" if s.lower() in ("none", "na") else s
+
+
+def _is_infraction(rec) -> bool:
+    """True when a DineSafe row records an actual infraction. Clean inspections
+    come through as a single row whose severity/deficiency columns are blank or
+    the literal string "None" (the CKAN export uses "None"/"NA" placeholders)."""
+    return bool(
+        _clean(_get(rec, "deficiencyDesc", "Infraction Details", "infraction_details"))
+        or _clean(_get(rec, "severity", "Severity"))
+    )
+
+
+def _infraction(rec) -> dict:
+    """The infraction detail carried by one DineSafe row: what was wrong, how
+    serious, and what the inspector ordered. Blank fields are dropped so the
+    committed JSON (and the sidebar) stay compact."""
+    fields = {
+        "detail": _clean(_get(rec, "deficiencyDesc", "Infraction Details", "infraction_details")),
+        "severity": _clean(_get(rec, "severity", "Severity")),
+        "action": _clean(_get(rec, "action", "Action")),
+        "outcome": _clean(_get(rec, "Outcome", "outcome", "Court Outcome", "court_outcome")),
+    }
+    return {k: v for k, v in fields.items() if v}
+
+
+def _coord(rec):
+    lat = _get(rec, "Latitude", "latitude")
+    lon = _get(rec, "Longitude", "longitude")
+    try:
+        lat, lon = float(lat), float(lon)
+    except (TypeError, ValueError):
+        return None
+    # DineSafe sits inside the GTA; reject obvious junk (0,0 etc.).
+    if 43.0 <= lat <= 44.2 and -80.2 <= lon <= -78.8:
+        return [round(lat, 5), round(lon, 5)]
+    return None
+
+
+def reduce_to_establishments(records):
+    """Collapse inspection rows to one current record per establishment."""
+    est = {}
+    for rec in records:
+        eid = _get(rec, "estId", "oldEstId", "Establishment ID", "establishment_id") \
+            or _get(rec, "estName", "Establishment Name")
+        if not eid:
+            continue
+        date = str(_get(rec, "inspectionDate", "Inspection Date", "inspection_date") or "")
+        status = _get(rec, "inspectionStatus", "Establishment Status", "establishment_status") or ""
+        e = est.get(eid)
+        if e is None:
+            e = est[eid] = {
+                "name": _get(rec, "estName", "Establishment Name", "establishment_name") or "Establishment",
+                "type": _get(rec, "Establishment Type", "Establishmenttype", "establishment_type") or "",
+                "address": _clean_address(_get(rec, "address", "Establishment Address", "establishment_address")),
+                "status": status,
+                "last_inspection": date,
+                "min_per_year": _get(rec, "Min. Inspections Per Year", "min_inspections_per_year") or "",
+                "coord": _coord(rec),
+                "_inspections": {},  # inspection date -> {status, infractions[]}, the full timeline
+            }
+        # Build the per-inspection timeline: one entry per inspection date, each
+        # holding that visit's status and the infraction lines recorded on it.
+        ins = e["_inspections"].get(date)
+        if ins is None:
+            ins = e["_inspections"][date] = {"status": status, "infractions": []}
+        elif status and not ins["status"]:
+            ins["status"] = status
+        if _is_infraction(rec):
+            ins["infractions"].append(_infraction(rec))
+        # Keep the newest inspection's status as the establishment's current status.
+        if date and date >= (e["last_inspection"] or ""):
+            e["last_inspection"] = date
+            e["status"] = status or e["status"]
+        if e["coord"] is None:
+            e["coord"] = _coord(rec)
+    return est
+
+
+def main() -> None:
+    print("Fetching DineSafe from Toronto Open Data...")
+    rid = active_resource_id()
+    # Canonical ordering resolves equal-date ties independently of API row order.
+    records = sorted(iter_records(rid), key=lambda row: json.dumps(row, sort_keys=True))
+    est = reduce_to_establishments(records)
+    print(f"  {len(est)} distinct establishments; resolving coordinates...")
+
+    establishments = []
+    geocoded = dropped = 0
+    for e in est.values():
+        coord = e["coord"]
+        if coord is None:
+            addr = ", ".join(p for p in [e["address"], "Toronto", "Ontario"] if p)
+            coord = geocode(addr)
+            if coord:
+                geocoded += 1
+        if not coord:
+            dropped += 1
+            continue
+        # Timeline, newest inspection first, for the sidebar's history section.
+        inspections = [
+            {
+                "date": d[:10] if d else "",
+                "status": e["_inspections"][d]["status"],
+                "infractions": sorted(
+                    e["_inspections"][d]["infractions"],
+                    key=lambda item: json.dumps(item, sort_keys=True),
+                ),
+            }
+            for d in sorted(e["_inspections"], reverse=True)
+        ]
+        latest = inspections[0] if inspections else {"infractions": []}
+        establishments.append({
+            "name": e["name"],
+            "type": e["type"],
+            "address": e["address"],
+            "lat": coord[0],
+            "lon": coord[1],
+            "status": e["status"],
+            "last_inspection": e["last_inspection"][:10] if e["last_inspection"] else "",
+            "infractions": len(latest["infractions"]),  # count on the most recent inspection
+            "min_per_year": e["min_per_year"],
+            "inspections": inspections,
+        })
+
+    if not establishments:
+        raise RuntimeError("No usable establishments; refusing to replace dinesafe.json.")
+    establishments.sort(key=lambda x: ((x["name"] or "").lower(), x["address"], json.dumps(x, sort_keys=True)))
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    substantive = {
+        "source_page": SOURCE_PAGE,
+        "total_records": len(establishments),
+        "establishments": establishments,
+    }
+    if OUT_PATH.exists():
+        existing = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        existing.pop("generated_at", None)
+        if existing == substantive:
+            print(f"{OUT_PATH} is unchanged ({len(establishments)} establishments).")
+            return
+    write_if_changed(OUT_PATH,
+        json.dumps(
+            {
+                "generated_at": datetime.datetime.now().strftime("%Y-%m-%d"),
+                **substantive,
+            },
+            indent=2,
+            ensure_ascii=False,
+        ) + "\n",
+    )
+    if geocoded:
+        print(f"  geocoded {geocoded} establishment(s) whose rows lacked coordinates")
+    if dropped:
+        print(f"  dropped {dropped} establishment(s) with no usable location")
+    print(f"Wrote {OUT_PATH} with {len(establishments)} establishments.")
+    print("Data ready; make data rebuilds the map automatically.")
+
+
+if __name__ == "__main__":
+    main()

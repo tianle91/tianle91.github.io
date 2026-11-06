@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TRCA flood plain explorer</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      __EXPLORER_CSS__
+    </style>
+    <style></style>
+  </head>
+  <body>
+    <header class="explorer-header">
+      <div>
+        <h1>TRCA flood plain explorer</h1>
+        <p>Riverine flood plains and attributed boundaries</p>
+      </div>
+      <div id="snapshot-date"></div>
+    </header>
+    <main class="explorer-layout">
+      <aside
+        id="panel"
+        class="explorer-sidebar"
+        aria-label="Map exploration controls"
+      >
+        <button
+          type="button"
+          id="sheet-toggle"
+          class="sheet-toggle"
+          aria-label="Expand map controls"
+          aria-expanded="false"
+        >Show results &amp; filters</button>
+        <div class="search-area">
+          <label for="search">Search features</label
+          ><input
+            id="search"
+            type="search"
+            placeholder="Watershed, source or boundary type"
+            aria-label="Search features"
+            autocomplete="off"
+          />
+        </div>
+        <div id="stats" role="status" aria-live="polite"></div>
+        __MAP_TABS__
+        <section
+          id="layers-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="layers-tab"
+        >
+          <div id="layer-controls"></div>
+          <div class="layer-actions">
+            <button type="button" class="text-button" id="select-all">
+              Select all</button
+            ><button type="button" class="text-button" id="clear-all">
+              Clear all
+            </button>
+          </div>
+          <label class="field" for="watershed">Watershed</label
+          ><select id="watershed">
+            <option value="">All watersheds</option>
+          </select>
+          <p class="notice">
+            Generalized riverine mapping. Confirm precise property limits and
+            risk with TRCA.
+          </p>
+        </section>
+        <section
+          id="results-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="results-tab"
+          hidden
+        >
+          <p id="result-note" class="hint"></p>
+          <div id="results"></div>
+        </section>
+        <section
+          id="sources-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="sources-tab"
+          hidden
+        >
+          <p id="snapshot-provenance" class="muted"></p>
+          <h2>Data sources</h2>
+          <ul>
+            <li>
+              © Toronto and Region Conservation Authority:
+              <a
+                href="https://trca-camaps.opendata.arcgis.com/datasets/camaps::floodline-trca-polygon"
+                >Floodline TRCA Polygon</a
+              >
+              and
+              <a
+                href="https://trca-camaps.opendata.arcgis.com/datasets/camaps::floodline-trca-line"
+                >Floodline TRCA Line</a
+              >, via the
+              <a href="https://trca-camaps.opendata.arcgis.com/"
+                >TRCA Open Data Portal</a
+              >.
+            </li>
+            <li>
+              <a
+                href="https://www.arcgis.com/home/item.html?id=50ee80b4a2dc4d3ebfb71a2fc33d597a"
+                >TRCA data terms and disclaimer</a
+              >. Supplied as is; TRCA does not warrant completeness or currency.
+            </li>
+            <li>
+              <a
+                href="https://trca.ca/conservation/flood-risk-management/flood-plain-map-viewer/"
+                >Official viewer and explanations</a
+              >
+            </li>
+            <li>
+              Map: <a href="https://leafletjs.com/">Leaflet</a> / ©
+              <a href="https://www.openstreetmap.org/copyright"
+                >OpenStreetMap contributors</a
+              >
+            </li>
+          </ul>
+          <p>
+            Coordinates are generalized by approximately ten metres for display.
+            No property-level flood determination is made here.
+          </p>
+        </section>
+        <footer class="explorer-footer">
+          <span>Toronto & Region Conservation Authority</span
+          ><button type="button" id="provenance" class="text-button">
+            Provenance
+          </button>
+        </footer>
+      </aside>
+      <div class="map-canvas">
+        <div id="map" aria-label="TRCA flood plain explorer map"></div>
+        <div
+          id="location-status"
+          class="map-message"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </div>
+    </main>
+    <dialog
+      id="record-detail"
+      class="record-dialog"
+      aria-labelledby="record-title"
+    >
+      <button
+        type="button"
+        id="record-close"
+        class="close"
+        aria-label="Close details"
+      >
+        ×
+      </button>
+      <h2 id="record-title"></h2>
+      <div id="record-body"></div>
+    </dialog>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const DATA = __PAYLOAD__;
+    </script>
+    <script>
+      __EXPLORER_JS__;
+    </script>
+    <script>
+      __APP_JS__;
+    </script>
+  </body>
+</html>

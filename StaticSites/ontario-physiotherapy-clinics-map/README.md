@@ -1,0 +1,150 @@
+# Ontario Publicly-Funded Physiotherapy Clinics Map
+
+An interactive Leaflet map of every clinic and hospital listed on
+[ontario.ca — publicly-funded physiotherapy clinic locations](https://www.ontario.ca/page/publicly-funded-physiotherapy-clinic-locations),
+with phone, email, a text filter (name / city / postal code) and directions
+links.
+
+## Visual snapshots
+
+[Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·
+[Mobile (390 × 844)](tests/snapshots/mobile.jpg)
+
+Regenerate both review images explicitly:
+
+```sh
+make snapshot-browser  # one-time headless Chromium download; repeat after Playwright upgrades
+make snapshots         # rebuild from committed inputs, then capture both views
+```
+
+The shared capture helper serves this project on a temporary loopback port and uses fresh,
+light-mode Chromium contexts with no search or user location. Mobile uses touch
+emulation and the compact panel; browser chrome and the on-screen keyboard are
+excluded. It waits for initialization, fonts, loaded tiles and settled map motion.
+Both captures must succeed before existing images are replaced. Images are visual
+review references, not automated pixel comparisons; upstream map tiles can change.
+
+Snapshot capture needs network access to the page's map scripts and tiles. It
+never refreshes committed data or installs browsers automatically. Ordinary
+`make`, `make test` and `make data` do not capture snapshots. Python dependencies
+remain locked in the repository-root environment. On Linux, install Chromium's
+[manual system prerequisites](https://playwright.dev/python/docs/browsers#install-system-dependencies)
+if required; these targets do not install OS packages. Recapture after visual
+changes and commit the reviewed images with them.
+
+## Map controls
+
+The desktop sidebar puts search and the matching count above **Layers**,
+**Results**, and **Data sources** tabs. On phones, the same controls live in an
+expandable bottom panel. Search and selected layers determine both the count
+and results; layer badges show matches available before layer selection. Results
+list up to 50 matches; narrow the search to find a specific feature.
+
+On phones, the compact panel keeps search and counts visible. **Show results & filters**
+expands it; **Show more map** folds it down. Focusing search also expands the
+panel. It follows the visible viewport when the keyboard opens, and Search/Enter
+dismisses the keyboard. Source links remain available under **Data sources**.
+Long location details open in a scrollable mobile dialog with a persistent close
+button; short map labels remain anchored popups. Desktop keeps its sidebar and popups.
+
+Use **Center on my location** (◎) to request browser location and show its
+accuracy circle, or **Fit matching features** (⛶) to frame the current selection.
+Location is requested only after a click and stays in browser memory. HTTPS or
+localhost is needed for location in most browsers. Denied, unavailable and timed
+out requests show a message and can be retried. The **Provenance** footer opens
+source links, snapshot information and accuracy caveats.
+
+
+## Run
+
+```bash
+make        # builds output/ontario-physiotherapy-clinics-map.html from data/clinics.json (offline)
+make data   # re-pulls the clinic list and geocodes it, then rebuilds (needs internet)
+make open   # build and open in a browser
+```
+
+## Where the data comes from
+
+The ontario.ca page renders its table client-side from an
+`<onesite-interactive-table>` component, so there is nothing to scrape in the
+served HTML. That component reads a CKAN datastore resource, which
+`src/fetch_data.py` queries directly:
+
+```
+https://data.ontario.ca/api/3/action/datastore_search?resource_id=6238e64a-e5a9-484b-97b2-774640f7ab99
+```
+
+Fields published per clinic: type of facility, operating name, address, city,
+postal code, phone, email. There are **no coordinates** in the source, so
+`src/fetch_data.py` geocodes each address with OpenStreetMap Nominatim
+(1 request/second, results cached in `data/geocode_cache.json`).
+
+## Caveats
+
+- **11 of 255 pins are city centres, not street addresses.** Those say so in the
+  popup — the exact address is still listed, so confirm it there rather than
+  trusting the dot. The rest are street-level matches.
+- City lookups are **structured** (`city=&state=&country=`) rather than
+  free-form on purpose: free-form `Perth, Ontario, Canada` returns Perth
+  *County*'s centroid and `Kenora` returns Kenora *District* — both hundreds of
+  km from the town. Street matches are also rejected if they land more than
+  40 km from their own city.
+
+### How addresses get matched
+
+The province writes unit numbers into the street field, which Nominatim indexes
+by building, not unit — so `11-2007 Lawrence Ave West` misses outright. Naively
+geocoding the raw field leaves 110 of 255 clinics stuck at their city centre.
+`clean_street()` strips the unit noise and `geocode()` then tries progressively
+looser queries, taking the first hit that survives the 40 km check:
+
+| Raw | Cleaned |
+| --- | --- |
+| `11-2007 Lawrence Ave West` | `2007 Lawrence Ave West` |
+| `1B & 1-9275 Markham Road` | `9275 Markham Road` |
+| `325 West Street, Suite 300, Building A` | `325 West Street` |
+| `8 Glen Watford Dr G3-G5` | `8 Glen Watford Dr` |
+| `Kingfisher Square, 9-920 Upper Wentworth Street` | `920 Upper Wentworth Street` |
+| `124 Barker Street\nCarling Heights Medical Centre` | `124 Barker Street` |
+
+That takes the city-centre fallbacks from 110 down to 11. The stragglers are a
+source typo (`455 Simcoe Steet South`), highway-style addresses (`6-209 Highway
+#20 East`) and rural county roads (`8433 Lennox and Addington County Rd 2`) that
+OSM simply doesn't carry at house-number precision.
+
+Note that `100-4500 Highway 7` cleans to `4500 Highway 7`, not `4500 Highway`:
+the trailing-unit-code rule requires a letter next to the digit, so numbered
+highways and concession roads survive.
+- **Eligibility is limited** — generally seniors 65+, people 19 and under, and
+  patients recently discharged from hospital or receiving ODSP/OW. Call the
+  clinic before going.
+- The province updates the list regularly; re-run `make data` for a fresh pull.
+
+## Refresh and dependencies
+
+This project includes the repository's [shared Python/uv Make template](../python-project.mk).
+Its own Makefile defines artifact inputs, rendering rules, and any configuration
+overrides. Build inside the repository checkout so the shared template is available.
+
+`make system-deps` installs [uv](https://formulae.brew.sh/formula/uv)
+on macOS using [Homebrew](https://brew.sh), which must already be installed.
+On other platforms, install those tools manually before `make deps` / `make data`.
+System installation runs only when explicitly requested; other targets never
+invoke it. Credentials must be supplied separately.
+
+`make deps` installs the repository's complete locked Python environment, including
+test dependencies, when it is new or the dependency manifests change. `make data`
+uses the same setup before fetching all required upstream inputs. Repeated commands
+reuse the environment; they do not attempt repairs. To reinstall from scratch, run
+`make clean-deps && make deps` (`clean-venv` remains an alias). Missing or stale
+locks fail without being rewritten.
+Dependency setup may require network access; installed builds/tests are offline.
+`make data` obtains every required input and rebuilds outputs automatically.
+Unchanged upstream content preserves data timestamps; missing generated files are
+restored. Required-source failures retain previous datasets and return an error.
+
+Shared build-time components and the single Python environment are documented
+in the [repo README](../README.md). Project `make clean-deps` removes that shared
+environment, not a private environment. Add dependencies at the repository root;
+`site.toml` holds listing metadata and `pytest.ini` configures this project’s tests.
+The generated HTML remains standalone and embeds its application assets/data.

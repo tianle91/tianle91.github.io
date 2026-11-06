@@ -42,7 +42,7 @@
 - [US & Canada government bond yield curves](/StaticSites/us-canada-yield-curves/output/us-canada-yield-curves.html)
   — Compare nominal government bond yields from 1 month to the long end on the latest shared trading date.
 
-Source for all 11: [github.com/tianle91/StaticSites](https://github.com/tianle91/StaticSites)
+Source for all 11: [StaticSites source](https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)
 <!-- staticsites:end -->
 
 

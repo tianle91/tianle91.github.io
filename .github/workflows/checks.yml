@@ -17,8 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: actions/setup-python@v5
         with:
@@ -33,3 +31,17 @@ jobs:
 
       - name: Post filenames are Jekyll-valid
         run: make check-posts
+
+  staticsites:
+    name: StaticSites tests and builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: StaticSites/uv.lock
+      - name: Test and build committed datasets
+        run: make check-staticsites
+        env:
+          MPLBACKEND: Agg

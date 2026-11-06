@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "canada-mortgage-stress",
+    "title": "Ontario Mortgage Stress",
+    "description": "monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plotted over their shared available period.",
+    "output": "canada-mortgage-stress/output/canada-mortgage-stress.html"
+  },
+  {
+    "slug": "fcf-macro-indicators",
+    "title": "Free cash flow vs. the macro backdrop",
+    "description": "quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.",
+    "output": "fcf-macro-indicators/output/fcf-macro-indicators.html"
+  },
+  {
+    "slug": "margin-sp500-m2-visualization",
+    "title": "Margin debt vs. the S&P 500",
+    "description": "FINRA margin debt against the S&P 500, M2, CPI, and PPI, rebased to a chosen anchor date.",
+    "output": "margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html"
+  },
+  {
+    "slug": "ontario-physiotherapy-clinics-map",
+    "title": "Ontario OHIP physiotherapy clinics",
+    "description": "the 255 publicly-funded clinics and hospitals, searchable by name / city / postal code.",
+    "output": "ontario-physiotherapy-clinics-map/output/ontario-physiotherapy-clinics-map.html"
+  },
+  {
+    "slug": "toronto-building-permits-map",
+    "title": "Toronto building permits",
+    "description": "the complete active permit register, searchable by address, with status, type, and year filters.",
+    "output": "toronto-building-permits-map/output/toronto-building-permits-map.html"
+  },
+  {
+    "slug": "toronto-crime-map",
+    "title": "Toronto reported crime map",
+    "description": "Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.",
+    "output": "toronto-crime-map/output/toronto-crime-map.html"
+  },
+  {
+    "slug": "toronto-dinesafe-map",
+    "title": "Toronto DineSafe food-safety inspections",
+    "description": "one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.",
+    "output": "toronto-dinesafe-map/output/toronto-dinesafe-map.html"
+  },
+  {
+    "slug": "toronto-vulnerable-services-map",
+    "title": "Toronto services for vulnerable populations",
+    "description": "shelters, warming & respite centres, drop-ins, harm reduction, housing supports.",
+    "output": "toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html"
+  },
+  {
+    "slug": "trca-flood-plain-map",
+    "title": "TRCA flood plain map",
+    "description": "TRCA riverine flood plains and attributed floodline boundaries, filterable by watershed and mapped source.",
+    "output": "trca-flood-plain-map/output/trca-flood-plain-map.html"
+  },
+  {
+    "slug": "union-station-transit-isochrone",
+    "title": "Union Station commute-shed",
+    "description": "where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.",
+    "output": "union-station-transit-isochrone/output/union-station-transit-isochrone.html"
+  },
+  {
+    "slug": "us-canada-yield-curves",
+    "title": "US & Canada government bond yield curves",
+    "description": "Compare nominal government bond yields from 1 month to the long end on the latest shared trading date.",
+    "output": "us-canada-yield-curves/output/us-canada-yield-curves.html"
+  }
+]
