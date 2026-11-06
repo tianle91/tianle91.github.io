@@ -32,7 +32,7 @@ SHELTERS_PATH = DATA_DIR / "shelters.json"
 
 CKAN = "https://ckan0.cf.opendata.inter.prod-toronto.ca"
 DATASET = "daily-shelter-overnight-service-occupancy-capacity"
-USER_AGENT = "toronto-vulnerable-services-map/1.0 (+https://github.com/tianle91/StaticSites)"
+USER_AGENT = "toronto-vulnerable-services-map/1.0 (+https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)"
 
 # RateLimiter sleeps between calls for us, which is what keeps this inside
 # Nominatim's 1 request/second policy.

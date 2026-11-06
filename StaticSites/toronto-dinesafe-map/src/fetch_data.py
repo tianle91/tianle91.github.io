@@ -49,7 +49,7 @@ CACHE_PATH = DATA_DIR / "geocode_cache.json"
 CKAN = "https://ckan0.cf.opendata.inter.prod-toronto.ca"
 DATASET = "dinesafe"
 SOURCE_PAGE = "https://open.toronto.ca/dataset/dinesafe/"
-USER_AGENT = "toronto-dinesafe-map/1.0 (+https://github.com/tianle91/StaticSites)"
+USER_AGENT = "toronto-dinesafe-map/1.0 (+https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)"
 
 # RateLimiter sleeps between calls for us, keeping this inside Nominatim's
 # 1 request/second policy. Only hit when a row is missing coordinates.

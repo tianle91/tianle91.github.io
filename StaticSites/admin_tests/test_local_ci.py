@@ -104,5 +104,27 @@ class LocalCITests(unittest.TestCase):
             local_ci.run(self.root, "off", "../shared-environment")
 
 
+class NestedRepositoryTests(unittest.TestCase):
+    def test_nested_checks_pin_parent_head_and_detect_changes_outside_staticsites(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent = pathlib.Path(directory)
+            nested = parent / "StaticSites"
+            nested.mkdir()
+            (parent / "index.md").write_text("homepage")
+            (nested / "source.py").write_text("source")
+            subprocess.run(["git", "init", "-q", str(parent)], check=True)
+            subprocess.run(["git", "add", "."], cwd=parent, check=True)
+            subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.com",
+                            "commit", "-qm", "fixture"], cwd=parent, check=True)
+            sha = local_ci.git(parent, "rev-parse", "HEAD")
+            self.assertEqual(local_ci.git(nested, "rev-parse", "HEAD"), sha)
+            self.assertTrue(local_ci.clean_commit(nested, sha))
+            (parent / "index.md").write_text("updated homepage")
+            self.assertFalse(local_ci.clean_commit(nested, sha))
+            (parent / "index.md").write_text("homepage")
+            (parent / "new-post.md").touch()
+            self.assertFalse(local_ci.clean_commit(nested, sha))
+
+
 if __name__ == "__main__":
     unittest.main()

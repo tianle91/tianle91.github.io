@@ -34,7 +34,7 @@ FEEDS = {
     "go.zip": "https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/GO-GTFS.zip",
     "up.zip": "https://assets.metrolinx.com/raw/upload/Documents/Metrolinx/Open%20Data/UP-GTFS.zip",
 }
-USER_AGENT = "union-station-transit-isochrone/1.0 (+https://github.com/tianle91/StaticSites)"
+USER_AGENT = "union-station-transit-isochrone/1.0 (+https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)"
 
 
 def digest(path):

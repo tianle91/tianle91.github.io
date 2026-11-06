@@ -1,37 +1,23 @@
-# Site chores. There is no build step here — GitHub Pages builds the site
-# server-side from master (see AGENTS.md). These targets only cover the things
-# you do by hand: bumping the StaticSites submodule, regenerating index.md's
-# Interactive list from its manifest, and checking the result.
+# Site checks and homepage sync. GitHub Pages publishes master server-side.
 
 SITE    := https://tianle91.com
-MSG     ?= bump StaticSites
 SYNC    := python3 scripts/sync_staticsites.py
 
 .DEFAULT_GOAL := help
-.PHONY: help sync update publish check check-sync check-posts verify
+.PHONY: help sync check check-sync check-posts check-staticsites verify
 
 help: ## Show this help
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) \
 	  | awk 'BEGIN{FS=":.*?## "}{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
-sync: ## Regenerate index.md from the currently pinned submodule
+sync: ## Regenerate index.md from StaticSites/sites.json
 	$(SYNC)
 
-update: ## Bump StaticSites to latest main and regenerate index.md
-	$(SYNC) --update-submodule
-	@git --no-pager diff --stat -- StaticSites index.md
-
-publish: update ## Bump, regenerate, commit and push (publishes an updated map)
-	@if git diff --quiet -- StaticSites index.md; then \
-	  echo "Nothing to publish — StaticSites is already at the latest commit."; \
-	else \
-	  git commit -m '$(MSG)' -- StaticSites index.md && git push; \
-	fi
-
-check: check-sync check-posts ## Run the same checks CI runs
+check: check-sync check-posts check-staticsites ## Check the homepage, posts and every static project
 
 check-sync:
 	$(SYNC) --check
+	python3 -m unittest discover -s scripts -p 'test_*.py'
 
 check-posts:
 	@bad=$$(ls _posts | grep -vE '^[0-9]{4}-[0-9]{2}-[0-9]{2}-' || true); \
@@ -40,6 +26,9 @@ check-posts:
 	  echo "$$bad"; exit 1; \
 	fi; \
 	echo "Post filenames OK."
+
+check-staticsites: ## Test and build every static project from committed inputs
+	$(MAKE) -C StaticSites test STATUSES=off
 
 verify: ## After pushing: check the Pages build and that every map returns 200
 	@gh api repos/tianle91/tianle91.github.io/pages/builds/latest \

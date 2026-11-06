@@ -40,7 +40,7 @@ CKAN = "https://data.ontario.ca"
 # Resource backing the <onesite-interactive-table> on the ontario.ca page.
 RESOURCE_ID = "6238e64a-e5a9-484b-97b2-774640f7ab99"
 SOURCE_PAGE = "https://www.ontario.ca/page/publicly-funded-physiotherapy-clinic-locations"
-USER_AGENT = "ontario-physiotherapy-clinics-map/1.0 (+https://github.com/tianle91/StaticSites)"
+USER_AGENT = "ontario-physiotherapy-clinics-map/1.0 (+https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)"
 
 # RateLimiter sleeps between calls for us, which is what keeps this inside
 # Nominatim's 1 request/second policy.

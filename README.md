@@ -39,26 +39,29 @@ The post is live a minute or two after you push.
 
 ## Publishing an updated map or chart
 
-The interactive maps and plots in the **Interactive** section are built in the separate
-[StaticSites](https://github.com/tianle91/StaticSites) repo and pulled in here as a
-submodule. This site never rebuilds them; it serves the HTML that StaticSites has
-already committed.
+The maps, charts, source code, datasets and generated outputs live in
+[StaticSites/](StaticSites/) in this repository. A normal clone includes everything;
+there is no submodule to initialize or separate pointer PR to merge.
 
-To publish a change to one of them: commit and push it in StaticSites first, then in
-this repo point at the new version.
+From `StaticSites/`, edit the project and run its build and tests as described in
+[StaticSites/README.md](StaticSites/README.md). Commit the source, data and generated
+outputs together. From this repository's root:
 
 ```bash
-make publish   # bump the submodule, regenerate index.md, commit and push
-make verify    # after a minute: Pages build status + every map returns 200
+make sync      # regenerate the homepage list after metadata/project changes
+make check     # homepage and post checks, plus all static project tests/builds
 ```
 
-`make` on its own lists the targets. If you'd rather look before committing, `make
-update` does the bump and regeneration and stops there.
+Open one PR in this repository. Merging to `master` publishes the committed HTML
+through the existing legacy GitHub Pages builder. The checks workflow tests and
+builds static projects from committed inputs; it does not refresh datasets or
+deploy the site. After publication, run `make verify` to check the Pages build
+and every published map/chart URL.
 
-A *new* map needs nothing extra: the **Interactive** list in [index.md](index.md) is
-generated from StaticSites' own manifest, so `make publish` picks it up. Edit its
-title and blurb in StaticSites, not here.
+Existing URLs stay at `/StaticSites/<project>/output/<project>.html`. A new
+project belongs in `StaticSites/`; use its scaffolder, edit `site.toml`, run
+`make manifest` there, then `make sync` here. `make` lists the root targets.
 
-> **StaticSites must stay a public repo.** This site uses the legacy GitHub Pages
-> builder, which fetches submodules anonymously over HTTPS. If StaticSites is made
-> private, every build of this site fails and the maps 404.
+The former [StaticSites repository](https://github.com/tianle91/StaticSites) remains
+available for historical issues and PRs. Its Git history was imported without
+rewriting the original commits. New work belongs here.

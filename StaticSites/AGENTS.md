@@ -2,6 +2,9 @@
 
 Coding guidance for StaticSites. Humans: see README.md.
 
+This is a directory of the parent tianle91.github.io repository. References to
+the root/environment below mean `StaticSites/`. Open PRs in the parent repository.
+
 ## Architecture and standalone outputs
 
 Projects have local source, data, tests, configuration and committed outputs.
@@ -118,7 +121,8 @@ Browser fixtures are explicit; ordinary pytest never launches/downloads browsers
 `STATUSES=off` never contacts GitHub. `auto` publishes local-ci/metadata and
 local-ci/<project> only for clean pushed commits; `required` refuses dirty state.
 Pin HEAD and verify tracked/untracked changes before success publication; status
-API failures return nonzero. Keep logs ignored in `.local-ci/<sha>/`. No hosted
-workflows. Use the existing gh session/keychain; a sandboxed auth failure does
-not prove the login is broken. Retry with normal keychain access before asking
+API failures return nonzero. Keep logs ignored in `.local-ci/<sha>/`. The parent
+checks workflow runs this suite with `STATUSES=off`; it does not deploy Pages or
+refresh datasets. Use the existing gh session/keychain; a sandboxed auth failure
+does not prove the login is broken. Retry with normal keychain access before asking
 for authentication, and never print tokens.

@@ -1,5 +1,9 @@
 # StaticSites
 
+This directory is part of [tianle91.github.io](../README.md). Run the commands
+below from `StaticSites/`; its environment and dependency manifests stay here.
+Submit project and homepage changes in one PR to the parent repository.
+
 Standalone static maps and plots built from committed datasets. Projects share
 build-time Python and UI components, while retaining their own sources, data,
 tests and outputs. Each generated HTML embeds its application code, styles and
@@ -217,7 +221,8 @@ It uses the same root environment throughout.
 `local-ci/<project>` for a clean pushed commit; `required` refuses dirty or
 unpublished state. A run pins HEAD and checks all tracked/untracked changes
 before publishing success. Status-publication failures are visible and nonzero.
-Logs remain ignored under `.local-ci/<sha>/`. There are no hosted workflows.
+Logs remain ignored under `.local-ci/<sha>/`. The parent repository also runs
+this suite in its checks workflow with `STATUSES=off`; Pages publication still uses committed outputs.
 The existing `gh` session/keychain supplies authentication; never print tokens.
 
 Optional interaction checks: `node admin_tests/map_explorer.cjs`,
