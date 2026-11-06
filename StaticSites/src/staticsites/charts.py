@@ -6,6 +6,7 @@ import re
 import json
 import math
 from staticsites.assets import script_json
+from staticsites.theme import embed_site_theme
 
 INK = '#182d37'
 MUTED = '#596b71'
@@ -75,7 +76,7 @@ def chart_page(payload, *, title, subtitle, sources, pulled, context=''):
     stamp = f'<p>Data pulled {escape(pulled)}</p>' if pulled else ''
     events = ''.join(f'<li>{escape(event["date"])}: {escape(event["label"])}</li>' for event in payload.get('events', []))
     events = '<p>Market event markers</p><ul>' + events + '</ul>' if events else ''
-    return f'''<!DOCTYPE html>
+    return embed_site_theme(f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><style>{style}</style></head>
@@ -89,4 +90,4 @@ def chart_page(payload, *, title, subtitle, sources, pulled, context=''):
 <p class="hint">Hover, tap the plot or use arrow keys to inspect · Tap legend entries to toggle series</p></section>
 <footer><details><summary>Definitions & data sources</summary>{stamp}<p>{escape(context)}</p>{events}<ul>{links}</ul></details></footer>
 </main><script id="chart-data" type="application/json">{encoded}</script><script>{behavior}</script></body></html>
-'''
+''')

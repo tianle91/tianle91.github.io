@@ -1,4 +1,4 @@
-# Site checks and homepage sync. GitHub Pages publishes master server-side.
+# Site checks and project-directory sync. GitHub Pages publishes master server-side.
 
 SITE    := https://tianle91.com
 SYNC    := python3 scripts/sync_staticsites.py

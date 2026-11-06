@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <link rel="icon" href="{{ '/assets/apps/tchdevs.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  {% include head-custom.html %}
+</head>
+<body class="site-page">
+  {% assign nav_url = page.nav_url %}
+  {% if nav_url == nil and page.layout == 'post' %}{% assign nav_url = '/writing/' %}{% endif %}
+  {% capture header %}{% include site-header.html %}{% endcapture %}
+  {% if nav_url %}
+    {% capture nav_link %}href="{{ nav_url }}"{% endcapture %}
+    {% capture active_link %}href="{{ nav_url }}" aria-current="page"{% endcapture %}
+    {{ header | replace: nav_link, active_link }}
+  {% else %}{{ header }}{% endif %}
+  <main id="main-content" tabindex="-1" class="site-main {{ page.page_class | escape }}{% if page.width == 'reading' or page.layout == 'post' %} reading-width{% endif %}">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <span>Tianle Chen · Toronto</span>
+    <div><a href="mailto:tianlechen@gmail.com">Contact</a><a href="https://github.com/tianle91">GitHub</a><a href="/publications.html">Publications</a></div>
+  </footer>
+</body>
+</html>

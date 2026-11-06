@@ -9,6 +9,19 @@ import sync_staticsites as sync
 
 
 class ManifestTests(unittest.TestCase):
+    def test_directory_groups_known_projects_and_preserves_unknown_ones(self):
+        sites = [{"title": title, "description": "A project", "output": f"{slug}/output/{slug}.html"}
+                 for title, slug in [("Yields", "us-canada-yield-curves"),
+                                     ("Crime", "toronto-crime-map"), ("New", "new-project")]]
+        block = sync.render(sites)
+        for title in ["Maps", "Economics & Finance", "Other projects"]:
+            self.assertIn(f"## {title}", block)
+        for site in sites:
+            self.assertEqual(block.count(f"](/StaticSites/{site['output']})"), 1)
+        document = f"Intro\n{sync.STARTMARK}\nOld content\n{sync.ENDMARK}\nFooter"
+        self.assertEqual(sync.splice(document, block),
+                         f"Intro\n{sync.STARTMARK}\n{block}\n{sync.ENDMARK}\nFooter")
+
     def test_nested_tracked_outputs_match_manifest_and_report_drift(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

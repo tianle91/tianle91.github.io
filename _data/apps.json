@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "dedup2", "name": "Dedup2", "category": "Photo library",
+    "summary": "Photo cleanup you can review.",
+    "description": "Compare similar photos and videos, choose what to keep, and compress large originals. Fill missing photo locations with suggestions you can review.",
+    "platform": "iPhone & iPad", "store_id": "6777753354", "featured": true,
+    "screenshot_alt": "Dedup2 showing groups of similar photos for review"
+  },
+  {
+    "slug": "offlineclipper", "name": "OfflineClipper", "category": "Video highlights",
+    "summary": "Find clips and photos worth keeping.",
+    "description": "Find standout clips and still photos in your recordings. Prioritize subjects, review suggestions, trim your clips, and export with on-device processing.",
+    "platform": "iPhone & iPad", "store_id": "6783943164", "featured": true,
+    "screenshot_alt": "OfflineClipper showing suggested highlights from a video"
+  },
+  {
+    "slug": "watchmyscore", "name": "WatchMyScore", "category": "On the court",
+    "summary": "Scorekeeping from your wrist.",
+    "description": "Keep badminton, tennis, and pickleball scores on Apple Watch. Review your matches on iPhone and add recorded scores to your photos and videos.",
+    "platform": "Apple Watch & iPhone", "store_id": "6781288253", "featured": true,
+    "screenshot_alt": "WatchMyScore displaying match scoring on Apple Watch"
+  },
+  {
+    "slug": "routeoverlay", "name": "RouteOverlay", "category": "Workout routes",
+    "summary": "Bring your route into your photos and videos.",
+    "description": "Match photos and videos to existing Apple Health workouts. Add route maps and workout details to your media, review location corrections, and export routes as GPX.",
+    "platform": "iPhone & iPad", "store_id": "6809984947", "featured": true,
+    "screenshot_alt": "RouteOverlay showing a workout route alongside photos and video"
+  },
+  {
+    "slug": "dedup-lite", "name": "Dedup Lite", "featured": false, "store_id": "6738871467",
+    "description": "Find similar photos, compare quality, and clean up your library with on-device analysis."
+  },
+  {
+    "slug": "dedup", "name": "Dedup", "featured": false, "store_id": "6503489725",
+    "description": "Review groups of similar photos and remove unwanted copies in bulk."
+  }
+]

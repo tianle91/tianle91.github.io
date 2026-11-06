@@ -1,6 +1,7 @@
 """Embed shared components at build time, never as runtime repo dependencies."""
 from pathlib import Path
 import json
+from staticsites.theme import embed_site_theme
 
 ASSETS = Path(__file__).parent / "assets"
 SHARED = {"explorer.js": "maps/explorer.js", "explorer.css": "maps/explorer.css",
@@ -24,5 +25,5 @@ def read_template(path):
     for token, asset in {"__MAP_TABS__": "maps/tabs.html"}.items():
         if token in text:
             text = text.replace(token, (ASSETS / asset).read_text(encoding="utf-8"))
-    return text
+    return embed_site_theme(text)
 

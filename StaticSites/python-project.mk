@@ -10,6 +10,7 @@ FETCH_SCRIPT ?= src/fetch_data.py
 PYTEST_ARGS ?= -q
 SNAPSHOT_SCRIPT ?=
 SHARED_INPUTS := $(shell find $(REPO_ROOT)/src/staticsites -type f \( -name '*.py' -o -name '*.js' -o -name '*.css' -o -name '*.html' \))
+SHARED_INPUTS += $(wildcard $(REPO_ROOT)/../_includes/site-header.html $(REPO_ROOT)/../assets/css/site.css $(REPO_ROOT)/../assets/apps/tchdevs.svg)
 
 .PHONY: all test data open clean
 all: $(OUTPUTS) | deps
