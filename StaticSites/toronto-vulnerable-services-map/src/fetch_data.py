@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Network step: geocode curated addresses and pull every distinct shelter
+location from the Toronto Open Data API, then geocode those too.
+
+Outputs (both consumed by build_map.py, both safe to commit):
+  - geocode_cache.json : { "address": [lat, lon] | null }  (refines curated pins)
+  - shelters.json      : { "date": "...", "locations": [ ...marker dicts... ] }
+
+Requires internet. geopy's RateLimiter enforces the Nominatim usage policy
+(<=1 request/second, descriptive User-Agent); results are cached on disk so
+reruns are cheap. Re-run with `make data` whenever you want fresh shelter data.
+"""
+import datetime
+import json
+import pathlib
+import tempfile
+import sys
+
+import requests
+from geopy.extra.rate_limiter import RateLimiter
+from geopy.geocoders import Nominatim
+from staticsites.pipeline import write_if_changed
+from staticsites.sources import ckan_action
+from staticsites.geocoding import nominatim
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent  # project root (src/ is one level down)
+DATA_DIR = ROOT / "data"
+OUT_DIR = ROOT / "output"
+SERVICES = json.loads((DATA_DIR / "services.json").read_text(encoding="utf-8"))
+CACHE_PATH = DATA_DIR / "geocode_cache.json"
+SHELTERS_PATH = DATA_DIR / "shelters.json"
+
+CKAN = "https://ckan0.cf.opendata.inter.prod-toronto.ca"
+DATASET = "daily-shelter-overnight-service-occupancy-capacity"
+USER_AGENT = "toronto-vulnerable-services-map/1.0 (+https://github.com/tianle91/StaticSites)"
+
+# RateLimiter sleeps between calls for us, which is what keeps this inside
+# Nominatim's 1 request/second policy.
+_nominatim, _lookup = nominatim(USER_AGENT)
+
+cache = json.loads(CACHE_PATH.read_text(encoding="utf-8")) if CACHE_PATH.exists() else {}
+
+
+
+
+
+def save_cache() -> None:
+    write_if_changed(CACHE_PATH, json.dumps(cache, indent=2, ensure_ascii=False))
+
+
+def geocode(address):
+    """Return [lat, lon] for an address, using the on-disk cache. None if not found."""
+    if not address:
+        return None
+    if address in cache:
+        return cache[address]
+    loc = _lookup(address, country_codes="ca", exactly_one=True)
+    result = [loc.latitude, loc.longitude] if loc else None
+    cache[address] = result  # cache misses too, so we don't re-hammer for unknown addresses
+    save_cache()
+    if result:
+        print(f"  + {address} -> {result}")
+    else:
+        print(f"  ? no match for {address}")
+    return result
+
+
+def ckan(action, **params):
+    return ckan_action(CKAN, action, params, user_agent=USER_AGENT, get=requests.get, timeout=60)
+
+
+def refine_curated() -> None:
+    print("Geocoding curated addresses (refines approximate pins)...")
+    for loc in SERVICES["locations"]:
+        geocode(loc.get("address"))
+
+
+def fetch_shelters() -> None:
+    print("Fetching shelter locations from Toronto Open Data...")
+    pkg = ckan("package_show", id=DATASET)
+    active = [r for r in pkg["resources"] if r.get("datastore_active")]
+    if not active:
+        raise RuntimeError("No datastore-active resource on the dataset.")
+    # The SQL endpoint (datastore_search_sql) is disabled on Toronto's CKAN, so
+    # compare actual dates: annual archives sort after the unsuffixed live table
+    # by name and would otherwise hide the current records.
+    snapshots = []
+    for resource in active:
+        top = ckan("datastore_search", resource_id=resource["id"], limit=1,
+                   sort="OCCUPANCY_DATE desc")["records"]
+        if top:
+            day_raw = top[0]["OCCUPANCY_DATE"]
+            day = str(day_raw)[:10]
+            try:
+                day = datetime.date.fromisoformat(day).isoformat()
+            except ValueError:
+                # Some older annual exports use YY-MM-DD rather than ISO dates.
+                day = datetime.datetime.strptime(day, "%y-%m-%d").date().isoformat()
+            snapshots.append((day, resource["id"], day_raw))
+    if not snapshots:
+        raise RuntimeError("Resource has no records.")
+    day, rid, day_raw = max(snapshots)
+    rows = ckan("datastore_search", resource_id=rid, limit=10000,
+                filters=json.dumps({"OCCUPANCY_DATE": day_raw}))["records"]
+    print(f"  {len(rows)} program rows for {day}; aggregating by location...")
+
+    agg = {}
+    for r in rows:
+        if not r.get("LOCATION_ADDRESS"):
+            continue
+        a = agg.setdefault(r.get("LOCATION_ID"), {
+            "name": r.get("LOCATION_NAME") or "Shelter location",
+            "parts": [r.get("LOCATION_ADDRESS"), r.get("LOCATION_CITY") or "Toronto",
+                      r.get("LOCATION_PROVINCE") or "Ontario"],
+            "users": 0, "programs": 0,
+        })
+        a["users"] += int(float(r.get("SERVICE_USER_COUNT") or 0))
+        a["programs"] += 1
+    print(f"  {len(agg)} distinct shelter locations.")
+
+    locations = []
+    for a in agg.values():
+        address = ", ".join(p for p in a["parts"] if p)
+        coord = geocode(address)
+        if not coord:
+            continue
+        locations.append({
+            "name": a["name"],
+            "category": "shelter",
+            "address": address,
+            "lat": coord[0],
+            "lon": coord[1],
+            "notes": f"{a['users']} served in {a['programs']} program(s) on {day}.",
+            "url": f"https://open.toronto.ca/dataset/{DATASET}/",
+        })
+
+    if not locations:
+        raise RuntimeError("No usable shelters; refusing to replace shelters.json.")
+    locations.sort(key=lambda item: (item["name"], item["address"]))
+    substantive = {
+        "date": day,  # occupancy snapshot date
+        "source": DATASET,
+        "locations": locations,
+    }
+    if SHELTERS_PATH.exists():
+        existing = json.loads(SHELTERS_PATH.read_text(encoding="utf-8"))
+        existing.pop("generated_at", None)
+        if existing == substantive:
+            print(f"  {SHELTERS_PATH} is unchanged ({len(locations)} locations).")
+            return
+    write_if_changed(SHELTERS_PATH,
+        json.dumps(
+            {
+                "generated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                **substantive,
+            },
+            indent=2,
+            ensure_ascii=False,
+        ),
+    )
+    print(f"  Wrote {SHELTERS_PATH} with {len(locations)} geocoded locations (date {day}).")
+
+
+def main() -> None:
+    refine_curated()
+    fetch_shelters()
+    print("Data ready; make data rebuilds the map automatically.")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Toronto building permits</title>
+    <meta name="permits-build" content="__BUILD_ID__" />
+    <script>__STARTUP_JS__</script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      __CLUSTER_CSS__
+    </style>
+    <style>
+      __EXPLORER_CSS__
+    </style>
+    <style></style>
+  </head>
+  <body>
+    <header class="explorer-header">
+      <div>
+        <h1>Toronto building permits</h1>
+        <p>Complete active permit register</p>
+      </div>
+      <div id="snapshot-date"></div>
+    </header>
+    <main class="explorer-layout">
+      <aside
+        id="panel"
+        class="explorer-sidebar"
+        aria-label="Map exploration controls"
+      >
+        <button
+          type="button"
+          id="sheet-toggle"
+          class="sheet-toggle"
+          aria-label="Expand map controls"
+          aria-expanded="false"
+        >Show results &amp; filters</button>
+        <div class="search-area">
+          <label for="search">Search by address</label
+          ><input
+            id="search"
+            type="search"
+            placeholder="Street number or street name"
+            aria-label="Search by address"
+            autocomplete="off"
+            disabled
+          />
+        </div>
+        <p id="startup-status" role="status">Loading permits…</p>
+        <button id="startup-show-details" type="button" hidden>
+          Show diagnostic details
+        </button>
+        <button id="startup-retry" type="button" hidden>Retry loading permits</button>
+
+        <noscript>Enable JavaScript to search permits.</noscript>
+        <div id="stats" role="status" aria-live="polite"></div>
+        __MAP_TABS__
+        <section
+          id="layers-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="layers-tab"
+        >
+          <div id="layer-controls"></div>
+          <div class="layer-actions">
+            <button type="button" class="text-button" id="select-all">
+              Select all</button
+            ><button type="button" class="text-button" id="clear-all">
+              Clear all
+            </button>
+          </div>
+          <details>
+            <summary>More filters</summary>
+            <label class="field" for="status">Status</label
+            ><select id="status">
+              <option value="">All statuses</option></select
+            ><label class="field" for="type">Exact permit type</label
+            ><select id="type">
+              <option value="">All permit types</option></select
+            ><label class="field" for="year">Application year</label
+            ><select id="year">
+              <option value="">All years</option>
+            </select>
+          </details>
+          <p class="notice">
+            Permit records, not properties. An open permit does not imply work
+            is happening today.
+          </p>
+        </section>
+        <section
+          id="results-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="results-tab"
+          hidden
+        >
+          <p id="result-note" class="hint"></p>
+          <div id="results"></div>
+        </section>
+        <section
+          id="sources-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="sources-tab"
+          hidden
+        >
+          <p id="snapshot-provenance" class="muted"></p>
+          <details id="startup-diagnostics">
+            <summary>Diagnostic details</summary>
+            <p>For troubleshooting. These details stay on your device.
+              No search text or location is included.</p>
+            <pre id="diagnostic-output"></pre>
+          </details>
+          <h2>Data sources</h2>
+          <ul>
+            <li>
+              <a
+                href="https://open.toronto.ca/dataset/building-permits-active-permits/"
+                >City of Toronto — Building Permits: Active Permits</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://open.toronto.ca/dataset/address-points-municipal-toronto-one-address-repository/"
+                >City of Toronto — Address Points (Municipal)</a
+              >
+            </li>
+            <li>
+              Contains information licensed under the
+              <a href="https://open.toronto.ca/open-data-license/"
+                >Open Government Licence – Toronto</a
+              >.
+            </li>
+            <li>
+              Map: <a href="https://leafletjs.com/">Leaflet</a> / ©
+              <a href="https://www.openstreetmap.org/copyright"
+                >OpenStreetMap contributors</a
+              >
+            </li>
+          </ul>
+          <p>
+            Active register snapshot, not a history of all construction. An open
+            permit does not mean work is happening today. Address points
+            approximate the property location. Unmatched permits remain
+            searchable and are counted above. Check current status with the
+            <a
+              href="https://www.toronto.ca/services-payments/building-construction/building-permit/after-you-apply-for-a-building-permit/search-the-status-of-a-building-permit-application/"
+              >City</a
+            >.
+          </p>
+        </section>
+        <footer class="explorer-footer">
+          <span>City of Toronto</span
+          ><button type="button" id="provenance" class="text-button">
+            Provenance
+          </button>
+        </footer>
+      </aside>
+      <div class="map-canvas">
+        <div id="map" aria-label="Toronto building permits map"></div>
+        <div
+          id="location-status"
+          class="map-message"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </div>
+    </main>
+    <dialog
+      id="record-detail"
+      class="record-dialog"
+      aria-labelledby="record-title"
+    >
+      <button
+        type="button"
+        id="record-close"
+        class="close"
+        aria-label="Close details"
+      >
+        ×
+      </button>
+      <h2 id="record-title"></h2>
+      <div id="record-body"></div>
+    </dialog>
+    <script data-permit-required="Leaflet" crossorigin="anonymous" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      __CLUSTER_JS__;
+    </script>
+    <script type="application/json" id="permit-data">__PAYLOAD__</script>
+    <script>__QUERY_JS__
+__SEARCH_JS__</script>
+    <script>
+      __EXPLORER_JS__;
+    </script>
+    <script>
+      __APP_JS__;
+    </script>
+  </body>
+</html>

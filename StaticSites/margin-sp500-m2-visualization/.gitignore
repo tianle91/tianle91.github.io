@@ -1,0 +1,3 @@
+# Generic Python/venv rules live in the repo-root .gitignore.
+# data/series.csv is the committed input that makes `make` reproducible offline;
+# refresh it with `make data`.

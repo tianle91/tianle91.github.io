@@ -1,0 +1,2 @@
+# Generic Python/venv rules live in the repo-root .gitignore.
+fetch.log

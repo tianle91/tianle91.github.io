@@ -1,0 +1,31 @@
+* { box-sizing:border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+main { max-width:1200px; margin:auto; padding:35px 28px; }
+header { margin-bottom:23px; }
+h1 { font-size:clamp(27px,3.5vw,38px); font-weight:650; letter-spacing:-1px; line-height:1.25; margin:0 0 8px; }
+.subtitle { color:var(--muted); margin:0; font-size:14px; }
+.chart svg { display:block; width:100%; height:auto; touch-action:pan-y; }
+.gridline { stroke:var(--line); stroke-width:1; }
+.vertical-grid { stroke:var(--line); stroke-width:1; stroke-dasharray:2 4; }
+.axis { font-size:11px; fill:var(--muted); }
+.axis-title { font-size:11px; font-weight:600; fill:var(--muted); }
+.inspection-status { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.hint { color:var(--muted); font-size:10px; margin:7px 0 0; }
+footer { color:var(--muted); font-size:11px; margin:15px 2px 0; }
+.chart { position:relative; }
+.plot-hover { position:absolute; z-index:1; pointer-events:none; width:max-content; max-width:100%;
+  padding:8px 10px; background:var(--surface); border:1px solid var(--line);
+  border-radius:5px; box-shadow:0 3px 12px #182d3722; }
+.plot-hover-marker { pointer-events:none; stroke:var(--surface); stroke-width:2; }
+.plot-hover-closest { font-weight:700; }
+.plot-hover-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+.plot-hover-period { font-size:11px; font-weight:600; margin-bottom:4px; }
+.plot-hover > .readout-row, .plot-hover > .readout-row + .readout-row { padding:2px 0; border:0; }
+.plot-hover .readout-value strong { font-size:12px; }
+.plot-hover .readout-value:has(.readout-unit) { display:flex; align-items:baseline; gap:4px; }
+.plot-hover .readout-value:has(.readout-original) { display:block; }
+.plot-hover .readout-original { display:block; color:var(--muted); font-size:10px; }
+.plot-hover .readout-value:has(.readout-original) strong,
+.plot-hover .readout-value:has(.readout-original) .readout-unit { display:inline; }
+.plot-hover .readout-value:has(.readout-original) .readout-unit { margin-left:4px; }
