@@ -6,6 +6,7 @@ data/*
 !data/transit_model.json
 !data/station_itineraries.json
 !data/transit_lines.geojson
+!data/routing_grid.json
 *.osm.pbf
 *.mapdb
 *.mapdb.p

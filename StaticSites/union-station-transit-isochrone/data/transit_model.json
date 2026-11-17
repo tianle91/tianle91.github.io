@@ -14,9 +14,19 @@
   },
   "bands": [
     {
+      "minutes": 15,
+      "label": "≤ 15 min",
+      "color": "#006837"
+    },
+    {
       "minutes": 30,
       "label": "≤ 30 min",
       "color": "#1a9850"
+    },
+    {
+      "minutes": 45,
+      "label": "≤ 45 min",
+      "color": "#a6d96a"
     },
     {
       "minutes": 60,
@@ -24,9 +34,14 @@
       "color": "#fee08b"
     },
     {
+      "minutes": 75,
+      "label": "≤ 1 h 15 min",
+      "color": "#fdae61"
+    },
+    {
       "minutes": 90,
       "label": "≤ 1.5 hours",
-      "color": "#fc8d59"
+      "color": "#f46d43"
     },
     {
       "minutes": 120,

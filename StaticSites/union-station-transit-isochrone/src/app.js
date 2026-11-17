@@ -22,7 +22,7 @@ for (const f of feats) {
       weight: 1.5,
       opacity: 0.9,
       fillColor: color,
-      fillOpacity: 0.28,
+      fillOpacity: 0.18,
     },
   }).addTo(map);
   bandLayers[f.properties.minutes] = layer;
@@ -309,6 +309,9 @@ map.on("click", (e) => {
   showTrip(lat, lng);
 });
 document.getElementById("assume").textContent = DATA.service_assumption;
+document.getElementById("routing-grid").textContent = DATA.geo.properties.grid_spacing_m
+  ? "Routing grid: " + DATA.geo.properties.grid_spacing_m + " m."
+  : "";
 document.getElementById("generated").textContent = DATA.generated_at;
 document.getElementById("line-generated").textContent = DATA.lines?.generated_at
   ? "Route geometry snapshot: " + DATA.lines.generated_at + "."

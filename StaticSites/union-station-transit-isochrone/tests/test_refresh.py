@@ -196,9 +196,13 @@ def test_routing_cache_invalidation_and_failure_preserves_previous(local, monkey
     before = destination.stat().st_mtime_ns
     sidecar = local / "station_itineraries.json"
     assert sidecar.exists()
+    grid = local / "routing_grid.json"
+    assert json.loads(grid.read_text())["points"] == [[43.65, -79.38, 20]]
     sidecar.unlink()
+    grid.unlink()
     refresh.refresh_routing(state, osm, [gtfs], DATE)
     assert sidecar.exists()
+    assert grid.exists()
     assert len(runs) == 1
     assert destination.stat().st_mtime_ns == before
     monkeypatch.setattr(refresh.routing, "PERCENTILE", 50)
