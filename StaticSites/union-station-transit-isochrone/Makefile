@@ -18,7 +18,7 @@ BBOX := -80.6,43.05,-78.7,44.40
 SNAPSHOT_SCRIPT := src/snapshot_site.py
 BUILD_SCRIPT := src/build_map.py
 BUILD_OUTPUTS = $(OUT)
-DATA_INPUTS := $(GEOJSON) data/transit_model.json $(wildcard data/reachability.json data/station_itineraries.json)
+DATA_INPUTS := $(GEOJSON) data/transit_model.json data/transit_lines.geojson $(wildcard data/reachability.json data/station_itineraries.json)
 
 include ../artifact-project.mk
 
@@ -27,7 +27,11 @@ include ../artifact-project.mk
 $(GEOJSON): src/build_isochrones.py data/transit_model.json $(wildcard data/reachability.json)
 	$(PY) src/build_isochrones.py
 
-.PHONY: osm
+.PHONY: osm lines
+
+lines: deps
+	$(PY) src/fetch_data.py --lines-only
+	$(MAKE) all
 
 # Clip the raw OSM download to the GTHA bbox (needs osmium: `brew install
 # osmium-tool`). R5 rejects extents above ~975,000 km2, so this is required.

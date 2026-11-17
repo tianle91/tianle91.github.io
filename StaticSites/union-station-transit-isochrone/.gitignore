@@ -5,6 +5,7 @@ data/*
 !data/README.md
 !data/transit_model.json
 !data/station_itineraries.json
+!data/transit_lines.geojson
 *.osm.pbf
 *.mapdb
 *.mapdb.p

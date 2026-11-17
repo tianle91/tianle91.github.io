@@ -28,6 +28,34 @@ for (const f of feats) {
   bandLayers[f.properties.minutes] = layer;
 }
 
+// Draw published track shapes above the bands and below the station markers.
+map.createPane("transit-lines").style.zIndex = 450;
+const lineGroups = [
+  { id: "go-lines", mode: "go", label: "GO rail lines", color: DATA.mode_color.go },
+  { id: "subway-lines", mode: "subway", label: "Subway lines", color: DATA.mode_color.subway },
+].map((group) => {
+  const features = (DATA.lines?.features || []).filter(
+    (feature) => feature.properties.mode === group.mode,
+  );
+  const layer = L.geoJSON(features, {
+    pane: "transit-lines",
+    bubblingMouseEvents: false,
+    style: (feature) => ({
+      color: feature.properties.color,
+      weight: 4,
+      opacity: 1,
+      className: "transit-line",
+    }),
+    onEachFeature: (feature, route) => {
+      const name = esc(feature.properties.name);
+      route.bindTooltip(name, { sticky: true });
+      route.bindPopup("<b>" + name + "</b><br>" +
+        esc(DATA.mode_label[group.mode]) + " · published route geometry");
+    },
+  }).addTo(map);
+  return { ...group, layer, count: features.length };
+}).filter((group) => group.count > 0);
+
 // Origin marker.
 L.marker([DATA.origin.lat, DATA.origin.lon], {
   icon: L.divIcon({
@@ -208,12 +236,16 @@ function update() {
     if (Explorer.enabled("band-" + b.minutes)) layer.addTo(map);
     else map.removeLayer(layer);
   }
+  for (const group of lineGroups) {
+    if (Explorer.enabled(group.id)) group.layer.addTo(map);
+    else map.removeLayer(group.layer);
+  }
   Explorer.layerCounts(
     Object.fromEntries(
-      [...new Set(entries.map((e) => e.rec.mode))].map((id) => [
-        id,
-        counts[id] || 0,
-      ]),
+      [
+        ...[...new Set(entries.map((e) => e.rec.mode))].map((id) => [id, counts[id] || 0]),
+        ...lineGroups.map((group) => [group.id, group.count]),
+      ],
     ),
   );
   Explorer.count(
@@ -239,6 +271,9 @@ Explorer.layers(
       id: "band-" + b.minutes,
       label: b.label,
       color: b.color,
+    })),
+    ...lineGroups.map((group) => ({
+      id: group.id, label: group.label, color: group.color,
     })),
     ...[...new Set(entries.map((e) => e.rec.mode))].map((id) => ({
       id,
@@ -274,6 +309,9 @@ map.on("click", (e) => {
 });
 document.getElementById("assume").textContent = DATA.service_assumption;
 document.getElementById("generated").textContent = DATA.generated_at;
+document.getElementById("line-generated").textContent = DATA.lines?.generated_at
+  ? "Route geometry snapshot: " + DATA.lines.generated_at + "."
+  : "";
 document.getElementById("search").addEventListener("input", update);
 Explorer.stamp(DATA.generated_at);
 Explorer.connect(map, {
@@ -282,6 +320,8 @@ Explorer.connect(map, {
     for (const band of DATA.bands)
       if (Explorer.enabled("band-" + band.minutes))
         b.extend(bandLayers[band.minutes].getBounds());
+    for (const group of lineGroups)
+      if (Explorer.enabled(group.id)) b.extend(group.layer.getBounds());
     return b;
   },
   located: (pos) => showTrip(pos.coords.latitude, pos.coords.longitude),
