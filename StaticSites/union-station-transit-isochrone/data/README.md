@@ -24,7 +24,10 @@ Routing reruns when content, service date, configuration, model, code, or the
 project lock changes, or when reachability results are missing/invalid.
 
 All binary inputs, cache metadata, and `reachability.json` are gitignored.
-`transit_model.json` remains the committed offline fallback.
+`routing_grid.json` retains the routed points and model provenance for offline
+contouring. It is restored along with station itineraries on routing-cache reuse.
+`transit_model.json` supplies the seven thresholds and the curated fallback used
+when neither routing grid is available.
 
 `transit_lines.geojson` is a committed, derived snapshot of GO rail and TTC
 subway/streetcar GTFS shapes. Both the ordinary offline build and browser use this snapshot.

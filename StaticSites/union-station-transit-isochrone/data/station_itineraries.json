@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25",
+  "generated_at": "2026-11-17",
   "stations": [
     {
       "name": "Agincourt GO",
@@ -168,20 +168,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Bathurst Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:06",
+          "dep": "07:10",
           "min": 3
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:15",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -190,14 +190,14 @@
       "mode": "subway",
       "lat": 43.76695,
       "lon": -79.38673,
-      "minutes": 39,
+      "minutes": 40,
       "legs": [
         {
           "mode": "Subway",
           "route": "Line 4 (Sheppard)",
           "from": "Bayview Station - Westbound Platform",
           "to": "Sheppard-Yonge Station - Subway Platform",
-          "dep": "07:15",
+          "dep": "07:04",
           "min": 3
         },
         {
@@ -209,8 +209,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard-Yonge Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:23",
-          "min": 25
+          "dep": "07:11",
+          "min": 26
         },
         {
           "mode": "Walk",
@@ -223,14 +223,14 @@
       "mode": "subway",
       "lat": 43.7693,
       "lon": -79.37635,
-      "minutes": 41,
+      "minutes": 42,
       "legs": [
         {
           "mode": "Subway",
           "route": "Line 4 (Sheppard)",
           "from": "Bessarion Station - Westbound Platform",
           "to": "Sheppard-Yonge Station - Subway Platform",
-          "dep": "07:13",
+          "dep": "07:02",
           "min": 5
         },
         {
@@ -242,8 +242,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard-Yonge Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:23",
-          "min": 25
+          "dep": "07:11",
+          "min": 26
         },
         {
           "mode": "Walk",
@@ -302,7 +302,7 @@
       "mode": "subway",
       "lat": 43.671,
       "lon": -79.38596,
-      "minutes": 19,
+      "minutes": 18,
       "legs": [
         {
           "mode": "Walk",
@@ -313,8 +313,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 6
+          "dep": "07:18",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -398,7 +398,7 @@
       "mode": "subway",
       "lat": 43.67669,
       "lon": -79.35861,
-      "minutes": 30,
+      "minutes": 28,
       "legs": [
         {
           "mode": "Walk",
@@ -409,8 +409,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Broadview Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:15",
-          "min": 6
+          "dep": "07:12",
+          "min": 4
         },
         {
           "mode": "Walk",
@@ -421,8 +421,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:26",
-          "min": 6
+          "dep": "07:23",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -477,7 +477,7 @@
       "mode": "subway",
       "lat": 43.67363,
       "lon": -79.36885,
-      "minutes": 27,
+      "minutes": 26,
       "legs": [
         {
           "mode": "Walk",
@@ -488,8 +488,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Castle Frank Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:16",
-          "min": 5
+          "dep": "07:11",
+          "min": 3
         },
         {
           "mode": "Walk",
@@ -500,8 +500,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:26",
-          "min": 6
+          "dep": "07:20",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -521,8 +521,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Chester Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:14",
-          "min": 7
+          "dep": "07:08",
+          "min": 6
         },
         {
           "mode": "Walk",
@@ -533,8 +533,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:26",
-          "min": 6
+          "dep": "07:20",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -558,20 +558,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Christie Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:09",
+          "dep": "07:04",
           "min": 4
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:16",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:10",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -612,7 +612,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "College Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:07",
+          "dep": "07:11",
           "min": 4
         },
         {
@@ -647,7 +647,7 @@
       "mode": "subway",
       "lat": 43.68408,
       "lon": -79.32292,
-      "minutes": 30,
+      "minutes": 31,
       "legs": [
         {
           "mode": "Walk",
@@ -658,8 +658,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Coxwell Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:08",
-          "min": 13
+          "dep": "07:10",
+          "min": 12
         },
         {
           "mode": "Walk",
@@ -670,7 +670,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "Union Station - Northbound Platform Towards Vaughan Metropolitan Centre",
-          "dep": "07:26",
+          "dep": "07:28",
           "min": 8
         },
         {
@@ -705,7 +705,7 @@
       "mode": "subway",
       "lat": 43.6978,
       "lon": -79.39701,
-      "minutes": 22,
+      "minutes": 23,
       "legs": [
         {
           "mode": "Walk",
@@ -716,8 +716,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Davisville Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:09",
-          "min": 13
+          "dep": "07:05",
+          "min": 14
         },
         {
           "mode": "Walk",
@@ -751,7 +751,7 @@
       "mode": "subway",
       "lat": 43.77564,
       "lon": -79.34634,
-      "minutes": 46,
+      "minutes": 47,
       "legs": [
         {
           "mode": "Walk",
@@ -774,8 +774,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard-Yonge Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:28",
-          "min": 25
+          "dep": "07:29",
+          "min": 26
         },
         {
           "mode": "Walk",
@@ -788,7 +788,7 @@
       "mode": "subway",
       "lat": 43.68105,
       "lon": -79.33792,
-      "minutes": 31,
+      "minutes": 30,
       "legs": [
         {
           "mode": "Walk",
@@ -799,8 +799,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Donlands Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:13",
-          "min": 10
+          "dep": "07:10",
+          "min": 9
         },
         {
           "mode": "Walk",
@@ -811,8 +811,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:29",
-          "min": 6
+          "dep": "07:25",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -825,19 +825,23 @@
       "mode": "subway",
       "lat": 43.75331,
       "lon": -79.47869,
-      "minutes": 36,
+      "minutes": 28,
       "legs": [
         {
-          "mode": "Subway",
-          "route": "Line 1 (Yonge-University)",
-          "from": "Downsview Park Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:07",
-          "min": 31
+          "mode": "Walk",
+          "min": 6
+        },
+        {
+          "mode": "Rail",
+          "route": "Barrie",
+          "from": "Downsview Park GO",
+          "to": "UP Express Union Station",
+          "dep": "07:09",
+          "min": 20
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 1
         }
       ]
     },
@@ -878,20 +882,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Dufferin Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:11",
-          "min": 8
+          "dep": "07:13",
+          "min": 7
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:21",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:23",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -911,8 +915,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "TMU Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:10",
-          "min": 2
+          "dep": "07:09",
+          "min": 3
         },
         {
           "mode": "Walk",
@@ -960,13 +964,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Dupont Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:08",
-          "min": 10
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:13",
+          "min": 12
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -996,7 +1000,7 @@
       "mode": "subway",
       "lat": 43.70526,
       "lon": -79.39861,
-      "minutes": 24,
+      "minutes": 25,
       "legs": [
         {
           "mode": "Walk",
@@ -1007,8 +1011,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Eglinton Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:13",
-          "min": 15
+          "dep": "07:06",
+          "min": 16
         },
         {
           "mode": "Walk",
@@ -1042,7 +1046,7 @@
       "mode": "subway",
       "lat": 43.69885,
       "lon": -79.43596,
-      "minutes": 25,
+      "minutes": 26,
       "legs": [
         {
           "mode": "Walk",
@@ -1052,13 +1056,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Cedarvale Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:10",
-          "min": 18
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:11",
+          "min": 21
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1134,7 +1138,7 @@
       "mode": "subway",
       "lat": 43.78049,
       "lon": -79.41481,
-      "minutes": 39,
+      "minutes": 40,
       "legs": [
         {
           "mode": "Walk",
@@ -1145,7 +1149,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Finch Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:17",
+          "dep": "07:10",
           "min": 29
         },
         {
@@ -1159,7 +1163,7 @@
       "mode": "subway",
       "lat": 43.76513,
       "lon": -79.4909,
-      "minutes": 42,
+      "minutes": 35,
       "legs": [
         {
           "mode": "Walk",
@@ -1169,13 +1173,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Finch West Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:09",
-          "min": 34
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:10",
+          "min": 38
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1205,7 +1209,7 @@
       "mode": "subway",
       "lat": 43.70915,
       "lon": -79.44089,
-      "minutes": 28,
+      "minutes": 29,
       "legs": [
         {
           "mode": "Walk",
@@ -1215,13 +1219,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Glencairn Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:09",
-          "min": 20
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:12",
+          "min": 23
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1230,7 +1234,7 @@
       "mode": "subway",
       "lat": 43.68255,
       "lon": -79.33035,
-      "minutes": 31,
+      "minutes": 30,
       "legs": [
         {
           "mode": "Walk",
@@ -1241,8 +1245,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Greenwood Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:12",
-          "min": 11
+          "dep": "07:09",
+          "min": 10
         },
         {
           "mode": "Walk",
@@ -1253,8 +1257,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:29",
-          "min": 6
+          "dep": "07:25",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -1330,7 +1334,7 @@
       "mode": "subway",
       "lat": 43.65397,
       "lon": -79.46635,
-      "minutes": 27,
+      "minutes": 26,
       "legs": [
         {
           "mode": "Walk",
@@ -1340,25 +1344,21 @@
           "mode": "Subway",
           "route": "Line 2 (Bloor - Danforth)",
           "from": "High Park Station - Eastbound Platform",
-          "to": "Dundas West Station - Eastbound Platform",
+          "to": "St George Station - Eastbound Platform",
           "dep": "07:14",
-          "min": 3
+          "min": 12
         },
         {
-          "mode": "Walk",
-          "min": 8
-        },
-        {
-          "mode": "Rail",
-          "route": "Union Pearson Express",
-          "from": "Bloor GO/UP",
-          "to": "UP Express Union Station",
+          "mode": "Subway",
+          "route": "Line 1 (Yonge-University)",
+          "from": "St George Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:28",
           "min": 9
         },
         {
           "mode": "Walk",
-          "min": 6
+          "min": 3
         }
       ]
     },
@@ -1367,7 +1367,7 @@
       "mode": "subway",
       "lat": 43.64541,
       "lon": -79.52359,
-      "minutes": 31,
+      "minutes": 30,
       "legs": [
         {
           "mode": "Walk",
@@ -1404,7 +1404,7 @@
       "mode": "subway",
       "lat": 43.64991,
       "lon": -79.48407,
-      "minutes": 34,
+      "minutes": 33,
       "legs": [
         {
           "mode": "Walk",
@@ -1415,20 +1415,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Jane Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:11",
-          "min": 17
+          "dep": "07:12",
+          "min": 15
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:31",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:28",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1441,19 +1441,27 @@
       "legs": [
         {
           "mode": "Walk",
-          "min": 16
+          "min": 5
         },
         {
-          "mode": "Rail",
-          "route": "Kitchener",
-          "from": "Bloor GO/UP",
-          "to": "UP Express Union Station",
-          "dep": "07:24",
+          "mode": "Subway",
+          "route": "Line 2 (Bloor - Danforth)",
+          "from": "Keele Station - Eastbound Platform",
+          "to": "St George Station - Eastbound Platform",
+          "dep": "07:16",
           "min": 11
         },
         {
+          "mode": "Subway",
+          "route": "Line 1 (Yonge-University)",
+          "from": "St George Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:28",
+          "min": 9
+        },
+        {
           "mode": "Walk",
-          "min": 1
+          "min": 3
         }
       ]
     },
@@ -1638,7 +1646,7 @@
       "mode": "subway",
       "lat": 43.65925,
       "lon": -79.44246,
-      "minutes": 24,
+      "minutes": 23,
       "legs": [
         {
           "mode": "Subway",
@@ -1646,19 +1654,19 @@
           "from": "Lansdowne Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
           "dep": "07:04",
-          "min": 9
+          "min": 8
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:16",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:15",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1667,7 +1675,7 @@
       "mode": "subway",
       "lat": 43.72529,
       "lon": -79.40238,
-      "minutes": 26,
+      "minutes": 27,
       "legs": [
         {
           "mode": "Walk",
@@ -1678,8 +1686,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Lawrence Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:04",
-          "min": 19
+          "dep": "07:07",
+          "min": 20
         },
         {
           "mode": "Walk",
@@ -1692,7 +1700,7 @@
       "mode": "subway",
       "lat": 43.71596,
       "lon": -79.4441,
-      "minutes": 30,
+      "minutes": 31,
       "legs": [
         {
           "mode": "Walk",
@@ -1702,13 +1710,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Lawrence West Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:12",
-          "min": 21
+          "min": 25
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -1717,7 +1725,7 @@
       "mode": "subway",
       "lat": 43.77135,
       "lon": -79.36499,
-      "minutes": 45,
+      "minutes": 46,
       "legs": [
         {
           "mode": "Walk",
@@ -1740,8 +1748,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard-Yonge Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:28",
-          "min": 25
+          "dep": "07:29",
+          "min": 26
         },
         {
           "mode": "Walk",
@@ -2028,13 +2036,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Museum Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:10",
-          "min": 6
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:14",
+          "min": 8
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2064,7 +2072,7 @@
       "mode": "subway",
       "lat": 43.76915,
       "lon": -79.4127,
-      "minutes": 40,
+      "minutes": 41,
       "legs": [
         {
           "mode": "Walk",
@@ -2075,8 +2083,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "North York Centre Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:14",
-          "min": 26
+          "dep": "07:17",
+          "min": 27
         },
         {
           "mode": "Walk",
@@ -2143,19 +2151,19 @@
           "from": "Old Mill Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
           "dep": "07:10",
-          "min": 18
+          "min": 17
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:31",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:28",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2195,13 +2203,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Osgoode Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:12",
-          "min": 1
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:09",
+          "min": 3
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2210,7 +2218,7 @@
       "mode": "subway",
       "lat": 43.66227,
       "lon": -79.42655,
-      "minutes": 22,
+      "minutes": 21,
       "legs": [
         {
           "mode": "Walk",
@@ -2221,20 +2229,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Ossington Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:03",
+          "dep": "07:07",
           "min": 6
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:15",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2243,7 +2251,7 @@
       "mode": "subway",
       "lat": 43.67981,
       "lon": -79.34488,
-      "minutes": 29,
+      "minutes": 28,
       "legs": [
         {
           "mode": "Walk",
@@ -2254,8 +2262,8 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Pape Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
-          "dep": "07:12",
-          "min": 9
+          "dep": "07:11",
+          "min": 8
         },
         {
           "mode": "Walk",
@@ -2266,8 +2274,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Bloor Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:26",
-          "min": 6
+          "dep": "07:25",
+          "min": 7
         },
         {
           "mode": "Walk",
@@ -2301,7 +2309,7 @@
       "mode": "subway",
       "lat": 43.77642,
       "lon": -79.50078,
-      "minutes": 47,
+      "minutes": 40,
       "legs": [
         {
           "mode": "Walk",
@@ -2311,13 +2319,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "York University - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:12",
-          "min": 36
+          "min": 40
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2358,7 +2366,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Queen Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:04",
+          "dep": "07:08",
           "min": 1
         },
         {
@@ -2382,13 +2390,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Queen's Park Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:12",
-          "min": 4
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:11",
+          "min": 6
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2433,7 +2441,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Rosedale Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:15",
+          "dep": "07:09",
           "min": 8
         },
         {
@@ -2479,20 +2487,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Royal York Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:07",
-          "min": 20
+          "dep": "07:15",
+          "min": 19
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:31",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:35",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2501,7 +2509,7 @@
       "mode": "subway",
       "lat": 43.65173,
       "lon": -79.47595,
-      "minutes": 30,
+      "minutes": 29,
       "legs": [
         {
           "mode": "Walk",
@@ -2512,15 +2520,15 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Runnymede Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:07",
-          "min": 16
+          "dep": "07:13",
+          "min": 14
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
           "to": "Union Station - Northbound Platform Towards Finch",
-          "dep": "07:26",
+          "dep": "07:28",
           "min": 9
         },
         {
@@ -2576,7 +2584,7 @@
       "mode": "subway",
       "lat": 43.74957,
       "lon": -79.46219,
-      "minutes": 35,
+      "minutes": 37,
       "legs": [
         {
           "mode": "Walk",
@@ -2586,13 +2594,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard West Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:05",
-          "min": 28
+          "min": 32
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2601,7 +2609,7 @@
       "mode": "subway",
       "lat": 43.7616,
       "lon": -79.41119,
-      "minutes": 34,
+      "minutes": 35,
       "legs": [
         {
           "mode": "Walk",
@@ -2612,8 +2620,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Sheppard-Yonge Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:15",
-          "min": 25
+          "dep": "07:09",
+          "min": 26
         },
         {
           "mode": "Walk",
@@ -2626,7 +2634,7 @@
       "mode": "subway",
       "lat": 43.67215,
       "lon": -79.37665,
-      "minutes": 23,
+      "minutes": 21,
       "legs": [
         {
           "mode": "Walk",
@@ -2638,23 +2646,23 @@
           "from": "Sherbourne Station - Westbound Platform",
           "to": "Yonge Station - Westbound Platform",
           "dep": "07:08",
-          "min": 4
-        },
-        {
-          "mode": "Walk",
           "min": 2
         },
         {
-          "mode": "Bus",
-          "route": "Yonge",
-          "from": "Yonge St at Bloor St West - Bloor Station",
-          "to": "Yonge St at Front St West",
+          "mode": "Walk",
+          "min": 4
+        },
+        {
+          "mode": "Subway",
+          "route": "Line 1 (Yonge-University)",
+          "from": "Bloor Station - Southbound Platform",
+          "to": "King Station - Southbound Platform",
           "dep": "07:15",
-          "min": 13
+          "min": 7
         },
         {
           "mode": "Walk",
-          "min": 6
+          "min": 10
         }
       ]
     },
@@ -2670,20 +2678,20 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Spadina Station - Eastbound Platform",
           "to": "St George Station - Eastbound Platform",
-          "dep": "07:08",
+          "dep": "07:02",
           "min": 1
         },
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:05",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2703,7 +2711,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "St Andrew Station - Southbound Platform",
           "to": "Union Station - Northbound Platform Towards Finch",
-          "dep": "07:06",
+          "dep": "07:10",
           "min": 2
         },
         {
@@ -2728,8 +2736,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "St Clair Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:14",
-          "min": 11
+          "dep": "07:08",
+          "min": 12
         },
         {
           "mode": "Walk",
@@ -2748,13 +2756,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St Clair West Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:07",
-          "min": 14
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:09",
+          "min": 15
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2773,13 +2781,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St George Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:13",
-          "min": 7
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:15",
+          "min": 9
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2798,13 +2806,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "St Patrick Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:08",
-          "min": 3
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:13",
+          "min": 4
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -2862,7 +2870,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Summerhill Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:11",
+          "dep": "07:09",
           "min": 10
         },
         {
@@ -2922,7 +2930,7 @@
       "mode": "subway",
       "lat": 43.79402,
       "lon": -79.52791,
-      "minutes": 49,
+      "minutes": 41,
       "legs": [
         {
           "mode": "Walk",
@@ -2932,13 +2940,25 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Vaughan Metropolitan Centre Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 42
+          "to": "Downsview Park Station - Southbound Platform",
+          "dep": "07:16",
+          "min": 11
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 6
+        },
+        {
+          "mode": "Rail",
+          "route": "Barrie",
+          "from": "Downsview Park GO",
+          "to": "UP Express Union Station",
+          "dep": "07:39",
+          "min": 20
+        },
+        {
+          "mode": "Walk",
+          "min": 1
         }
       ]
     },
@@ -2958,7 +2978,7 @@
           "route": "Line 2 (Bloor - Danforth)",
           "from": "Victoria Park Station - Westbound Platform",
           "to": "Main Street Station - Westbound Platform",
-          "dep": "07:11",
+          "dep": "07:12",
           "min": 2
         },
         {
@@ -3028,7 +3048,7 @@
           "route": "Line 1 (Yonge-University)",
           "from": "Wellesley Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:08",
+          "dep": "07:14",
           "min": 5
         },
         {
@@ -3109,7 +3129,7 @@
       "mode": "subway",
       "lat": 43.73427,
       "lon": -79.45068,
-      "minutes": 35,
+      "minutes": 37,
       "legs": [
         {
           "mode": "Walk",
@@ -3119,13 +3139,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Wilson Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
-          "dep": "07:13",
-          "min": 25
+          "to": "Union Station - Northbound Platform Towards Finch",
+          "dep": "07:08",
+          "min": 29
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -3134,7 +3154,7 @@
       "mode": "subway",
       "lat": 43.68665,
       "lon": -79.31229,
-      "minutes": 26,
+      "minutes": 27,
       "legs": [
         {
           "mode": "Subway",
@@ -3167,7 +3187,7 @@
       "mode": "subway",
       "lat": 43.74378,
       "lon": -79.40644,
-      "minutes": 30,
+      "minutes": 31,
       "legs": [
         {
           "mode": "Walk",
@@ -3178,8 +3198,8 @@
           "route": "Line 1 (Yonge-University)",
           "from": "York Mills Station - Southbound Platform",
           "to": "King Station - Southbound Platform",
-          "dep": "07:11",
-          "min": 22
+          "dep": "07:14",
+          "min": 23
         },
         {
           "mode": "Walk",
@@ -3192,19 +3212,19 @@
       "mode": "subway",
       "lat": 43.7741,
       "lon": -79.49989,
-      "minutes": 42,
+      "minutes": 35,
       "legs": [
         {
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "York University - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:07",
-          "min": 36
+          "min": 40
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     },
@@ -3213,7 +3233,7 @@
       "mode": "subway",
       "lat": 43.72525,
       "lon": -79.44769,
-      "minutes": 31,
+      "minutes": 33,
       "legs": [
         {
           "mode": "Walk",
@@ -3223,13 +3243,13 @@
           "mode": "Subway",
           "route": "Line 1 (Yonge-University)",
           "from": "Yorkdale Station - Southbound Platform",
-          "to": "St Andrew Station - Southbound Platform",
+          "to": "Union Station - Northbound Platform Towards Finch",
           "dep": "07:10",
-          "min": 23
+          "min": 27
         },
         {
           "mode": "Walk",
-          "min": 8
+          "min": 3
         }
       ]
     }

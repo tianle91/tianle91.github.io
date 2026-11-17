@@ -1,11 +1,11 @@
-# Interactive transit isochrone map around Union Station (30 / 60 / 90 / 120 min).
+# Interactive transit commute shed with seven travel-time bands from 15 to 120 min.
 # Run from this directory: cd union-station-transit-isochrone && make
 # Layout and target contract are the repo standard - see ../AGENTS.md.
 
 PROJECT := union-station-transit-isochrone
 GEOJSON := output/isochrones.geojson
 OUTPUTS := output/$(PROJECT).html $(GEOJSON)
-# Keep the routed grid cleanup: plain make then uses the curated fallback.
+# Keep the large routing cache local; offline rebuilds use the committed grid.
 CLEAN_FILES := $(OUTPUTS) data/reachability.json
 BREW_FORMULAE := uv osmium-tool
 BREW_CASKS := temurin@21
@@ -22,9 +22,8 @@ DATA_INPUTS := $(GEOJSON) data/transit_model.json data/transit_lines.geojson $(w
 
 include ../artifact-project.mk
 
-# Depends on data/reachability.json when present so a fresh `make data`
-# re-contours; `make clean` removes it to fall back to data/transit_model.json.
-$(GEOJSON): src/build_isochrones.py data/transit_model.json $(wildcard data/reachability.json)
+# Fresh routing takes precedence; the committed grid reproduces contours offline.
+$(GEOJSON): src/build_isochrones.py data/transit_model.json $(wildcard data/reachability.json data/routing_grid.json)
 	$(PY) src/build_isochrones.py
 
 .PHONY: osm lines

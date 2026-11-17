@@ -1,23 +1,16 @@
 #!/usr/bin/env python3
-"""Turn the curated transit reachability graph (data/transit_model.json) into
-nested transit-isochrone polygons around Union Station and write them to
-output/isochrones.geojson.
+"""Build nested commute-shed polygons for the configured travel-time thresholds.
 
-Method (the standard "buffer reachable stops" isochrone approximation):
-  For a band of T minutes, every transit station reachable from Union in
-  t <= T minutes contributes a walking circle of radius
-      r = min(T - t, egress_cap) * walk_speed
-  i.e. the area you can still walk to after getting off transit. The isochrone
-  for T is the union of all those circles (plus Union's own walk circle). Bands
-  are naturally nested (30 subset of 60 subset of 90 subset of 120).
-
-The union and smoothing are done with shapely; no network access is needed.
+Use routed points from the local reachability cache or the committed contour
+snapshot. Each reachable point contributes a circle with radius 0.75 times the
+grid spacing. Without either grid, use the curated station-and-walk approximation.
+All contouring is offline and uses Shapely.
 """
 import json
 import math
 import pathlib
 
-from shapely.geometry import Point, mapping
+from shapely.geometry import Point, mapping, shape
 from shapely.ops import unary_union
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent  # project root (src/ is one level down)
@@ -27,6 +20,7 @@ OUT_DIR = ROOT / "output"
 MODEL = json.loads((DATA_DIR / "transit_model.json").read_text(encoding="utf-8"))
 OUT = OUT_DIR / "isochrones.geojson"
 REACH_PATH = DATA_DIR / "reachability.json"   # produced by `make data` (r5py); optional
+GRID_PATH = DATA_DIR / "routing_grid.json"  # committed contour input for offline builds
 
 PARAMS = MODEL["params"]
 WALK = PARAMS["walk_speed_m_per_min"]       # metres per minute on foot
@@ -38,7 +32,8 @@ NODES = MODEL["nodes"]
 # of the curated rapid-transit model: each reached grid point already includes
 # the door-to-door walk, so it just needs a fixed radius (~grid cell) to merge
 # neighbouring cells into a solid blob.
-REACH = json.loads(REACH_PATH.read_text(encoding="utf-8")) if REACH_PATH.exists() else None
+GRID_SOURCE = REACH_PATH if REACH_PATH.exists() else GRID_PATH
+REACH = json.loads(GRID_SOURCE.read_text(encoding="utf-8")) if GRID_SOURCE.exists() else None
 SOURCE = "r5py travel-time grid" if REACH else "curated rapid-transit model"
 
 # Circles are built in degrees, where a metric radius is an ellipse: one degree
@@ -97,8 +92,17 @@ def build_band(minutes):
 
 def main():
     features = []
-    # Largest band first so smaller (shorter-time) bands draw on top.
-    for band in sorted(BANDS, key=lambda b: -b["minutes"]):
+    previous = None
+    for band in sorted(BANDS, key=lambda b: b["minutes"]):
+        geometry = shape({"type": "MultiPolygon", "coordinates": build_band(band["minutes"])})
+        # Independent simplification can cut small slivers out of shared edges.
+        # Include the shorter contour after simplification to enforce nesting.
+        if previous is not None:
+            geometry = geometry.union(previous)
+        previous = geometry
+        encoded = mapping(geometry)
+        if geometry.geom_type == "Polygon":
+            encoded = {"type": "MultiPolygon", "coordinates": [encoded["coordinates"]]}
         features.append({
             "type": "Feature",
             "properties": {
@@ -106,8 +110,10 @@ def main():
                 "label": band["label"],
                 "color": band["color"],
             },
-            "geometry": {"type": "MultiPolygon", "coordinates": build_band(band["minutes"])},
+            "geometry": encoded,
         })
+    # Largest band first so shorter-time bands draw on top.
+    features.reverse()
     fc = {
         "type": "FeatureCollection",
         "properties": {
@@ -117,6 +123,9 @@ def main():
         },
         "features": features,
     }
+    if REACH:
+        fc["properties"].update({key: REACH[key] for key in
+                                 ("grid_spacing_m", "arrival", "percentile") if key in REACH})
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(fc, indent=2) + "\n", encoding="utf-8")
     counts = ", ".join(f'{f["properties"]["minutes"]}min:{len(f["geometry"]["coordinates"])} polygons'

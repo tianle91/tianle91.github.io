@@ -253,13 +253,18 @@ def validate_reachability(path):
             raise ValueError("Invalid reachability point")
 
 
-def save_station_itineraries(value):
+def save_routing_snapshots(value):
     # Small enough to commit independently of the ignored routing grid. It is
     # derived only from validated routing results, including on cache reuse.
     snapshot = {key: value.get(key, [] if key == "stations" else "")
                 for key in ("generated_at", "stations")}
     write_if_changed(DATA_DIR / "station_itineraries.json",
                      json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n")
+    grid = {key: value[key] for key in ("generated_at", "origin", "direction", "arrival",
+                                      "departure_window_min", "percentile", "grid_spacing_m", "engine", "points")
+            if key in value}
+    write_if_changed(DATA_DIR / "routing_grid.json",
+                     json.dumps(grid, indent=2, ensure_ascii=False) + "\n")
 
 
 def refresh_routing(state, osm, feeds, date):
@@ -278,7 +283,7 @@ def refresh_routing(state, osm, feeds, date):
             and previous.get("sha256") == digest(destination)):
         try:
             validate_reachability(destination)
-            save_station_itineraries(json.loads(destination.read_text(encoding="utf-8")))
+            save_routing_snapshots(json.loads(destination.read_text(encoding="utf-8")))
             print("Routing inputs unchanged; reusing reachability.json.")
             return
         except (ValueError, KeyError, TypeError):
@@ -301,7 +306,7 @@ def refresh_routing(state, osm, feeds, date):
         value["generated_at"] = stamp if existing == value and stamp else datetime.date.today().isoformat()
         temporary.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
         publish(temporary, destination)
-        save_station_itineraries(value)
+        save_routing_snapshots(value)
         state["routing"] = {"signature": key, "sha256": digest(destination)}
         save_state(state)
     finally:

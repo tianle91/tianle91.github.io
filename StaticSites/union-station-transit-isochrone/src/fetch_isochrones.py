@@ -45,9 +45,9 @@ OUT = pathlib.Path(os.environ.get("REACHABILITY_OUT", str(DATA_DIR / "reachabili
 # Tunables (env-overridable).
 # This computes a *reverse* isochrone: travel time TO Union, arriving by ARRIVE_HHMM
 # during the weekday morning peak. Every grid point is a routing origin (one r5py
-# search each), so coarse spacing keeps the build to minutes, not hours.
+# search each), so spacing determines the number of independent routing searches.
 MAX_MINUTES = int(os.environ.get("MAX_MINUTES", "120"))
-GRID_SPACING_M = int(os.environ.get("GRID_SPACING_M", "1000"))  # finer = sharper, MUCH slower (reverse routes per point)
+GRID_SPACING_M = int(os.environ.get("GRID_SPACING_M", "500"))  # finer = sharper, MUCH slower (reverse routes per point)
 ARRIVE_HHMM = os.environ.get("ARRIVE_HHMM", "09:00")    # weekday morning-peak arrival at Union
 # Departure window spans the MAX_MINUTES before arrival ([ARRIVE - MAX, ARRIVE]),
 # so even a MAX_MINUTES-long trip can depart early enough to arrive by ARRIVE_HHMM

@@ -27,7 +27,7 @@ permalink: /interactive/
 - [TRCA flood plain map](/StaticSites/trca-flood-plain-map/output/trca-flood-plain-map.html)
   — TRCA riverine flood plains and attributed floodline boundaries, filterable by watershed and mapped source.
 - [Union Station commute-shed](/StaticSites/union-station-transit-isochrone/output/union-station-transit-isochrone.html)
-  — where you can reach Toronto's Union Station by transit in 30 / 60 / 90 / 120 minutes.
+  — where you can reach Toronto's Union Station by transit in 15 / 30 / 45 / 60 / 75 / 90 / 120 minutes.
 
 ## Economics & Finance
 

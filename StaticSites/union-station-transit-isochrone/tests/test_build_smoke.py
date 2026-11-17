@@ -12,6 +12,7 @@ import subprocess
 import sys
 
 import pytest
+from shapely.geometry import shape
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -33,7 +34,7 @@ def test_isochrones_geojson_is_valid(built):
     assert geo["type"] == "FeatureCollection"
     assert geo["features"], "no band polygons produced"
     minutes = {f["properties"]["minutes"] for f in geo["features"]}
-    assert minutes <= {30, 60, 90, 120}
+    assert minutes == {15, 30, 45, 60, 75, 90, 120}
     for f in geo["features"]:
         assert f["geometry"]["type"] == "MultiPolygon"
         assert f["geometry"]["coordinates"], "band has no polygons"
@@ -51,6 +52,34 @@ def test_bands_are_nested(built):
         )
     ordered = [areas[m] for m in sorted(areas)]
     assert ordered == sorted(ordered), f"bands not nested by area: {areas}"
+    geometries = [shape(feature['geometry']) for feature in
+                  sorted(geo['features'], key=lambda feature: feature['properties']['minutes'])]
+    for smaller, larger in zip(geometries, geometries[1:]):
+        assert smaller.difference(larger).area < 1e-12
+
+
+def test_committed_grid_reproduces_routed_contours_without_large_cache(tmp_path):
+    shutil.copytree(ROOT / 'src', tmp_path / 'src')
+    (tmp_path / 'data').mkdir()
+    shutil.copy(ROOT / 'data/transit_model.json', tmp_path / 'data/transit_model.json')
+    grid = {'grid_spacing_m': 500, 'arrival': '2026-11-18T09:00:00', 'percentile': 1,
+            'points': [[43.6453, -79.3806, 0], [43.65, -79.38, 20]]}
+    (tmp_path / 'data/routing_grid.json').write_text(json.dumps(grid))
+    command = [sys.executable, 'src/build_isochrones.py']
+    subprocess.run(command, cwd=tmp_path, check=True)
+    output = tmp_path / 'output/isochrones.geojson'
+    first = output.read_bytes()
+    geo = json.loads(first)
+    assert geo['properties']['source'] == 'r5py travel-time grid'
+    assert geo['properties']['grid_spacing_m'] == 500
+    assert {f['properties']['minutes'] for f in geo['features']} == {15, 30, 45, 60, 75, 90, 120}
+    subprocess.run(command, cwd=tmp_path, check=True)
+    assert output.read_bytes() == first
+    # Fresh routing output takes precedence over the committed contour snapshot.
+    grid['grid_spacing_m'] = 1000
+    (tmp_path / 'data/reachability.json').write_text(json.dumps(grid))
+    subprocess.run(command, cwd=tmp_path, check=True)
+    assert json.loads(output.read_text())['properties']['grid_spacing_m'] == 1000
 
 
 def test_map_html_rendered(built):
