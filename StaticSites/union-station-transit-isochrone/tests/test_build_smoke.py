@@ -75,9 +75,17 @@ def test_routed_station_snapshot_survives_without_large_grid(tmp_path):
     cached=json.loads((ROOT/'data/station_itineraries.json').read_text())
     assert payload['stations'] == cached['stations']
     assert payload['generated_at'] == cached['generated_at']
+    model = json.loads((ROOT/'data/transit_model.json').read_text())
+    locations = {(station['name'], station['mode']): station for station in cached['stations']}
+    for original, displayed in zip(model['nodes'], payload['nodes'], strict=True):
+        station = locations.get((original['name'], original['mode']), original)
+        assert displayed == {**original, 'lat': station['lat'], 'lon': station['lon']}
+    unionville = next(node for node in payload['nodes'] if node['name'] == 'Unionville GO')
+    assert (unionville['lat'], unionville['lon']) == (43.85169, -79.31433)
     # A deliberate curated rebuild must not inherit routed station trip claims.
     subprocess.run([sys.executable,'src/build_isochrones.py'],cwd=tmp_path,check=True)
     subprocess.run([sys.executable,'src/build_map.py'],cwd=tmp_path,check=True)
     html=(tmp_path/'output/union-station-transit-isochrone.html').read_text()
     payload=json.JSONDecoder().raw_decode(html.split('const DATA = ',1)[1])[0]
     assert payload['stations'] == []
+    assert payload['nodes'] == model['nodes']

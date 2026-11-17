@@ -231,8 +231,9 @@ Root `make test` runs this suite and the offline build alongside every other pro
 * **Use current GTFS feeds.** `make data` routes for the next non-holiday
   Wednesday, so each feed's `calendar` must cover that date or you'll get empty
   isochrones.
-* Station-marker times are approximate all-day typicals (not the peak routed
-  bands); coordinates are good to ~city scale.
+* Stations with routed itineraries use their GTFS-snapped coordinates and routed
+  travel times. Stations without routed details use the curated coordinates and
+  approximate all-day typical times.
 
 ## Refresh and dependencies
 
