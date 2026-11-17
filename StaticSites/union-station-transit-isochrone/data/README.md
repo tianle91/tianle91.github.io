@@ -26,6 +26,12 @@ project lock changes, or when reachability results are missing/invalid.
 All binary inputs, cache metadata, and `reachability.json` are gitignored.
 `transit_model.json` remains the committed offline fallback.
 
+`transit_lines.geojson` is a committed, derived snapshot of GO rail and TTC
+subway/streetcar GTFS shapes. Both the ordinary offline build and browser use this snapshot.
+Run `make lines` to download/validate the feeds and update only the line geometry,
+or set `GTFS_DIR` to a directory of local GTFS ZIPs. A full `make data` refresh
+updates it too. The line snapshot carries its own observation date.
+
 ## Caller-managed inputs
 
 Set `OSM_PBF` to a pre-clipped custom extract and/or `GTFS_DIR` to a folder of

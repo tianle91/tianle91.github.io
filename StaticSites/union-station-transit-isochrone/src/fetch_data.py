@@ -4,6 +4,7 @@
 Large files and cache metadata stay local and ignored. Caller-supplied OSM_PBF
 and GTFS_DIR paths are read-only inputs; the defaults are managed downloads.
 """
+import argparse
 import csv
 import datetime
 import hashlib
@@ -23,6 +24,7 @@ import urllib.request
 import zipfile
 
 import fetch_isochrones as routing
+from transit_lines import build_lines, save_lines
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -193,7 +195,7 @@ def download(url, destination, validate, state):
         temporary.unlink(missing_ok=True)
 
 
-def prepare_inputs(state, date, osmium_version):
+def prepare_feeds(state, date):
     feed_dir = pathlib.Path(os.environ.get("GTFS_DIR", str(DATA_DIR))).resolve()
     if "GTFS_DIR" not in os.environ:
         for name, url in FEEDS.items():
@@ -203,6 +205,11 @@ def prepare_inputs(state, date, osmium_version):
         raise ValueError(f"No GTFS feeds in {feed_dir}")
     for feed in feeds:
         validate_gtfs(feed, date)
+    return feeds
+
+
+def prepare_inputs(state, date, osmium_version):
+    feeds = prepare_feeds(state, date)
 
     if "OSM_PBF" in os.environ:
         osm = pathlib.Path(os.environ["OSM_PBF"]).resolve()
@@ -301,17 +308,27 @@ def refresh_routing(state, osm, feeds, date):
         temporary.unlink(missing_ok=True)
 
 
-def main():
+def main(lines_only=False):
+    if lines_only:
+        feeds = prepare_feeds(read_state(), routing.next_weekday())
+        save_lines(build_lines(feeds), DATA_DIR / "transit_lines.geojson")
+        return
     osmium_version = preflight()
     state = read_state()
     date = routing.next_weekday()
     osm, feeds = prepare_inputs(state, date, osmium_version)
+    lines = build_lines(feeds)
     refresh_routing(state, osm, feeds, date)
+    save_lines(lines, DATA_DIR / "transit_lines.geojson")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--lines-only", action="store_true",
+                        help="refresh rail, subway, and streetcar shapes without running the routing model")
+    args = parser.parse_args()
     try:
-        main()
+        main(lines_only=args.lines_only)
     except (OSError, ValueError, KeyError, TypeError, RuntimeError, subprocess.SubprocessError, zipfile.BadZipFile) as exc:
         print(f"Data refresh failed: {exc}", file=sys.stderr)
         sys.exit(1)

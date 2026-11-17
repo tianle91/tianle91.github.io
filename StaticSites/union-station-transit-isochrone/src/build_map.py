@@ -27,6 +27,16 @@ DETAILS = (json.loads(_REACH.read_text(encoding="utf-8")) if _REACH.exists() els
            if GEO.get("properties", {}).get("source") == "r5py travel-time grid" and _STATION_CACHE.exists()
            else {})
 STATIONS = DETAILS.get("stations", [])
+_LINES = DATA_DIR / "transit_lines.geojson"
+LINES = (json.loads(_LINES.read_text(encoding="utf-8")) if _LINES.exists()
+         else {"type": "FeatureCollection", "features": []})
+# Render pins at the same GTFS-snapped locations used for station itineraries.
+# Keep curated metadata and coordinates for stations without routed details.
+station_locations = {(station["name"], station["mode"]): station for station in STATIONS}
+NODES = []
+for node in MODEL["nodes"]:
+    location = station_locations.get((node["name"], node["mode"]), node)
+    NODES.append({**node, "lat": location["lat"], "lon": location["lon"]})
 
 
 MODE_COLOR = {
@@ -57,10 +67,11 @@ PAYLOAD = script_json({
     "geo": GEO,
     "origin": MODEL["origin"],
     "bands": MODEL["bands"],
-    "nodes": MODEL["nodes"],
+    "nodes": NODES,
     "service_assumption": MODEL["service_assumption"],
     "generated_at": _generated_at(),
     "stations": STATIONS,
+    "lines": LINES,
     "mode_color": MODE_COLOR,
     "mode_label": MODE_LABEL,
 })

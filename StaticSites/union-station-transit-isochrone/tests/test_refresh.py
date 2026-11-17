@@ -14,6 +14,18 @@ import fetch_data as refresh
 DATE = datetime.date(2026, 10, 14)
 
 
+def test_lines_only_skips_routing_and_osm_preflight(local, monkeypatch):
+    monkeypatch.setattr(refresh, "prepare_feeds", lambda state, date: [])
+    monkeypatch.setattr(refresh, "build_lines", lambda feeds: {"type": "FeatureCollection", "features": []})
+
+    def unexpected_preflight():
+        raise AssertionError("Line refresh must not invoke the routing stack")
+
+    monkeypatch.setattr(refresh, "preflight", unexpected_preflight)
+    refresh.main(lines_only=True)
+    assert json.loads((local / "transit_lines.geojson").read_text())["features"] == []
+
+
 def feed(path, active=True, exceptions=None):
     tables = {
         "agency.txt": "agency_name,agency_url,agency_timezone\nTest,https://example.com,America/Toronto\n",

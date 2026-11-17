@@ -11,7 +11,9 @@
     <style>
       __EXPLORER_CSS__
     </style>
-    <style></style>
+    <style>
+      .transit-line { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff); }
+    </style>
   </head>
   <body>
     <header class="explorer-header">
@@ -90,6 +92,8 @@
           <h3>Service assumptions</h3>
           <p id="assume"></p>
           <h2>Data sources</h2>
+          <p>GO Rail, subway, and streetcar/light-rail lines use published GTFS route shapes. Route lines toggle independently of station pins and travel-time bands. The streetcar/light-rail group includes night routes and Lines 5 and 6.</p>
+          <p id="line-generated" class="muted"></p>
           <ul class="sources">
             <li>
               Street &amp; walk network:
