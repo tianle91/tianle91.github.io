@@ -15,6 +15,7 @@ def feed(path, agency="GO Transit", route_type="2", missing_shape=False):
         "routes.txt": [
             ["route_id", "agency_id", "route_type", "route_short_name", "route_long_name", "route_color"],
             ["rail", "a", route_type, "R", "Rail route", "123ABC"],
+            ["unused", "a", route_type, "U", "Route without trips", "123ABC"],
             ["bus", "a", "3", "B", "Bus route", "FF0000"],
         ],
         "trips.txt": [
@@ -38,14 +39,15 @@ def feed(path, agency="GO Transit", route_type="2", missing_shape=False):
             archive.writestr(name, output.getvalue())
 
 
-def test_only_go_rail_and_ttc_subway_with_all_branches(tmp_path):
-    go, ttc, up = [tmp_path / name for name in ("go.zip", "ttc.zip", "up.zip")]
+def test_go_rail_and_ttc_subway_streetcar_with_all_branches(tmp_path):
+    go, ttc, streetcar, up = [tmp_path / name for name in ("go.zip", "ttc.zip", "streetcar.zip", "up.zip")]
     feed(go)
     feed(ttc, agency="TTC", route_type="1")
+    feed(streetcar, agency="TTC", route_type="0")
     feed(up, agency="UP Express")
-    result = build_lines([go, ttc, up])
-    assert result == build_lines([up, ttc, go])
-    assert [f["properties"]["mode"] for f in result["features"]] == ["go", "subway"]
+    result = build_lines([go, ttc, streetcar, up])
+    assert result == build_lines([up, streetcar, ttc, go])
+    assert [f["properties"]["mode"] for f in result["features"]] == ["go", "streetcar", "subway"]
     for feature in result["features"]:
         assert feature["properties"]["color"] == "#123abc"
         assert feature["geometry"]["type"] == "MultiLineString"

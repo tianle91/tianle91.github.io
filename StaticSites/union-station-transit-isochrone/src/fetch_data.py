@@ -325,7 +325,7 @@ def main(lines_only=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lines-only", action="store_true",
-                        help="refresh GO/subway shapes without running the routing model")
+                        help="refresh rail, subway, and streetcar shapes without running the routing model")
     args = parser.parse_args()
     try:
         main(lines_only=args.lines_only)

@@ -33,6 +33,7 @@ map.createPane("transit-lines").style.zIndex = 450;
 const lineGroups = [
   { id: "go-lines", mode: "go", label: "GO rail lines", color: DATA.mode_color.go },
   { id: "subway-lines", mode: "subway", label: "Subway lines", color: DATA.mode_color.subway },
+  { id: "streetcar-lines", mode: "streetcar", label: "Streetcar / light rail lines", color: DATA.mode_color.streetcar },
 ].map((group) => {
   const features = (DATA.lines?.features || []).filter(
     (feature) => feature.properties.mode === group.mode,
@@ -50,7 +51,7 @@ const lineGroups = [
       const name = esc(feature.properties.name);
       route.bindTooltip(name, { sticky: true });
       route.bindPopup("<b>" + name + "</b><br>" +
-        esc(DATA.mode_label[group.mode]) + " · published route geometry");
+        esc(group.label) + " · published route geometry");
     },
   }).addTo(map);
   return { ...group, layer, count: features.length };

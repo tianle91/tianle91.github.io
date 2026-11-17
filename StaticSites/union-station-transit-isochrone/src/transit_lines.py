@@ -1,4 +1,4 @@
-"""Extract published GO rail and TTC subway shapes from local GTFS feeds."""
+"""Extract GO rail and TTC subway/streetcar shapes from local GTFS feeds."""
 import csv
 import datetime
 import io
@@ -12,6 +12,9 @@ from shapely.geometry import LineString, mapping
 from shapely.ops import linemerge, unary_union
 
 from staticsites.pipeline import write_if_changed
+
+TTC_MODES = {"0": "streetcar", "1": "subway"}
+MODE_COLORS = {"go": "1b7a3d", "subway": "1f78b4", "streetcar": "e31a1c"}
 
 
 def feed_lines(path):
@@ -29,13 +32,13 @@ def feed_lines(path):
                 agency = next(iter(agencies.values()))
             if agency == "GO Transit" and route["route_type"] == "2":
                 mode = "go"
-            elif agency in ("TTC", "Toronto Transit Commission") and route["route_type"] == "1":
-                mode = "subway"
+            elif agency in ("TTC", "Toronto Transit Commission") and route["route_type"] in TTC_MODES:
+                mode = TTC_MODES[route["route_type"]]
             else:
                 continue
             color = route.get("route_color", "")
             if not re.fullmatch(r"[0-9a-fA-F]{6}", color):
-                color = "1b7a3d" if mode == "go" else "1f78b4"
+                color = MODE_COLORS[mode]
             short_name = route.get("route_short_name", "") or route["route_id"]
             routes[route["route_id"]] = {
                 "id": f"{mode}-{short_name}", "mode": mode,
@@ -46,8 +49,10 @@ def feed_lines(path):
             return []
 
         route_shapes = defaultdict(set)
+        used_routes = set()
         for trip in rows("trips.txt"):
             if trip["route_id"] in routes:
+                used_routes.add(trip["route_id"])
                 shape_id = trip.get("shape_id")
                 if shape_id:
                     route_shapes[trip["route_id"]].add(shape_id)
@@ -62,7 +67,8 @@ def feed_lines(path):
             shapes[point["shape_id"]].append((int(point["shape_pt_sequence"]), (lon, lat)))
 
         features = []
-        for route_id, properties in sorted(routes.items()):
+        for route_id in sorted(used_routes):
+            properties = routes[route_id]
             paths = []
             for shape_id in sorted(route_shapes[route_id]):
                 points = [point for _, point in sorted(shapes[shape_id])]
