@@ -13,6 +13,31 @@ Major projects draw above register records. Selecting a map feature or result
 adds a white outline and a persistent highlighted-project key; clear it from the
 key or change filters. Project lines and pins enlarge at neighbourhood zoom.
 
+## Share a view
+
+Pan/zoom and choose filters, then use **Copy link to this view**, or copy the
+browser address. The URL updates with `replaceState` rather than adding a browser
+history entry for every pan or keystroke. Opening a link restores its centre and
+zoom, search, collection, stage, owner, category layers (including none selected),
+basemap contrast, radius preference and highlighted project. Browser Back/Forward
+also reapplies incoming URL state. Existing project-only links remain supported.
+
+Parameters are `lat`, `lng`, `z`, `q`, `scope`, `stage`, `owner`, `layers`,
+`basemap`, `radius` and `project`, with `v=1` identifying serialized views. Default
+filters are omitted; unknown unrelated query parameters/fragments are preserved.
+Invalid values fall back to defaults and category/owner values are validated
+against the available options. Centres are stored to six decimal places; rendered
+position can vary within a pixel with viewport layout and Leaflet rounding.
+
+The live location circle, location permission and tracking state are excluded.
+A recipient starts without that local distance filter; they can choose ◎ to show
+projects near their own location using the shared radius preference. The copy
+confirmation makes this limitation explicit. Clipboard failures leave the full
+shareable link in the address bar and show a manual-copy message.
+
+`make share-test` explicitly runs desktop/mobile URL and clipboard regressions
+with the same optional `BROWSER_EXECUTABLE` selection as `make click-test`.
+
 The default view combines the City register and major-project watchlist, excluding
 completed and post-construction work. Use ◎ and allow browser location access to show a nearby-project circle.
 It stays centred on the browser’s reported position and follows location updates

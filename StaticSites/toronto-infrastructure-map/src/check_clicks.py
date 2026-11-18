@@ -56,7 +56,7 @@ def run(browser):
                     assert page.evaluate('nearby===null'), 'Project click moved the nearby circle'
                     assert page.locator('#record-detail' if mobile else '.leaflet-popup').is_visible()
                     close()
-                click(43.648,-79.384)
+                click(43.6495,-79.383)
                 assert page.evaluate('nearby===null'), 'Empty-map click unexpectedly started location search'
                 assert page.locator('.circle-dismiss').count()==0
                 page.locator('#locate').click()

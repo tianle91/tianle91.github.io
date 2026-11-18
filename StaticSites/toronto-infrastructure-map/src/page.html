@@ -12,6 +12,10 @@
       __EXPLORER_CSS__
     </style>
     <style>
+      .share-view { margin: 0 16px 10px; }
+      #copy-view { width: 100%; min-height: 36px; padding: 6px 12px; background: #fff;
+        border: 1px solid #c8bedb; border-radius: 6px; color: #543493; font-size: 12px; cursor: pointer; }
+      #share-status { margin: 4px 0 0; font-size: 11px; }
       #nearby-label { margin: 6px 16px; }
       .report-311 { display: flex; align-items: center; justify-content: space-between;
         gap: 12px; min-height: 40px; margin: 0 16px 10px; padding: 8px 12px;
@@ -68,7 +72,7 @@
             type="search"
             placeholder="Street, Gardiner, work type or project ID"
             aria-label="Search projects"
-            autocomplete="off"
+            autocomplete="off" maxlength="300"
           />
         </div>
         <div id="stats" role="status" aria-live="polite"></div>
@@ -76,6 +80,8 @@
           target="_blank" rel="noopener" aria-label="Report an infrastructure problem to Toronto 311 (opens in a new tab)">
           <span>Report a problem to 311</span><span aria-hidden="true">↗</span>
         </a>
+        <div class="share-view"><button type="button" id="copy-view">Copy link to this view</button>
+          <p id="share-status" role="status" aria-live="polite"></p></div>
         <p id="nearby-label" class="hint" hidden></p>
         __MAP_TABS__
         <section
@@ -183,6 +189,9 @@
     </script>
     <script>
       __LOCATION_JS__;
+    </script>
+    <script>
+      __VIEW_STATE_JS__;
     </script>
     <script>
       __APP_JS__;

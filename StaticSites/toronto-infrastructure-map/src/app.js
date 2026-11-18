@@ -20,8 +20,9 @@ const colors = Object.fromEntries(categories.map(x=>[x.id,x.color]));
 const group = L.featureGroup().addTo(map);
 const spotlight=L.featureGroup().addTo(map);
 let visible = [], nearby = null, nearbyRadius=500, locationControl=null;
+let selectedProject=null, urlReady=false, restoringURL=false, urlTimer=null;
 function clearHighlight() {
-  spotlight.clearLayers();$('selection-key').hidden=true;
+  spotlight.clearLayers();$('selection-key').hidden=true;selectedProject=null;scheduleShareURL();
 }
 function highlight(f) {
   clearHighlight();if(!f.geometry)return;
@@ -32,7 +33,7 @@ function highlight(f) {
       pointToLayer:(_,ll)=>L.circleMarker(ll,{pane:'selected-project',renderer:selectionRenderer,interactive:false,radius:halo?13:9,color:halo?'#fff':color,fillColor:color,fillOpacity:1,weight:halo?4:2})
     }).addTo(spotlight);
   }
-  $('selection-name').textContent=f.properties.title;$('selection-key').hidden=false;
+  $('selection-name').textContent=f.properties.title;$('selection-key').hidden=false;selectedProject=f.properties.id;scheduleShareURL();
 }
 function projectStyle(f) {
   const p=f.properties, close=map.getZoom()>=14;
@@ -42,7 +43,7 @@ function projectStyle(f) {
     dashArray:['Planning','Design'].includes(p.stage)?'7 6':null};
 }
 $('clear-selection').onclick=clearHighlight;
-$('basemap').onchange=()=>basemap.setOpacity(Number($('basemap').value));
+$('basemap').onchange=()=>{basemap.setOpacity(Number($('basemap').value));scheduleShareURL();};
 for (const owner of [...new Set(DATA.features.map(f=>f.properties.owner))].sort()) {
   const option = document.createElement('option'); option.value=owner;option.textContent=owner;$('owner').append(option);
 }
@@ -97,6 +98,7 @@ function update() {
   Explorer.layerCounts(Object.fromEntries(categories.map(c=>[c.id,counts[c.id]||0])));
   Explorer.count(visible.length,'project locations',visible.filter(x=>x.layer).length,nearby?'within '+nearbyRadius.toLocaleString()+' metres':'','without geometry');
   Explorer.results(visible,e=>e.f.properties.title,e=>`${nearby?Math.round(e.distance)+' m · ':''}${e.f.properties.stage} · ${e.f.properties.location || e.f.properties.owner}`,select);
+  scheduleShareURL();
   if(!visible.length) $('result-note').textContent='No matching project records in this snapshot. Broaden the radius, clear filters or ask the City. This does not establish that no work is planned.';
 }
 Explorer.layers(categories,update);
@@ -125,7 +127,7 @@ function setNearby(ll,radius) {
   let option=$('radius').querySelector('[data-custom]');
   if(![250,500,1000].includes(radius)) {
     if(!option){option=document.createElement('option');option.dataset.custom='true';$('radius').append(option);}
-    option.value=radius;option.textContent=radius.toLocaleString()+' metres (dragged)';
+    option.value=radius;option.textContent=radius.toLocaleString()+' metres';
   } else if(option)option.remove();
   $('radius').value=String(radius);
   $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag anywhere on the circumference to resize; use × at the bottom to dismiss. Distances are to project geometry.`;
@@ -135,11 +137,63 @@ function setNearby(ll,radius) {
 }
 Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
 locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
-$('radius').onchange=()=>locationControl.resize(Number($('radius').value));
+$('radius').onchange=()=>{locationControl.resize(Number($('radius').value));scheduleShareURL();};
 
-update();
-const requested=new URLSearchParams(location.search).get('project');
-if(requested) {
-  const f=DATA.features.find(f=>f.properties.id===requested);
-  if(f){$('scope').value=f.properties.collection;$('stage').value='all';update();const e=visible.find(e=>e.f===f);if(e)select(e);}
+const urlOptions={
+  layers:categories.map(c=>c.id),scopes:[...$('scope').options].map(o=>o.value),
+  stages:[...$('stage').options].map(o=>o.value),owners:[...$('owner').options].map(o=>o.value)
+};
+function captureView() {
+  const center=map.getCenter().wrap();
+  return {view:{lat:Math.max(-85.051129,Math.min(85.051129,center.lat)),lng:center.lng,z:map.getZoom()},q:$('search').value,
+    scope:$('scope').value,stage:$('stage').value,owner:$('owner').value,
+    layers:categories.filter(c=>Explorer.enabled(c.id)).map(c=>c.id),
+    basemap:$('basemap').value,radius:Number($('radius').value),project:selectedProject};
 }
+function saveShareURL() {
+  clearTimeout(urlTimer);urlTimer=null;
+  if(!urlReady || restoringURL)return;
+  const next=ViewState.write(location.href,captureView(),urlOptions);
+  if(next!==location.href)history.replaceState(history.state,'',next);
+}
+function scheduleShareURL() {
+  if(!urlReady || restoringURL)return;
+  clearTimeout(urlTimer);urlTimer=setTimeout(saveShareURL,400);
+}
+function restoreShareURL() {
+  clearTimeout(urlTimer);restoringURL=true;
+  if($('record-detail').open)$('record-detail').close();map.closePopup();
+  const state=ViewState.parse(location.href,urlOptions);
+  $('search').value=state.q;$('scope').value=state.scope;$('stage').value=state.stage;$('owner').value=state.owner;
+  $('basemap').value=state.basemap;basemap.setOpacity(Number(state.basemap));
+  let option=$('radius').querySelector('[data-custom]');
+  if(![250,500,1000].includes(state.radius)) {
+    if(!option){option=document.createElement('option');option.dataset.custom='true';$('radius').append(option);}
+    option.value=state.radius;option.textContent=state.radius.toLocaleString()+' metres';
+  } else if(option)option.remove();
+  $('radius').value=String(state.radius);locationControl.resize(state.radius);
+  const project=DATA.features.find(f=>f.properties.id===state.project);
+  if(project && state.legacyProject){$('scope').value=project.properties.collection;$('stage').value='all';}
+  document.querySelectorAll('[data-layer]').forEach(input=>{input.checked=state.layers.includes(input.dataset.layer);});
+  update();
+  const entry=visible.find(e=>e.f===project);
+  if(entry){
+    if(state.view){highlight(entry.f);entry.layer?.openPopup();}
+    else select(entry);
+  }
+  if(state.view)map.setView([state.view.lat,state.view.lng],state.view.z,{animate:false});
+  else if(urlReady && !entry)map.setView([43.69,-79.43],11,{animate:false});
+  restoringURL=false;urlReady=true;scheduleShareURL();
+}
+map.on('moveend',scheduleShareURL);
+window.addEventListener('popstate',restoreShareURL);
+$('copy-view').onclick=async()=>{
+  saveShareURL();
+  try {
+    await navigator.clipboard.writeText(location.href);
+    $('share-status').textContent='Link copied. Live location circle is not shared.';
+  } catch {
+    $('share-status').textContent='Copy the link from your browser’s address bar. Live location circle is not shared.';
+  }
+};
+restoreShareURL();
