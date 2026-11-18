@@ -738,11 +738,11 @@ summary {
     </style>
     <style>
       #nearby-label { margin: 6px 16px; }
-      #clear-nearby { margin: 0 16px 12px; }
+      .radius-edge:focus { stroke-opacity: 0.65; stroke-width: 5; outline: none; }
       .radius-edge { pointer-events: stroke; cursor: ew-resize; touch-action: none; }
-      .radius-handle button { width: 44px; height: 44px; padding: 0; background: #fff;
+      .circle-dismiss button { width: 44px; height: 44px; padding: 0; background: #fff;
         border: 3px solid #182d37; border-radius: 50%; color: #182d37; font-size: 22px;
-        cursor: ew-resize; touch-action: none; box-shadow: 0 1px 6px #0003; }
+        cursor: pointer; touch-action: manipulation; box-shadow: 0 1px 6px #0003; }
       #locate.location-active { color: #6546a4; background: #eee8ff; }
       .map-message { pointer-events: none; }
       #map { background: #f5f5f1; }
@@ -1213,7 +1213,6 @@ body.site-tool {
         </div>
         <div id="stats" role="status" aria-live="polite"></div>
         <p id="nearby-label" class="hint" hidden></p>
-        <button type="button" id="clear-nearby" class="text-button" hidden>Dismiss location circle</button>
         <nav class="explorer-tabs" role="tablist" aria-label="Map exploration">
           <button
             type="button"
@@ -1263,7 +1262,7 @@ body.site-tool {
           <p class="hint">Select a line, pin or result to highlight its geometry with a white outline. Zoom in for thicker project lines and larger pins.</p>
           <label class="field" for="scope">Project collection</label>
           <select id="scope"><option value="all">City register & major projects</option><option value="register">City project register</option><option value="major">Major project watchlist</option></select>
-          <p class="hint">Use ◎ and allow location access to show nearby projects. Drag the circle circumference or ↔ handle to resize it (100 m–5 km). Its centre follows your reported location. Search matches published street and project text.</p>
+          <p class="hint">Use ◎ and allow location access to show nearby projects. Drag anywhere on the circumference to resize (100 m–5 km). Dismiss only with × at the bottom of the circle. Its centre follows your reported location. Search matches published street and project text.</p>
           <label class="field" for="radius">Nearby search radius</label>
           <select id="radius" aria-label="Nearby search radius"><option value="250">250 metres</option><option value="500" selected>500 metres</option><option value="1000">1 kilometre</option></select>
           <label class="field" for="stage">Project stage</label>
@@ -1082499,7 +1082498,7 @@ const LocationCircle = (() => {
     const button=document.getElementById('locate');
     const pane=map.createPane('location-radius');pane.style.zIndex=480;
     const renderer=L.svg({pane:'location-radius'});
-    let generation=0, watch=null, center=null, radius=500, layers=[], ring=null, edge=null, handle=null;
+    let generation=0, watch=null, center=null, radius=500, layers=[], ring=null, edge=null, closeMarker=null;
     let pending=null, finishDrag=null;
     const limit=value=>Math.max(100,Math.min(5000,Math.round(value/25)*25));
     function reset() {
@@ -1082508,7 +1082507,7 @@ const LocationCircle = (() => {
       watch=null;if(finishDrag)finishDrag();
       if(pending!==null)clearTimeout(pending);pending=null;
       for(const layer of layers)map.removeLayer(layer);
-      layers=[];center=null;ring=edge=handle=null;
+      layers=[];center=null;ring=edge=closeMarker=null;
       button.removeAttribute('aria-busy');button.setAttribute('aria-pressed','false');
       button.classList.remove('location-active');
       button.title='Find projects near my location';button.setAttribute('aria-label',button.title);
@@ -1082516,12 +1082515,13 @@ const LocationCircle = (() => {
     function notify() {pending=null;if(center)change(center,radius);}
     function resize(value, immediate=false) {
       radius=limit(value);
-      if(ring){ring.setRadius(radius);edge.setRadius(radius);handle.setLatLng(east());
-        const node=handle.getElement().querySelector('button');node.setAttribute('aria-valuenow',radius);node.setAttribute('aria-valuetext',radius+' metres');}
+      if(ring){ring.setRadius(radius);edge.setRadius(radius);closeMarker.setLatLng(south());
+        const node=edge.getElement();node.setAttribute('aria-valuenow',radius);node.setAttribute('aria-valuetext',radius+' metres');}
       if(immediate){if(pending!==null)clearTimeout(pending);notify();}
       else if(pending===null)pending=setTimeout(notify,120);
     }
-    function east() {return L.latLng(center.lat,center.lng+radius/(6371000*Math.cos(center.lat*Math.PI/180))*180/Math.PI);}
+    function south() {return L.latLng(center.lat-radius/6371000*180/Math.PI,center.lng);}
+    function close() {reset();dismiss();status('Location circle dismissed. Use ◎ to start again.');}
     function beginDrag(event) {
       if(event.button!==undefined && event.button!==0)return;
       event.preventDefault();event.stopPropagation();
@@ -1082543,27 +1082543,31 @@ const LocationCircle = (() => {
         const marker=L.marker(center,{title:'Your reported location',zIndexOffset:2000,icon:L.divIcon({className:'',html:'<div class="you-dot"></div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(map);
         ring=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:2,fillOpacity:0.04,interactive:false}).addTo(map);
         edge=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:14,opacity:0,fill:false,className:'radius-edge',bubblingMouseEvents:false}).addTo(map);
-        handle=L.marker(east(),{title:'Drag to resize nearby radius',icon:L.divIcon({className:'radius-handle',html:'<button type="button" role="slider" aria-label="Nearby search radius" aria-valuemin="100" aria-valuemax="5000" aria-valuenow="500" aria-valuetext="500 metres">↔</button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
-        layers=[marker,ring,edge,handle];
-        edge.getElement().addEventListener('pointerdown',beginDrag);
-        const slider=handle.getElement().querySelector('button');slider.addEventListener('pointerdown',beginDrag);
+        closeMarker=L.marker(south(),{title:'Dismiss location circle',zIndexOffset:2100,icon:L.divIcon({className:'circle-dismiss',html:'<button type="button" aria-label="Dismiss location circle">×</button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
+        layers=[marker,ring,edge,closeMarker];
+        const cross=closeMarker.getElement();L.DomEvent.disableClickPropagation(cross);L.DomEvent.disableScrollPropagation(cross);
+        cross.querySelector('button').addEventListener('click',close);
+        const slider=edge.getElement();slider.addEventListener('pointerdown',beginDrag);
+        slider.setAttribute('tabindex','0');slider.setAttribute('role','slider');
+        slider.setAttribute('aria-label','Nearby search radius');slider.setAttribute('aria-valuemin','100');slider.setAttribute('aria-valuemax','5000');
         slider.addEventListener('keydown',event=>{
           const step=event.shiftKey?100:25;
           const value={ArrowRight:radius+step,ArrowUp:radius+step,ArrowLeft:radius-step,ArrowDown:radius-step,Home:100,End:5000}[event.key];
           if(value!==undefined){event.preventDefault();resize(value,true);}
         });
       }
-      handle.setLatLng(east());
-      const slider=handle.getElement().querySelector('button');
+      closeMarker.setLatLng(south());
+      const slider=edge.getElement();
       slider.setAttribute('aria-valuenow',radius);slider.setAttribute('aria-valuetext',radius+' metres');
       button.removeAttribute('aria-busy');button.setAttribute('aria-pressed','true');button.classList.add('location-active');
-      button.title='Refresh my location';button.setAttribute('aria-label',button.title);
+      button.title='Show my location circle';button.setAttribute('aria-label',button.title);
       change(center,radius);
       const accuracy=Number.isFinite(pos.coords.accuracy)?` Reported accuracy: about ${Math.round(pos.coords.accuracy)} m.`:'';
       status('Circle centred on your reported location.'+accuracy);
       if(first)Explorer.focus(map,center,15);
     }
     function request() {
+      if(center){Explorer.fit(map,ring.getBounds(),15);return;}
       reset();dismiss();
       if(!navigator.geolocation){status('Location is unavailable in this browser.');return;}
       const token=generation;button.setAttribute('aria-busy','true');status('Finding your location…');
@@ -1082583,7 +1082587,7 @@ const LocationCircle = (() => {
     // the marker and stop location updates together with its nearby circle.
     button.onclick=request;button.setAttribute('aria-pressed','false');
     button.title='Find projects near my location';button.setAttribute('aria-label',button.title);
-    return {resize:value=>resize(value,true),clear:()=>{reset();dismiss();status('Location circle dismissed. Use ◎ to start again.');}};
+    return {resize:value=>resize(value,true)};
   }
   return {connect};
 })();
@@ -1082701,7 +1082705,6 @@ map.on('zoomend',()=>{
 for(const id of ['scope','stage','owner']) $(id).onchange=update;
 $('search').addEventListener('input',update);
 $('gardiner').onclick=()=>{
-  locationControl.clear();
   $('scope').value='major';$('stage').value='all';$('owner').value='';$('search').value='Gardiner';
   $('select-all').click();update();$('fit').click();
   document.getElementById('results-tab').click();
@@ -1082709,7 +1082712,7 @@ $('gardiner').onclick=()=>{
 Explorer.stamp(DATA.retrieved_at);
 function clearNearby() {
   nearby=null;
-  $('nearby-label').hidden=true;$('clear-nearby').hidden=true;
+  $('nearby-label').hidden=true;
   update();
 }
 function setNearby(ll,radius) {
@@ -1082721,14 +1082724,13 @@ function setNearby(ll,radius) {
     option.value=radius;option.textContent=radius.toLocaleString()+' metres (dragged)';
   } else if(option)option.remove();
   $('radius').value=String(radius);
-  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag the circle edge or ↔ handle to resize. Distances are to project geometry.`;
-  $('nearby-label').hidden=false;$('clear-nearby').hidden=false;
+  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag anywhere on the circumference to resize; use × at the bottom to dismiss. Distances are to project geometry.`;
+  $('nearby-label').hidden=false;
   if(changed)update();
   if(first)$('results-tab').click();
 }
 Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
 locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
-$('clear-nearby').onclick=()=>locationControl.clear();
 $('radius').onchange=()=>locationControl.resize(Number($('radius').value));
 
 update();
