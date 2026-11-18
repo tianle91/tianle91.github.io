@@ -64,7 +64,7 @@ def test_committed_snapshot_and_shell():
     assert data['source_counts']['line']>2000
     html=render(data)
     assert html.startswith('<!DOCTYPE html') and '__PAYLOAD__' not in html
-    assert '__EXPLORER' not in html and '__APP_JS__' not in html
+    assert '__EXPLORER' not in html and '__APP_JS__' not in html and '__LOCATION_JS__' not in html
     assert 'Data sources' in html and 'Track the Gardiner' in html
 
 def test_nearby_uses_full_line_and_polygon_geometry():

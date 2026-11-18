@@ -14,9 +14,15 @@ adds a white outline and a persistent highlighted-project key; clear it from the
 key or change filters. Project lines and pins enlarge at neighbourhood zoom.
 
 The default view combines the City register and major-project watchlist, excluding
-completed and post-construction work. Tap the map to search nearby mapped geometry
-within 250 m, 500 m or 1 km. The location button uses browser geolocation to do the
-same, on request only. Clear the nearby search to return to citywide results.
+completed and post-construction work. Use ◎ and allow browser location access to show a nearby-project circle.
+It stays centred on the browser’s reported position and follows location updates
+while visible. Drag its circumference or the ↔ edge handle to resize from 100 m
+to 5 km; preset radii remain available in the filters. The handle also supports
+arrow keys (25 m; Shift for 100 m), Home and End. Project clicks open details;
+empty-map clicks never create or move the circle. Dismiss location circle removes
+the circle and location pin, stops location updates, resets ◎, and restores
+citywide results. Clicking ◎ again requests a fresh position using the browser’s
+existing permission state. The page cannot revoke browser-level permission.
 Search matches street and project text; it is not an address geocoder.
 Missing geometry remains searchable citywide but cannot match a nearby search.
 No nearby record is evidence only of this snapshot’s coverage, not that work is
@@ -34,6 +40,17 @@ of municipal capital assets or an inventory of live road closures.
 - `make data` refreshes all three official register layers and checks watchlist
   source pages, then builds. Internet is required only for explicit refresh.
 - `make snapshots` captures desktop/mobile review images after explicit browser setup.
+- `make click-test` runs explicit real-mouse/touch regressions after browser setup.
+  An existing browser can be selected with `BROWSER_EXECUTABLE=/absolute/path`.
+
+The click regression serves a small fixture through the production renderer and
+application. It checks register lines, pins, repeated selection through the
+highlight overlay, major corridors, permission-gated circle creation, real
+mouse/touch circumference resizing, location tracking, dismissal and restart,
+permission denial, and late callbacks after cancellation. Empty-map clicks leave
+the location circle unchanged. In particular, offscreen major geometry must not intercept clicks on
+register records. Major and highlight layers use SVG so their blank surfaces
+allow clicks through; the larger register retains its shared Canvas renderer.
 
 The shared `../.venv`, locked dependencies and Make environment are used. See
 [repository instructions](../AGENTS.md). No credentials or new dependencies are needed.
