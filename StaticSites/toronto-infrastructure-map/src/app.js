@@ -4,6 +4,11 @@ const basemap=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {max
 map.createPane('major-projects').style.zIndex=450;
 map.createPane('selected-project').style.zIndex=470;
 map.getPane('selected-project').style.pointerEvents='none';
+// Separate canvases intercept events across their entire rectangular surface,
+// including blank pixels. SVG panes hit-test only their interactive paths, so
+// major corridors and selection outlines cannot block register clicks below.
+const majorRenderer=L.svg({pane:'major-projects'});
+const selectionRenderer=L.svg({pane:'selected-project'});
 const categories = [
   {id:'roads',label:'Roads & bridges',color:'#6546a4'},
   {id:'water',label:'Water & wastewater',color:'#0075aa'},
@@ -22,9 +27,9 @@ function highlight(f) {
   clearHighlight();if(!f.geometry)return;
   const color=f.properties.stage==='Completed'?'#58636c':colors[f.properties.category];
   for(const halo of [true,false]) {
-    L.geoJSON(f,{pane:'selected-project',interactive:false,
+    L.geoJSON(f,{pane:'selected-project',renderer:selectionRenderer,interactive:false,
       style:{pane:'selected-project',interactive:false,color:halo?'#fff':color,weight:halo?12:6,opacity:1,fillOpacity:halo?0:0.16},
-      pointToLayer:(_,ll)=>L.circleMarker(ll,{pane:'selected-project',interactive:false,radius:halo?13:9,color:halo?'#fff':color,fillColor:color,fillOpacity:1,weight:halo?4:2})
+      pointToLayer:(_,ll)=>L.circleMarker(ll,{pane:'selected-project',renderer:selectionRenderer,interactive:false,radius:halo?13:9,color:halo?'#fff':color,fillColor:color,fillOpacity:1,weight:halo?4:2})
     }).addTo(spotlight);
   }
   $('selection-name').textContent=f.properties.title;$('selection-key').hidden=false;
@@ -77,9 +82,10 @@ function update() {
       const color=projectStyle(f).color, pane=p.collection==='major'?'major-projects':'overlayPane';
       layer=L.geoJSON(f,{
         pane,
+        renderer:p.collection==='major'?majorRenderer:undefined,
         onEachFeature: (_,path)=>{path.options.bubblingMouseEvents=false;},
         style:()=>({...projectStyle(f),pane}),
-        pointToLayer:(_,ll)=>L.circleMarker(ll,{pane,radius:p.collection==='major'?9:map.getZoom()>=14?7:4,color:'#fff',weight:2,fillColor:color,fillOpacity:1,bubblingMouseEvents:false})
+        pointToLayer:(_,ll)=>L.circleMarker(ll,{pane,renderer:p.collection==='major'?majorRenderer:undefined,radius:p.collection==='major'?9:map.getZoom()>=14?7:4,color:'#fff',weight:2,fillColor:color,fillOpacity:1,bubblingMouseEvents:false})
       });
       layer.on('click',()=>highlight(f));
       layer.bindPopup(()=>details(f),{...Explorer.detailPopup(p.title),maxWidth:370});

@@ -34,6 +34,15 @@ of municipal capital assets or an inventory of live road closures.
 - `make data` refreshes all three official register layers and checks watchlist
   source pages, then builds. Internet is required only for explicit refresh.
 - `make snapshots` captures desktop/mobile review images after explicit browser setup.
+- `make click-test` runs explicit real-mouse/touch regressions after browser setup.
+  An existing browser can be selected with `BROWSER_EXECUTABLE=/absolute/path`.
+
+The click regression serves a small fixture through the production renderer and
+application. It checks register lines, pins, repeated selection through the
+highlight overlay, major corridors, and empty-map nearby search on desktop and
+mobile. In particular, offscreen major geometry must not intercept clicks on
+register records. Major and highlight layers use SVG so their blank surfaces
+allow clicks through; the larger register retains its shared Canvas renderer.
 
 The shared `../.venv`, locked dependencies and Make environment are used. See
 [repository instructions](../AGENTS.md). No credentials or new dependencies are needed.

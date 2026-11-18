@@ -4,3 +4,7 @@ DATA_INPUTS := data/projects.json
 SNAPSHOT_SCRIPT := src/snapshot_site.py
 
 include ../artifact-project.mk
+
+.PHONY: click-test
+click-test: deps
+	$(PY) src/check_clicks.py $(if $(BROWSER_EXECUTABLE),--browser-executable "$(BROWSER_EXECUTABLE)")
