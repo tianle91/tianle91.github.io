@@ -22,6 +22,8 @@ permalink: /interactive/
   — Toronto Police reports merged by incident ID with seven type layers, text search and approximate intersection locations.
 - [Toronto DineSafe food-safety inspections](/StaticSites/toronto-dinesafe-map/output/toronto-dinesafe-map.html)
   — one pin per establishment, coloured by its latest outcome (Pass / Conditional Pass / Closed); search by name / type / address and open any business for its inspection history.
+- [Toronto infrastructure tracker](/StaticSites/toronto-infrastructure-map/output/toronto-infrastructure-map.html)
+  — Find City infrastructure work by street or nearby location, including Gardiner rehabilitation, with schedules and official sources.
 - [Toronto services for vulnerable populations](/StaticSites/toronto-vulnerable-services-map/output/toronto-vulnerable-services-map.html)
   — shelters, warming & respite centres, drop-ins, harm reduction, housing supports.
 - [TRCA flood plain map](/StaticSites/trca-flood-plain-map/output/trca-flood-plain-map.html)
@@ -41,5 +43,5 @@ permalink: /interactive/
   — Compare nominal government bond yields from 1 month to the long end on the latest shared trading date.
 
 
-Source for all 11: [StaticSites source](https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)
+Source for all 12: [StaticSites source](https://github.com/tianle91/tianle91.github.io/tree/master/StaticSites)
 <!-- staticsites:end -->
