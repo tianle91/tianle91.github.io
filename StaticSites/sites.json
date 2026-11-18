@@ -42,6 +42,12 @@
     "output": "toronto-dinesafe-map/output/toronto-dinesafe-map.html"
   },
   {
+    "slug": "toronto-infrastructure-map",
+    "title": "Toronto infrastructure tracker",
+    "description": "Find City infrastructure work by street or nearby location, including Gardiner rehabilitation, with schedules and official sources.",
+    "output": "toronto-infrastructure-map/output/toronto-infrastructure-map.html"
+  },
+  {
     "slug": "toronto-vulnerable-services-map",
     "title": "Toronto services for vulnerable populations",
     "description": "shelters, warming & respite centres, drop-ins, harm reduction, housing supports.",

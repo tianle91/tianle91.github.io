@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Toronto infrastructure tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      __EXPLORER_CSS__
+    </style>
+    <style>
+      #nearby-label { margin: 6px 16px; }
+      #clear-nearby { margin: 0 16px 12px; }
+    </style>
+  </head>
+  <body>
+    <header class="explorer-header">
+      <div>
+        <h1>Toronto infrastructure tracker</h1>
+        <p>Tap the map or use ◎ to find nearby City infrastructure work</p>
+      </div>
+      <div id="snapshot-date"></div>
+    </header>
+    <main class="explorer-layout">
+      <aside
+        id="panel"
+        class="explorer-sidebar"
+        aria-label="Map exploration controls"
+      >
+        <button
+          type="button"
+          id="sheet-toggle"
+          class="sheet-toggle"
+          aria-label="Expand map controls"
+          aria-expanded="false"
+        >Show results &amp; filters</button>
+        <div class="search-area">
+          <label for="search">Search projects</label
+          ><input
+            id="search"
+            type="search"
+            placeholder="Street, Gardiner, work type or project ID"
+            aria-label="Search projects"
+            autocomplete="off"
+          />
+        </div>
+        <div id="stats" role="status" aria-live="polite"></div>
+        <p id="nearby-label" class="hint" hidden></p>
+        <button type="button" id="clear-nearby" class="text-button" hidden>Clear nearby search</button>
+        __MAP_TABS__
+        <section
+          id="layers-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="layers-tab"
+        >
+          <div id="layer-controls"></div>
+          <div class="layer-actions">
+            <button type="button" class="text-button" id="select-all">
+              Select all</button
+            ><button type="button" class="text-button" id="clear-all">
+              Clear all
+            </button>
+          </div>
+          <label class="field" for="scope">Project collection</label>
+          <select id="scope"><option value="all">City register & major projects</option><option value="register">City project register</option><option value="major">Major project watchlist</option></select>
+          <p class="hint">Tap a spot on the map, or use ◎ to find projects near your location. Search matches published street and project text.</p>
+          <label class="field" for="radius">Nearby search radius</label>
+          <select id="radius"><option value="250">250 metres</option><option value="500" selected>500 metres</option><option value="1000">1 kilometre</option></select>
+          <label class="field" for="stage">Project stage</label>
+          <select id="stage"><option value="open">Open projects</option><option value="all">All stages, including completed</option><option>Construction</option><option>Design</option><option>Planning</option><option>Active — schedule unconfirmed</option><option>Post-construction</option><option>Completed</option></select>
+          <label class="field" for="owner">Asset owner / responsible organization</label>
+          <select id="owner"><option value="">All City divisions & agencies</option></select>
+          <button type="button" id="gardiner" class="feature-result"><strong>Track the Gardiner →</strong><small>All six sections, including completed phases</small></button>
+          <p class="notice">A selected major-project watchlist plus the City’s published register. Coverage is incomplete; “Active” does not establish that construction is underway. Schedules may change.</p>
+          <p class="hint">Colour identifies asset type. Dashed lines identify planning or design. Gardiner lines follow City road centrelines with approximate section limits; they are not work boundaries or future alignments.</p>
+        </section>
+        <section
+          id="results-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="results-tab"
+          hidden
+        >
+          <p id="result-note" class="hint"></p>
+          <p class="hint">No matching record does not establish that work is unplanned. <a href="https://www.toronto.ca/home/311-toronto-at-your-service/">Ask 311 or report infrastructure needing repair ↗</a></p>
+          <div id="results"></div>
+        </section>
+        <section
+          id="sources-panel"
+          class="explorer-panel"
+          role="tabpanel"
+          aria-labelledby="sources-tab"
+          hidden
+        >
+          <p id="snapshot-provenance" class="muted"></p>
+          <h2>Data sources</h2>
+          <p>The watchlist summarizes official City project pages, reviewed 18 November 2026. Each project links its source. A source-change flag means the summary needs review, not that a new status has been confirmed.</p>
+          <ul><li><a href="https://map.toronto.ca/toinview/">City of Toronto T.O.INview</a> — point, line and polygon project layers. Includes City divisions and wholly City-owned agencies. Excludes private developments, provincial projects, road moratoria and study-only records.</li>
+          <li><a href="https://www.toronto.ca/services-payments/streets-parking-transportation/road-maintenance/bridges-and-expressways/expressways/gardiner-expressway/gardiner-expressway-rehabilitation-strategy/">Gardiner strategic rehabilitation plan</a> and <a href="https://open.toronto.ca/dataset/toronto-centreline-tcl/">Toronto road centrelines</a></li>
+          <li><a href="https://www.toronto.ca/services-payments/water-environment/managing-rain-melted-snow/what-the-city-is-doing-stormwater-management-projects/lower-don-river-taylor-massey-creek-and-inner-harbour-program/">Don River & Central Waterfront program</a></li>
+          <li><a href="https://open.toronto.ca/open-data-license/">Open Government Licence – Toronto</a></li>
+          <li>Map: <a href="https://leafletjs.com/">Leaflet</a> / © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></li></ul>
+          <p>Register counts represent published location records, not unique contracts or capital investments. One project can have multiple locations. The register can overlap the major watchlist. It does not cover every municipal building, park or capital program.</p>
+          <p>Register geometry comes from the City. Watchlist geometry is an illustrative point or corridor. No live traffic feed or automatic daily refresh: this is a committed snapshot refreshed with the project’s data command.</p>
+        </section>
+        <footer class="explorer-footer">
+          <span>City of Toronto sources</span
+          ><button type="button" id="provenance" class="text-button">
+            Provenance
+          </button>
+        </footer>
+      </aside>
+      <div class="map-canvas">
+        <div id="map" aria-label="Toronto infrastructure tracker map"></div>
+        <div
+          id="location-status"
+          class="map-message"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </div>
+    </main>
+    <dialog
+      id="record-detail"
+      class="record-dialog"
+      aria-labelledby="record-title"
+    >
+      <button
+        type="button"
+        id="record-close"
+        class="close"
+        aria-label="Close details"
+      >
+        ×
+      </button>
+      <h2 id="record-title"></h2>
+      <div id="record-body"></div>
+    </dialog>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const DATA = __PAYLOAD__;
+    </script>
+    <script>
+      __EXPLORER_JS__;
+    </script>
+    <script>
+      __NEARBY_JS__;
+    </script>
+    <script>
+      __APP_JS__;
+    </script>
+  </body>
+</html>
