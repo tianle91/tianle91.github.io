@@ -226,4 +226,6 @@ PermitStartup.run(async () => {
   });
   update();
 
+  Explorer.share(map, { update, fields: ["status", "type", "year"] });
+
 });

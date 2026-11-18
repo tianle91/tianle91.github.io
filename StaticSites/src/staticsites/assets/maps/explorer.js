@@ -364,7 +364,76 @@ const Explorer = (() => {
     map.addControl(new Fit());
     // Location stays in memory only and is requested solely by the locate button.
   }
+  function hasSharedView() {
+    return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
+  }
+  // Project adapters opt in after their controls and initial view are ready.
+  function share(map, {update, fields=[]} = {}) {
+    if(typeof location==='undefined' || typeof history==='undefined')return;
+    const ids=[...choices.keys()], defaults=new Map(), initialLayers=ids.filter(enabled);
+    const inputs=fields.map(id=>byId(id));
+    for(const input of inputs) defaults.set(input.id,input.type==='checkbox'?(input.checked?'1':'0'):input.value);
+    const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
+    const keys=['v','lat','lng','z','q','layers',...fields];
+    let timer=null, restoring=false;
+    const holder=document.createElement('div');holder.className='share-view';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';copy.textContent='Copy link to this view';
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    holder.append(copy,message);byId('stats').after(holder);
+    byId('search').maxLength=300;
+    function save() {
+      clearTimeout(timer);if(restoring)return;
+      const url=new URL(location.href),params=url.searchParams;
+      for(const key of keys)params.delete(key);
+      const center=map.getCenter().wrap();
+      MapURL.writeView(params,{lat:Math.max(-85.051129,Math.min(85.051129,center.lat)),lng:center.lng,z:map.getZoom()});
+      MapURL.writeLayers(params,ids.filter(enabled),ids);
+      if(byId('search').value)params.set('q',byId('search').value);
+      for(const input of inputs) {
+        const value=input.type==='checkbox'?(input.checked?'1':'0'):input.value;
+        if(value!==defaults.get(input.id))params.set(input.id,value);
+      }
+      if(url.href!==location.href)history.replaceState(history.state,'',url.href);
+    }
+    function schedule() {if(!restoring){clearTimeout(timer);timer=setTimeout(save,400);}}
+    function restore(initial=false) {
+      clearTimeout(timer);restoring=true;
+      const params=new URL(location.href).searchParams;
+      if(!initial || keys.some(key=>params.has(key))) {
+        map.stop();map.closePopup();if(byId('record-detail')?.open)byId('record-detail').close();
+        byId('search').value=(params.get('q')||'').slice(0,300);
+        for(const input of inputs) {
+          const values=input.type==='checkbox'?['0','1']:[...input.options].map(option=>option.value);
+          const value=MapURL.choice(params,input.id,values,defaults.get(input.id));
+          if(input.type==='checkbox')input.checked=value==='1';else input.value=value;
+        }
+        const selected=params.has('layers')?MapURL.layers(params,ids):initialLayers;
+        for(const [id,{input,item}] of choices) {
+          input.checked=selected.includes(id);
+          if(item.layer){if(input.checked)item.layer.addTo(item.map);else item.map.removeLayer(item.layer);}
+        }
+        update();
+        const view=MapURL.view(params)||initialView;
+        map.setView([view.lat,view.lng],Math.min(view.z,map.getMaxZoom()),{animate:false});
+      }
+      restoring=false;schedule();
+    }
+    byId('panel').addEventListener('input',schedule);
+    byId('panel').addEventListener('change',schedule);
+    for(const id of ['select-all','clear-all'])byId(id).addEventListener('click',schedule);
+    map.on('moveend',schedule);window.addEventListener('popstate',()=>restore());
+    copy.onclick=async()=>{
+      save();
+      try {await navigator.clipboard.writeText(location.href);message.textContent='Link copied. Recipients enable their own location.';}
+      catch {message.textContent='Copy the link from your browser’s address bar. Recipients enable their own location.';}
+    };
+    restore(true);
+    return {save,restore};
+  }
+
   return {
+    share,
+    hasSharedView,
     mobile,
     detailPopup,
     esc,

@@ -331,3 +331,5 @@ Explorer.connect(map, {
   located: (pos) => showTrip(pos.coords.latitude, pos.coords.longitude),
 });
 update();
+
+Explorer.share(map, { update, fields: [] });

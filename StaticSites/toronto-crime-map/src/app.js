@@ -215,3 +215,5 @@ for (const [name, source] of Object.entries(DATA.sources || {})) {
 
 $("scope").textContent =
   "Police-reported incidents · " + (DATA.start_year ?? 2025) + " onward";
+
+Explorer.share(map, { update, fields: [] });

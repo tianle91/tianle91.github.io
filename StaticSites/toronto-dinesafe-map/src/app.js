@@ -300,3 +300,5 @@ Explorer.connect(map, {
 });
 closeSidebar();
 update();
+
+Explorer.share(map, { update, fields: ["near-toggle"] });

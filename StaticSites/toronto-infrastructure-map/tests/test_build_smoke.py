@@ -98,7 +98,7 @@ def test_url_state_validation_and_roundtrip():
     import subprocess
     if not shutil.which('node'): pytest.skip('Node unavailable for URL-state regression')
     script=r'''
-const assert=require('node:assert/strict'), V=require(process.argv[1]);
+const assert=require('node:assert/strict');global.MapURL=require(process.argv[2]);const V=require(process.argv[1]);
 const options={layers:['roads','water'],scopes:['all','major','register'],stages:['open','all','Construction'],owners:['','Toronto Water']};
 const state=V.parse('https://example.com/map?lat=43.65&lng=-79.38&z=15&q=A%26B&layers=&radius=750&owner=Toronto+Water',options);
 assert.deepEqual(state.view,{lat:43.65,lng:-79.38,z:15});assert.deepEqual(state.layers,[]);assert.equal(state.q,'A&B');assert.equal(state.radius,750);
@@ -111,4 +111,4 @@ assert.equal(V.parse('https://example.com/map?project=gardiner-3',options).legac
 assert.equal(V.parse('https://example.com/map?project=gardiner-3&scope=register',options).legacyProject,false);
 assert.equal(new URL(url).searchParams.has('nearby'),false);
 '''
-    subprocess.run(['node','-e',script,str(ROOT/'src/view_state.js')],check=True)
+    subprocess.run(['node','-e',script,str(ROOT/'src/view_state.js'),str(ROOT.parent/'src/staticsites/assets/maps/map_url.js')],check=True)

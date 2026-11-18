@@ -60,6 +60,35 @@ errors. The chart pages are self-contained; capture blocks external requests and
 works offline after setup. Review snapshots show the initial viewport; the
 macro projects' Matplotlib PNGs remain separate static charts.
 
+## Shareable map views
+
+All eight maps provide **Copy link to this view** and keep camera/search/layer
+choices in the URL. Permit links also preserve status/type/year, flood-map links
+preserve watershed, and transit links preserve each band and route overlay.
+DineSafe includes its nearest-ranking preference; obtaining a recipient’s
+location remains an explicit action. Selected infrastructure records retain their
+existing deep-link support. Clipboard failures fall back to the address bar.
+
+`MapURL` in `assets/maps/map_url.js` owns camera/range validation and ordered layer
+serialization. `Explorer.share(map, {update, fields: [...]})` adds common controls,
+field validation, debounced history replacement and Back/Forward restoration.
+Projects call it after populating selectors and starting their initial view. The
+infrastructure adapter reuses the same primitives while retaining its record-link
+and radius behaviour. Assets embed into standalone pages through `source_text`.
+
+After offline builds, run the explicit full-artifact browser matrix with:
+
+```sh
+.venv/bin/python admin_tests/map_share_browser.py --snapshots
+```
+
+Supply `--browser-executable /absolute/path` to use an existing browser. This
+checks desktop/mobile filter and camera round trips, copying, empty layers and
+no automatic location requests, and optionally updates the seven additional
+maps’ review images. It uses existing scripts/tiles and blocks the services
+map’s live statistics requests; it never refreshes committed datasets. The
+infrastructure project keeps its additional `make share-test` and `make click-test`.
+
 ## Map interface convention
 
 Map projects use a dark teal title bar, a desktop sidebar and an expandable

@@ -735,6 +735,12 @@ summary {
   }
 }
 
+/* Shared view links remain available in the compact mobile sheet. */
+.share-view { margin: 0 16px 10px; }
+#copy-view { width: 100%; min-height: 36px; padding: 6px 12px; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 6px; color: var(--ink); font-size: 12px; cursor: pointer; }
+#share-status { margin: 4px 0 0; font-size: 11px; }
+
     </style>
     <style>
       .share-view { margin: 0 16px 10px; }
@@ -1082086,7 +1082092,34 @@ body.site-tool {
 };
     </script>
     <script>
-      /* Project-local explorer UI. No source is loaded from another project. */
+      /* Small URL primitives shared by the map adapters; no geolocation state. */
+const MapURL = (() => {
+  function number(params,key,min,max) {
+    const text=params.get(key);if(text===null || !text.trim())return null;
+    const value=Number(text);return Number.isFinite(value)&&value>=min&&value<=max?value:null;
+  }
+  function view(params) {
+    const lat=number(params,'lat',-85.051129,85.051129),lng=number(params,'lng',-180,180),z=number(params,'z',0,19);
+    return lat!==null&&lng!==null&&z!==null?{lat,lng,z}:null;
+  }
+  function layers(params,ids) {
+    const text=params.get('layers');if(text===null)return [...ids];
+    const chosen=ids.filter(id=>text.split(',').includes(id));
+    return text && !chosen.length?[...ids]:chosen;
+  }
+  const choice=(params,key,values,fallback)=>values.includes(params.get(key))?params.get(key):fallback;
+  function writeView(params,camera) {
+    params.set('v','1');params.set('lat',Number(camera.lat.toFixed(6)));params.set('lng',Number(camera.lng.toFixed(6)));params.set('z',camera.z);
+  }
+  function writeLayers(params,chosen,ids) {
+    params.delete('layers');const ordered=ids.filter(id=>chosen.includes(id));
+    if(ordered.length!==ids.length)params.set('layers',ordered.join(','));
+  }
+  return {number,view,layers,choice,writeView,writeLayers};
+})();
+if(typeof module!=='undefined')module.exports=MapURL;
+
+/* Project-local explorer UI. No source is loaded from another project. */
 const Explorer = (() => {
   const byId = (id) => document.getElementById(id);
   const esc = (value) =>
@@ -1082452,7 +1082485,76 @@ const Explorer = (() => {
     map.addControl(new Fit());
     // Location stays in memory only and is requested solely by the locate button.
   }
+  function hasSharedView() {
+    return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
+  }
+  // Project adapters opt in after their controls and initial view are ready.
+  function share(map, {update, fields=[]} = {}) {
+    if(typeof location==='undefined' || typeof history==='undefined')return;
+    const ids=[...choices.keys()], defaults=new Map(), initialLayers=ids.filter(enabled);
+    const inputs=fields.map(id=>byId(id));
+    for(const input of inputs) defaults.set(input.id,input.type==='checkbox'?(input.checked?'1':'0'):input.value);
+    const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
+    const keys=['v','lat','lng','z','q','layers',...fields];
+    let timer=null, restoring=false;
+    const holder=document.createElement('div');holder.className='share-view';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';copy.textContent='Copy link to this view';
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    holder.append(copy,message);byId('stats').after(holder);
+    byId('search').maxLength=300;
+    function save() {
+      clearTimeout(timer);if(restoring)return;
+      const url=new URL(location.href),params=url.searchParams;
+      for(const key of keys)params.delete(key);
+      const center=map.getCenter().wrap();
+      MapURL.writeView(params,{lat:Math.max(-85.051129,Math.min(85.051129,center.lat)),lng:center.lng,z:map.getZoom()});
+      MapURL.writeLayers(params,ids.filter(enabled),ids);
+      if(byId('search').value)params.set('q',byId('search').value);
+      for(const input of inputs) {
+        const value=input.type==='checkbox'?(input.checked?'1':'0'):input.value;
+        if(value!==defaults.get(input.id))params.set(input.id,value);
+      }
+      if(url.href!==location.href)history.replaceState(history.state,'',url.href);
+    }
+    function schedule() {if(!restoring){clearTimeout(timer);timer=setTimeout(save,400);}}
+    function restore(initial=false) {
+      clearTimeout(timer);restoring=true;
+      const params=new URL(location.href).searchParams;
+      if(!initial || keys.some(key=>params.has(key))) {
+        map.stop();map.closePopup();if(byId('record-detail')?.open)byId('record-detail').close();
+        byId('search').value=(params.get('q')||'').slice(0,300);
+        for(const input of inputs) {
+          const values=input.type==='checkbox'?['0','1']:[...input.options].map(option=>option.value);
+          const value=MapURL.choice(params,input.id,values,defaults.get(input.id));
+          if(input.type==='checkbox')input.checked=value==='1';else input.value=value;
+        }
+        const selected=params.has('layers')?MapURL.layers(params,ids):initialLayers;
+        for(const [id,{input,item}] of choices) {
+          input.checked=selected.includes(id);
+          if(item.layer){if(input.checked)item.layer.addTo(item.map);else item.map.removeLayer(item.layer);}
+        }
+        update();
+        const view=MapURL.view(params)||initialView;
+        map.setView([view.lat,view.lng],Math.min(view.z,map.getMaxZoom()),{animate:false});
+      }
+      restoring=false;schedule();
+    }
+    byId('panel').addEventListener('input',schedule);
+    byId('panel').addEventListener('change',schedule);
+    for(const id of ['select-all','clear-all'])byId(id).addEventListener('click',schedule);
+    map.on('moveend',schedule);window.addEventListener('popstate',()=>restore());
+    copy.onclick=async()=>{
+      save();
+      try {await navigator.clipboard.writeText(location.href);message.textContent='Link copied. Recipients enable their own location.';}
+      catch {message.textContent='Copy the link from your browser’s address bar. Recipients enable their own location.';}
+    };
+    restore(true);
+    return {save,restore};
+  }
+
   return {
+    share,
+    hasSharedView,
     mobile,
     detailPopup,
     esc,
@@ -1082616,18 +1082718,16 @@ const LocationCircle = (() => {
     <script>
       /* Validated, deterministic URL state; no geolocation or permission state. */
 const ViewState = (() => {
+  const core=MapURL;
   const keys=['v','lat','lng','z','q','scope','stage','owner','layers','basemap','radius','project'];
   function parse(url, options) {
     const p=new URL(url).searchParams;
-    const number=(key,min,max)=>{const text=p.get(key);if(text===null || !text.trim())return null;const n=Number(text);return Number.isFinite(n)&&n>=min&&n<=max?n:null;};
-    const choice=(key,values,fallback)=>values.includes(p.get(key))?p.get(key):fallback;
-    const lat=number('lat',-85.051129,85.051129),lng=number('lng',-180,180),z=number('z',0,19);
-    const requested=p.get('layers');
-    let layers=requested===null?[...options.layers]:options.layers.filter(id=>requested.split(',').includes(id));
-    if(requested && !layers.length)layers=[...options.layers];
+    const number=(key,min,max)=>core.number(p,key,min,max);
+    const choice=(key,values,fallback)=>core.choice(p,key,values,fallback);
+    const layers=core.layers(p,options.layers);
     const radius=number('radius',100,5000);
     return {
-      view:lat!==null&&lng!==null&&z!==null?{lat,lng,z}:null,
+      view:core.view(p),
       q:(p.get('q')||'').slice(0,300),
       scope:choice('scope',options.scopes,'all'),stage:choice('stage',options.stages,'open'),
       owner:choice('owner',options.owners,''),layers,
@@ -1082639,12 +1082739,11 @@ const ViewState = (() => {
   function write(url,state,options) {
     const target=new URL(url),p=target.searchParams;
     for(const key of keys)p.delete(key);
-    p.set('v','1');p.set('lat',Number(state.view.lat.toFixed(6)));p.set('lng',Number(state.view.lng.toFixed(6)));p.set('z',state.view.z);
+    core.writeView(p,state.view);
     for(const [key,fallback] of [['q',''],['scope','all'],['stage','open'],['owner',''],['basemap','0.4'],['radius',500]]) {
       if(String(state[key])!==String(fallback))p.set(key,state[key]);
     }
-    const layers=options.layers.filter(id=>state.layers.includes(id));
-    if(layers.length!==options.layers.length)p.set('layers',layers.join(','));
+    core.writeLayers(p,state.layers,options.layers);
     if(state.project)p.set('project',state.project);
     return target.href;
   }
