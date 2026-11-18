@@ -49,7 +49,7 @@ const LocationCircle = (() => {
         const marker=L.marker(center,{title:'Your reported location',zIndexOffset:2000,icon:L.divIcon({className:'',html:'<div class="you-dot"></div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(map);
         ring=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:2,fillOpacity:0.04,interactive:false}).addTo(map);
         edge=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:14,opacity:0,fill:false,className:'radius-edge',bubblingMouseEvents:false}).addTo(map);
-        closeMarker=L.marker(south(),{title:'Dismiss location circle',zIndexOffset:2100,icon:L.divIcon({className:'circle-dismiss',html:'<button type="button" aria-label="Dismiss location circle">×</button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
+        closeMarker=L.marker(south(),{title:'Dismiss location circle',zIndexOffset:2100,icon:L.divIcon({className:'circle-dismiss',html:'<button type="button" aria-label="Dismiss location circle"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3L13 13M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
         layers=[marker,ring,edge,closeMarker];
         const cross=closeMarker.getElement();L.DomEvent.disableClickPropagation(cross);L.DomEvent.disableScrollPropagation(cross);
         cross.querySelector('button').addEventListener('click',close);
