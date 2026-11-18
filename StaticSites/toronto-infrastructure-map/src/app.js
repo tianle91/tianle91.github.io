@@ -19,7 +19,7 @@ const categories = [
 const colors = Object.fromEntries(categories.map(x=>[x.id,x.color]));
 const group = L.featureGroup().addTo(map);
 const spotlight=L.featureGroup().addTo(map);
-let visible = [], nearby = null, searchCircle = null;
+let visible = [], nearby = null, nearbyRadius=500, locationControl=null;
 function clearHighlight() {
   spotlight.clearLayers();$('selection-key').hidden=true;
 }
@@ -70,7 +70,7 @@ function update() {
   for(const f of DATA.features) {
     const p=f.properties;
     const distance = nearby ? Nearby.distance(f.geometry,nearby.lat,nearby.lng) : null;
-    if(nearby && distance>Number($('radius').value)) continue;
+    if(nearby && distance>nearbyRadius) continue;
     if(scope!=='all' && p.collection!==scope) continue;
     if(stage==='open' ? ['Completed','Post-construction'].includes(p.stage) : stage!=='all' && p.stage!==stage) continue;
     if(owner && p.owner!==owner) continue;
@@ -95,7 +95,7 @@ function update() {
   }
   if(nearby) visible.sort((a,b)=>a.distance-b.distance);
   Explorer.layerCounts(Object.fromEntries(categories.map(c=>[c.id,counts[c.id]||0])));
-  Explorer.count(visible.length,'project locations',visible.filter(x=>x.layer).length,nearby?'within '+$('radius').selectedOptions[0].text:'','without geometry');
+  Explorer.count(visible.length,'project locations',visible.filter(x=>x.layer).length,nearby?'within '+nearbyRadius.toLocaleString()+' metres':'','without geometry');
   Explorer.results(visible,e=>e.f.properties.title,e=>`${nearby?Math.round(e.distance)+' m · ':''}${e.f.properties.stage} · ${e.f.properties.location || e.f.properties.owner}`,select);
   if(!visible.length) $('result-note').textContent='No matching project records in this snapshot. Broaden the radius, clear filters or ask the City. This does not establish that no work is planned.';
 }
@@ -109,27 +109,36 @@ map.on('zoomend',()=>{
 for(const id of ['scope','stage','owner']) $(id).onchange=update;
 $('search').addEventListener('input',update);
 $('gardiner').onclick=()=>{
-  clearNearby();
+  locationControl.clear();
   $('scope').value='major';$('stage').value='all';$('owner').value='';$('search').value='Gardiner';
   $('select-all').click();update();$('fit').click();
   document.getElementById('results-tab').click();
 };
 Explorer.stamp(DATA.retrieved_at);
 function clearNearby() {
-  nearby=null;if(searchCircle) {map.removeLayer(searchCircle);searchCircle=null;}
+  nearby=null;
   $('nearby-label').hidden=true;$('clear-nearby').hidden=true;
+  update();
 }
-function setNearby(ll) {
-  nearby=ll;if(searchCircle) map.removeLayer(searchCircle);
-  searchCircle=L.circle(ll,{radius:Number($('radius').value),color:'#182d37',weight:2,fillOpacity:0.04,interactive:false}).addTo(map);
-  $('nearby-label').textContent=`Within ${$('radius').selectedOptions[0].text} of ${ll.lat.toFixed(4)}, ${ll.lng.toFixed(4)}. Distances are to mapped geometry, not work boundaries.`;
-  $('nearby-label').hidden=false;
-  $('clear-nearby').hidden=false;update();$('results-tab').click();
+function setNearby(ll,radius) {
+  const first=!nearby, changed=first || nearbyRadius!==radius || map.distance(nearby,ll)>5;
+  nearby=ll;nearbyRadius=radius;
+  let option=$('radius').querySelector('[data-custom]');
+  if(![250,500,1000].includes(radius)) {
+    if(!option){option=document.createElement('option');option.dataset.custom='true';$('radius').append(option);}
+    option.value=radius;option.textContent=radius.toLocaleString()+' metres (dragged)';
+  } else if(option)option.remove();
+  $('radius').value=String(radius);
+  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag the circle edge or ↔ handle to resize. Distances are to project geometry.`;
+  $('nearby-label').hidden=false;$('clear-nearby').hidden=false;
+  if(changed)update();
+  if(first)$('results-tab').click();
 }
-$('clear-nearby').onclick=()=>{clearNearby();update();};
-$('radius').onchange=()=>{if(nearby)setNearby(nearby);};
-map.on('click',e=>setNearby(e.latlng));
-Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14,located:pos=>setNearby(L.latLng(pos.coords.latitude,pos.coords.longitude))});
+Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
+locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
+$('clear-nearby').onclick=()=>locationControl.clear();
+$('radius').onchange=()=>locationControl.resize(Number($('radius').value));
+
 update();
 const requested=new URLSearchParams(location.search).get('project');
 if(requested) {
