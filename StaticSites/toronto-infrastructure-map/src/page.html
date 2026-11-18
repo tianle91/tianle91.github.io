@@ -14,6 +14,14 @@
     <style>
       #nearby-label { margin: 6px 16px; }
       #clear-nearby { margin: 0 16px 12px; }
+      #map { background: #f5f5f1; }
+      #selection-key { position: absolute; z-index: 600; top: 12px; right: 12px;
+        max-width: min(360px, calc(100% - 80px)); padding: 9px 12px; border-radius: 6px;
+        background: #fff; border: 2px solid #6546a4; box-shadow: 0 2px 8px #0002;
+        font-size: 12px; }
+      #selection-key strong { display: block; }
+      #selection-key button { margin-top: 5px; }
+      @media (max-width: 760px) { #selection-key { top: 58px; } }
     </style>
   </head>
   <body>
@@ -65,6 +73,9 @@
               Clear all
             </button>
           </div>
+          <label class="field" for="basemap">Street map contrast</label>
+          <select id="basemap"><option value="0.4">Muted — emphasize projects</option><option value="1">Full street map</option></select>
+          <p class="hint">Select a line, pin or result to highlight its geometry with a white outline. Zoom in for thicker project lines and larger pins.</p>
           <label class="field" for="scope">Project collection</label>
           <select id="scope"><option value="all">City register & major projects</option><option value="register">City project register</option><option value="major">Major project watchlist</option></select>
           <p class="hint">Tap a spot on the map, or use ◎ to find projects near your location. Search matches published street and project text.</p>
@@ -115,6 +126,7 @@
         </footer>
       </aside>
       <div class="map-canvas">
+        <div id="selection-key" hidden role="status"><strong>Highlighted project</strong><span id="selection-name"></span><br><button type="button" id="clear-selection" class="text-button">Clear highlight</button></div>
         <div id="map" aria-label="Toronto infrastructure tracker map"></div>
         <div
           id="location-status"
