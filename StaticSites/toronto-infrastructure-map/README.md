@@ -16,17 +16,23 @@ key or change filters. Project lines and pins enlarge at neighbourhood zoom.
 The default view combines the City register and major-project watchlist, excluding
 completed and post-construction work. Use ◎ and allow browser location access to show a nearby-project circle.
 It stays centred on the browser’s reported position and follows location updates
-while visible. Drag its circumference or the ↔ edge handle to resize from 100 m
-to 5 km; preset radii remain available in the filters. The handle also supports
-arrow keys (25 m; Shift for 100 m), Home and End. Project clicks open details;
-empty-map clicks never create or move the circle. Dismiss location circle removes
+while visible. Drag anywhere on its circumference to resize from 100 m to 5 km;
+there is no resize icon. Preset radii remain available in the filters. The
+circumference is keyboard focusable and supports arrow keys (25 m; Shift for
+100 m), Home and End. Project clicks open details;
+empty-map clicks never create or move the circle. The × button on the south
+(bottom) edge is the only user control that dismisses the circle. It removes
 the circle and location pin, stops location updates, resets ◎, and restores
-citywide results. Clicking ◎ again requests a fresh position using the browser’s
+citywide results. Filters and the Gardiner shortcut preserve the circle and
+respect its active radius. While active, ◎ fits the circle back into view without
+restarting location access; this also brings × into view after panning or resizing. Clicking ◎ again requests a fresh position using the browser’s
 existing permission state. The page cannot revoke browser-level permission.
 Search matches street and project text; it is not an address geocoder.
 Missing geometry remains searchable citywide but cannot match a nearby search.
 No nearby record is evidence only of this snapshot’s coverage, not that work is
-unplanned. Results link to City 311 for verification or reporting repair needs.
+unplanned. The prominent Report a problem to 311 link stays beside search/counts
+across all tabs, including the compact mobile panel, and opens City 311 in a new
+tab for verification or reporting repair needs without losing the map state.
 It includes Transportation Services, Toronto Water, Parks, City Planning,
 Economic Development and City-owned TTC, Toronto Hydro and Toronto Community
 Housing records. Provincial and private projects, moratoria, lane-restriction
@@ -47,7 +53,8 @@ The click regression serves a small fixture through the production renderer and
 application. It checks register lines, pins, repeated selection through the
 highlight overlay, major corridors, permission-gated circle creation, real
 mouse/touch circumference resizing, location tracking, dismissal and restart,
-permission denial, and late callbacks after cancellation. Empty-map clicks leave
+permission denial, and ensuring filters, the Gardiner shortcut and active ◎ do
+not dismiss the circle. Empty-map clicks leave
 the location circle unchanged. In particular, offscreen major geometry must not intercept clicks on
 register records. Major and highlight layers use SVG so their blank surfaces
 allow clicks through; the larger register retains its shared Canvas renderer.

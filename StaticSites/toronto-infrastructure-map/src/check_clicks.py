@@ -33,6 +33,7 @@ def run(browser):
         with Snapshotter(ROOT).serve(root) as base:
             for mobile in (False,True):
                 context=browser.new_context(viewport={'width':390 if mobile else 1440,'height':844 if mobile else 900},is_mobile=mobile,has_touch=mobile,geolocation={'latitude':43.65,'longitude':-79.38},permissions=['geolocation'])
+                context.add_init_script("const g=navigator.geolocation,original=g.getCurrentPosition.bind(g);g.getCurrentPosition=(...args)=>{window.locationRequests=(window.locationRequests||0)+1;return original(...args);};")
                 page=context.new_page();errors=[]
                 page.on('pageerror',lambda error:errors.append(str(error)))
                 page.goto(base+'/map.html')
@@ -57,21 +58,30 @@ def run(browser):
                     close()
                 click(43.648,-79.384)
                 assert page.evaluate('nearby===null'), 'Empty-map click unexpectedly started location search'
-                assert page.locator('.radius-handle').count()==0
+                assert page.locator('.circle-dismiss').count()==0
                 page.locator('#locate').click()
                 page.wait_for_function('nearby!==null')
                 page.wait_for_timeout(400)
                 assert page.locator('#locate').get_attribute('aria-pressed')=='true'
                 assert page.locator('.you-dot').count()==1
-                page.locator('.radius-handle button').press('ArrowRight')
+                assert page.locator('#clear-nearby').count()==0
+                assert page.locator('.radius-handle').count()==0
+                page.locator('#locate').click();page.wait_for_timeout(500)
+                assert page.locator('.circle-dismiss').count()==1 and page.evaluate('nearby!==null')
+                assert page.evaluate('window.locationRequests')==1,'Active location button restarted access'
+                page.evaluate("document.getElementById('gardiner').click()")
+                assert page.evaluate('nearby!==null'),'Gardiner shortcut dismissed circle'
+                page.evaluate("document.getElementById('scope').value='all';document.getElementById('stage').value='open';document.getElementById('search').value='';update();Explorer.focus(map,nearby,15)")
+                page.wait_for_timeout(500)
+                page.locator('.radius-edge').press('ArrowRight')
                 assert page.evaluate('nearbyRadius')==525
-                assert page.locator('.radius-handle button').get_attribute('aria-valuenow')=='525'
+                assert page.locator('.radius-edge').get_attribute('aria-valuenow')=='525'
                 centre=page.evaluate('[nearby.lat,nearby.lng]')
                 click(43.65,-79.378)
                 assert page.locator('#selection-name').inner_text()=='Register line'
                 assert page.evaluate('[nearby.lat,nearby.lng]')==centre
                 close()
-                # Drag the circumference itself, away from the east-side handle.
+                # Drag the circumference itself; there is no separate resize icon.
                 coords=page.evaluate("""() => {
                   const c=nearby,r=nearbyRadius;
                   const p=map.latLngToContainerPoint([c.lat+r/111195,c.lng]);
@@ -95,10 +105,11 @@ def run(browser):
                 # Location updates move the centre; dragging and ordinary map clicks cannot.
                 context.set_geolocation({'latitude':43.6501,'longitude':-79.38})
                 page.wait_for_function('Math.abs(nearby.lat-43.6501)<0.00001')
-                page.evaluate("document.getElementById('clear-nearby').click()")
+                page.locator('#locate').click();page.wait_for_timeout(700)
+                page.locator('.circle-dismiss button').tap() if mobile else page.locator('.circle-dismiss button').click()
                 assert page.evaluate('nearby===null')
                 assert page.locator('.you-dot').count()==0
-                assert page.locator('.radius-handle').count()==0
+                assert page.locator('.circle-dismiss').count()==0
                 assert page.locator('.radius-edge').count()==0
                 assert page.locator('#locate').get_attribute('aria-pressed')=='false'
                 context.set_geolocation({'latitude':43.651,'longitude':-79.38})
@@ -106,9 +117,10 @@ def run(browser):
                 assert page.evaluate('nearby===null'),'Dismissed watch resurrected circle'
                 page.locator('#locate').click()
                 page.wait_for_function('nearby && Math.abs(nearby.lat-43.651)<0.00001')
-                page.evaluate("document.getElementById('clear-nearby').click()")
+                page.locator('#locate').click();page.wait_for_timeout(700)
+                page.locator('.circle-dismiss button').tap() if mobile else page.locator('.circle-dismiss button').click()
                 # Higher-pane major geometry must also remain interactive.
-                page.evaluate("document.getElementById('clear-nearby').click();map.setView([43.7,-79.485],16,{animate:false});Explorer.collapse()")
+                page.evaluate("map.setView([43.7,-79.485],16,{animate:false});Explorer.collapse()")
                 page.wait_for_timeout(600)
                 click(43.7,-79.485)
                 assert page.locator('#selection-name').inner_text()=='Major corridor'
@@ -117,28 +129,23 @@ def run(browser):
                 print(f'{"Mobile touch" if mobile else "Desktop pointer"}: project clicks, location-only circle, circumference drag, location updates, dismissal and restart passed',flush=True)
                 context.close()
 
-            for mode in ('denied','pending'):
-                context=browser.new_context()
-                context.add_init_script("""Object.defineProperty(navigator,'geolocation',{value:{
-                  getCurrentPosition(success,error){window.geoSuccess=success;window.geoError=error;},
-                  watchPosition(){window.geoWatched=true;return 1;},clearWatch(){}
-                }});""")
-                page=context.new_page();page.goto(base+'/map.html')
-                page.wait_for_function("typeof locationControl!=='undefined' && locationControl")
-                assert page.evaluate('window.geoSuccess===undefined'),'Location requested before user action'
-                page.locator('#locate').click()
-                if mode=='denied':
-                    page.evaluate('window.geoError({code:1})')
-                    assert 'denied' in page.locator('#location-status').inner_text()
-                else:
-                    page.evaluate("locationControl.clear();window.geoSuccess({coords:{latitude:43.65,longitude:-79.38,accuracy:10}})")
-                assert page.evaluate('nearby===null')
-                assert page.locator('.you-dot').count()==0
-                assert page.locator('.radius-handle').count()==0
-                assert page.evaluate('!window.geoWatched')
-                assert page.locator('#locate').get_attribute('aria-pressed')=='false'
-                context.close()
-            print('Permission denial and cancelled late location response passed',flush=True)
+            context=browser.new_context()
+            context.add_init_script("""Object.defineProperty(navigator,'geolocation',{value:{
+              getCurrentPosition(success,error){window.geoError=error;},
+              watchPosition(){window.geoWatched=true;return 1;},clearWatch(){}
+            }});""")
+            page=context.new_page();page.goto(base+'/map.html')
+            page.wait_for_function("typeof locationControl!=='undefined' && locationControl")
+            assert page.evaluate('window.geoError===undefined'),'Location requested before user action'
+            page.locator('#locate').click();page.evaluate('window.geoError({code:1})')
+            assert 'denied' in page.locator('#location-status').inner_text()
+            assert page.evaluate('nearby===null')
+            assert page.locator('.you-dot').count()==0
+            assert page.locator('.circle-dismiss').count()==0
+            assert page.evaluate('!window.geoWatched')
+            assert page.locator('#locate').get_attribute('aria-pressed')=='false'
+            context.close()
+            print('Permission denial passed',flush=True)
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--browser-executable')

@@ -4,7 +4,7 @@ const LocationCircle = (() => {
     const button=document.getElementById('locate');
     const pane=map.createPane('location-radius');pane.style.zIndex=480;
     const renderer=L.svg({pane:'location-radius'});
-    let generation=0, watch=null, center=null, radius=500, layers=[], ring=null, edge=null, handle=null;
+    let generation=0, watch=null, center=null, radius=500, layers=[], ring=null, edge=null, closeMarker=null;
     let pending=null, finishDrag=null;
     const limit=value=>Math.max(100,Math.min(5000,Math.round(value/25)*25));
     function reset() {
@@ -13,7 +13,7 @@ const LocationCircle = (() => {
       watch=null;if(finishDrag)finishDrag();
       if(pending!==null)clearTimeout(pending);pending=null;
       for(const layer of layers)map.removeLayer(layer);
-      layers=[];center=null;ring=edge=handle=null;
+      layers=[];center=null;ring=edge=closeMarker=null;
       button.removeAttribute('aria-busy');button.setAttribute('aria-pressed','false');
       button.classList.remove('location-active');
       button.title='Find projects near my location';button.setAttribute('aria-label',button.title);
@@ -21,12 +21,13 @@ const LocationCircle = (() => {
     function notify() {pending=null;if(center)change(center,radius);}
     function resize(value, immediate=false) {
       radius=limit(value);
-      if(ring){ring.setRadius(radius);edge.setRadius(radius);handle.setLatLng(east());
-        const node=handle.getElement().querySelector('button');node.setAttribute('aria-valuenow',radius);node.setAttribute('aria-valuetext',radius+' metres');}
+      if(ring){ring.setRadius(radius);edge.setRadius(radius);closeMarker.setLatLng(south());
+        const node=edge.getElement();node.setAttribute('aria-valuenow',radius);node.setAttribute('aria-valuetext',radius+' metres');}
       if(immediate){if(pending!==null)clearTimeout(pending);notify();}
       else if(pending===null)pending=setTimeout(notify,120);
     }
-    function east() {return L.latLng(center.lat,center.lng+radius/(6371000*Math.cos(center.lat*Math.PI/180))*180/Math.PI);}
+    function south() {return L.latLng(center.lat-radius/6371000*180/Math.PI,center.lng);}
+    function close() {reset();dismiss();status('Location circle dismissed. Use ◎ to start again.');}
     function beginDrag(event) {
       if(event.button!==undefined && event.button!==0)return;
       event.preventDefault();event.stopPropagation();
@@ -48,27 +49,31 @@ const LocationCircle = (() => {
         const marker=L.marker(center,{title:'Your reported location',zIndexOffset:2000,icon:L.divIcon({className:'',html:'<div class="you-dot"></div>',iconSize:[18,18],iconAnchor:[9,9]})}).addTo(map);
         ring=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:2,fillOpacity:0.04,interactive:false}).addTo(map);
         edge=L.circle(center,{pane:'location-radius',renderer,radius,color:'#182d37',weight:14,opacity:0,fill:false,className:'radius-edge',bubblingMouseEvents:false}).addTo(map);
-        handle=L.marker(east(),{title:'Drag to resize nearby radius',icon:L.divIcon({className:'radius-handle',html:'<button type="button" role="slider" aria-label="Nearby search radius" aria-valuemin="100" aria-valuemax="5000" aria-valuenow="500" aria-valuetext="500 metres">↔</button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
-        layers=[marker,ring,edge,handle];
-        edge.getElement().addEventListener('pointerdown',beginDrag);
-        const slider=handle.getElement().querySelector('button');slider.addEventListener('pointerdown',beginDrag);
+        closeMarker=L.marker(south(),{title:'Dismiss location circle',zIndexOffset:2100,icon:L.divIcon({className:'circle-dismiss',html:'<button type="button" aria-label="Dismiss location circle"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3L13 13M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(map);
+        layers=[marker,ring,edge,closeMarker];
+        const cross=closeMarker.getElement();L.DomEvent.disableClickPropagation(cross);L.DomEvent.disableScrollPropagation(cross);
+        cross.querySelector('button').addEventListener('click',close);
+        const slider=edge.getElement();slider.addEventListener('pointerdown',beginDrag);
+        slider.setAttribute('tabindex','0');slider.setAttribute('role','slider');
+        slider.setAttribute('aria-label','Nearby search radius');slider.setAttribute('aria-valuemin','100');slider.setAttribute('aria-valuemax','5000');
         slider.addEventListener('keydown',event=>{
           const step=event.shiftKey?100:25;
           const value={ArrowRight:radius+step,ArrowUp:radius+step,ArrowLeft:radius-step,ArrowDown:radius-step,Home:100,End:5000}[event.key];
           if(value!==undefined){event.preventDefault();resize(value,true);}
         });
       }
-      handle.setLatLng(east());
-      const slider=handle.getElement().querySelector('button');
+      closeMarker.setLatLng(south());
+      const slider=edge.getElement();
       slider.setAttribute('aria-valuenow',radius);slider.setAttribute('aria-valuetext',radius+' metres');
       button.removeAttribute('aria-busy');button.setAttribute('aria-pressed','true');button.classList.add('location-active');
-      button.title='Refresh my location';button.setAttribute('aria-label',button.title);
+      button.title='Show my location circle';button.setAttribute('aria-label',button.title);
       change(center,radius);
       const accuracy=Number.isFinite(pos.coords.accuracy)?` Reported accuracy: about ${Math.round(pos.coords.accuracy)} m.`:'';
       status('Circle centred on your reported location.'+accuracy);
       if(first)Explorer.focus(map,center,15);
     }
     function request() {
+      if(center){Explorer.fit(map,ring.getBounds(),15);return;}
       reset();dismiss();
       if(!navigator.geolocation){status('Location is unavailable in this browser.');return;}
       const token=generation;button.setAttribute('aria-busy','true');status('Finding your location…');
@@ -88,7 +93,7 @@ const LocationCircle = (() => {
     // the marker and stop location updates together with its nearby circle.
     button.onclick=request;button.setAttribute('aria-pressed','false');
     button.title='Find projects near my location';button.setAttribute('aria-label',button.title);
-    return {resize:value=>resize(value,true),clear:()=>{reset();dismiss();status('Location circle dismissed. Use ◎ to start again.');}};
+    return {resize:value=>resize(value,true)};
   }
   return {connect};
 })();

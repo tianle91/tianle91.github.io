@@ -109,7 +109,6 @@ map.on('zoomend',()=>{
 for(const id of ['scope','stage','owner']) $(id).onchange=update;
 $('search').addEventListener('input',update);
 $('gardiner').onclick=()=>{
-  locationControl.clear();
   $('scope').value='major';$('stage').value='all';$('owner').value='';$('search').value='Gardiner';
   $('select-all').click();update();$('fit').click();
   document.getElementById('results-tab').click();
@@ -117,7 +116,7 @@ $('gardiner').onclick=()=>{
 Explorer.stamp(DATA.retrieved_at);
 function clearNearby() {
   nearby=null;
-  $('nearby-label').hidden=true;$('clear-nearby').hidden=true;
+  $('nearby-label').hidden=true;
   update();
 }
 function setNearby(ll,radius) {
@@ -129,14 +128,13 @@ function setNearby(ll,radius) {
     option.value=radius;option.textContent=radius.toLocaleString()+' metres (dragged)';
   } else if(option)option.remove();
   $('radius').value=String(radius);
-  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag the circle edge or ↔ handle to resize. Distances are to project geometry.`;
-  $('nearby-label').hidden=false;$('clear-nearby').hidden=false;
+  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag anywhere on the circumference to resize; use × at the bottom to dismiss. Distances are to project geometry.`;
+  $('nearby-label').hidden=false;
   if(changed)update();
   if(first)$('results-tab').click();
 }
 Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
 locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
-$('clear-nearby').onclick=()=>locationControl.clear();
 $('radius').onchange=()=>locationControl.resize(Number($('radius').value));
 
 update();
