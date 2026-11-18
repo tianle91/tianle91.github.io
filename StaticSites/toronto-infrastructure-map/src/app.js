@@ -1,16 +1,43 @@
 const $ = id => document.getElementById(id), esc = Explorer.esc;
 const map = L.map('map', {preferCanvas:true}).setView([43.69,-79.43],11);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+const basemap=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,opacity:0.4,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+map.createPane('major-projects').style.zIndex=450;
+map.createPane('selected-project').style.zIndex=470;
+map.getPane('selected-project').style.pointerEvents='none';
 const categories = [
-  {id:'roads',label:'Roads & bridges',color:'#806493'},
-  {id:'water',label:'Water & wastewater',color:'#258ac2'},
-  {id:'transit',label:'TTC infrastructure',color:'#b94b3f'},
-  {id:'power',label:'City-owned electricity',color:'#aa7618'},
-  {id:'places',label:'Parks, housing & public places',color:'#278365'}
+  {id:'roads',label:'Roads & bridges',color:'#6546a4'},
+  {id:'water',label:'Water & wastewater',color:'#0075aa'},
+  {id:'transit',label:'TTC infrastructure',color:'#b3342b'},
+  {id:'power',label:'City-owned electricity',color:'#a46400'},
+  {id:'places',label:'Parks, housing & public places',color:'#08774c'}
 ];
 const colors = Object.fromEntries(categories.map(x=>[x.id,x.color]));
 const group = L.featureGroup().addTo(map);
+const spotlight=L.featureGroup().addTo(map);
 let visible = [], nearby = null, searchCircle = null;
+function clearHighlight() {
+  spotlight.clearLayers();$('selection-key').hidden=true;
+}
+function highlight(f) {
+  clearHighlight();if(!f.geometry)return;
+  const color=f.properties.stage==='Completed'?'#58636c':colors[f.properties.category];
+  for(const halo of [true,false]) {
+    L.geoJSON(f,{pane:'selected-project',interactive:false,
+      style:{pane:'selected-project',interactive:false,color:halo?'#fff':color,weight:halo?12:6,opacity:1,fillOpacity:halo?0:0.16},
+      pointToLayer:(_,ll)=>L.circleMarker(ll,{pane:'selected-project',interactive:false,radius:halo?13:9,color:halo?'#fff':color,fillColor:color,fillOpacity:1,weight:halo?4:2})
+    }).addTo(spotlight);
+  }
+  $('selection-name').textContent=f.properties.title;$('selection-key').hidden=false;
+}
+function projectStyle(f) {
+  const p=f.properties, close=map.getZoom()>=14;
+  return {color:p.stage==='Completed'?'#58636c':colors[p.category],
+    weight:p.collection==='major'?6:close?4:2,
+    opacity:p.collection==='major'?1:close?0.95:0.7,fillOpacity:0.12,
+    dashArray:['Planning','Design'].includes(p.stage)?'7 6':null};
+}
+$('clear-selection').onclick=clearHighlight;
+$('basemap').onchange=()=>basemap.setOpacity(Number($('basemap').value));
 for (const owner of [...new Set(DATA.features.map(f=>f.properties.owner))].sort()) {
   const option = document.createElement('option'); option.value=owner;option.textContent=owner;$('owner').append(option);
 }
@@ -29,12 +56,12 @@ function details(f) {
   return html;
 }
 function select(entry) {
-  if(entry.layer) {Explorer.fit(map,entry.layer.getBounds(),15);entry.layer.openPopup();}
+  if(entry.layer) {Explorer.fit(map,entry.layer.getBounds(),15);highlight(entry.f);entry.layer.openPopup();}
   else Explorer.detail(entry.f.properties.title,details(entry.f));
 }
 function update() {
   const q=$('search').value.toLowerCase().trim(), scope=$('scope').value, stage=$('stage').value, owner=$('owner').value;
-  group.clearLayers(); visible=[];const counts={};
+  group.clearLayers();clearHighlight();visible=[];const counts={};
   for(const f of DATA.features) {
     const p=f.properties;
     const distance = nearby ? Nearby.distance(f.geometry,nearby.lat,nearby.lng) : null;
@@ -47,12 +74,14 @@ function update() {
     if(!Explorer.enabled(p.category)) continue;
     let layer=null;
     if(f.geometry) {
-      const color=p.stage==='Completed' ? '#76818a' : colors[p.category];
+      const color=projectStyle(f).color, pane=p.collection==='major'?'major-projects':'overlayPane';
       layer=L.geoJSON(f,{
+        pane,
         onEachFeature: (_,path)=>{path.options.bubblingMouseEvents=false;},
-        style:{color,weight:p.collection==='major'?6:1.5,opacity:p.collection==='major'?0.9:0.6,fillOpacity:0.12,dashArray:['Planning','Design'].includes(p.stage)?'7 6':null},
-        pointToLayer:(_,ll)=>L.circleMarker(ll,{radius:p.collection==='major'?9:4,color:'#fff',weight:1.5,fillColor:color,fillOpacity:0.9,bubblingMouseEvents:false})
+        style:()=>({...projectStyle(f),pane}),
+        pointToLayer:(_,ll)=>L.circleMarker(ll,{pane,radius:p.collection==='major'?9:map.getZoom()>=14?7:4,color:'#fff',weight:2,fillColor:color,fillOpacity:1,bubblingMouseEvents:false})
       });
+      layer.on('click',()=>highlight(f));
       layer.bindPopup(()=>details(f),{...Explorer.detailPopup(p.title),maxWidth:370});
       layer.bindTooltip(p.title);group.addLayer(layer);
     }
@@ -65,6 +94,12 @@ function update() {
   if(!visible.length) $('result-note').textContent='No matching project records in this snapshot. Broaden the radius, clear filters or ask the City. This does not establish that no work is planned.';
 }
 Explorer.layers(categories,update);
+map.on('zoomend',()=>{
+  for(const entry of visible) if(entry.layer) entry.layer.eachLayer(path=>{
+    if(path instanceof L.CircleMarker) path.setRadius(entry.f.properties.collection==='major'?9:map.getZoom()>=14?7:4);
+    else path.setStyle(projectStyle(entry.f));
+  });
+});
 for(const id of ['scope','stage','owner']) $(id).onchange=update;
 $('search').addEventListener('input',update);
 $('gardiner').onclick=()=>{

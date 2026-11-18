@@ -7,6 +7,12 @@ location, fit and mobile details. The Gardiner shortcut shows all six sections,
 including completed ones. Project links such as `?project=gardiner-3` reopen a
 specific record. Sources and schedules are visible in every record.
 
+The street basemap is muted by default so project colours stand out. The Street
+map contrast selector restores the full basemap when street context is needed.
+Major projects draw above register records. Selecting a map feature or result
+adds a white outline and a persistent highlighted-project key; clear it from the
+key or change filters. Project lines and pins enlarge at neighbourhood zoom.
+
 The default view combines the City register and major-project watchlist, excluding
 completed and post-construction work. Tap the map to search nearby mapped geometry
 within 250 m, 500 m or 1 km. The location button uses browser geolocation to do the
