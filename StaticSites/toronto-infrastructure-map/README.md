@@ -30,7 +30,9 @@ existing permission state. The page cannot revoke browser-level permission.
 Search matches street and project text; it is not an address geocoder.
 Missing geometry remains searchable citywide but cannot match a nearby search.
 No nearby record is evidence only of this snapshot’s coverage, not that work is
-unplanned. Results link to City 311 for verification or reporting repair needs.
+unplanned. The prominent Report a problem to 311 link stays beside search/counts
+across all tabs, including the compact mobile panel, and opens City 311 in a new
+tab for verification or reporting repair needs without losing the map state.
 It includes Transportation Services, Toronto Water, Parks, City Planning,
 Economic Development and City-owned TTC, Toronto Hydro and Toronto Community
 Housing records. Provincial and private projects, moratoria, lane-restriction

@@ -13,6 +13,12 @@
     </style>
     <style>
       #nearby-label { margin: 6px 16px; }
+      .report-311 { display: flex; align-items: center; justify-content: space-between;
+        gap: 12px; min-height: 40px; margin: 0 16px 10px; padding: 8px 12px;
+        border: 1px solid #6546a4; border-radius: 6px; background: #f2edf9;
+        color: #543493; font-size: 12px; font-weight: 600; text-decoration: none; }
+      .report-311:hover { background: #e9e0f6; }
+      .report-311:focus-visible { outline: 2px solid #6546a4; outline-offset: 2px; }
       .radius-edge:focus { stroke-opacity: 0.65; stroke-width: 5; outline: none; }
       .radius-edge { pointer-events: stroke; cursor: ew-resize; touch-action: none; }
       .circle-dismiss button { width: 44px; height: 44px; padding: 0; background: transparent;
@@ -66,6 +72,10 @@
           />
         </div>
         <div id="stats" role="status" aria-live="polite"></div>
+        <a class="report-311" href="https://www.toronto.ca/home/311-toronto-at-your-service/"
+          target="_blank" rel="noopener" aria-label="Report an infrastructure problem to Toronto 311 (opens in a new tab)">
+          <span>Report a problem to 311</span><span aria-hidden="true">↗</span>
+        </a>
         <p id="nearby-label" class="hint" hidden></p>
         __MAP_TABS__
         <section
@@ -106,7 +116,7 @@
           hidden
         >
           <p id="result-note" class="hint"></p>
-          <p class="hint">No matching record does not establish that work is unplanned. <a href="https://www.toronto.ca/home/311-toronto-at-your-service/">Ask 311 or report infrastructure needing repair ↗</a></p>
+          <p class="hint">Missing records do not mean no work is planned.</p>
           <div id="results"></div>
         </section>
         <section
