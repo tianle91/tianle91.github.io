@@ -11,7 +11,10 @@
     <style>
       __EXPLORER_CSS__
     </style>
-    <style></style>
+    <style>
+      #nearby-label { margin: 6px 16px; }
+      #clear-nearby { margin: 0 16px 12px; }
+    </style>
   </head>
   <body>
     <header class="explorer-header">
@@ -45,6 +48,8 @@
           />
         </div>
         <div id="stats" role="status" aria-live="polite"></div>
+        <p id="nearby-label" class="hint" hidden></p>
+        <button type="button" id="clear-nearby" class="text-button" hidden>Clear nearby search</button>
         __MAP_TABS__
         <section
           id="layers-panel"
@@ -65,8 +70,6 @@
           <p class="hint">Tap a spot on the map, or use ◎ to find projects near your location. Search matches published street and project text.</p>
           <label class="field" for="radius">Nearby search radius</label>
           <select id="radius"><option value="250">250 metres</option><option value="500" selected>500 metres</option><option value="1000">1 kilometre</option></select>
-          <p id="nearby-label" class="hint">No location selected — showing all matching locations.</p>
-          <button type="button" id="clear-nearby" class="text-button" hidden>Clear nearby search</button>
           <label class="field" for="stage">Project stage</label>
           <select id="stage"><option value="open">Open projects</option><option value="all">All stages, including completed</option><option>Construction</option><option>Design</option><option>Planning</option><option>Active — schedule unconfirmed</option><option>Post-construction</option><option>Completed</option></select>
           <label class="field" for="owner">Asset owner / responsible organization</label>

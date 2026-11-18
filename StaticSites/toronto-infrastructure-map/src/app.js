@@ -76,12 +76,13 @@ $('gardiner').onclick=()=>{
 Explorer.stamp(DATA.retrieved_at);
 function clearNearby() {
   nearby=null;if(searchCircle) {map.removeLayer(searchCircle);searchCircle=null;}
-  $('nearby-label').textContent='No location selected — showing all matching locations.';$('clear-nearby').hidden=true;
+  $('nearby-label').hidden=true;$('clear-nearby').hidden=true;
 }
 function setNearby(ll) {
   nearby=ll;if(searchCircle) map.removeLayer(searchCircle);
   searchCircle=L.circle(ll,{radius:Number($('radius').value),color:'#182d37',weight:2,fillOpacity:0.04,interactive:false}).addTo(map);
   $('nearby-label').textContent=`Within ${$('radius').selectedOptions[0].text} of ${ll.lat.toFixed(4)}, ${ll.lng.toFixed(4)}. Distances are to mapped geometry, not work boundaries.`;
+  $('nearby-label').hidden=false;
   $('clear-nearby').hidden=false;update();$('results-tab').click();
 }
 $('clear-nearby').onclick=()=>{clearNearby();update();};
