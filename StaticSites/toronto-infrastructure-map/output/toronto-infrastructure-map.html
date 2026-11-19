@@ -750,12 +750,14 @@ summary {
     </style>
     <style>
       #nearby-label { margin: 6px 16px; }
-      .report-311 { display: flex; align-items: center; justify-content: space-between;
-        gap: 12px; min-height: 40px; margin: 0 16px 10px; padding: 8px 12px;
+      .header-actions { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+      #header-locate, .report-311 { display: inline-flex; align-items: center; justify-content: center;
+        gap: 8px; box-sizing: border-box; height: 36px; min-height: 36px; margin: 0; padding: 6px 10px;
         border: 1px solid #6546a4; border-radius: 6px; background: #f2edf9;
-        color: #543493; font-size: 12px; font-weight: 600; text-decoration: none; }
-      .report-311:hover { background: #e9e0f6; }
-      .report-311:focus-visible { outline: 2px solid #6546a4; outline-offset: 2px; }
+        color: #543493; font-size: 12px; line-height: 20px; font-weight: 600; text-decoration: none; }
+      #header-locate { cursor: pointer; background: #fff; white-space: nowrap; }
+      #header-locate:hover, .report-311:hover { background: #e9e0f6; }
+      #header-locate:focus-visible, .report-311:focus-visible { outline: 2px solid #6546a4; outline-offset: 2px; }
       .radius-edge:focus { stroke-opacity: 0.65; stroke-width: 5; outline: none; }
       .radius-edge { pointer-events: stroke; cursor: ew-resize; touch-action: none; }
       .circle-dismiss button { width: 44px; height: 44px; padding: 0; background: transparent;
@@ -1206,7 +1208,13 @@ body.site-tool {
     <header class="explorer-header">
       <div>
         <h1>Toronto infrastructure tracker</h1>
-        <p>Use ◎ to find projects near you</p>
+        <div class="header-actions">
+          <button type="button" id="header-locate" aria-label="Find projects near my location">◎ Near me</button>
+          <a class="report-311" href="https://www.toronto.ca/home/311-toronto-at-your-service/"
+            target="_blank" rel="noopener" aria-label="Report an infrastructure problem to Toronto 311 (opens in a new tab)">
+            <span>Report a problem to 311</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
       <div id="snapshot-date"></div>
     </header>
@@ -1234,10 +1242,6 @@ body.site-tool {
           />
         </div>
         <div id="stats" role="status" aria-live="polite"></div>
-        <a class="report-311" href="https://www.toronto.ca/home/311-toronto-at-your-service/"
-          target="_blank" rel="noopener" aria-label="Report an infrastructure problem to Toronto 311 (opens in a new tab)">
-          <span>Report a problem to 311</span><span aria-hidden="true">↗</span>
-        </a>
         <p id="nearby-label" class="hint" hidden></p>
         <nav class="explorer-tabs" role="tablist" aria-label="Map exploration">
           <button
@@ -1082907,6 +1082911,7 @@ function setNearby(ll,radius) {
 }
 Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
 locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
+$('header-locate').onclick=()=>$('locate').click();
 $('radius').onchange=()=>{locationControl.resize(Number($('radius').value));scheduleShareURL();};
 
 const urlOptions={

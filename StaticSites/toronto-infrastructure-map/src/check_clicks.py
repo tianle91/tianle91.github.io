@@ -59,7 +59,7 @@ def run(browser):
                 click(43.6495,-79.383)
                 assert page.evaluate('nearby===null'), 'Empty-map click unexpectedly started location search'
                 assert page.locator('.circle-dismiss').count()==0
-                page.locator('#locate').click()
+                page.locator('#header-locate').click()
                 page.wait_for_function('nearby!==null')
                 page.wait_for_timeout(400)
                 assert page.locator('#locate').get_attribute('aria-pressed')=='true'

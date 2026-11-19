@@ -139,6 +139,7 @@ function setNearby(ll,radius) {
 }
 Explorer.connect(map,{bounds:()=>group.getBounds(),maxZoom:14});
 locationControl=LocationCircle.connect(map,{change:setNearby,dismiss:clearNearby,status:Explorer.status});
+$('header-locate').onclick=()=>$('locate').click();
 $('radius').onchange=()=>{locationControl.resize(Number($('radius').value));scheduleShareURL();};
 
 const urlOptions={
