@@ -41,7 +41,10 @@ with the same optional `BROWSER_EXECUTABLE` selection as `make click-test`.
 The default view combines the City register and major-project watchlist, excluding
 completed and post-construction work. Use ◎ and allow browser location access to show a nearby-project circle.
 It stays centred on the browser’s reported position and follows location updates
-while visible. Drag anywhere on its circumference to resize from 100 m to 5 km;
+while visible. The compact view shows the nearby count, radius and one-line drag/
+dismiss hint. Tap the location pin for the browser-reported accuracy; successful
+location updates do not leave a banner over the map. Errors remain visible.
+Drag anywhere on its circumference to resize from 100 m to 5 km;
 there is no resize icon. Preset radii remain available in the filters. The
 circumference is keyboard focusable and supports arrow keys (25 m; Shift for
 100 m), Home and End. Project clicks open details;
@@ -55,9 +58,10 @@ existing permission state. The page cannot revoke browser-level permission.
 Search matches street and project text; it is not an address geocoder.
 Missing geometry remains searchable citywide but cannot match a nearby search.
 No nearby record is evidence only of this snapshot’s coverage, not that work is
-unplanned. The prominent Report a problem to 311 link stays beside search/counts
-across all tabs, including the compact mobile panel, and opens City 311 in a new
-tab for verification or reporting repair needs without losing the map state.
+unplanned. Report a problem to 311 sits beside the Near me action in a header row
+under the title, outside the map and bottom panel. It opens City 311 in a new tab
+for verification or reporting repair needs without losing the map state. Near me
+uses the same location action as ◎, including fitting an existing circle into view.
 It includes Transportation Services, Toronto Water, Parks, City Planning,
 Economic Development and City-owned TTC, Toronto Hydro and Toronto Community
 Housing records. Provincial and private projects, moratoria, lane-restriction
