@@ -19,6 +19,16 @@ A house number alone also requires a complete-number match. Street-name-only
 queries match partial address text. Permit numbers and descriptions are shown
 in the results/details but are not searched.
 
+## Share a view
+
+Use the share glyph beside search (**Copy link to this view**) or copy the address bar to share the current map
+centre, zoom, search and selected layers/filters. Links restore that combination
+on a fresh page; invalid values use defaults. URLs update without adding a history
+entry for each interaction. Browser Back/Forward restores incoming URL state.
+Location access, permission and live proximity calculations are not restored
+from a link. The shared map UI and URL helpers are embedded into
+the standalone output at build time.
+
 ## Visual snapshots
 
 [Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·

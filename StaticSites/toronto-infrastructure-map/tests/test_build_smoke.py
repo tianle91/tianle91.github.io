@@ -64,7 +64,7 @@ def test_committed_snapshot_and_shell():
     assert data['source_counts']['line']>2000
     html=render(data)
     assert html.startswith('<!DOCTYPE html') and '__PAYLOAD__' not in html
-    assert '__EXPLORER' not in html and '__APP_JS__' not in html and '__LOCATION_JS__' not in html
+    assert '__EXPLORER' not in html and '__APP_JS__' not in html and '__LOCATION_JS__' not in html and '__VIEW_STATE_JS__' not in html
     assert 'Data sources' in html and 'Track the Gardiner' in html
 
 def test_nearby_uses_full_line_and_polygon_geometry():
@@ -92,3 +92,23 @@ def test_major_reviewed_geometry_matches_published_snapshot():
     for f in editorial:
         assert published[f['properties']['id']]['geometry']==f['geometry']
         assert published[f['properties']['id']]['properties']['reviewed_source_hash']==f['properties']['reviewed_source_hash']
+
+def test_url_state_validation_and_roundtrip():
+    import shutil
+    import subprocess
+    if not shutil.which('node'): pytest.skip('Node unavailable for URL-state regression')
+    script=r'''
+const assert=require('node:assert/strict');global.MapURL=require(process.argv[2]);const V=require(process.argv[1]);
+const options={layers:['roads','water'],scopes:['all','major','register'],stages:['open','all','Construction'],owners:['','Toronto Water']};
+const state=V.parse('https://example.com/map?lat=43.65&lng=-79.38&z=15&q=A%26B&layers=&radius=750&owner=Toronto+Water',options);
+assert.deepEqual(state.view,{lat:43.65,lng:-79.38,z:15});assert.deepEqual(state.layers,[]);assert.equal(state.q,'A&B');assert.equal(state.radius,750);
+const url=V.write('https://example.com/map?utm_source=test#anchor',state,options);
+assert.equal(new URL(url).searchParams.get('utm_source'),'test');assert.equal(new URL(url).hash,'#anchor');
+assert.deepEqual(V.parse(url,options),{...state,legacyProject:false});
+const invalid=V.parse('https://example.com/map?lat=&lng=999&z=NaN&layers=unknown&scope=evil&owner=evil&radius=Infinity&basemap=evil',options);
+assert.equal(invalid.view,null);assert.deepEqual(invalid.layers,options.layers);assert.equal(invalid.scope,'all');assert.equal(invalid.owner,'');assert.equal(invalid.radius,500);assert.equal(invalid.basemap,'0.4');
+assert.equal(V.parse('https://example.com/map?project=gardiner-3',options).legacyProject,true);
+assert.equal(V.parse('https://example.com/map?project=gardiner-3&scope=register',options).legacyProject,false);
+assert.equal(new URL(url).searchParams.has('nearby'),false);
+'''
+    subprocess.run(['node','-e',script,str(ROOT/'src/view_state.js'),str(ROOT.parent/'src/staticsites/assets/maps/map_url.js')],check=True)

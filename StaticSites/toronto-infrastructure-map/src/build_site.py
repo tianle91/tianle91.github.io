@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def render(data):
     page = read_template(ROOT / "src/page.html")
-    for token, asset in [("__EXPLORER_CSS__", "explorer.css"), ("__EXPLORER_JS__", "explorer.js"), ("__NEARBY_JS__", "nearby.js"), ("__LOCATION_JS__", "location.js"), ("__APP_JS__", "app.js")]:
+    for token, asset in [("__EXPLORER_CSS__", "explorer.css"), ("__EXPLORER_JS__", "explorer.js"), ("__NEARBY_JS__", "nearby.js"), ("__LOCATION_JS__", "location.js"), ("__VIEW_STATE_JS__", "view_state.js"), ("__APP_JS__", "app.js")]:
         page = page.replace(token, source_text(ROOT, asset))
     return page.replace("__PAYLOAD__", script_json(data))
 

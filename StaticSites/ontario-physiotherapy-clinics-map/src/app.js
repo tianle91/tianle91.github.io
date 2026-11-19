@@ -114,9 +114,11 @@ Explorer.connect(map, {
 });
 update();
 
-if (visible.length)
+if (visible.length && !Explorer.hasSharedView())
   Explorer.fit(
     map,
     L.latLngBounds(visible.map((e) => e.marker.getLatLng())),
     12,
   );
+
+Explorer.share(map, { update, fields: [] });

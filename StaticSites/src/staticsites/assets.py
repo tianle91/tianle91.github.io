@@ -6,7 +6,7 @@ from staticsites.theme import embed_site_theme
 ASSETS = Path(__file__).parent / "assets"
 SHARED = {"explorer.js": "maps/explorer.js", "explorer.css": "maps/explorer.css",
           "chart.js": "plots/chart.js", "chart.css": "plots/chart.css",
-          "query.js": "maps/query.js"}
+          "query.js": "maps/query.js", "map_url.js": "maps/map_url.js"}
 
 
 def script_json(value):
@@ -17,7 +17,10 @@ def script_json(value):
 
 def source_text(project, filename):
     path = ASSETS / SHARED[filename] if filename in SHARED else Path(project) / "src" / filename
-    return path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8")
+    if filename == "explorer.js":
+        text = (ASSETS / "maps/map_url.js").read_text(encoding="utf-8") + "\n" + text
+    return text
 
 
 def read_template(path):

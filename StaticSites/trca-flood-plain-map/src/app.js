@@ -135,4 +135,6 @@ Explorer.connect(map, {
   maxZoom: 15,
 });
 update();
-$("fit").click();
+if (!Explorer.hasSharedView()) $("fit").click();
+
+Explorer.share(map, { update, fields: ["watershed"] });

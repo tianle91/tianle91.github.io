@@ -187,3 +187,5 @@ async function loadShelterStats() {
   }
 }
 loadShelterStats();
+
+Explorer.share(map, { update, fields: [] });

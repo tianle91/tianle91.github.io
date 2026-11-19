@@ -735,6 +735,18 @@ summary {
   }
 }
 
+/* The share glyph occupies the search row rather than another control row. */
+.search-row { display: flex; align-items: stretch; gap: 8px; }
+.search-row input[type="search"] { flex: 1; width: 0; min-width: 0;
+  box-sizing: border-box; height: 44px; min-height: 44px; margin: 0; line-height: 20px; }
+#copy-view { display: grid; place-items: center; flex: 0 0 44px; width: 44px;
+  box-sizing: border-box; height: 44px; min-height: 44px; margin: 0; padding: 0; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 6px; color: var(--ink); cursor: pointer; }
+#copy-view svg { display: block; }
+#copy-view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#share-status { margin: 6px 0 0; font-size: 11px; }
+#share-status:empty { display: none; }
+
     </style>
     <style></style>
   <style>:root {
@@ -1002435,7 +1002447,34 @@ body.site-tool {
 };
     </script>
     <script>
-      /* Project-local explorer UI. No source is loaded from another project. */
+      /* Small URL primitives shared by the map adapters; no geolocation state. */
+const MapURL = (() => {
+  function number(params,key,min,max) {
+    const text=params.get(key);if(text===null || !text.trim())return null;
+    const value=Number(text);return Number.isFinite(value)&&value>=min&&value<=max?value:null;
+  }
+  function view(params) {
+    const lat=number(params,'lat',-85.051129,85.051129),lng=number(params,'lng',-180,180),z=number(params,'z',0,19);
+    return lat!==null&&lng!==null&&z!==null?{lat,lng,z}:null;
+  }
+  function layers(params,ids) {
+    const text=params.get('layers');if(text===null)return [...ids];
+    const chosen=ids.filter(id=>text.split(',').includes(id));
+    return text && !chosen.length?[...ids]:chosen;
+  }
+  const choice=(params,key,values,fallback)=>values.includes(params.get(key))?params.get(key):fallback;
+  function writeView(params,camera) {
+    params.set('v','1');params.set('lat',Number(camera.lat.toFixed(6)));params.set('lng',Number(camera.lng.toFixed(6)));params.set('z',camera.z);
+  }
+  function writeLayers(params,chosen,ids) {
+    params.delete('layers');const ordered=ids.filter(id=>chosen.includes(id));
+    if(ordered.length!==ids.length)params.set('layers',ordered.join(','));
+  }
+  return {number,view,layers,choice,writeView,writeLayers};
+})();
+if(typeof module!=='undefined')module.exports=MapURL;
+
+/* Project-local explorer UI. No source is loaded from another project. */
 const Explorer = (() => {
   const byId = (id) => document.getElementById(id);
   const esc = (value) =>
@@ -1002801,7 +1002840,85 @@ const Explorer = (() => {
     map.addControl(new Fit());
     // Location stays in memory only and is requested solely by the locate button.
   }
+  function hasSharedView() {
+    return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
+  }
+  function shareButton() {
+    const search=byId('search'), area=search.parentElement;
+    const row=document.createElement('div');row.className='search-row';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';
+    copy.title='Copy link to this view';copy.setAttribute('aria-label','Copy link to this view');
+    copy.innerHTML='<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-4 4 4-4 4 4M7 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    area.insertBefore(row,search);row.append(search,copy);
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    area.append(message);
+    return {copy,message};
+  }
+  // Project adapters opt in after their controls and initial view are ready.
+  function share(map, {update, fields=[]} = {}) {
+    if(typeof location==='undefined' || typeof history==='undefined')return;
+    const ids=[...choices.keys()], defaults=new Map(), initialLayers=ids.filter(enabled);
+    const inputs=fields.map(id=>byId(id));
+    for(const input of inputs) defaults.set(input.id,input.type==='checkbox'?(input.checked?'1':'0'):input.value);
+    const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
+    const keys=['v','lat','lng','z','q','layers',...fields];
+    let timer=null, restoring=false;
+    const {copy,message}=shareButton();
+    byId('search').maxLength=300;
+    function save() {
+      clearTimeout(timer);if(restoring)return;
+      const url=new URL(location.href),params=url.searchParams;
+      for(const key of keys)params.delete(key);
+      const center=map.getCenter().wrap();
+      MapURL.writeView(params,{lat:Math.max(-85.051129,Math.min(85.051129,center.lat)),lng:center.lng,z:map.getZoom()});
+      MapURL.writeLayers(params,ids.filter(enabled),ids);
+      if(byId('search').value)params.set('q',byId('search').value);
+      for(const input of inputs) {
+        const value=input.type==='checkbox'?(input.checked?'1':'0'):input.value;
+        if(value!==defaults.get(input.id))params.set(input.id,value);
+      }
+      if(url.href!==location.href)history.replaceState(history.state,'',url.href);
+    }
+    function schedule() {if(!restoring){clearTimeout(timer);timer=setTimeout(save,400);}}
+    function restore(initial=false) {
+      clearTimeout(timer);restoring=true;
+      const params=new URL(location.href).searchParams;
+      if(!initial || keys.some(key=>params.has(key))) {
+        map.stop();map.closePopup();if(byId('record-detail')?.open)byId('record-detail').close();
+        byId('search').value=(params.get('q')||'').slice(0,300);
+        for(const input of inputs) {
+          const values=input.type==='checkbox'?['0','1']:[...input.options].map(option=>option.value);
+          const value=MapURL.choice(params,input.id,values,defaults.get(input.id));
+          if(input.type==='checkbox')input.checked=value==='1';else input.value=value;
+        }
+        const selected=params.has('layers')?MapURL.layers(params,ids):initialLayers;
+        for(const [id,{input,item}] of choices) {
+          input.checked=selected.includes(id);
+          if(item.layer){if(input.checked)item.layer.addTo(item.map);else item.map.removeLayer(item.layer);}
+        }
+        update();
+        const view=MapURL.view(params)||initialView;
+        map.setView([view.lat,view.lng],Math.min(view.z,map.getMaxZoom()),{animate:false});
+      }
+      restoring=false;schedule();
+    }
+    byId('panel').addEventListener('input',schedule);
+    byId('panel').addEventListener('change',schedule);
+    for(const id of ['select-all','clear-all'])byId(id).addEventListener('click',schedule);
+    map.on('moveend',schedule);window.addEventListener('popstate',()=>restore());
+    copy.onclick=async()=>{
+      save();
+      try {await navigator.clipboard.writeText(location.href);message.textContent='Link copied. Recipients enable their own location.';}
+      catch {message.textContent='Copy the link from your browser’s address bar. Recipients enable their own location.';}
+    };
+    restore(true);
+    return {save,restore};
+  }
+
   return {
+    share,
+    shareButton,
+    hasSharedView,
     mobile,
     detailPopup,
     esc,
@@ -1002960,7 +1003077,9 @@ Explorer.connect(map, {
   maxZoom: 15,
 });
 update();
-$("fit").click();
+if (!Explorer.hasSharedView()) $("fit").click();
+
+Explorer.share(map, { update, fields: ["watershed"] });
 ;
     </script>
   </body>

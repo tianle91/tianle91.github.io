@@ -364,7 +364,85 @@ const Explorer = (() => {
     map.addControl(new Fit());
     // Location stays in memory only and is requested solely by the locate button.
   }
+  function hasSharedView() {
+    return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
+  }
+  function shareButton() {
+    const search=byId('search'), area=search.parentElement;
+    const row=document.createElement('div');row.className='search-row';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';
+    copy.title='Copy link to this view';copy.setAttribute('aria-label','Copy link to this view');
+    copy.innerHTML='<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-4 4 4-4 4 4M7 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    area.insertBefore(row,search);row.append(search,copy);
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    area.append(message);
+    return {copy,message};
+  }
+  // Project adapters opt in after their controls and initial view are ready.
+  function share(map, {update, fields=[]} = {}) {
+    if(typeof location==='undefined' || typeof history==='undefined')return;
+    const ids=[...choices.keys()], defaults=new Map(), initialLayers=ids.filter(enabled);
+    const inputs=fields.map(id=>byId(id));
+    for(const input of inputs) defaults.set(input.id,input.type==='checkbox'?(input.checked?'1':'0'):input.value);
+    const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
+    const keys=['v','lat','lng','z','q','layers',...fields];
+    let timer=null, restoring=false;
+    const {copy,message}=shareButton();
+    byId('search').maxLength=300;
+    function save() {
+      clearTimeout(timer);if(restoring)return;
+      const url=new URL(location.href),params=url.searchParams;
+      for(const key of keys)params.delete(key);
+      const center=map.getCenter().wrap();
+      MapURL.writeView(params,{lat:Math.max(-85.051129,Math.min(85.051129,center.lat)),lng:center.lng,z:map.getZoom()});
+      MapURL.writeLayers(params,ids.filter(enabled),ids);
+      if(byId('search').value)params.set('q',byId('search').value);
+      for(const input of inputs) {
+        const value=input.type==='checkbox'?(input.checked?'1':'0'):input.value;
+        if(value!==defaults.get(input.id))params.set(input.id,value);
+      }
+      if(url.href!==location.href)history.replaceState(history.state,'',url.href);
+    }
+    function schedule() {if(!restoring){clearTimeout(timer);timer=setTimeout(save,400);}}
+    function restore(initial=false) {
+      clearTimeout(timer);restoring=true;
+      const params=new URL(location.href).searchParams;
+      if(!initial || keys.some(key=>params.has(key))) {
+        map.stop();map.closePopup();if(byId('record-detail')?.open)byId('record-detail').close();
+        byId('search').value=(params.get('q')||'').slice(0,300);
+        for(const input of inputs) {
+          const values=input.type==='checkbox'?['0','1']:[...input.options].map(option=>option.value);
+          const value=MapURL.choice(params,input.id,values,defaults.get(input.id));
+          if(input.type==='checkbox')input.checked=value==='1';else input.value=value;
+        }
+        const selected=params.has('layers')?MapURL.layers(params,ids):initialLayers;
+        for(const [id,{input,item}] of choices) {
+          input.checked=selected.includes(id);
+          if(item.layer){if(input.checked)item.layer.addTo(item.map);else item.map.removeLayer(item.layer);}
+        }
+        update();
+        const view=MapURL.view(params)||initialView;
+        map.setView([view.lat,view.lng],Math.min(view.z,map.getMaxZoom()),{animate:false});
+      }
+      restoring=false;schedule();
+    }
+    byId('panel').addEventListener('input',schedule);
+    byId('panel').addEventListener('change',schedule);
+    for(const id of ['select-all','clear-all'])byId(id).addEventListener('click',schedule);
+    map.on('moveend',schedule);window.addEventListener('popstate',()=>restore());
+    copy.onclick=async()=>{
+      save();
+      try {await navigator.clipboard.writeText(location.href);message.textContent='Link copied. Recipients enable their own location.';}
+      catch {message.textContent='Copy the link from your browser’s address bar. Recipients enable their own location.';}
+    };
+    restore(true);
+    return {save,restore};
+  }
+
   return {
+    share,
+    shareButton,
+    hasSharedView,
     mobile,
     detailPopup,
     esc,
