@@ -41,7 +41,10 @@ with the same optional `BROWSER_EXECUTABLE` selection as `make click-test`.
 The default view combines the City register and major-project watchlist, excluding
 completed and post-construction work. Use ◎ and allow browser location access to show a nearby-project circle.
 It stays centred on the browser’s reported position and follows location updates
-while visible. Drag anywhere on its circumference to resize from 100 m to 5 km;
+while visible. The compact view shows the nearby count, radius and one-line drag/
+dismiss hint. Tap the location pin for the browser-reported accuracy; successful
+location updates do not leave a banner over the map. Errors remain visible.
+Drag anywhere on its circumference to resize from 100 m to 5 km;
 there is no resize icon. Preset radii remain available in the filters. The
 circumference is keyboard focusable and supports arrow keys (25 m; Shift for
 100 m), Home and End. Project clicks open details;

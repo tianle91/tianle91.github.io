@@ -68,8 +68,12 @@ const LocationCircle = (() => {
       button.removeAttribute('aria-busy');button.setAttribute('aria-pressed','true');button.classList.add('location-active');
       button.title='Show my location circle';button.setAttribute('aria-label',button.title);
       change(center,radius);
-      const accuracy=Number.isFinite(pos.coords.accuracy)?` Reported accuracy: about ${Math.round(pos.coords.accuracy)} m.`:'';
-      status('Circle centred on your reported location.'+accuracy);
+      const accuracy=Number.isFinite(pos.coords.accuracy)?` · accuracy ±${Math.round(pos.coords.accuracy)} m`:'';
+      const label='Your location'+accuracy;
+      layers[0].bindPopup(label,{autoPan:false});
+      layers[0].getElement().setAttribute('aria-label',label);
+      layers[0].getElement().title=label;
+      status('');
       if(first)Explorer.focus(map,center,15);
     }
     function request() {

@@ -97,7 +97,8 @@ function update() {
   }
   if(nearby) visible.sort((a,b)=>a.distance-b.distance);
   Explorer.layerCounts(Object.fromEntries(categories.map(c=>[c.id,counts[c.id]||0])));
-  Explorer.count(visible.length,'project locations',visible.filter(x=>x.layer).length,nearby?'within '+nearbyRadius.toLocaleString()+' metres':'','without geometry');
+  if(nearby)Explorer.count(visible.length,'nearby locations',null,nearbyRadius.toLocaleString()+' m radius');
+  else Explorer.count(visible.length,'project locations',visible.filter(x=>x.layer).length,'','without geometry');
   Explorer.results(visible,e=>e.f.properties.title,e=>`${nearby?Math.round(e.distance)+' m · ':''}${e.f.properties.stage} · ${e.f.properties.location || e.f.properties.owner}`,select);
   scheduleShareURL();
   if(!visible.length) $('result-note').textContent='No matching project records in this snapshot. Broaden the radius, clear filters or ask the City. This does not establish that no work is planned.';
@@ -131,7 +132,7 @@ function setNearby(ll,radius) {
     option.value=radius;option.textContent=radius.toLocaleString()+' metres';
   } else if(option)option.remove();
   $('radius').value=String(radius);
-  $('nearby-label').textContent=`Within ${radius.toLocaleString()} metres of your reported location. Drag anywhere on the circumference to resize; use × at the bottom to dismiss. Distances are to project geometry.`;
+  $('nearby-label').textContent='Drag edge to resize · × to dismiss';
   $('nearby-label').hidden=false;
   if(changed)update();
   if(first)$('results-tab').click();
