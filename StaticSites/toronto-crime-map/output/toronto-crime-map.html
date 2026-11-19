@@ -1472,10 +1472,11 @@ summary {
 }
 
 /* The share glyph occupies the search row rather than another control row. */
-.search-row { display: flex; align-items: center; gap: 8px; }
-.search-row input[type="search"] { flex: 1; width: 0; min-width: 0; }
+.search-row { display: flex; align-items: stretch; gap: 8px; }
+.search-row input[type="search"] { flex: 1; width: 0; min-width: 0;
+  box-sizing: border-box; height: 44px; min-height: 44px; margin: 0; line-height: 20px; }
 #copy-view { display: grid; place-items: center; flex: 0 0 44px; width: 44px;
-  height: 44px; min-height: 44px; padding: 0; background: var(--paper);
+  box-sizing: border-box; height: 44px; min-height: 44px; margin: 0; padding: 0; background: var(--paper);
   border: 1px solid var(--line); border-radius: 6px; color: var(--ink); cursor: pointer; }
 #copy-view svg { display: block; }
 #copy-view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

@@ -37,6 +37,7 @@ def run(browser, snapshots=False, projects=None):
     assert page.locator('#copy-view').get_attribute('aria-label')=='Copy link to this view'
     assert page.locator('.search-row #search').count()==1 and page.locator('.search-row #copy-view svg').count()==1
     assert page.locator('.share-view').count()==0
+    assert page.evaluate("()=>{const a=document.getElementById('search').getBoundingClientRect(),b=document.getElementById('copy-view').getBoundingClientRect();return Math.abs(a.y-b.y)<.5 && Math.abs(a.height-b.height)<.5;}"),'Search/share borders are not aligned'
     # One enabled category and a query yield a compact but nonempty/empty
     # result set deterministically, including chunked permit rendering.
     chosen=page.evaluate("document.querySelector('[data-layer]').dataset.layer")
