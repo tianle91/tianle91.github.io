@@ -2,7 +2,7 @@
 import argparse
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from urllib.parse import urlencode
+from urllib.parse import urlencode,parse_qs,urlsplit
 from playwright.sync_api import sync_playwright
 from staticsites.snapshots import Snapshotter
 from build_site import render
@@ -40,8 +40,8 @@ def run(browser):
                 assert restored.evaluate("[$('scope').value,$('stage').value,$('owner').value,$('basemap').value,$('radius').value]")==['register','Construction','Transportation Services','1','1000']
                 assert restored.evaluate('categories.filter(c=>Explorer.enabled(c.id)).map(c=>c.id)')==['roads']
                 assert restored.evaluate('visible.map(e=>e.f.properties.id)')==['bridge']
-                assert restored.evaluate('map.getCenter().lat')==43.65
-                assert restored.evaluate('map.getCenter().lng')==-79.38
+                camera=parse_qs(urlsplit(shared).query)
+                assert restored.evaluate('p=>map.project(map.getCenter(),+p.z[0]).distanceTo(map.project([+p.lat[0],+p.lng[0]],+p.z[0]))',camera)<1
                 assert restored.evaluate('map.getZoom()')==15
                 assert restored.evaluate('nearby===null')
                 # Empty layer selection must survive a reload.

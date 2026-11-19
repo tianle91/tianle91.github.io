@@ -15,7 +15,7 @@ key or change filters. Project lines and pins enlarge at neighbourhood zoom.
 
 ## Share a view
 
-Pan/zoom and choose filters, then use **Copy link to this view**, or copy the
+Pan/zoom and choose filters, then use the share glyph beside search (**Copy link to this view**), or copy the
 browser address. The URL updates with `replaceState` rather than adding a browser
 history entry for every pan or keystroke. Opening a link restores its centre and
 zoom, search, collection, stage, owner, category layers (including none selected),

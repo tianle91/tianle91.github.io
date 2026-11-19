@@ -34,6 +34,9 @@ def run(browser, snapshots=False, projects=None):
     page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(url+'?utm_source=share-regression#anchor',timeout=120000);page.wait_for_function(snap.READY,timeout=120000)
     assert page.locator('#copy-view').is_visible()
+    assert page.locator('#copy-view').get_attribute('aria-label')=='Copy link to this view'
+    assert page.locator('.search-row #search').count()==1 and page.locator('.search-row #copy-view svg').count()==1
+    assert page.locator('.share-view').count()==0
     # One enabled category and a query yield a compact but nonempty/empty
     # result set deterministically, including chunked permit rendering.
     chosen=page.evaluate("document.querySelector('[data-layer]').dataset.layer")

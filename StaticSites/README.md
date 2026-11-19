@@ -62,7 +62,7 @@ macro projects' Matplotlib PNGs remain separate static charts.
 
 ## Shareable map views
 
-All eight maps provide **Copy link to this view** and keep camera/search/layer
+All eight maps provide a compact share glyph beside search (**Copy link to this view**) and keep camera/search/layer
 choices in the URL. Permit links also preserve status/type/year, flood-map links
 preserve watershed, and transit links preserve each band and route overlay.
 DineSafe includes its nearest-ranking preference; obtaining a recipient’s

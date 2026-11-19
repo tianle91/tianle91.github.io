@@ -735,18 +735,19 @@ summary {
   }
 }
 
-/* Shared view links remain available in the compact mobile sheet. */
-.share-view { margin: 0 16px 10px; }
-#copy-view { width: 100%; min-height: 36px; padding: 6px 12px; background: var(--paper);
-  border: 1px solid var(--line); border-radius: 6px; color: var(--ink); font-size: 12px; cursor: pointer; }
-#share-status { margin: 4px 0 0; font-size: 11px; }
+/* The share glyph occupies the search row rather than another control row. */
+.search-row { display: flex; align-items: center; gap: 8px; }
+.search-row input[type="search"] { flex: 1; width: 0; min-width: 0; }
+#copy-view { display: grid; place-items: center; flex: 0 0 44px; width: 44px;
+  height: 44px; min-height: 44px; padding: 0; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 6px; color: var(--ink); cursor: pointer; }
+#copy-view svg { display: block; }
+#copy-view:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#share-status { margin: 6px 0 0; font-size: 11px; }
+#share-status:empty { display: none; }
 
     </style>
     <style>
-      .share-view { margin: 0 16px 10px; }
-      #copy-view { width: 100%; min-height: 36px; padding: 6px 12px; background: #fff;
-        border: 1px solid #c8bedb; border-radius: 6px; color: #543493; font-size: 12px; cursor: pointer; }
-      #share-status { margin: 4px 0 0; font-size: 11px; }
       #nearby-label { margin: 6px 16px; }
       .report-311 { display: flex; align-items: center; justify-content: space-between;
         gap: 12px; min-height: 40px; margin: 0 16px 10px; padding: 8px 12px;
@@ -1236,8 +1237,6 @@ body.site-tool {
           target="_blank" rel="noopener" aria-label="Report an infrastructure problem to Toronto 311 (opens in a new tab)">
           <span>Report a problem to 311</span><span aria-hidden="true">↗</span>
         </a>
-        <div class="share-view"><button type="button" id="copy-view">Copy link to this view</button>
-          <p id="share-status" role="status" aria-live="polite"></p></div>
         <p id="nearby-label" class="hint" hidden></p>
         <nav class="explorer-tabs" role="tablist" aria-label="Map exploration">
           <button
@@ -1082488,6 +1082487,17 @@ const Explorer = (() => {
   function hasSharedView() {
     return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
   }
+  function shareButton() {
+    const search=byId('search'), area=search.parentElement;
+    const row=document.createElement('div');row.className='search-row';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';
+    copy.title='Copy link to this view';copy.setAttribute('aria-label','Copy link to this view');
+    copy.innerHTML='<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-4 4 4-4 4 4M7 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    area.insertBefore(row,search);row.append(search,copy);
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    area.append(message);
+    return {copy,message};
+  }
   // Project adapters opt in after their controls and initial view are ready.
   function share(map, {update, fields=[]} = {}) {
     if(typeof location==='undefined' || typeof history==='undefined')return;
@@ -1082497,10 +1082507,7 @@ const Explorer = (() => {
     const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
     const keys=['v','lat','lng','z','q','layers',...fields];
     let timer=null, restoring=false;
-    const holder=document.createElement('div');holder.className='share-view';
-    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';copy.textContent='Copy link to this view';
-    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
-    holder.append(copy,message);byId('stats').after(holder);
+    const {copy,message}=shareButton();
     byId('search').maxLength=300;
     function save() {
       clearTimeout(timer);if(restoring)return;
@@ -1082554,6 +1082561,7 @@ const Explorer = (() => {
 
   return {
     share,
+    shareButton,
     hasSharedView,
     mobile,
     detailPopup,
@@ -1082754,6 +1082762,7 @@ if(typeof module!=='undefined')module.exports=ViewState;
     </script>
     <script>
       const $ = id => document.getElementById(id), esc = Explorer.esc;
+Explorer.shareButton();
 const map = L.map('map', {preferCanvas:true}).setView([43.69,-79.43],11);
 const basemap=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,opacity:0.4,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 map.createPane('major-projects').style.zIndex=450;

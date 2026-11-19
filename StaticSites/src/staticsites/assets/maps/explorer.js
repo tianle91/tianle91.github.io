@@ -367,6 +367,17 @@ const Explorer = (() => {
   function hasSharedView() {
     return typeof location!=='undefined' && !!location.href && typeof MapURL!=='undefined' && !!MapURL.view(new URL(location.href).searchParams);
   }
+  function shareButton() {
+    const search=byId('search'), area=search.parentElement;
+    const row=document.createElement('div');row.className='search-row';
+    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';
+    copy.title='Copy link to this view';copy.setAttribute('aria-label','Copy link to this view');
+    copy.innerHTML='<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16V3m-4 4 4-4 4 4M7 11H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    area.insertBefore(row,search);row.append(search,copy);
+    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
+    area.append(message);
+    return {copy,message};
+  }
   // Project adapters opt in after their controls and initial view are ready.
   function share(map, {update, fields=[]} = {}) {
     if(typeof location==='undefined' || typeof history==='undefined')return;
@@ -376,10 +387,7 @@ const Explorer = (() => {
     const initialView={lat:map.getCenter().lat,lng:map.getCenter().lng,z:map.getZoom()};
     const keys=['v','lat','lng','z','q','layers',...fields];
     let timer=null, restoring=false;
-    const holder=document.createElement('div');holder.className='share-view';
-    const copy=document.createElement('button');copy.id='copy-view';copy.type='button';copy.textContent='Copy link to this view';
-    const message=document.createElement('p');message.id='share-status';message.setAttribute('role','status');message.setAttribute('aria-live','polite');
-    holder.append(copy,message);byId('stats').after(holder);
+    const {copy,message}=shareButton();
     byId('search').maxLength=300;
     function save() {
       clearTimeout(timer);if(restoring)return;
@@ -433,6 +441,7 @@ const Explorer = (() => {
 
   return {
     share,
+    shareButton,
     hasSharedView,
     mobile,
     detailPopup,

@@ -1,4 +1,5 @@
 const $ = id => document.getElementById(id), esc = Explorer.esc;
+Explorer.shareButton();
 const map = L.map('map', {preferCanvas:true}).setView([43.69,-79.43],11);
 const basemap=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,opacity:0.4,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
 map.createPane('major-projects').style.zIndex=450;

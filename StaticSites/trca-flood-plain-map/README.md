@@ -8,7 +8,7 @@ estimated boundaries are dashed cyan, spills are red, and pending updates are am
 
 ## Share a view
 
-Use **Copy link to this view** or copy the address bar to share the current map
+Use the share glyph beside search (**Copy link to this view**) or copy the address bar to share the current map
 centre, zoom, search and selected layers/filters. Links restore that combination
 on a fresh page; invalid values use defaults. URLs update without adding a history
 entry for each interaction. Browser Back/Forward restores incoming URL state.
