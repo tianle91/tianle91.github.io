@@ -28,6 +28,10 @@
     {
       "name": "TRREB Market Watch — mw2609.pdf",
       "url": "https://public.trreb.ca/wp-content/files/market-stats/market-watch/mw2609.pdf"
+    },
+    {
+      "name": "Valery — GTA new power-of-sale listings, October 28, 2026 report",
+      "url": "https://valery.ca/research/power-of-sale/"
     }
   ],
   "groups": [
@@ -7467,6 +7471,143 @@
       "source_url": "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report"
     },
     {
+      "id": "power_sale",
+      "title": "GTA new power-of-sale listings",
+      "unit": "listings",
+      "frequency": "Monthly",
+      "source": "Valery analysis of TRREB MLS® data, October 2026 report",
+      "source_url": "https://valery.ca/research/power-of-sale/",
+      "published_at": "2026-10-28",
+      "note": "GTA new listings, October 2024–September 2026. A home relisted under a new MLS® number counts again. Counts are listings, not unique homes, active inventory or completed sales. Fixed October 28, 2026 report vintage; no forecast or earlier history is inferred.",
+      "series": [
+        {
+          "name": "GTA new power-of-sale listings",
+          "points": [
+            {
+              "period": "2024-10",
+              "value": 31.0,
+              "status": "observed"
+            },
+            {
+              "period": "2024-11",
+              "value": 37.0,
+              "status": "observed"
+            },
+            {
+              "period": "2024-12",
+              "value": 25.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-01",
+              "value": 35.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-02",
+              "value": 38.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-03",
+              "value": 34.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-04",
+              "value": 41.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-05",
+              "value": 49.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-06",
+              "value": 42.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-07",
+              "value": 49.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-08",
+              "value": 50.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-09",
+              "value": 53.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-10",
+              "value": 44.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-11",
+              "value": 42.0,
+              "status": "observed"
+            },
+            {
+              "period": "2025-12",
+              "value": 34.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-01",
+              "value": 51.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-02",
+              "value": 44.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-03",
+              "value": 82.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-04",
+              "value": 92.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-05",
+              "value": 88.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-06",
+              "value": 75.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-07",
+              "value": 85.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-08",
+              "value": 83.0,
+              "status": "observed"
+            },
+            {
+              "period": "2026-09",
+              "value": 87.0,
+              "status": "observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "prices",
       "title": "Toronto-area monthly sale prices",
       "unit": "CAD",
@@ -8222,10 +8363,6 @@
   ],
   "gaps": [
     {
-      "metric": "Power-of-sale listings",
-      "detail": "No verified, consistently defined public historical series has been obtained. The reported 600+ figure is excluded."
-    },
-    {
       "metric": "Active listing inventory",
       "detail": "Available in individual TRREB monthly reports, but a consistent historical series has not yet been assembled. The roughly 26,000 figure is not plotted as a time series."
     },
@@ -8234,5 +8371,5 @@
       "detail": "This version uses TRREB average prices. A consistently revised monthly benchmark series is still needed for a stronger cycle-timing study."
     }
   ],
-  "retrieved_at": "2026-11-01T22:18:20+00:00"
+  "retrieved_at": "2026-11-22T01:56:01+00:00"
 }

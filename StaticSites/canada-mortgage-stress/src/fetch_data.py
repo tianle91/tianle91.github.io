@@ -6,6 +6,7 @@ layout extraction: plain extraction can reverse columns and reorder headings.
 from __future__ import annotations
 
 import calendar
+import csv
 from datetime import datetime, timezone
 from io import BytesIO
 import json
@@ -27,6 +28,47 @@ MARKET = 'https://public.trreb.ca/market-data/market-watch/'
 HISTORIC = 'https://public.trreb.ca/wp-content/files/market-stats/market-watch/historic.pdf'
 ARCHIVE = 'https://public.trreb.ca/wp-content/files/market-stats/market-watch/mw{}12.pdf'
 MONTHS = list(calendar.month_name)[1:]
+POWER_SALE = 'https://valery.ca/research/power-of-sale/'
+POWER_SALE_SNAPSHOT = DATA_DIR / 'valery-gta-power-of-sale-2026-10.csv'
+
+
+def power_sale_group(path=POWER_SALE_SNAPSHOT):
+    """Reviewed transcription of the October 28 report's accessible monthly table.
+
+    The rolling source blocks automated downloads. Keep this explicit fixed
+    vintage until a new edition has been reviewed; never estimate screenshot bars.
+    """
+    with path.open(newline='') as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != ['period', 'new_listings']:
+            raise ValueError('Invalid power-of-sale snapshot columns')
+        points = []
+        for row in reader:
+            if not re.fullmatch(r'\d+', row['new_listings'] or ''):
+                raise ValueError('Power-of-sale counts must be whole numbers')
+            points.append(point(row['period'], int(row['new_listings'])))
+    group = {'id': 'power_sale', 'title': 'GTA new power-of-sale listings',
+             'unit': 'listings', 'frequency': 'Monthly',
+             'source': 'Valery analysis of TRREB MLS® data, October 2026 report',
+             'source_url': POWER_SALE, 'published_at': '2026-10-28',
+             'note': 'GTA new listings, October 2024–September 2026. A home relisted under a new MLS® number counts again. Counts are listings, not unique homes, active inventory or completed sales. Fixed October 28, 2026 report vintage; no forecast or earlier history is inferred.',
+             'series': [{'name': 'GTA new power-of-sale listings', 'points': points}]}
+    validate_power_sale(group)
+    return group
+
+
+def validate_power_sale(group):
+    if group['unit'] != 'listings' or group['frequency'] != 'Monthly' or len(group['series']) != 1:
+        raise ValueError('Invalid power-of-sale definition')
+    points = group['series'][0]['points']
+    expected = [f'{2024 + (9 + i) // 12}-{(9 + i) % 12 + 1:02}' for i in range(24)]
+    if [p['period'] for p in points] != expected:
+        raise ValueError('Power-of-sale snapshot must cover October 2024–September 2026')
+    if any(not math.isfinite(p['value']) or p['value'] < 0 or p['value'] % 1 or
+           p['status'] != 'observed' for p in points):
+        raise ValueError('Power-of-sale counts must be nonnegative observed integers')
+    if [sum(p['value'] for p in points[i:i + 12]) for i in (0, 12)] != [484, 807]:
+        raise ValueError('Power-of-sale counts disagree with published annual totals')
 
 
 def point(period, value, status='observed', source=None):
@@ -138,7 +180,11 @@ def validate_dataset(data):
     ids = [g['id'] for g in data['groups']]
     if len(ids) != len(set(ids)) or len(ids) < 7:
         raise ValueError('Missing or duplicate metric groups')
+    if 'power_sale' not in ids:
+        raise ValueError('Missing power-of-sale group')
     for group in data['groups']:
+        if group['id'] == 'power_sale':
+            validate_power_sale(group)
         for series in group['series']:
             periods = [p['period'] for p in series['points']]
             if not periods or periods != sorted(set(periods)):
@@ -234,9 +280,11 @@ def collect(get):
     ]
     for group in groups:
         group['source_url'] = HISTORIC if group['id'] == 'annual' else MARKET if group['id'] == 'prices' else REPORT
+    groups.insert(-2, power_sale_group())
+    sources.append({'name': 'Valery — GTA new power-of-sale listings, October 28, 2026 report',
+                    'url': POWER_SALE})
     return validate_dataset({'schema_version': 1, 'sources': sources, 'groups': groups,
         'gaps': [
-            {'metric': 'Power-of-sale listings', 'detail': 'No verified, consistently defined public historical series has been obtained. The reported 600+ figure is excluded.'},
             {'metric': 'Active listing inventory', 'detail': 'Available in individual TRREB monthly reports, but a consistent historical series has not yet been assembled. The roughly 26,000 figure is not plotted as a time series.'},
             {'metric': 'Comparable resale benchmark / HPI', 'detail': 'This version uses TRREB average prices. A consistently revised monthly benchmark series is still needed for a stronger cycle-timing study.'},
         ]})

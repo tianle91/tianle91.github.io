@@ -39,6 +39,49 @@ def test_reference_observations_and_forecast_boundary(data):
     assert outlook[-1] == {'period': '2027-06', 'value': .44, 'status': 'forecast'}
 
 
+def test_power_sale_snapshot_matches_published_counts(data):
+    group = fetch_data.power_sale_group()
+    assert group == next(g for g in data['groups'] if g['id'] == 'power_sale')
+    points = group['series'][0]['points']
+    assert len(points) == 24
+    assert points[0]['period'] == '2024-10'
+    assert points[-1]['period'] == '2026-09'
+    assert [p['value'] for p in points[12:]] == [44, 42, 34, 51, 44, 82, 92, 88, 75, 85, 83, 87]
+    assert sum(p['value'] for p in points[:12]) == 484
+    assert sum(p['value'] for p in points[12:]) == 807
+    assert group['unit'] == 'listings'
+    assert 'new MLS® number counts again' in group['note']
+
+
+@pytest.mark.parametrize('damage', ['truncated', 'decimal', 'negative', 'wrong_count', 'duplicate'])
+def test_power_sale_bad_snapshot_cannot_replace_dataset(data, tmp_path, damage):
+    snapshot = fetch_data.POWER_SALE_SNAPSHOT.read_text()
+    if damage == 'truncated': snapshot = snapshot.replace('2026-09,87', '')
+    elif damage == 'decimal': snapshot = snapshot.replace('2026-09,87', '2026-09,87.5')
+    elif damage == 'negative': snapshot = snapshot.replace('2026-09,87', '2026-09,-87')
+    elif damage == 'wrong_count': snapshot = snapshot.replace('2026-09,87', '2026-09,88')
+    else: snapshot = snapshot.replace('2026-09,87', '2026-08,87')
+    source = tmp_path / 'snapshot.csv'
+    source.write_text(snapshot)
+    target = tmp_path / 'series.json'
+    target.write_text(json.dumps(data))
+    original = target.read_bytes()
+    with pytest.raises(ValueError):
+        data['groups'][-3] = fetch_data.power_sale_group(source)
+        publish(data, target)
+    assert target.read_bytes() == original
+
+
+def test_power_sale_forecast_and_missing_group_are_rejected(data):
+    group = next(g for g in data['groups'] if g['id'] == 'power_sale')
+    group['series'][0]['points'][-1]['status'] = 'forecast'
+    with pytest.raises(ValueError, match='observed integers'):
+        validate_dataset(data)
+    data['groups'].remove(group)
+    with pytest.raises(ValueError, match='Missing power-of-sale'):
+        validate_dataset(data)
+
+
 @pytest.mark.parametrize('year,period,value', [
     ('2021','2020-01',838087), ('2021','2021-12',1157849),
     ('2023','2022-02',1334021), ('2023','2023-12',1084692),
@@ -110,7 +153,7 @@ def test_required_source_failure_does_not_publish(data, tmp_path):
 @pytest.mark.parametrize('damage', [None, 'terminal', 'prior_year', 'future'])
 def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypatch, damage):
     """A readable but truncated latest PDF must never replace published history."""
-    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy(data['groups'][:-2]))
+    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy([g for g in data['groups'] if g['id'] not in {'power_sale', 'prices', 'annual'}]))
     monkeypatch.setattr(fetch_data, 'parse_annual', lambda _: data['groups'][-1]['series'][0]['points'])
 
     def parse_fixture(content, source):
@@ -144,7 +187,7 @@ def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypa
 def test_offline_build_is_deterministic_and_embeds_sources(data, tmp_path, monkeypatch):
     source = tmp_path / 'src'
     source.mkdir()
-    for filename in ('page.html','style.css','timeline.js','app.js'):
+    for filename in ('page.html','style.css','timeline.js','app.js','power-sale.js'):
         (source / filename).write_bytes((ROOT / 'src' / filename).read_bytes())
     inputs = tmp_path / 'data'
     inputs.mkdir()
@@ -159,7 +202,7 @@ def test_offline_build_is_deterministic_and_embeds_sources(data, tmp_path, monke
     assert build_site.build().read_bytes() == original
     assert target.stat().st_mtime_ns == mtime
     html = target.read_text()
-    assert all(marker not in html for marker in ('__DATA__','__TIMELINE__','__APP__','__STYLE__'))
+    assert all(marker not in html for marker in ('__DATA__','__TIMELINE__','__APP__','__STYLE__','__POWER_SALE__'))
     soup = BeautifulSoup(html,'html.parser')
     assert json.loads(soup.select_one('#dataset').string) == data
     assert not soup.select('script[src],link[rel=stylesheet]')

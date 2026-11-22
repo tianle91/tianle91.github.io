@@ -1,6 +1,6 @@
 # Ontario arrears & house prices
 
-A single-plot comparison of **Ontario bank mortgage arrears** and **Toronto-area
+An indexed comparison of **Ontario bank mortgage arrears** and **Toronto-area
 house prices**. Both series share one calendar axis and one index axis. Each
 starts at 100 in the first shared month, so 120 means 20% above that series’
 starting value. The tooltip shows the index alongside the original share of
@@ -22,7 +22,7 @@ Hover or tap to inspect, or focus the chart and use Left/Right to step through
 months (Home/End jump to the window edges). The tooltip labels the exact period of each
 nearest published observation, within half the reporting interval. It never
 interpolates values or carries a stale series beyond its published coverage.
-Definitions and linked sources are in one collapsed section beneath the chart.
+Definitions and linked sources are in one collapsed section beneath the charts.
 The page embeds all data, scripts and styles and works offline.
 
 ## Data and limits
@@ -46,13 +46,38 @@ lag or prove that prices have not bottomed.
 
 The source JSON retains the original broader CMHC tables for provenance and
 refresh validation. Quarterly bank history, annual prices, GTHA private-lender rates, other
-provinces and national consumer-credit series are excluded from the plot. No
-power-of-sale or inventory history is presented.
+provinces and national consumer-credit series are excluded from the indexed plot.
+Inventory history is not presented.
+
+A separate **GTA new power-of-sale listings** bar chart shows the 24 published
+monthly counts for October 2024–September 2026. The latest 12 months total 807
+versus 484 in the preceding year (+66.7%). It uses a zero-based count axis and
+its own reporting window, preserving the full arrears/price comparison above.
+Hover/tap or keyboard arrows inspect each month; Home/End jump to the edges.
+An expandable table exposes every count without using the chart.
+
+These are new listing events, not unique properties, active inventory or
+completed sales. A property relisted under a new MLS® number counts again.
+The geography is the source's GTA, not all Ontario. No earlier history or
+forecast is inferred. Valery's October 28, 2026 analysis of TRREB MLS® data
+provides the accessible monthly table matching the supplied chart.
+
+`data/valery-gta-power-of-sale-2026-10.csv` is a reviewed transcription of that
+published numerical table (verified November 21, 2026), not estimated bar heights.
+The rolling source blocks automated HTTP downloads. Refreshes therefore retain
+this explicit fixed edition from the committed CSV while fetching CMHC/TRREB;
+they do not claim to discover newer Valery editions. Review the source's dates,
+definition and monthly numbers before replacing the CSV or updating its parser.
+The parser requires 24 consecutive months, integer counts and the published
+12-month totals. All required inputs, including this snapshot, must validate
+before the combined dataset can be published.
 
 ## Visual snapshots
 
 [Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·
-[Mobile (390 × 844)](tests/snapshots/mobile.jpg)
+[Mobile (390 × 844)](tests/snapshots/mobile.jpg) ·
+[Power-of-sale desktop](tests/snapshots/power-sale-desktop.jpg) ·
+[Power-of-sale mobile](tests/snapshots/power-sale-mobile.jpg)
 
 Generate review images of the actual HTML page:
 
@@ -120,10 +145,14 @@ requires reviewing definitions and forecast vintage before updating the parser.
 TRREB archive reports may need extending when a new year creates a history gap.
 
 Sources live in `src/`; `timeline.js` holds the date/selection model and `app.js`
-renders the one SVG plot. `tests/` contains parser fixtures and model checks.
+renders the indexed SVG plot; `power-sale.js` renders the separate count panel. `tests/` contains parser fixtures and model checks.
 The committed artifact is `output/canada-mortgage-stress.html`.
 
 ## Data sources
+
+- [Valery Power of Sale Report, October 2026](https://valery.ca/research/power-of-sale/):
+  GTA new monthly listings, October 2024–September 2026; published October 28,
+  2026. Valery analysis of TRREB MLS® data. The reviewed CSV preserves this edition.
 
 - [CMHC Residential Mortgage Industry Report, Fall 2026](https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report):
   accessible tables, Ontario observations from Figures 1 and 13. Underlying
