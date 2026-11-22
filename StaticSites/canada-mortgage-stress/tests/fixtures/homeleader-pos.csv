@@ -1,0 +1,876 @@
+# Power of sale tracker, Greater Toronto Area. Aggregates only. Data as of 2026-11-22T03:15:05Z. Counts are properties: a property listed under several listing numbers at the same time counts once. Commercial properties are not included. Method: https://homeleaderrealty.com/power-of-sale-tracker/#pos-method
+month,scope,region,city,property_type,active_listings,listed,new_listings,sold,left_unsold,avg_days_on_market,median_list_price
+2025-01,gta,,,,53,37,33,24,11,40,899900
+2025-02,gta,,,,66,38,30,20,5,41,912400
+2025-03,gta,,,,71,34,29,15,14,42,999999
+2025-04,gta,,,,89,42,35,9,15,43,899900
+2025-05,gta,,,,99,40,29,9,21,48,899900
+2025-06,gta,,,,106,43,26,16,20,51,894000
+2025-07,gta,,,,103,46,30,21,28,53,899900
+2025-08,gta,,,,116,52,34,18,21,54,957000
+2025-09,gta,,,,117,52,38,26,25,54,899000
+2025-10,gta,,,,112,42,32,28,19,64,899000
+2025-11,gta,,,,111,36,25,22,15,72,923500
+2025-12,gta,,,,107,33,25,16,21,76,899000
+2026-01,gta,,,,122,47,35,12,20,74,914000
+2026-02,gta,,,,125,41,30,23,15,75,869000
+2026-03,gta,,,,136,68,47,25,32,69,914500
+2026-04,gta,,,,155,71,59,29,23,67,849000
+2026-05,gta,,,,152,63,48,34,32,72,799950
+2026-06,gta,,,,155,62,50,37,22,77,849000
+2026-07,gta,,,,163,61,45,29,24,73,819900
+2026-08,gta,,,,179,69,58,28,25,74,818000
+2026-09,gta,,,,181,66,46,34,30,72,849000
+2026-10,gta,,,,183,67,46,31,34,76,839900
+"2026-11 (to date)",gta,,,,190,50,38,19,24,78,809500
+2025-01,region,Toronto,,,19,12,11,8,2,38,849999
+2025-02,region,Toronto,,,22,15,12,9,3,43,824500
+2025-03,region,Toronto,,,27,16,13,6,5,35,799000
+2025-04,region,Toronto,,,38,20,17,4,5,39,764000
+2025-05,region,Toronto,,,37,10,6,4,7,54,799000
+2025-06,region,Toronto,,,38,16,6,0,15,50,799000
+2025-07,region,Toronto,,,37,20,11,6,15,46,839900
+2025-08,region,Toronto,,,36,13,7,7,7,52,799000
+2025-09,region,Toronto,,,33,15,9,8,10,49,799000
+2025-10,region,Toronto,,,32,14,12,10,5,56,874000
+2025-11,region,Toronto,,,32,10,8,6,4,65,1074995
+2025-12,region,Toronto,,,29,8,5,5,6,70,899000
+2026-01,region,Toronto,,,35,15,12,4,5,66,874900
+2026-02,region,Toronto,,,40,16,11,6,5,65,871950
+2026-03,region,Toronto,,,41,17,12,8,8,75,790000
+2026-04,region,Toronto,,,48,20,17,8,5,80,674900
+2026-05,region,Toronto,,,51,19,13,5,11,77,639900
+2026-06,region,Toronto,,,49,18,16,12,8,84,638000
+2026-07,region,Toronto,,,54,17,13,6,6,88,649950
+2026-08,region,Toronto,,,60,30,21,9,15,77,682000
+2026-09,region,Toronto,,,60,17,12,8,9,79,677000
+2026-10,region,Toronto,,,58,15,13,9,8,95,618500
+"2026-11 (to date)",region,Toronto,,,69,23,19,5,7,84,674900
+2025-01,region,Peel,,,9,7,7,7,2,23,1399000
+2025-02,region,Peel,,,14,10,7,3,2,25,1234500
+2025-03,region,Peel,,,16,8,7,3,3,37,1290000
+2025-04,region,Peel,,,18,7,6,4,1,44,1089950
+2025-05,region,Peel,,,24,12,10,1,5,42,919500
+2025-06,region,Peel,,,26,11,8,6,3,53,870000
+2025-07,region,Peel,,,28,15,12,8,5,51,876950
+2025-08,region,Peel,,,34,15,13,5,4,53,1089450
+2025-09,region,Peel,,,37,17,15,11,3,59,844900
+2025-10,region,Peel,,,38,14,9,6,7,64,829945
+2025-11,region,Peel,,,39,11,6,5,5,73,805000
+2025-12,region,Peel,,,39,11,10,5,6,76,839990
+2026-01,region,Peel,,,39,12,9,4,8,77,809000
+2026-02,region,Peel,,,36,9,7,7,5,86,807000
+2026-03,region,Peel,,,34,20,14,11,11,62,826500
+2026-04,region,Peel,,,32,13,11,12,3,74,799450
+2026-05,region,Peel,,,35,17,15,9,5,65,699900
+2026-06,region,Peel,,,35,13,12,11,2,81,709000
+2026-07,region,Peel,,,33,11,10,8,5,77,769900
+2026-08,region,Peel,,,37,15,15,9,2,78,799000
+2026-09,region,Peel,,,41,20,15,11,5,66,819999
+2026-10,region,Peel,,,47,18,14,5,7,67,849900
+"2026-11 (to date)",region,Peel,,,43,11,8,6,9,75,799000
+2025-01,region,York,,,5,2,1,5,1,52,1288000
+2025-02,region,York,,,9,5,5,1,0,36,1375000
+2025-03,region,York,,,11,4,3,1,1,48,1500000
+2025-04,region,York,,,18,11,9,0,4,41,1449500
+2025-05,region,York,,,17,7,5,2,6,47,1149900
+2025-06,region,York,,,16,6,3,6,1,52,1324450
+2025-07,region,York,,,17,4,3,2,1,66,1349000
+2025-08,region,York,,,20,7,5,2,2,66,1499894
+2025-09,region,York,,,17,8,3,2,9,59,1488000
+2025-10,region,York,,,15,7,4,5,4,70,1399900
+2025-11,region,York,,,19,8,4,2,2,73,1399900
+2025-12,region,York,,,23,9,7,1,4,70,1125000
+2026-01,region,York,,,31,13,8,1,4,69,1139000
+2026-02,region,York,,,28,9,7,9,3,70,1009500
+2026-03,region,York,,,35,18,11,3,8,64,1249900
+2026-04,region,York,,,41,19,15,4,9,53,984900
+2026-05,region,York,,,26,10,6,13,12,74,1099500
+2026-06,region,York,,,31,13,10,3,5,70,984900
+2026-07,region,York,,,37,15,9,3,6,64,984900
+2026-08,region,York,,,36,9,8,5,5,81,1374500
+2026-09,region,York,,,35,13,6,7,7,85,1459888
+2026-10,region,York,,,36,21,12,10,10,75,1349944
+"2026-11 (to date)",region,York,,,31,5,3,6,4,85,1459888
+2025-01,region,Durham,,,16,13,11,4,5,45,779500
+2025-02,region,Durham,,,15,5,4,6,0,50,850000
+2025-03,region,Durham,,,12,6,6,4,5,48,837500
+2025-04,region,Durham,,,11,3,2,1,3,44,825000
+2025-05,region,Durham,,,13,6,5,1,3,46,825000
+2025-06,region,Durham,,,17,7,6,2,1,48,825000
+2025-07,region,Durham,,,16,6,3,3,4,48,862450
+2025-08,region,Durham,,,17,10,4,4,5,42,799900
+2025-09,region,Durham,,,18,7,7,4,2,43,724450
+2025-10,region,Durham,,,17,5,5,5,1,59,799900
+2025-11,region,Durham,,,9,4,4,9,3,62,880000
+2025-12,region,Durham,,,8,2,2,3,0,73,840000
+2026-01,region,Durham,,,9,6,5,2,3,58,825888
+2026-02,region,Durham,,,13,6,4,0,2,41,880000
+2026-03,region,Durham,,,17,9,8,3,2,49,900000
+2026-04,region,Durham,,,20,12,10,4,5,39,914950
+2026-05,region,Durham,,,26,13,11,4,3,45,911950
+2026-06,region,Durham,,,28,15,11,9,4,56,921950
+2026-07,region,Durham,,,31,13,10,7,3,62,899900
+2026-08,region,Durham,,,34,9,8,4,2,70,889500
+2026-09,region,Durham,,,33,11,9,5,7,60,880000
+2026-10,region,Durham,,,31,11,6,6,7,57,880000
+"2026-11 (to date)",region,Durham,,,36,10,7,1,4,60,889500
+2025-01,region,Halton,,,4,3,3,0,1,,
+2025-02,region,Halton,,,6,3,2,1,0,59,1169444
+2025-03,region,Halton,,,5,0,0,1,0,73,1288888
+2025-04,region,Halton,,,4,1,1,0,2,,
+2025-05,region,Halton,,,8,5,3,1,0,45,1127000
+2025-06,region,Halton,,,9,3,3,2,0,50,1299000
+2025-07,region,Halton,,,5,1,1,2,3,87,1489000
+2025-08,region,Halton,,,9,7,5,0,3,58,1299000
+2025-09,region,Halton,,,12,5,4,1,1,66,1149500
+2025-10,region,Halton,,,10,2,2,2,2,84,1001500
+2025-11,region,Halton,,,12,3,3,0,1,98,1087000
+2025-12,region,Halton,,,8,3,1,2,5,116,1312375
+2026-01,region,Halton,,,8,1,1,1,0,130,1499375
+2026-02,region,Halton,,,8,1,1,1,0,141,1499375
+2026-03,region,Halton,,,9,4,2,0,3,124,1499000
+2026-04,region,Halton,,,14,7,6,1,1,92,1599000
+2026-05,region,Halton,,,14,4,3,3,1,116,1449000
+2026-06,region,Halton,,,12,3,1,2,3,102,1549000
+2026-07,region,Halton,,,8,5,3,5,4,51,1024900
+2026-08,region,Halton,,,12,6,6,1,1,38,1164450
+2026-09,region,Halton,,,12,5,4,3,2,42,1195950
+2026-10,region,Halton,,,11,2,1,1,2,70,1099000
+"2026-11 (to date)",region,Halton,,,11,1,1,1,0,89,899900
+2025-01,type,,,Detached,27,18,16,10,8,41,1288000
+2025-02,type,,,Detached,35,20,15,10,2,42,1280000
+2025-03,type,,,Detached,41,16,14,8,2,51,1199999
+2025-04,type,,,Detached,44,17,15,6,8,53,1114450
+2025-05,type,,,Detached,49,21,14,3,13,53,1099000
+2025-06,type,,,Detached,53,24,15,11,9,51,1129900
+2025-07,type,,,Detached,49,25,15,13,16,51,1200000
+2025-08,type,,,Detached,57,32,22,11,13,44,1299000
+2025-09,type,,,Detached,51,22,16,19,9,53,1250000
+2025-10,type,,,Detached,44,18,15,15,10,62,1374900
+2025-11,type,,,Detached,47,22,16,11,8,67,1599000
+2025-12,type,,,Detached,50,20,16,6,11,68,1314000
+2026-01,type,,,Detached,59,31,24,9,13,58,1300000
+2026-02,type,,,Detached,60,18,14,10,7,66,1399950
+2026-03,type,,,Detached,73,44,33,14,17,58,1450000
+2026-04,type,,,Detached,76,39,31,23,13,61,1474450
+2026-05,type,,,Detached,70,31,23,25,12,66,1299995
+2026-06,type,,,Detached,72,35,29,19,14,64,1274000
+2026-07,type,,,Detached,75,33,26,19,11,62,1199900
+2026-08,type,,,Detached,90,34,32,12,7,68,1194000
+2026-09,type,,,Detached,91,36,26,17,18,67,1279900
+2026-10,type,,,Detached,87,30,21,17,17,72,1107000
+"2026-11 (to date)",type,,,Detached,91,24,18,5,15,71,1086800
+2025-01,type,,,Semi-Detached,2,3,3,2,0,,
+2025-02,type,,,Semi-Detached,4,4,4,2,0,,
+2025-03,type,,,Semi-Detached,4,2,2,0,2,,
+2025-04,type,,,Semi-Detached,5,3,2,1,1,30,849000
+2025-05,type,,,Semi-Detached,7,3,3,0,1,36,849000
+2025-06,type,,,Semi-Detached,5,1,1,2,1,45,824900
+2025-07,type,,,Semi-Detached,7,5,5,2,1,31,819900
+2025-08,type,,,Semi-Detached,8,6,3,3,2,32,938750
+2025-09,type,,,Semi-Detached,6,1,1,2,1,63,871700
+2025-10,type,,,Semi-Detached,7,4,4,3,0,69,899000
+2025-11,type,,,Semi-Detached,7,2,1,1,1,74,849000
+2025-12,type,,,Semi-Detached,3,0,0,3,1,,
+2026-01,type,,,Semi-Detached,1,0,0,2,0,,
+2026-02,type,,,Semi-Detached,3,3,2,0,1,,
+2026-03,type,,,Semi-Detached,5,4,3,1,1,19,774999
+2026-04,type,,,Semi-Detached,7,4,3,1,1,27,835000
+2026-05,type,,,Semi-Detached,6,4,3,3,2,27,866950
+2026-06,type,,,Semi-Detached,8,4,4,2,0,41,911950
+2026-07,type,,,Semi-Detached,9,7,5,3,3,33,899000
+2026-08,type,,,Semi-Detached,14,5,5,0,0,44,811750
+2026-09,type,,,Semi-Detached,17,9,8,4,2,56,759000
+2026-10,type,,,Semi-Detached,15,7,4,6,3,70,849000
+"2026-11 (to date)",type,,,Semi-Detached,13,5,1,3,4,75,849000
+2025-01,type,,,Townhouse,3,2,1,3,1,,
+2025-02,type,,,Townhouse,3,3,2,2,1,,
+2025-03,type,,,Townhouse,6,6,6,2,1,10,774450
+2025-04,type,,,Townhouse,9,5,3,0,2,29,729900
+2025-05,type,,,Townhouse,9,6,4,4,2,35,749000
+2025-06,type,,,Townhouse,14,10,8,2,3,36,722250
+2025-07,type,,,Townhouse,16,6,5,4,0,51,739000
+2025-08,type,,,Townhouse,17,6,3,2,3,57,749900
+2025-09,type,,,Townhouse,26,17,14,1,7,34,704450
+2025-10,type,,,Townhouse,24,6,5,6,2,53,749000
+2025-11,type,,,Townhouse,21,6,4,7,2,64,799900
+2025-12,type,,,Townhouse,16,4,3,5,4,64,714000
+2026-01,type,,,Townhouse,22,9,7,0,3,62,709450
+2026-02,type,,,Townhouse,20,7,6,8,1,61,735000
+2026-03,type,,,Townhouse,16,6,4,7,3,66,798500
+2026-04,type,,,Townhouse,21,8,8,1,2,64,719900
+2026-05,type,,,Townhouse,28,12,10,2,3,65,624000
+2026-06,type,,,Townhouse,29,12,9,7,4,72,619000
+2026-07,type,,,Townhouse,32,12,9,4,5,59,680100
+2026-08,type,,,Townhouse,27,7,6,7,5,71,649000
+2026-09,type,,,Townhouse,27,7,4,6,1,75,675000
+2026-10,type,,,Townhouse,33,15,9,2,7,67,689000
+"2026-11 (to date)",type,,,Townhouse,32,7,7,7,1,77,689450
+2025-01,type,,,"Condo Apartment",11,7,7,8,0,44,600000
+2025-02,type,,,"Condo Apartment",15,8,7,3,1,42,648000
+2025-03,type,,,"Condo Apartment",15,8,5,4,4,37,599000
+2025-04,type,,,"Condo Apartment",19,9,7,1,4,42,649000
+2025-05,type,,,"Condo Apartment",20,6,4,1,4,49,611750
+2025-06,type,,,"Condo Apartment",17,5,0,1,7,51,599000
+2025-07,type,,,"Condo Apartment",19,9,5,2,5,48,599000
+2025-08,type,,,"Condo Apartment",21,6,5,2,2,54,500000
+2025-09,type,,,"Condo Apartment",20,9,5,4,6,49,579000
+2025-10,type,,,"Condo Apartment",21,9,6,3,5,52,610000
+2025-11,type,,,"Condo Apartment",22,6,4,2,3,59,619500
+2025-12,type,,,"Condo Apartment",25,6,5,2,1,73,610000
+2026-01,type,,,"Condo Apartment",26,4,2,1,2,90,578000
+2026-02,type,,,"Condo Apartment",27,7,5,3,3,93,568000
+2026-03,type,,,"Condo Apartment",27,12,5,2,10,74,544900
+2026-04,type,,,"Condo Apartment",33,14,11,4,4,77,544900
+2026-05,type,,,"Condo Apartment",37,13,12,4,5,73,525000
+2026-06,type,,,"Condo Apartment",34,9,7,9,3,91,499950
+2026-07,type,,,"Condo Apartment",36,7,5,3,2,108,499950
+2026-08,type,,,"Condo Apartment",40,21,14,8,9,93,509950
+2026-09,type,,,"Condo Apartment",37,12,6,6,9,78,529000
+2026-10,type,,,"Condo Apartment",38,13,10,6,6,83,534450
+"2026-11 (to date)",type,,,"Condo Apartment",44,11,11,4,1,84,529450
+2025-01,type,,,Multiplex,1,1,0,0,1,,
+2025-02,type,,,Multiplex,1,1,0,0,1,,
+2025-03,type,,,Multiplex,1,0,0,0,0,,
+2025-04,type,,,Multiplex,1,1,1,1,0,,
+2025-05,type,,,Multiplex,1,0,0,0,0,,
+2025-06,type,,,Multiplex,1,0,0,0,0,,
+2025-07,type,,,Multiplex,1,0,0,0,0,,
+2025-08,type,,,Multiplex,1,0,0,0,0,,
+2025-09,type,,,Multiplex,1,1,0,0,1,,
+2025-10,type,,,Multiplex,1,0,0,0,0,,
+2025-11,type,,,Multiplex,1,0,0,0,0,,
+2025-12,type,,,Multiplex,1,1,0,0,1,,
+2026-01,type,,,Multiplex,1,0,0,0,0,,
+2026-02,type,,,Multiplex,1,1,0,0,1,,
+2026-03,type,,,Multiplex,1,0,0,0,0,,
+2026-04,type,,,Multiplex,1,0,0,0,0,,
+2026-05,type,,,Multiplex,1,1,0,0,1,,
+2026-06,type,,,Multiplex,2,1,1,0,0,,
+2026-07,type,,,Multiplex,2,0,0,0,0,,
+2026-08,type,,,Multiplex,1,0,0,0,1,,
+2026-09,type,,,Multiplex,1,0,0,0,0,,
+2026-10,type,,,Multiplex,1,0,0,0,0,,
+"2026-11 (to date)",type,,,Multiplex,1,1,0,0,1,,
+2025-01,type,,,Land,9,6,6,1,1,42,569000
+2025-02,type,,,Land,8,2,2,3,0,57,519394
+2025-03,type,,,Land,4,2,2,1,5,,
+2025-04,type,,,Land,7,3,3,0,0,42,1699000
+2025-05,type,,,Land,9,4,4,1,1,47,1649900
+2025-06,type,,,Land,11,2,1,0,0,64,1649900
+2025-07,type,,,Land,10,1,0,0,2,86,1674450
+2025-08,type,,,Land,11,1,0,0,0,108,1649900
+2025-09,type,,,Land,12,2,2,0,1,112,1344950
+2025-10,type,,,Land,14,5,2,1,2,103,1344950
+2025-11,type,,,Land,12,0,0,1,1,131,1524900
+2025-12,type,,,Land,11,2,1,0,3,134,1125000
+2026-01,type,,,Land,12,3,2,0,2,134,1344500
+2026-02,type,,,Land,13,5,3,2,2,106,1125000
+2026-03,type,,,Land,13,2,2,1,1,134,1049900
+2026-04,type,,,Land,16,6,6,0,3,89,819500
+2026-05,type,,,Land,9,2,0,0,9,139,790000
+2026-06,type,,,Land,9,1,0,0,1,150,790000
+2026-07,type,,,Land,8,2,0,0,3,92,719950
+2026-08,type,,,Land,6,2,1,1,3,69,712000
+2026-09,type,,,Land,7,2,2,1,0,71,699000
+2026-10,type,,,Land,8,2,2,0,1,77,750450
+"2026-11 (to date)",type,,,Land,7,1,0,0,2,99,751000
+2025-01,type,,,Other,0,0,0,0,0,,
+2025-02,type,,,Other,0,0,0,0,0,,
+2025-03,type,,,Other,0,0,0,0,0,,
+2025-04,type,,,Other,4,4,4,0,0,,
+2025-05,type,,,Other,4,0,0,0,0,,
+2025-06,type,,,Other,5,1,1,0,0,59,12500
+2025-07,type,,,Other,1,0,0,0,4,,
+2025-08,type,,,Other,1,1,1,0,1,,
+2025-09,type,,,Other,1,0,0,0,0,,
+2025-10,type,,,Other,1,0,0,0,0,,
+2025-11,type,,,Other,1,0,0,0,0,,
+2025-12,type,,,Other,1,0,0,0,0,,
+2026-01,type,,,Other,1,0,0,0,0,,
+2026-02,type,,,Other,1,0,0,0,0,,
+2026-03,type,,,Other,1,0,0,0,0,,
+2026-04,type,,,Other,1,0,0,0,0,,
+2026-05,type,,,Other,1,0,0,0,0,,
+2026-06,type,,,Other,1,0,0,0,0,,
+2026-07,type,,,Other,1,0,0,0,0,,
+2026-08,type,,,Other,1,0,0,0,0,,
+2026-09,type,,,Other,1,0,0,0,0,,
+2026-10,type,,,Other,1,0,0,0,0,,
+"2026-11 (to date)",type,,,Other,2,1,1,0,0,,
+2025-01,city,Toronto,Toronto,,19,12,11,8,2,38,849999
+2025-02,city,Toronto,Toronto,,22,15,12,9,3,43,824500
+2025-03,city,Toronto,Toronto,,27,16,13,6,5,35,799000
+2025-04,city,Toronto,Toronto,,38,20,17,4,5,39,764000
+2025-05,city,Toronto,Toronto,,37,10,6,4,7,54,799000
+2025-06,city,Toronto,Toronto,,38,16,6,0,15,50,799000
+2025-07,city,Toronto,Toronto,,37,20,11,6,15,46,839900
+2025-08,city,Toronto,Toronto,,36,13,7,7,7,52,799000
+2025-09,city,Toronto,Toronto,,33,15,9,8,10,49,799000
+2025-10,city,Toronto,Toronto,,32,14,12,10,5,56,874000
+2025-11,city,Toronto,Toronto,,32,10,8,6,4,65,1074995
+2025-12,city,Toronto,Toronto,,29,8,5,5,6,70,899000
+2026-01,city,Toronto,Toronto,,35,15,12,4,5,66,874900
+2026-02,city,Toronto,Toronto,,40,16,11,6,5,65,871950
+2026-03,city,Toronto,Toronto,,41,17,12,8,8,75,790000
+2026-04,city,Toronto,Toronto,,48,20,17,8,5,80,674900
+2026-05,city,Toronto,Toronto,,51,19,13,5,11,77,639900
+2026-06,city,Toronto,Toronto,,49,18,16,12,8,84,638000
+2026-07,city,Toronto,Toronto,,54,17,13,6,6,88,649950
+2026-08,city,Toronto,Toronto,,60,30,21,9,15,77,682000
+2026-09,city,Toronto,Toronto,,60,17,12,8,9,79,677000
+2026-10,city,Toronto,Toronto,,58,15,13,9,8,95,618500
+"2026-11 (to date)",city,Toronto,Toronto,,69,23,19,5,7,84,674900
+2025-01,city,Peel,Brampton,,5,4,4,3,1,18,1399000
+2025-02,city,Peel,Brampton,,9,6,5,1,1,20,1280000
+2025-03,city,Peel,Brampton,,13,6,6,1,1,37,1300000
+2025-04,city,Peel,Brampton,,15,6,5,3,1,40,1129900
+2025-05,city,Peel,Brampton,,14,4,3,1,4,48,849500
+2025-06,city,Peel,Brampton,,16,7,5,4,1,52,849500
+2025-07,city,Peel,Brampton,,16,9,7,5,4,46,862500
+2025-08,city,Peel,Brampton,,20,9,8,4,1,45,1089450
+2025-09,city,Peel,Brampton,,21,13,12,10,2,47,849000
+2025-10,city,Peel,Brampton,,23,12,8,5,5,45,844900
+2025-11,city,Peel,Brampton,,24,9,6,5,3,52,807000
+2025-12,city,Peel,Brampton,,26,8,7,4,2,62,824495
+2026-01,city,Peel,Brampton,,22,6,5,3,7,75,807000
+2026-02,city,Peel,Brampton,,21,6,5,5,2,87,809000
+2026-03,city,Peel,Brampton,,22,12,8,5,6,65,813500
+2026-04,city,Peel,Brampton,,21,9,7,8,2,78,799900
+2026-05,city,Peel,Brampton,,28,15,13,4,4,57,699450
+2026-06,city,Peel,Brampton,,24,7,7,11,0,83,704450
+2026-07,city,Peel,Brampton,,22,9,8,7,4,77,739450
+2026-08,city,Peel,Brampton,,26,13,13,8,1,68,777450
+2026-09,city,Peel,Brampton,,24,10,6,9,3,63,780000
+2026-10,city,Peel,Brampton,,24,9,6,4,5,74,780000
+"2026-11 (to date)",city,Peel,Brampton,,25,8,6,3,4,70,709000
+2025-01,city,Peel,Mississauga,,2,3,3,4,1,,
+2025-02,city,Peel,Mississauga,,4,4,2,1,1,,
+2025-03,city,Peel,Mississauga,,1,1,0,2,2,,
+2025-04,city,Peel,Mississauga,,2,1,1,0,0,,
+2025-05,city,Peel,Mississauga,,8,7,6,0,1,19,1004500
+2025-06,city,Peel,Mississauga,,8,4,3,2,2,40,854950
+2025-07,city,Peel,Mississauga,,10,5,4,2,1,40,849400
+2025-08,city,Peel,Mississauga,,11,5,4,1,3,46,819900
+2025-09,city,Peel,Mississauga,,13,4,3,1,1,55,629000
+2025-10,city,Peel,Mississauga,,12,2,1,1,2,68,637000
+2025-11,city,Peel,Mississauga,,12,2,0,0,2,78,622000
+2025-12,city,Peel,Mississauga,,10,2,2,1,3,81,722450
+2026-01,city,Peel,Mississauga,,15,6,4,0,1,73,719900
+2026-02,city,Peel,Mississauga,,12,2,1,2,3,80,649000
+2026-03,city,Peel,Mississauga,,10,6,5,4,4,42,841194
+2026-04,city,Peel,Mississauga,,10,4,4,3,1,46,724394
+2026-05,city,Peel,Mississauga,,6,2,2,5,1,61,689394
+2026-06,city,Peel,Mississauga,,6,1,1,0,1,81,624900
+2026-07,city,Peel,Mississauga,,6,0,0,0,0,112,624900
+2026-08,city,Peel,Mississauga,,6,1,1,0,1,143,624900
+2026-09,city,Peel,Mississauga,,13,10,9,1,2,67,1049000
+2026-10,city,Peel,Mississauga,,19,9,8,1,2,49,1019000
+"2026-11 (to date)",city,Peel,Mississauga,,12,1,0,3,5,76,959000
+2025-01,city,Durham,Oshawa,,4,5,4,2,3,,
+2025-02,city,Durham,Oshawa,,5,2,1,1,0,51,689900
+2025-03,city,Durham,Oshawa,,8,5,5,1,1,45,739900
+2025-04,city,Durham,Oshawa,,7,2,1,1,2,39,699000
+2025-05,city,Durham,Oshawa,,7,3,2,1,2,38,699500
+2025-06,city,Durham,Oshawa,,8,1,1,0,0,62,709500
+2025-07,city,Durham,Oshawa,,6,1,0,1,2,70,734250
+2025-08,city,Durham,Oshawa,,6,5,2,3,2,43,679900
+2025-09,city,Durham,Oshawa,,7,3,3,1,1,31,664999
+2025-10,city,Durham,Oshawa,,7,2,2,2,0,49,689000
+2025-11,city,Durham,Oshawa,,3,1,1,5,0,,
+2025-12,city,Durham,Oshawa,,4,1,1,0,0,,
+2026-01,city,Durham,Oshawa,,1,1,0,1,3,,
+2026-02,city,Durham,Oshawa,,1,1,0,0,1,,
+2026-03,city,Durham,Oshawa,,4,3,3,0,0,,
+2026-04,city,Durham,Oshawa,,2,2,2,3,1,,
+2026-05,city,Durham,Oshawa,,6,5,4,0,1,25,659450
+2026-06,city,Durham,Oshawa,,7,3,2,1,1,36,619000
+2026-07,city,Durham,Oshawa,,8,3,2,1,1,52,654950
+2026-08,city,Durham,Oshawa,,9,3,2,1,1,58,699000
+2026-09,city,Durham,Oshawa,,8,0,0,0,1,90,654500
+2026-10,city,Durham,Oshawa,,9,4,2,1,2,62,699900
+"2026-11 (to date)",city,Durham,Oshawa,,12,4,3,0,1,60,689450
+2025-01,city,York,Markham,,0,0,0,0,0,,
+2025-02,city,York,Markham,,0,0,0,0,0,,
+2025-03,city,York,Markham,,0,0,0,0,0,,
+2025-04,city,York,Markham,,0,0,0,0,0,,
+2025-05,city,York,Markham,,1,1,1,0,0,,
+2025-06,city,York,Markham,,1,0,0,0,0,,
+2025-07,city,York,Markham,,3,2,2,0,0,,
+2025-08,city,York,Markham,,4,1,1,0,0,,
+2025-09,city,York,Markham,,2,1,1,1,2,,
+2025-10,city,York,Markham,,3,2,2,0,1,,
+2025-11,city,York,Markham,,4,1,0,0,0,,
+2025-12,city,York,Markham,,7,4,4,0,1,49,588000
+2026-01,city,York,Markham,,8,4,2,1,2,43,669000
+2026-02,city,York,Markham,,11,4,4,1,0,52,724900
+2026-03,city,York,Markham,,12,5,2,1,3,53,852450
+2026-04,city,York,Markham,,11,2,1,1,2,74,980000
+2026-05,city,York,Markham,,10,3,1,1,3,75,1092450
+2026-06,city,York,Markham,,9,3,0,1,3,62,849000
+2026-07,city,York,Markham,,13,6,3,0,2,49,869999
+2026-08,city,York,Markham,,14,2,2,1,0,76,927450
+2026-09,city,York,Markham,,11,2,0,2,3,89,984900
+2026-10,city,York,Markham,,10,6,3,2,5,58,916950
+"2026-11 (to date)",city,York,Markham,,8,1,0,1,2,85,916950
+2025-01,city,Durham,Pickering,,3,1,1,0,0,,
+2025-02,city,Durham,Pickering,,2,0,0,1,0,,
+2025-03,city,Durham,Pickering,,2,1,1,1,0,,
+2025-04,city,Durham,Pickering,,1,0,0,0,1,,
+2025-05,city,Durham,Pickering,,2,1,1,0,0,,
+2025-06,city,Durham,Pickering,,3,3,2,1,1,,
+2025-07,city,Durham,Pickering,,3,0,0,0,0,,
+2025-08,city,Durham,Pickering,,4,3,1,0,2,,
+2025-09,city,Durham,Pickering,,3,2,2,3,0,,
+2025-10,city,Durham,Pickering,,2,1,1,1,1,,
+2025-11,city,Durham,Pickering,,2,1,1,1,0,,
+2025-12,city,Durham,Pickering,,1,0,0,1,0,,
+2026-01,city,Durham,Pickering,,2,1,1,0,0,,
+2026-02,city,Durham,Pickering,,2,0,0,0,0,,
+2026-03,city,Durham,Pickering,,3,2,2,0,1,,
+2026-04,city,Durham,Pickering,,5,4,3,1,1,21,880000
+2026-05,city,Durham,Pickering,,5,1,1,1,0,46,979000
+2026-06,city,Durham,Pickering,,7,3,3,1,0,57,979000
+2026-07,city,Durham,Pickering,,6,2,1,2,1,80,929500
+2026-08,city,Durham,Pickering,,6,2,2,1,1,62,849000
+2026-09,city,Durham,Pickering,,6,2,2,2,0,78,864500
+2026-10,city,Durham,Pickering,,6,4,2,2,2,57,910000
+"2026-11 (to date)",city,Durham,Pickering,,7,1,1,0,0,69,939999
+2025-01,city,York,"Richmond Hill",,0,0,0,2,0,,
+2025-02,city,York,"Richmond Hill",,3,3,3,0,0,,
+2025-03,city,York,"Richmond Hill",,3,0,0,0,0,,
+2025-04,city,York,"Richmond Hill",,6,3,3,0,0,44,969450
+2025-05,city,York,"Richmond Hill",,5,3,2,2,2,29,1049000
+2025-06,city,York,"Richmond Hill",,5,0,0,0,0,59,1049000
+2025-07,city,York,"Richmond Hill",,3,0,0,2,0,,
+2025-08,city,York,"Richmond Hill",,7,4,4,0,0,64,2999900
+2025-09,city,York,"Richmond Hill",,7,4,1,0,4,49,2899900
+2025-10,city,York,"Richmond Hill",,6,2,1,2,1,64,2698950
+2025-11,city,York,"Richmond Hill",,6,4,1,2,2,65,2249450
+2025-12,city,York,"Richmond Hill",,7,1,1,0,0,85,1990000
+2026-01,city,York,"Richmond Hill",,10,4,3,0,1,83,2145000
+2026-02,city,York,"Richmond Hill",,9,3,2,3,1,86,1739900
+2026-03,city,York,"Richmond Hill",,11,5,2,0,3,70,1739900
+2026-04,city,York,"Richmond Hill",,13,8,8,3,3,37,925000
+2026-05,city,York,"Richmond Hill",,3,0,0,4,6,,
+2026-06,city,York,"Richmond Hill",,6,4,4,0,1,74,1209500
+2026-07,city,York,"Richmond Hill",,6,1,1,1,0,82,1994950
+2026-08,city,York,"Richmond Hill",,7,2,1,0,1,80,1899900
+2026-09,city,York,"Richmond Hill",,8,1,1,0,0,98,1759950
+2026-10,city,York,"Richmond Hill",,8,2,1,1,1,119,1654500
+"2026-11 (to date)",city,York,"Richmond Hill",,7,0,0,1,0,154,1819000
+2025-01,city,Peel,Caledon,,2,0,0,0,0,,
+2025-02,city,Peel,Caledon,,1,0,0,1,0,,
+2025-03,city,Peel,Caledon,,2,1,1,0,0,,
+2025-04,city,Peel,Caledon,,1,0,0,1,0,,
+2025-05,city,Peel,Caledon,,2,1,1,0,0,,
+2025-06,city,Peel,Caledon,,2,0,0,0,0,,
+2025-07,city,Peel,Caledon,,2,1,1,1,0,,
+2025-08,city,Peel,Caledon,,3,1,1,0,0,,
+2025-09,city,Peel,Caledon,,3,0,0,0,0,,
+2025-10,city,Peel,Caledon,,3,0,0,0,0,,
+2025-11,city,Peel,Caledon,,3,0,0,0,0,,
+2025-12,city,Peel,Caledon,,3,1,1,0,1,,
+2026-01,city,Peel,Caledon,,2,0,0,1,0,,
+2026-02,city,Peel,Caledon,,3,1,1,0,0,,
+2026-03,city,Peel,Caledon,,2,2,1,2,1,,
+2026-04,city,Peel,Caledon,,1,0,0,1,0,,
+2026-05,city,Peel,Caledon,,1,0,0,0,0,,
+2026-06,city,Peel,Caledon,,5,5,4,0,1,72,1174900
+2026-07,city,Peel,Caledon,,5,2,2,1,1,33,1075000
+2026-08,city,Peel,Caledon,,5,1,1,1,0,56,1174900
+2026-09,city,Peel,Caledon,,4,0,0,1,0,,
+2026-10,city,Peel,Caledon,,4,0,0,0,0,,
+"2026-11 (to date)",city,Peel,Caledon,,6,2,2,0,0,94,1620000
+2025-01,city,Durham,Ajax,,2,0,0,0,0,,
+2025-02,city,Durham,Ajax,,1,0,0,1,0,,
+2025-03,city,Durham,Ajax,,0,0,0,1,0,,
+2025-04,city,Durham,Ajax,,0,0,0,0,0,,
+2025-05,city,Durham,Ajax,,1,1,1,0,0,,
+2025-06,city,Durham,Ajax,,2,1,1,0,0,,
+2025-07,city,Durham,Ajax,,2,1,1,1,0,,
+2025-08,city,Durham,Ajax,,1,0,0,1,0,,
+2025-09,city,Durham,Ajax,,1,0,0,0,0,,
+2025-10,city,Durham,Ajax,,3,2,2,0,0,,
+2025-11,city,Durham,Ajax,,2,1,1,1,1,,
+2025-12,city,Durham,Ajax,,1,0,0,1,0,,
+2026-01,city,Durham,Ajax,,2,1,1,0,0,,
+2026-02,city,Durham,Ajax,,3,1,1,0,0,,
+2026-03,city,Durham,Ajax,,1,0,0,2,0,,
+2026-04,city,Durham,Ajax,,2,2,2,0,1,,
+2026-05,city,Durham,Ajax,,3,2,2,1,0,,
+2026-06,city,Durham,Ajax,,3,3,2,2,1,,
+2026-07,city,Durham,Ajax,,3,1,1,1,0,,
+2026-08,city,Durham,Ajax,,4,1,1,0,0,,
+2026-09,city,Durham,Ajax,,5,3,2,0,2,26,899999
+2026-10,city,Durham,Ajax,,5,1,1,0,1,47,899000
+"2026-11 (to date)",city,Durham,Ajax,,5,1,1,0,1,56,819000
+2025-01,city,Halton,Burlington,,1,1,1,0,0,,
+2025-02,city,Halton,Burlington,,3,2,2,0,0,,
+2025-03,city,Halton,Burlington,,3,0,0,0,0,,
+2025-04,city,Halton,Burlington,,2,0,0,0,1,,
+2025-05,city,Halton,Burlington,,4,2,1,0,0,,
+2025-06,city,Halton,Burlington,,3,0,0,1,0,,
+2025-07,city,Halton,Burlington,,3,0,0,0,0,,
+2025-08,city,Halton,Burlington,,3,1,1,0,1,,
+2025-09,city,Halton,Burlington,,3,1,0,0,1,,
+2025-10,city,Halton,Burlington,,2,1,1,1,1,,
+2025-11,city,Halton,Burlington,,2,0,0,0,0,,
+2025-12,city,Halton,Burlington,,1,0,0,0,1,,
+2026-01,city,Halton,Burlington,,2,1,1,0,0,,
+2026-02,city,Halton,Burlington,,2,0,0,0,0,,
+2026-03,city,Halton,Burlington,,3,1,1,0,0,,
+2026-04,city,Halton,Burlington,,5,2,2,0,0,130,1999000
+2026-05,city,Halton,Burlington,,5,1,1,1,0,159,1699000
+2026-06,city,Halton,Burlington,,5,1,0,0,1,155,1699000
+2026-07,city,Halton,Burlington,,2,1,1,2,2,,
+2026-08,city,Halton,Burlington,,3,1,1,0,0,,
+2026-09,city,Halton,Burlington,,4,1,1,0,0,,
+2026-10,city,Halton,Burlington,,4,0,0,0,0,,
+"2026-11 (to date)",city,Halton,Burlington,,5,1,1,0,0,93,699000
+2025-01,city,York,Vaughan,,1,0,0,3,0,,
+2025-02,city,York,Vaughan,,2,1,1,0,0,,
+2025-03,city,York,Vaughan,,3,2,2,1,0,,
+2025-04,city,York,Vaughan,,5,3,3,0,1,53,1849999
+2025-05,city,York,Vaughan,,6,1,1,0,0,75,1974500
+2025-06,city,York,Vaughan,,4,2,1,3,1,,
+2025-07,city,York,Vaughan,,5,1,1,0,0,80,1849999
+2025-08,city,York,Vaughan,,4,1,0,1,1,,
+2025-09,city,York,Vaughan,,3,1,0,0,2,,
+2025-10,city,York,Vaughan,,3,2,1,2,0,,
+2025-11,city,York,Vaughan,,4,1,1,0,0,,
+2025-12,city,York,Vaughan,,4,0,0,0,0,,
+2026-01,city,York,Vaughan,,5,1,1,0,0,135,1749000
+2026-02,city,York,Vaughan,,3,0,0,2,0,,
+2026-03,city,York,Vaughan,,5,2,2,0,0,119,1749000
+2026-04,city,York,Vaughan,,9,5,5,0,1,68,1729900
+2026-05,city,York,Vaughan,,7,5,3,4,3,71,1399000
+2026-06,city,York,Vaughan,,7,2,2,2,0,96,999000
+2026-07,city,York,Vaughan,,9,5,3,1,2,80,1399000
+2026-08,city,York,Vaughan,,10,2,2,0,1,99,1374500
+2026-09,city,York,Vaughan,,7,1,0,3,1,129,1349999
+2026-10,city,York,Vaughan,,7,4,3,3,1,132,1749000
+"2026-11 (to date)",city,York,Vaughan,,5,2,2,3,1,91,2890000
+2025-01,city,Durham,Whitby,,2,2,1,1,1,,
+2025-02,city,Durham,Whitby,,3,3,3,2,0,,
+2025-03,city,Durham,Whitby,,2,0,0,1,0,,
+2025-04,city,Durham,Whitby,,3,1,1,0,0,,
+2025-05,city,Durham,Whitby,,2,0,0,0,1,,
+2025-06,city,Durham,Whitby,,2,1,1,1,0,,
+2025-07,city,Durham,Whitby,,3,2,1,0,1,,
+2025-08,city,Durham,Whitby,,4,2,1,0,1,,
+2025-09,city,Durham,Whitby,,3,0,0,0,1,,
+2025-10,city,Durham,Whitby,,2,0,0,1,0,,
+2025-11,city,Durham,Whitby,,1,0,0,0,1,,
+2025-12,city,Durham,Whitby,,1,1,1,1,0,,
+2026-01,city,Durham,Whitby,,2,2,2,1,0,,
+2026-02,city,Durham,Whitby,,4,2,2,0,0,,
+2026-03,city,Durham,Whitby,,5,1,1,0,0,54,1269900
+2026-04,city,Durham,Whitby,,6,3,2,0,2,61,1284945
+2026-05,city,Durham,Whitby,,5,1,1,1,1,83,1299990
+2026-06,city,Durham,Whitby,,6,3,1,1,1,77,1181950
+2026-07,city,Durham,Whitby,,6,1,1,1,0,106,974450
+2026-08,city,Durham,Whitby,,7,2,2,1,0,110,1049000
+2026-09,city,Durham,Whitby,,6,3,3,2,2,45,1024450
+2026-10,city,Durham,Whitby,,5,1,1,2,0,50,999900
+"2026-11 (to date)",city,Durham,Whitby,,5,0,0,0,0,71,999900
+2025-01,city,Durham,Clarington,,1,1,1,1,1,,
+2025-02,city,Durham,Clarington,,0,0,0,1,0,,
+2025-03,city,Durham,Clarington,,0,0,0,0,0,,
+2025-04,city,Durham,Clarington,,0,0,0,0,0,,
+2025-05,city,Durham,Clarington,,0,0,0,0,0,,
+2025-06,city,Durham,Clarington,,1,1,1,0,0,,
+2025-07,city,Durham,Clarington,,1,1,1,1,0,,
+2025-08,city,Durham,Clarington,,1,0,0,0,0,,
+2025-09,city,Durham,Clarington,,1,0,0,0,0,,
+2025-10,city,Durham,Clarington,,1,0,0,0,0,,
+2025-11,city,Durham,Clarington,,0,1,1,1,1,,
+2025-12,city,Durham,Clarington,,0,0,0,0,0,,
+2026-01,city,Durham,Clarington,,0,0,0,0,0,,
+2026-02,city,Durham,Clarington,,1,1,1,0,0,,
+2026-03,city,Durham,Clarington,,3,2,2,0,0,,
+2026-04,city,Durham,Clarington,,4,1,1,0,0,,
+2026-05,city,Durham,Clarington,,6,4,3,1,1,35,966450
+2026-06,city,Durham,Clarington,,4,3,3,4,1,,
+2026-07,city,Durham,Clarington,,5,3,3,2,0,47,969900
+2026-08,city,Durham,Clarington,,5,1,1,1,0,75,980000
+2026-09,city,Durham,Clarington,,5,3,2,1,2,32,980000
+2026-10,city,Durham,Clarington,,4,1,0,1,1,,
+"2026-11 (to date)",city,Durham,Clarington,,4,2,1,1,1,,
+2025-01,city,Halton,Oakville,,0,1,1,0,1,,
+2025-02,city,Halton,Oakville,,1,1,0,0,0,,
+2025-03,city,Halton,Oakville,,1,0,0,0,0,,
+2025-04,city,Halton,Oakville,,0,0,0,0,1,,
+2025-05,city,Halton,Oakville,,2,2,1,0,0,,
+2025-06,city,Halton,Oakville,,2,1,1,1,0,,
+2025-07,city,Halton,Oakville,,1,0,0,0,1,,
+2025-08,city,Halton,Oakville,,2,2,1,0,1,,
+2025-09,city,Halton,Oakville,,4,3,3,1,0,,
+2025-10,city,Halton,Oakville,,4,0,0,0,0,,
+2025-11,city,Halton,Oakville,,5,2,2,0,1,71,1499750
+2025-12,city,Halton,Oakville,,5,3,1,1,2,80,1499750
+2026-01,city,Halton,Oakville,,5,0,0,0,0,111,1499750
+2026-02,city,Halton,Oakville,,4,0,0,1,0,,
+2026-03,city,Halton,Oakville,,4,3,1,0,3,,
+2026-04,city,Halton,Oakville,,5,2,2,1,0,101,1899990
+2026-05,city,Halton,Oakville,,6,3,2,1,1,103,1549945
+2026-06,city,Halton,Oakville,,3,1,0,2,2,,
+2026-07,city,Halton,Oakville,,2,1,1,2,0,,
+2026-08,city,Halton,Oakville,,5,3,3,0,0,47,1899990
+2026-09,city,Halton,Oakville,,6,3,2,0,2,39,1949900
+2026-10,city,Halton,Oakville,,5,1,1,1,1,69,1999900
+"2026-11 (to date)",city,Halton,Oakville,,4,0,0,1,0,,
+2025-01,city,York,"East Gwillimbury",,1,1,0,0,1,,
+2025-02,city,York,"East Gwillimbury",,2,1,1,0,0,,
+2025-03,city,York,"East Gwillimbury",,2,0,0,0,0,,
+2025-04,city,York,"East Gwillimbury",,2,1,0,0,1,,
+2025-05,city,York,"East Gwillimbury",,0,0,0,0,2,,
+2025-06,city,York,"East Gwillimbury",,3,3,1,0,0,,
+2025-07,city,York,"East Gwillimbury",,3,0,0,0,0,,
+2025-08,city,York,"East Gwillimbury",,2,0,0,1,0,,
+2025-09,city,York,"East Gwillimbury",,1,0,0,1,0,,
+2025-10,city,York,"East Gwillimbury",,1,1,0,0,1,,
+2025-11,city,York,"East Gwillimbury",,1,0,0,0,0,,
+2025-12,city,York,"East Gwillimbury",,1,1,0,0,1,,
+2026-01,city,York,"East Gwillimbury",,1,0,0,0,0,,
+2026-02,city,York,"East Gwillimbury",,0,0,0,0,1,,
+2026-03,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-04,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-05,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-06,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-07,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-08,city,York,"East Gwillimbury",,0,0,0,0,0,,
+2026-09,city,York,"East Gwillimbury",,1,1,1,0,0,,
+2026-10,city,York,"East Gwillimbury",,3,2,2,0,0,,
+"2026-11 (to date)",city,York,"East Gwillimbury",,3,1,0,0,1,,
+2025-01,city,York,Newmarket,,0,0,0,0,0,,
+2025-02,city,York,Newmarket,,0,0,0,0,0,,
+2025-03,city,York,Newmarket,,1,1,1,0,0,,
+2025-04,city,York,Newmarket,,2,1,1,0,0,,
+2025-05,city,York,Newmarket,,2,1,1,0,1,,
+2025-06,city,York,Newmarket,,1,0,0,1,0,,
+2025-07,city,York,Newmarket,,1,0,0,0,0,,
+2025-08,city,York,Newmarket,,1,0,0,0,0,,
+2025-09,city,York,Newmarket,,1,0,0,0,0,,
+2025-10,city,York,Newmarket,,0,0,0,0,1,,
+2025-11,city,York,Newmarket,,1,1,1,0,0,,
+2025-12,city,York,Newmarket,,1,0,0,0,0,,
+2026-01,city,York,Newmarket,,1,0,0,0,0,,
+2026-02,city,York,Newmarket,,0,0,0,1,0,,
+2026-03,city,York,Newmarket,,2,2,2,0,0,,
+2026-04,city,York,Newmarket,,2,0,0,0,0,,
+2026-05,city,York,Newmarket,,1,1,1,2,0,,
+2026-06,city,York,Newmarket,,4,3,3,0,0,,
+2026-07,city,York,Newmarket,,4,1,1,1,0,,
+2026-08,city,York,Newmarket,,2,2,2,2,2,,
+2026-09,city,York,Newmarket,,3,5,2,2,2,,
+2026-10,city,York,Newmarket,,4,4,2,2,1,,
+"2026-11 (to date)",city,York,Newmarket,,3,0,0,1,0,,
+2025-01,city,York,Georgina,,2,0,0,0,0,,
+2025-02,city,York,Georgina,,1,0,0,1,0,,
+2025-03,city,York,Georgina,,1,0,0,0,0,,
+2025-04,city,York,Georgina,,1,1,1,0,1,,
+2025-05,city,York,Georgina,,2,1,0,0,0,,
+2025-06,city,York,Georgina,,2,0,0,0,0,,
+2025-07,city,York,Georgina,,2,1,0,0,1,,
+2025-08,city,York,Georgina,,2,1,0,0,1,,
+2025-09,city,York,Georgina,,2,1,0,0,1,,
+2025-10,city,York,Georgina,,2,0,0,0,0,,
+2025-11,city,York,Georgina,,2,0,0,0,0,,
+2025-12,city,York,Georgina,,2,2,1,0,2,,
+2026-01,city,York,Georgina,,5,4,2,0,1,20,859900
+2026-02,city,York,Georgina,,5,2,1,1,1,34,839900
+2026-03,city,York,Georgina,,4,3,2,2,2,,
+2026-04,city,York,Georgina,,4,2,0,0,2,,
+2026-05,city,York,Georgina,,3,0,0,1,0,,
+2026-06,city,York,Georgina,,2,0,0,0,1,,
+2026-07,city,York,Georgina,,3,2,1,0,1,,
+2026-08,city,York,Georgina,,2,0,0,1,0,,
+2026-09,city,York,Georgina,,3,2,1,0,1,,
+2026-10,city,York,Georgina,,2,1,0,1,1,,
+"2026-11 (to date)",city,York,Georgina,,2,0,0,0,0,,
+2025-01,city,York,King,,0,0,0,0,0,,
+2025-02,city,York,King,,0,0,0,0,0,,
+2025-03,city,York,King,,0,0,0,0,0,,
+2025-04,city,York,King,,0,0,0,0,0,,
+2025-05,city,York,King,,0,0,0,0,0,,
+2025-06,city,York,King,,0,0,0,0,0,,
+2025-07,city,York,King,,0,0,0,0,0,,
+2025-08,city,York,King,,0,0,0,0,0,,
+2025-09,city,York,King,,0,0,0,0,0,,
+2025-10,city,York,King,,0,0,0,0,0,,
+2025-11,city,York,King,,0,0,0,0,0,,
+2025-12,city,York,King,,0,0,0,0,0,,
+2026-01,city,York,King,,0,0,0,0,0,,
+2026-02,city,York,King,,0,0,0,0,0,,
+2026-03,city,York,King,,1,1,1,0,0,,
+2026-04,city,York,King,,1,1,0,0,1,,
+2026-05,city,York,King,,1,1,1,1,0,,
+2026-06,city,York,King,,1,0,0,0,0,,
+2026-07,city,York,King,,0,0,0,0,1,,
+2026-08,city,York,King,,0,0,0,0,0,,
+2026-09,city,York,King,,1,1,1,0,0,,
+2026-10,city,York,King,,2,2,1,0,1,,
+"2026-11 (to date)",city,York,King,,2,0,0,0,0,,
+2025-01,city,Halton,Milton,,0,0,0,0,0,,
+2025-02,city,Halton,Milton,,0,0,0,0,0,,
+2025-03,city,Halton,Milton,,0,0,0,0,0,,
+2025-04,city,Halton,Milton,,1,1,1,0,0,,
+2025-05,city,Halton,Milton,,2,1,1,0,0,,
+2025-06,city,Halton,Milton,,4,2,2,0,0,,
+2025-07,city,Halton,Milton,,1,1,1,2,2,,
+2025-08,city,Halton,Milton,,4,4,3,0,1,,
+2025-09,city,Halton,Milton,,4,0,0,0,0,,
+2025-10,city,Halton,Milton,,3,1,1,1,1,,
+2025-11,city,Halton,Milton,,3,0,0,0,0,,
+2025-12,city,Halton,Milton,,1,0,0,1,1,,
+2026-01,city,Halton,Milton,,0,0,0,1,0,,
+2026-02,city,Halton,Milton,,1,1,1,0,0,,
+2026-03,city,Halton,Milton,,1,0,0,0,0,,
+2026-04,city,Halton,Milton,,1,0,0,0,0,,
+2026-05,city,Halton,Milton,,1,0,0,0,0,,
+2026-06,city,Halton,Milton,,1,0,0,0,0,,
+2026-07,city,Halton,Milton,,2,1,1,0,0,,
+2026-08,city,Halton,Milton,,1,1,1,1,1,,
+2026-09,city,Halton,Milton,,2,1,1,0,0,,
+2026-10,city,Halton,Milton,,2,1,0,0,1,,
+"2026-11 (to date)",city,Halton,Milton,,2,0,0,0,0,,
+2025-01,city,Durham,Scugog,,0,0,0,0,0,,
+2025-02,city,Durham,Scugog,,0,0,0,0,0,,
+2025-03,city,Durham,Scugog,,0,0,0,0,0,,
+2025-04,city,Durham,Scugog,,0,0,0,0,0,,
+2025-05,city,Durham,Scugog,,0,0,0,0,0,,
+2025-06,city,Durham,Scugog,,0,0,0,0,0,,
+2025-07,city,Durham,Scugog,,0,0,0,0,0,,
+2025-08,city,Durham,Scugog,,0,0,0,0,0,,
+2025-09,city,Durham,Scugog,,0,0,0,0,0,,
+2025-10,city,Durham,Scugog,,0,0,0,0,0,,
+2025-11,city,Durham,Scugog,,0,0,0,0,0,,
+2025-12,city,Durham,Scugog,,0,0,0,0,0,,
+2026-01,city,Durham,Scugog,,0,0,0,0,0,,
+2026-02,city,Durham,Scugog,,0,0,0,0,0,,
+2026-03,city,Durham,Scugog,,0,0,0,0,0,,
+2026-04,city,Durham,Scugog,,0,0,0,0,0,,
+2026-05,city,Durham,Scugog,,0,0,0,0,0,,
+2026-06,city,Durham,Scugog,,0,0,0,0,0,,
+2026-07,city,Durham,Scugog,,1,1,1,0,0,,
+2026-08,city,Durham,Scugog,,1,0,0,0,0,,
+2026-09,city,Durham,Scugog,,1,0,0,0,0,,
+2026-10,city,Durham,Scugog,,1,0,0,0,0,,
+"2026-11 (to date)",city,Durham,Scugog,,2,2,1,0,1,,
+2025-01,city,Durham,Brock,,4,4,4,0,0,,
+2025-02,city,Durham,Brock,,4,0,0,0,0,,
+2025-03,city,Durham,Brock,,0,0,0,0,4,,
+2025-04,city,Durham,Brock,,0,0,0,0,0,,
+2025-05,city,Durham,Brock,,1,1,1,0,0,,
+2025-06,city,Durham,Brock,,1,0,0,0,0,,
+2025-07,city,Durham,Brock,,1,1,0,0,1,,
+2025-08,city,Durham,Brock,,1,0,0,0,0,,
+2025-09,city,Durham,Brock,,3,2,2,0,0,,
+2025-10,city,Durham,Brock,,2,0,0,1,0,,
+2025-11,city,Durham,Brock,,1,0,0,1,0,,
+2025-12,city,Durham,Brock,,1,0,0,0,0,,
+2026-01,city,Durham,Brock,,1,0,0,0,0,,
+2026-02,city,Durham,Brock,,1,1,0,0,1,,
+2026-03,city,Durham,Brock,,1,0,0,0,0,,
+2026-04,city,Durham,Brock,,1,0,0,0,0,,
+2026-05,city,Durham,Brock,,1,0,0,0,0,,
+2026-06,city,Durham,Brock,,1,0,0,0,0,,
+2026-07,city,Durham,Brock,,1,1,0,0,1,,
+2026-08,city,Durham,Brock,,1,0,0,0,0,,
+2026-09,city,Durham,Brock,,1,0,0,0,0,,
+2026-10,city,Durham,Brock,,1,0,0,0,0,,
+"2026-11 (to date)",city,Durham,Brock,,1,0,0,0,0,,
+2025-01,city,York,Whitchurch-Stouffville,,1,1,1,0,0,,
+2025-02,city,York,Whitchurch-Stouffville,,1,0,0,0,0,,
+2025-03,city,York,Whitchurch-Stouffville,,1,1,0,0,1,,
+2025-04,city,York,Whitchurch-Stouffville,,2,2,1,0,1,,
+2025-05,city,York,Whitchurch-Stouffville,,1,0,0,0,1,,
+2025-06,city,York,Whitchurch-Stouffville,,0,1,1,2,0,,
+2025-07,city,York,Whitchurch-Stouffville,,0,0,0,0,0,,
+2025-08,city,York,Whitchurch-Stouffville,,0,0,0,0,0,,
+2025-09,city,York,Whitchurch-Stouffville,,1,1,1,0,0,,
+2025-10,city,York,Whitchurch-Stouffville,,0,0,0,1,0,,
+2025-11,city,York,Whitchurch-Stouffville,,1,1,1,0,0,,
+2025-12,city,York,Whitchurch-Stouffville,,1,1,1,1,0,,
+2026-01,city,York,Whitchurch-Stouffville,,1,0,0,0,0,,
+2026-02,city,York,Whitchurch-Stouffville,,0,0,0,1,0,,
+2026-03,city,York,Whitchurch-Stouffville,,0,0,0,0,0,,
+2026-04,city,York,Whitchurch-Stouffville,,0,0,0,0,0,,
+2026-05,city,York,Whitchurch-Stouffville,,0,0,0,0,0,,
+2026-06,city,York,Whitchurch-Stouffville,,1,1,1,0,0,,
+2026-07,city,York,Whitchurch-Stouffville,,1,0,0,0,0,,
+2026-08,city,York,Whitchurch-Stouffville,,1,1,1,0,1,,
+2026-09,city,York,Whitchurch-Stouffville,,1,0,0,0,0,,
+2026-10,city,York,Whitchurch-Stouffville,,0,0,0,1,0,,
+"2026-11 (to date)",city,York,Whitchurch-Stouffville,,1,1,1,0,0,,
+2025-01,city,York,Aurora,,0,0,0,0,0,,
+2025-02,city,York,Aurora,,0,0,0,0,0,,
+2025-03,city,York,Aurora,,0,0,0,0,0,,
+2025-04,city,York,Aurora,,0,0,0,0,0,,
+2025-05,city,York,Aurora,,0,0,0,0,0,,
+2025-06,city,York,Aurora,,0,0,0,0,0,,
+2025-07,city,York,Aurora,,0,0,0,0,0,,
+2025-08,city,York,Aurora,,0,0,0,0,0,,
+2025-09,city,York,Aurora,,0,0,0,0,0,,
+2025-10,city,York,Aurora,,0,0,0,0,0,,
+2025-11,city,York,Aurora,,0,0,0,0,0,,
+2025-12,city,York,Aurora,,0,0,0,0,0,,
+2026-01,city,York,Aurora,,0,0,0,0,0,,
+2026-02,city,York,Aurora,,0,0,0,0,0,,
+2026-03,city,York,Aurora,,0,0,0,0,0,,
+2026-04,city,York,Aurora,,1,1,1,0,0,,
+2026-05,city,York,Aurora,,1,0,0,0,0,,
+2026-06,city,York,Aurora,,1,0,0,0,0,,
+2026-07,city,York,Aurora,,1,0,0,0,0,,
+2026-08,city,York,Aurora,,0,0,0,1,0,,
+2026-09,city,York,Aurora,,0,0,0,0,0,,
+2026-10,city,York,Aurora,,0,0,0,0,0,,
+"2026-11 (to date)",city,York,Aurora,,0,0,0,0,0,,
+2025-01,city,Halton,"Halton Hills",,3,1,1,0,0,,
+2025-02,city,Halton,"Halton Hills",,2,0,0,1,0,,
+2025-03,city,Halton,"Halton Hills",,1,0,0,1,0,,
+2025-04,city,Halton,"Halton Hills",,1,0,0,0,0,,
+2025-05,city,Halton,"Halton Hills",,0,0,0,1,0,,
+2025-06,city,Halton,"Halton Hills",,0,0,0,0,0,,
+2025-07,city,Halton,"Halton Hills",,0,0,0,0,0,,
+2025-08,city,Halton,"Halton Hills",,0,0,0,0,0,,
+2025-09,city,Halton,"Halton Hills",,1,1,1,0,0,,
+2025-10,city,Halton,"Halton Hills",,1,0,0,0,0,,
+2025-11,city,Halton,"Halton Hills",,2,1,1,0,0,,
+2025-12,city,Halton,"Halton Hills",,1,0,0,0,1,,
+2026-01,city,Halton,"Halton Hills",,1,0,0,0,0,,
+2026-02,city,Halton,"Halton Hills",,1,0,0,0,0,,
+2026-03,city,Halton,"Halton Hills",,1,0,0,0,0,,
+2026-04,city,Halton,"Halton Hills",,3,3,2,0,1,,
+2026-05,city,Halton,"Halton Hills",,2,0,0,1,0,,
+2026-06,city,Halton,"Halton Hills",,3,1,1,0,0,,
+2026-07,city,Halton,"Halton Hills",,2,2,0,1,2,,
+2026-08,city,Halton,"Halton Hills",,3,1,1,0,0,,
+2026-09,city,Halton,"Halton Hills",,0,0,0,3,0,,
+2026-10,city,Halton,"Halton Hills",,0,0,0,0,0,,
+"2026-11 (to date)",city,Halton,"Halton Hills",,0,0,0,0,0,,
+2025-01,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-02,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-03,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-04,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-05,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-06,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-07,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-08,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-09,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-10,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-11,city,Durham,Uxbridge,,0,0,0,0,0,,
+2025-12,city,Durham,Uxbridge,,0,0,0,0,0,,
+2026-01,city,Durham,Uxbridge,,1,1,1,0,0,,
+2026-02,city,Durham,Uxbridge,,1,0,0,0,0,,
+2026-03,city,Durham,Uxbridge,,0,1,0,1,1,,
+2026-04,city,Durham,Uxbridge,,0,0,0,0,0,,
+2026-05,city,Durham,Uxbridge,,0,0,0,0,0,,
+2026-06,city,Durham,Uxbridge,,0,0,0,0,0,,
+2026-07,city,Durham,Uxbridge,,1,1,1,0,0,,
+2026-08,city,Durham,Uxbridge,,1,0,0,0,0,,
+2026-09,city,Durham,Uxbridge,,1,0,0,0,0,,
+2026-10,city,Durham,Uxbridge,,0,0,0,0,1,,
+"2026-11 (to date)",city,Durham,Uxbridge,,0,0,0,0,0,,

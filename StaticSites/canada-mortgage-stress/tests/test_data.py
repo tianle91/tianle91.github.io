@@ -153,7 +153,7 @@ def test_required_source_failure_does_not_publish(data, tmp_path):
 @pytest.mark.parametrize('damage', [None, 'terminal', 'prior_year', 'future'])
 def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypatch, damage):
     """A readable but truncated latest PDF must never replace published history."""
-    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy([g for g in data['groups'] if g['id'] not in {'power_sale', 'prices', 'annual'}]))
+    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy([g for g in data['groups'] if g['id'] not in {'power_sale', 'power_sale_homes', 'power_sale_transfers', 'prices', 'annual'}]))
     monkeypatch.setattr(fetch_data, 'parse_annual', lambda _: data['groups'][-1]['series'][0]['points'])
 
     def parse_fixture(content, source):
@@ -169,6 +169,10 @@ def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypa
     monkeypatch.setattr(fetch_data, 'parse_monthly', parse_fixture)
 
     def get(url):
+        if url == fetch_data.HOMELEADER_CSV:
+            return SimpleNamespace(text=(FIXTURES / 'homeleader-pos.csv').read_text())
+        if url == fetch_data.TERANET:
+            return SimpleNamespace(text=(FIXTURES / 'teranet-power-sale.html').read_text())
         return SimpleNamespace(content=b'', text='<a href="/mw2609.pdf">September report</a>')
 
     target = tmp_path / 'series.json'

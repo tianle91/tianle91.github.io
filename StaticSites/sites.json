@@ -2,7 +2,7 @@
   {
     "slug": "canada-mortgage-stress",
     "title": "Ontario Mortgage Stress",
-    "description": "monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, with a separate monthly GTA power-of-sale listings chart.",
+    "description": "monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, with monthly GTA power-of-sale listings and annual Ontario registered power-of-sale transfers.",
     "output": "canada-mortgage-stress/output/canada-mortgage-stress.html"
   },
   {

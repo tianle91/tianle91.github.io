@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ontario arrears & house prices</title>
-<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, plus monthly GTA new power-of-sale listings.">
+<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, plus monthly GTA power-of-sale listings and annual Ontario registered transfers.">
 <style>* { box-sizing:border-box; }
 body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
 main { max-width:1200px; margin:auto; padding:35px 28px; }
@@ -65,9 +65,9 @@ footer ol { padding-left:18px; }
 .power-sale h2 { margin:0 0 3px; font-size:20px; line-height:1.3; letter-spacing:-.3px; }
 .power-sale-summary { font-size:13px; font-weight:600; margin:10px 0 14px; }
 .latest-key { color:var(--latest); }.latest-key i,.latest-year { fill:var(--latest); background:var(--latest); }
-.previous-key { color:var(--previous); }.previous-key i,.previous-year { fill:var(--previous); background:var(--previous); }
+.previous-key { color:var(--muted); }.previous-key i,.previous-year { fill:var(--previous); background:var(--previous); }
 .power-sale .legend i { height:10px; width:10px; border-radius:2px; }
-.power-sale-bar.is-inspected { stroke:var(--ink); stroke-width:2; }
+.count-bar.is-inspected { stroke:var(--ink); stroke-width:2; }
 .power-sale-readout { display:flex; justify-content:space-between; gap:12px; margin:4px 0; font-size:12px; font-variant-numeric:tabular-nums; }
 .power-sale-note,.power-sale-table { font-size:11px; color:var(--muted); margin:10px 0 0; }
 .power-sale-table table { border-collapse:collapse; width:100%; max-width:440px; margin-top:10px; }
@@ -77,6 +77,12 @@ footer ol { padding-left:18px; }
 @media(max-width:640px) {
   .legend { gap:7px; flex-direction:column; font-size:11px; }
 }
+
+.power-sale-controls { display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; margin:12px 0 8px; font-size:11px; }
+.power-sale-controls label { font-weight:600; }
+.power-sale-controls select { padding:7px; max-width:100%; min-width:0; }
+.partial-key { color:var(--muted); }.partial-key i { background:repeating-linear-gradient(135deg,var(--latest) 0 2px,transparent 2px 5px); border:1px solid var(--latest); }
+.transfers { --latest:var(--bank); }
 @media(max-width:640px) {
   main { padding:23px 14px; }
   .explorer { padding:14px; }
@@ -521,15 +527,28 @@ body.site-tool {
 </section>
 <section class="explorer power-sale" aria-labelledby="power-sale-title">
 <h2 id="power-sale-title">GTA power-of-sale listings</h2>
-<p class="series-description">New listings by month · Oct 2024–Sep 2026</p>
+<div class="power-sale-controls"><label for="power-sale-source">Source &amp; counting method</label><select id="power-sale-source"><option value="power_sale_homes">Homeleader · homes, relists consolidated</option><option value="power_sale">Valery · listing events, includes relists</option></select></div>
+<p id="power-sale-description" class="series-description"></p>
 <p id="power-sale-summary" class="power-sale-summary"></p>
-<div class="legend"><span class="latest-key"><i></i>Oct 2025–Sep 2026</span><span class="previous-key"><i></i>The 12 months before</span></div>
+<div id="power-sale-legend" class="legend"></div>
 <div id="power-sale-chart" class="chart"></div>
 <p id="power-sale-readout" class="power-sale-readout" role="status" aria-atomic="true"><span id="power-sale-period"></span><strong id="power-sale-value"></strong></p>
 <p class="hint">Hover, tap or use arrow keys to inspect a month.</p>
-<p class="power-sale-note">Counts include repeat listings under new MLS® numbers; they are not unique homes, active inventory or completed sales.</p>
-<p class="power-sale-note">Source: <a href="https://valery.ca/research/power-of-sale/" target="_blank" rel="noopener">Valery analysis of TRREB MLS® data</a> · Published Oct 28, 2026.</p>
-<details class="power-sale-table"><summary>Monthly counts</summary><table><caption>GTA new power-of-sale listings</caption><thead><tr><th scope="col">Month</th><th scope="col">New listings</th></tr></thead><tbody id="power-sale-values"></tbody></table></details>
+<p id="power-sale-note" class="power-sale-note"></p>
+<p id="power-sale-source-note" class="power-sale-note"></p>
+<details class="power-sale-table"><summary>Monthly counts</summary><table><caption>GTA new power-of-sale listings</caption><thead><tr><th scope="col">Month</th><th scope="col">New count</th></tr></thead><tbody id="power-sale-values"></tbody></table></details>
+</section>
+<section class="explorer power-sale transfers" aria-labelledby="transfers-title">
+<h2 id="transfers-title">Ontario power-of-sale transfers</h2>
+<p id="transfers-description" class="series-description"></p>
+<p id="transfers-summary" class="power-sale-summary"></p>
+<div id="transfers-legend" class="legend"></div>
+<div id="transfers-chart" class="chart"></div>
+<p id="transfers-readout" class="power-sale-readout" role="status" aria-atomic="true"><span id="transfers-period"></span><strong id="transfers-value"></strong></p>
+<p class="hint">Hover, tap or use arrow keys to inspect a year.</p>
+<p id="transfers-note" class="power-sale-note"></p>
+<p id="transfers-source-note" class="power-sale-note"></p>
+<details class="power-sale-table"><summary>Annual counts</summary><table><caption>Ontario registered power-of-sale transfers</caption><thead><tr><th scope="col">Year</th><th scope="col">Transfers</th></tr></thead><tbody id="transfers-values"></tbody></table></details>
 </section>
 <footer><p>Prices cover the Toronto area, not all of Ontario. They are nominal sale averages, not a quality-adjusted HPI. The index compares relative changes since the first shared month. For example, 120 means 20% above that month’s value. The tooltip also shows the original percentage and price.</p><details><summary>Definitions & data sources</summary><div id="definitions"></div><p>“Arrears” and “delinquency” both mean 90+ days overdue here. The monthly price line breaks at the change in TRREB report coverage around 2024. The plot is limited to the period covered by both series, so the bank forecast stops at the latest available price month. Straight lines connect published observations without inventing intervening data. Rising arrears alone do not establish a house-price bottom.</p><ol id="source-list"></ol><p id="snapshot"></p></details></footer>
 </main>
@@ -567,6 +586,18 @@ body.site-tool {
     {
       "name": "Valery — GTA new power-of-sale listings, October 28, 2026 report",
       "url": "https://valery.ca/research/power-of-sale/"
+    },
+    {
+      "name": "Homeleader Realty — GTA Power of Sale Tracker",
+      "url": "https://homeleaderrealty.com/power-of-sale-tracker/"
+    },
+    {
+      "name": "Homeleader Realty — monthly aggregate CSV",
+      "url": "https://homeleaderrealty.com/api/hlr/v1/pos/csv"
+    },
+    {
+      "name": "Teranet — Q1 2026 Market Insights, Figure 4A",
+      "url": "https://teraintelligence.teranet.ca/market_insights/market-insights-q1-2026/"
     }
   ],
   "groups": [
@@ -8143,6 +8174,211 @@ body.site-tool {
       ]
     },
     {
+      "id": "power_sale_homes",
+      "title": "GTA newly listed power-of-sale homes",
+      "unit": "homes",
+      "frequency": "Monthly",
+      "data_as_of": "2026-11-22",
+      "source": "Homeleader Realty, GTA Power of Sale Tracker (MLS-derived)",
+      "source_url": "https://homeleaderrealty.com/power-of-sale-tracker/",
+      "download_url": "https://homeleaderrealty.com/api/hlr/v1/pos/csv",
+      "note": "Residential homes in Toronto, Peel, York, Durham and Halton. Listings for the same home are consolidated; a return within 60 days is not counted as new. Detection uses listing remarks and can miss undisclosed lender sales. These counts use a different definition from Valery and are not spliced together. The current month is incomplete.",
+      "series": [
+        {
+          "name": "Newly listed power-of-sale homes",
+          "points": [
+            {
+              "period": "2025-01",
+              "value": 33,
+              "status": "observed"
+            },
+            {
+              "period": "2025-02",
+              "value": 30,
+              "status": "observed"
+            },
+            {
+              "period": "2025-03",
+              "value": 29,
+              "status": "observed"
+            },
+            {
+              "period": "2025-04",
+              "value": 35,
+              "status": "observed"
+            },
+            {
+              "period": "2025-05",
+              "value": 29,
+              "status": "observed"
+            },
+            {
+              "period": "2025-06",
+              "value": 26,
+              "status": "observed"
+            },
+            {
+              "period": "2025-07",
+              "value": 30,
+              "status": "observed"
+            },
+            {
+              "period": "2025-08",
+              "value": 34,
+              "status": "observed"
+            },
+            {
+              "period": "2025-09",
+              "value": 38,
+              "status": "observed"
+            },
+            {
+              "period": "2025-10",
+              "value": 32,
+              "status": "observed"
+            },
+            {
+              "period": "2025-11",
+              "value": 25,
+              "status": "observed"
+            },
+            {
+              "period": "2025-12",
+              "value": 25,
+              "status": "observed"
+            },
+            {
+              "period": "2026-01",
+              "value": 35,
+              "status": "observed"
+            },
+            {
+              "period": "2026-02",
+              "value": 30,
+              "status": "observed"
+            },
+            {
+              "period": "2026-03",
+              "value": 47,
+              "status": "observed"
+            },
+            {
+              "period": "2026-04",
+              "value": 59,
+              "status": "observed"
+            },
+            {
+              "period": "2026-05",
+              "value": 48,
+              "status": "observed"
+            },
+            {
+              "period": "2026-06",
+              "value": 50,
+              "status": "observed"
+            },
+            {
+              "period": "2026-07",
+              "value": 45,
+              "status": "observed"
+            },
+            {
+              "period": "2026-08",
+              "value": 58,
+              "status": "observed"
+            },
+            {
+              "period": "2026-09",
+              "value": 46,
+              "status": "observed"
+            },
+            {
+              "period": "2026-10",
+              "value": 46,
+              "status": "observed"
+            },
+            {
+              "period": "2026-11",
+              "value": 38,
+              "status": "observed",
+              "partial": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power_sale_transfers",
+      "title": "Ontario registered power-of-sale transfers",
+      "unit": "transfers",
+      "frequency": "Annual",
+      "source": "Teranet, Q1 2026 Market Insights, Figure 4A",
+      "source_url": "https://teraintelligence.teranet.ca/market_insights/market-insights-q1-2026/",
+      "note": "Registered Ontario power-of-sale transfers, 2015–2025. Annual completed transfers, not new MLS listings or active inventory. Extracted directly from the report’s embedded numerical chart data. This fixed report edition does not imply monthly or 2026 coverage.",
+      "series": [
+        {
+          "name": "Registered power-of-sale transfers",
+          "points": [
+            {
+              "period": "2015",
+              "value": 4410,
+              "status": "observed"
+            },
+            {
+              "period": "2016",
+              "value": 3712,
+              "status": "observed"
+            },
+            {
+              "period": "2017",
+              "value": 2596,
+              "status": "observed"
+            },
+            {
+              "period": "2018",
+              "value": 2096,
+              "status": "observed"
+            },
+            {
+              "period": "2019",
+              "value": 1977,
+              "status": "observed"
+            },
+            {
+              "period": "2020",
+              "value": 1472,
+              "status": "observed"
+            },
+            {
+              "period": "2021",
+              "value": 942,
+              "status": "observed"
+            },
+            {
+              "period": "2022",
+              "value": 578,
+              "status": "observed"
+            },
+            {
+              "period": "2023",
+              "value": 1104,
+              "status": "observed"
+            },
+            {
+              "period": "2024",
+              "value": 2123,
+              "status": "observed"
+            },
+            {
+              "period": "2025",
+              "value": 2979,
+              "status": "observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "prices",
       "title": "Toronto-area monthly sale prices",
       "unit": "CAD",
@@ -8906,7 +9142,7 @@ body.site-tool {
       "detail": "This version uses TRREB average prices. A consistently revised monthly benchmark series is still needed for a stronger cycle-timing study."
     }
   ],
-  "retrieved_at": "2026-11-22T01:56:01+00:00"
+  "retrieved_at": "2026-11-22T03:18:54+00:00"
 }</script><script>/* Pure selection and date math, shared by the renderer and offline checks.
  * Both metrics use one calendar domain, regardless of their reporting cadence.
  */
@@ -9338,67 +9574,125 @@ function render() {
 let resizeTimer;
 window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(render,100);});
 render();
-</script><script>/* Separate count scale and published window; never rebase or forecast listings. */
+</script><script>/* Keep publisher definitions, time windows and count scales separate. */
 (() => {
-  const group = DATA.groups.find(group => group.id === 'power_sale');
-  const points = group.series[0].points;
-  const panel = $('power-sale-chart');
-  const dateLabel = period => new Date(period + '-01T00:00:00Z').toLocaleDateString('en-CA',
-    {month:'short', year:'numeric', timeZone:'UTC'});
-  const total = start => points.slice(start, start + 12).reduce((sum, point) => sum + point.value, 0);
-  const previous = total(0), latest = total(12);
-  $('power-sale-summary').textContent = `${latest} new listings in Oct 2025–Sep 2026 · ` +
-    `${((latest / previous - 1) * 100).toFixed(1)}% more than ${previous} the year before`;
-  let inspected = points.length - 1;
+  const groups = Object.fromEntries(DATA.groups.map(group => [group.id, group]));
+  const dateLabel = period => period.length === 4 ? period :
+    new Date(period + '-01T00:00:00Z').toLocaleDateString('en-CA',
+      {month:'short', year:'numeric', timeZone:'UTC'});
+  const number = value => value.toLocaleString('en-CA');
+  const change = (value, base) => base > 0 ?
+    `${value >= base ? '+' : ''}${((value / base - 1) * 100).toFixed(1)}%` : 'no percentage comparison';
+  const sourceChoice = $('power-sale-source');
+  const inspected = {};
 
-  for (const point of points) {
-    const row = document.createElement('tr');
-    const heading = text('th', dateLabel(point.period));
-    heading.scope = 'row';
-    row.append(heading, text('td', String(point.value)));
-    $('power-sale-values').append(row);
-  }
-
-  function inspect(index) {
-    inspected = Math.max(0, Math.min(points.length - 1, index));
-    panel.querySelectorAll('.power-sale-bar').forEach((bar, i) => {
-      bar.classList.toggle('is-inspected', i === inspected);
-    });
-    const point = points[inspected];
-    $('power-sale-period').textContent = dateLabel(point.period);
-    $('power-sale-value').textContent = `${point.value} new listings`;
-  }
-
-  function render() {
+  function draw(group, prefix) {
+    const points = group.series[0].points;
+    const panel = $(prefix + '-chart');
+    const unit = group.unit === 'homes' ? 'new homes' : group.unit === 'transfers' ? 'transfers' : 'new listings';
+    const annual = group.frequency === 'Annual';
+    const valery = group.id === 'power_sale';
+    const complete = points.filter(point => !point.partial);
+    const latest = complete.at(-1);
+    const prior = complete.at(-2);
+    const latestYear = points.at(-1).period.slice(0,4);
+    const isLatest = (point, i) => valery ? i >= 12 : point.period.startsWith(latestYear);
+    const priorYear = complete.find(point => point.period === `${Number(latest.period.slice(0,4))-1}${latest.period.slice(4)}`);
+    let summary;
+    if (valery) {
+      const total = start => points.slice(start,start+12).reduce((sum, point) => sum + point.value, 0);
+      summary = `${total(12)} new listings in Oct 2025–Sep 2026 · ${change(total(12),total(0))} versus the year before`;
+    } else if (annual) {
+      summary = `${latest.period}: ${number(latest.value)} transfers · ${change(latest.value,prior.value)} versus ${prior.period}`;
+    } else {
+      summary = `${dateLabel(latest.period)}: ${latest.value} new homes` +
+        (priorYear ? ` · ${change(latest.value,priorYear.value)} versus ${dateLabel(priorYear.period)}` : ' · latest complete month');
+    }
+    $(prefix + '-summary').textContent = summary;
+    $(prefix + '-description').textContent = `${annual ? 'Registered transfers by year' : valery ? 'New listing events by month' : 'Newly listed homes by month'} · ` +
+      `${dateLabel(points[0].period)}–${dateLabel(points.at(-1).period)}${points.at(-1).partial ? ' (last month to date)' : ''}`;
+    $(prefix + '-note').textContent = group.note;
+    const source = text('a', group.source);
+    source.href = group.source_url;
+    source.target = '_blank';
+    source.rel = 'noopener';
+    $(prefix + '-source-note').replaceChildren('Source: ', source,
+      group.data_as_of ? ` · Data as of ${group.data_as_of}.` : group.published_at ? ` · Published ${group.published_at}.` : '');
+    const legend = $(prefix + '-legend');
+    legend.replaceChildren();
+    for (const [label, className] of [
+      [valery ? 'Oct 2025–Sep 2026' : latestYear, 'latest-key'],
+      [valery ? 'The 12 months before' : annual ? `${points[0].period}–${prior.period}` : points[0].period.slice(0,4), 'previous-key'],
+      ...(points.at(-1).partial ? [['Month to date', 'partial-key']] : []),
+    ]) {
+      const key = text('span', '', className);
+      key.append(document.createElement('i'), label);
+      legend.append(key);
+    }
+    $(prefix + '-values').replaceChildren();
+    for (const point of points) {
+      const row = document.createElement('tr');
+      const heading = text('th', dateLabel(point.period) + (point.partial ? ' (to date)' : ''));
+      heading.scope = 'row';
+      row.append(heading, text('td', number(point.value)));
+      $(prefix + '-values').append(row);
+    }
+    function inspect(index) {
+      inspected[group.id] = Math.max(0, Math.min(points.length - 1, index));
+      panel.querySelectorAll('.count-bar').forEach((bar, i) => {
+        bar.classList.toggle('is-inspected', i === inspected[group.id]);
+      });
+      const point = points[inspected[group.id]];
+      $(prefix + '-period').textContent = dateLabel(point.period) + (point.partial ? ' (to date)' : '');
+      $(prefix + '-value').textContent = `${number(point.value)} ${unit}`;
+    }
     const width = panel.clientWidth;
     const height = width < 480 ? 260 : 300;
-    const left = 36, right = 14, top = 30, bottom = height - 42;
+    const left = annual ? 46 : 36, right = 14, top = 30, bottom = height - 42;
     const step = (width - left - right) / points.length;
-    const high = Math.ceil(Math.max(...points.map(point => point.value)) / 20) * 20;
+    const max = Math.max(...points.map(point => point.value));
+    const interval = annual ? 1000 : 20;
+    const high = Math.max(interval, Math.ceil(max / interval) * interval);
     const yAt = value => bottom - value / high * (bottom - top);
     const svg = svgNode('svg', {viewBox:`0 0 ${width} ${height}`, role:'img', tabindex:'0',
-      'aria-label':'GTA new power-of-sale listings, October 2024 to September 2026. Use Left and Right to inspect months; Home and End jump to the first and last month.',
-      'aria-describedby':'power-sale-readout'});
+      'aria-label':`${group.title}, ${dateLabel(points[0].period)} to ${dateLabel(points.at(-1).period)}. Use Left and Right to inspect; Home and End jump to the first and last period.`,
+      'aria-describedby':prefix + '-readout'});
     panel.replaceChildren(svg);
-    svg.append(svgNode('text', {x:left, y:15, class:'axis-title'}, 'New listings / month'));
-    for (let value = 0; value <= high; value += 20) {
+    const defs = svgNode('defs');
+    const pattern = svgNode('pattern', {id:prefix+'-partial', width:6, height:6, patternUnits:'userSpaceOnUse', patternTransform:'rotate(45)'});
+    pattern.append(svgNode('rect', {width:6, height:6, fill:'var(--latest)', opacity:.2}),
+      svgNode('line', {x1:0,x2:0,y1:0,y2:6,stroke:'var(--latest)','stroke-width':3}));
+    defs.append(pattern);
+    svg.append(defs, svgNode('text', {x:left, y:15, class:'axis-title'},
+      annual ? 'Registered transfers / year' : valery ? 'New listings / month' : 'New homes / month'));
+    for (let value = 0; value <= high; value += interval) {
       const y = yAt(value);
       svg.append(svgNode('line', {x1:left, x2:width-right, y1:y, y2:y, class:'gridline'}));
-      svg.append(svgNode('text', {x:left-7, y:y+4, 'text-anchor':'end', class:'axis'}, value));
+      svg.append(svgNode('text', {x:left-7, y:y+4, 'text-anchor':'end', class:'axis'}, number(value)));
     }
+    let lastTickRight = -Infinity;
     points.forEach((point, i) => {
       const x = left + i * step;
       const rect = svgNode('rect', {x:x+step*.15, y:yAt(point.value), width:step*.7,
         height:bottom-yAt(point.value), rx:2,
-        class:'power-sale-bar ' + (i < 12 ? 'previous-year' : 'latest-year'),
-        'data-period':point.period, 'data-value':point.value});
-      rect.append(svgNode('title', {}, `${dateLabel(point.period)}: ${point.value} new listings`));
+        class:'count-bar ' + (prefix === 'power-sale' ? 'power-sale-bar ' : '') +
+          (isLatest(point, i) ? 'latest-year' : 'previous-year'),
+        'data-period':point.period, 'data-value':point.value, 'data-partial':Boolean(point.partial)});
+      if (point.partial) rect.style.fill = `url(#${prefix}-partial)`;
+      rect.append(svgNode('title', {}, `${dateLabel(point.period)}${point.partial ? ' (to date)' : ''}: ${number(point.value)} ${unit}`));
       svg.append(rect);
-      if (i === 0 || i === 23 || i % (width < 480 ? 6 : 3) === 0) {
-        const edge = i === 0 ? 'start' : i === 23 ? 'end' : 'middle';
-        const label = dateLabel(point.period).replace('20', '’');
-        svg.append(svgNode('text', {x:i === 23 ? width-right : x+step/2,
-          y:height-18, 'text-anchor':edge, class:'axis'}, label));
+      const spacing = annual ? (width < 480 ? 2 : 1) : (width < 480 ? 6 : 3);
+      const last = i === points.length-1;
+      const edge = i === 0 ? 'start' : last ? 'end' : 'middle';
+      const labelX = i === 0 ? left : last ? width-right : x+step/2;
+      const labelWidth = annual ? 28 : 44;
+      const labelStart = labelX - (edge === 'end' ? labelWidth : edge === 'middle' ? labelWidth/2 : 0);
+      const fits = labelStart >= lastTickRight+8 && labelStart+labelWidth+8 <= width-right-labelWidth;
+      if (i === 0 || last || (i % spacing === 0 && fits)) {
+        const label = annual ? point.period : dateLabel(point.period).replace('20', '’');
+        svg.append(svgNode('text', {x:labelX,
+          y:height-18, 'text-anchor':edge, class:'axis count-tick'}, label));
+        lastTickRight = labelStart+labelWidth;
       }
     });
     const overlay = svgNode('rect', {x:left, y:top, width:width-left-right,
@@ -9417,10 +9711,15 @@ render();
       if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
       event.preventDefault();
       inspect(event.key === 'Home' ? 0 : event.key === 'End' ? points.length-1 :
-        inspected + (event.key === 'ArrowLeft' ? -1 : 1));
+        inspected[group.id] + (event.key === 'ArrowLeft' ? -1 : 1));
     });
-    inspect(inspected);
+    inspect(inspected[group.id] ?? points.length-1);
   }
+  function render() {
+    draw(groups[sourceChoice.value], 'power-sale');
+    draw(groups.power_sale_transfers, 'transfers');
+  }
+  sourceChoice.addEventListener('change', render);
   let timer;
   window.addEventListener('resize', () => {clearTimeout(timer); timer = setTimeout(render, 100);});
   render();
