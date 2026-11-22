@@ -1,6 +1,6 @@
 # Ontario arrears & house prices
 
-A single-plot comparison of **Ontario bank mortgage arrears** and **Toronto-area
+An indexed comparison of **Ontario bank mortgage arrears** and **Toronto-area
 house prices**. Both series share one calendar axis and one index axis. Each
 starts at 100 in the first shared month, so 120 means 20% above that series’
 starting value. The tooltip shows the index alongside the original share of
@@ -22,7 +22,7 @@ Hover or tap to inspect, or focus the chart and use Left/Right to step through
 months (Home/End jump to the window edges). The tooltip labels the exact period of each
 nearest published observation, within half the reporting interval. It never
 interpolates values or carries a stale series beyond its published coverage.
-Definitions and linked sources are in one collapsed section beneath the chart.
+Definitions and linked sources are in one collapsed section beneath the charts.
 The page embeds all data, scripts and styles and works offline.
 
 ## Data and limits
@@ -46,25 +46,73 @@ lag or prove that prices have not bottomed.
 
 The source JSON retains the original broader CMHC tables for provenance and
 refresh validation. Quarterly bank history, annual prices, GTHA private-lender rates, other
-provinces and national consumer-credit series are excluded from the plot. No
-power-of-sale or inventory history is presented.
+provinces and national consumer-credit series are excluded from the indexed plot.
+Inventory history is not presented.
+
+The **GTA power-of-sale listings** panel has two separate source choices:
+
+- **Homeleader (default):** residential homes in Toronto, Peel, York, Durham
+  and Halton, January 2025 onward. Downloaded directly from the publisher's
+  aggregate CSV. Use `new_listings`, not `listed` (which includes relistings).
+  Concurrent listings for a property count once; a return within 60 days is
+  treated as the same listing period. Detection uses public listing remarks
+  and can miss undisclosed lender sales. This remains publisher-derived MLS
+  analysis, not direct access to the MLS feed.
+- **Valery:** the original screenshot's 24 monthly listing-event counts,
+  October 2024–September 2026. New MLS numbers count again, so these counts
+  cannot be combined with Homeleader's history. This fixed October 28, 2026
+  report edition is preserved in `data/valery-gta-power-of-sale-2026-10.csv`,
+  a reviewed transcription of the numerical table, verified November 21, 2026.
+  The site blocks automated HTTP downloads; newer editions require review.
+
+Homeleader's current month is hatched and explicitly labelled **to date** in
+inspection and the table. The summary compares the latest complete month with
+that month a year earlier, when available; it never compares a partial month
+against a full month. The feed's timestamp anchors required terminal coverage.
+The downloaded November 22 UTC snapshot covers January 2025–November 2026,
+with November incomplete. Counts and past months may be revised by the provider.
+
+The separate **Ontario power-of-sale transfers** panel uses Teranet's Q1 2026
+Market Insights, Figure 4A. Its 11 annual observations cover 2015–2025. These
+are registered completed transfers, not new MLS listings or active inventory.
+The parser reads the original report's embedded numerical chart JSON, without
+executing scripts or estimating image heights. It fetches that fixed report
+edition directly during refresh; discovering newer report editions is manual.
+No monthly or 2026 transfer history is inferred.
+
+All count plots use their own zero-based axes and published reporting windows;
+none extends or rebases the arrears/price plot. Hover/tap or keyboard arrows
+inspect counts; Home/End jump to the edges. Expandable tables expose every
+observation. Source, geography, counting method and reporting window remain
+visible beside each chart.
+
+Both public CSV alternatives were tested successfully over HTTP on November
+21, 2026 local time. Homeleader was selected for its longer history (January
+2025 versus PropertyMesh's October 2025). Only Homeleader is integrated;
+PropertyMesh is not silently substituted if the source fails. Neither source
+is a direct MLS connection. New-source failures abort refresh before publishing.
+The original CMHC/TRREB data were preserved while adding these new sources.
 
 ## Visual snapshots
 
 [Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·
-[Mobile (390 × 844)](tests/snapshots/mobile.jpg)
+[Mobile (390 × 844)](tests/snapshots/mobile.jpg) ·
+[Power-of-sale desktop](tests/snapshots/power-sale-desktop.jpg) ·
+[Power-of-sale mobile](tests/snapshots/power-sale-mobile.jpg) ·
+[Transfers desktop](tests/snapshots/transfers-desktop.jpg) ·
+[Transfers mobile](tests/snapshots/transfers-mobile.jpg)
 
 Generate review images of the actual HTML page:
 
 ```sh
 make snapshot-browser  # explicit headless Chromium setup; repeat after Playwright upgrades
-make snapshots         # rebuild from committed data, then capture both views
+make snapshots         # rebuild from committed data, then capture all three panels at both sizes
 ```
 
 Capture uses a temporary loopback server and fresh light-mode contexts. Mobile
 uses touch emulation. All plots, the inspection readout, fonts and responsive
 geometry must finish rendering before capture; page errors, external requests
-and horizontal overflow fail the command. Both captures must succeed before
+and horizontal overflow fail the command. All six captures must succeed before
 existing review images are replaced. These JPEGs show the initial viewport;
 longer pages continue below the image. They are visual review references, not
 automated pixel comparisons.
@@ -105,9 +153,13 @@ Environments are reused without repair. Use `make clean-deps && make deps` for
 an incomplete environment. Missing/stale locks fail without being rewritten.
 
 Fetching uses requests, BeautifulSoup for CMHC accessible chart tables, and
-pypdf layout extraction for TRREB PDFs. All required inputs must validate before
+pypdf layout extraction for TRREB PDFs, the Homeleader aggregate CSV, and
+Teranet’s embedded annual chart JSON. Valery remains a fixed reviewed CSV snapshot. All required inputs must validate before
 one `data/series.json` is replaced atomically. Missing periods, duplicates,
 implausible values, truncated tables and missing report links fail the refresh.
+Homeleader must contain consecutive GTA-only totals from January 2025 through
+its source timestamp month, with only that last month marked incomplete. Teranet
+must retain Figure 4A’s 2015–2025 count series and the report’s stated totals.
 The latest monthly price table must cover the full previous year and January
 through the report month discovered from its PDF filename. Combined history
 must also reach that month; surviving extracted rows cannot shorten the endpoint.
@@ -120,10 +172,24 @@ requires reviewing definitions and forecast vintage before updating the parser.
 TRREB archive reports may need extending when a new year creates a history gap.
 
 Sources live in `src/`; `timeline.js` holds the date/selection model and `app.js`
-renders the one SVG plot. `tests/` contains parser fixtures and model checks.
+renders the indexed SVG plot; `power-sale.js` renders the listing and transfer
+count panels. `distress_data.py` parses and validates the new public sources. `tests/` contains parser fixtures and model checks.
 The committed artifact is `output/canada-mortgage-stress.html`.
 
 ## Data sources
+
+- [Homeleader GTA Power of Sale Tracker](https://homeleaderrealty.com/power-of-sale-tracker/):
+  methodology and [monthly aggregate CSV](https://homeleaderrealty.com/api/hlr/v1/pos/csv).
+  Downloaded from the publisher during explicit refreshes; source timestamp is
+  preserved as a date. The offline parser fixture retains the downloaded aggregate
+  CSV, including overlapping regional/type breakdowns that are not summed.
+- [Teranet Q1 2026 Market Insights](https://teraintelligence.teranet.ca/market_insights/market-insights-q1-2026/):
+  Figure 4A, Ontario registered power-of-sale transfer counts, 2015–2025.
+  The offline fixture retains only the relevant heading and embedded chart script.
+
+- [Valery Power of Sale Report, October 2026](https://valery.ca/research/power-of-sale/):
+  GTA new monthly listings, October 2024–September 2026; published October 28,
+  2026. Valery analysis of TRREB MLS® data. The reviewed CSV preserves this edition.
 
 - [CMHC Residential Mortgage Industry Report, Fall 2026](https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/research-reports/housing-finance/residential-mortgage-industry-report):
   accessible tables, Ontario observations from Figures 1 and 13. Underlying

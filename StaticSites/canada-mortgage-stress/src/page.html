@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ontario arrears & house prices</title>
-<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices in one plot, over their shared available period.">
+<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, plus monthly GTA power-of-sale listings and annual Ontario registered transfers.">
 <style>__STYLE__</style>
 </head>
 <body>
@@ -16,7 +16,32 @@
 <div class="inspection-status" role="status" aria-atomic="true"><p id="inspect-period"></p><div id="readout"></div></div>
 <p class="hint">Hover or tap the plot, or focus it and use the arrow keys, to inspect published observations.</p>
 </section>
+<section class="explorer power-sale" aria-labelledby="power-sale-title">
+<h2 id="power-sale-title">GTA power-of-sale listings</h2>
+<div class="power-sale-controls"><label for="power-sale-source">Source &amp; counting method</label><select id="power-sale-source"><option value="power_sale_homes">Homeleader · homes, relists consolidated</option><option value="power_sale">Valery · listing events, includes relists</option></select></div>
+<p id="power-sale-description" class="series-description"></p>
+<p id="power-sale-summary" class="power-sale-summary"></p>
+<div id="power-sale-legend" class="legend"></div>
+<div id="power-sale-chart" class="chart"></div>
+<p id="power-sale-readout" class="power-sale-readout" role="status" aria-atomic="true"><span id="power-sale-period"></span><strong id="power-sale-value"></strong></p>
+<p class="hint">Hover, tap or use arrow keys to inspect a month.</p>
+<p id="power-sale-note" class="power-sale-note"></p>
+<p id="power-sale-source-note" class="power-sale-note"></p>
+<details class="power-sale-table"><summary>Monthly counts</summary><table><caption>GTA new power-of-sale listings</caption><thead><tr><th scope="col">Month</th><th scope="col">New count</th></tr></thead><tbody id="power-sale-values"></tbody></table></details>
+</section>
+<section class="explorer power-sale transfers" aria-labelledby="transfers-title">
+<h2 id="transfers-title">Ontario power-of-sale transfers</h2>
+<p id="transfers-description" class="series-description"></p>
+<p id="transfers-summary" class="power-sale-summary"></p>
+<div id="transfers-legend" class="legend"></div>
+<div id="transfers-chart" class="chart"></div>
+<p id="transfers-readout" class="power-sale-readout" role="status" aria-atomic="true"><span id="transfers-period"></span><strong id="transfers-value"></strong></p>
+<p class="hint">Hover, tap or use arrow keys to inspect a year.</p>
+<p id="transfers-note" class="power-sale-note"></p>
+<p id="transfers-source-note" class="power-sale-note"></p>
+<details class="power-sale-table"><summary>Annual counts</summary><table><caption>Ontario registered power-of-sale transfers</caption><thead><tr><th scope="col">Year</th><th scope="col">Transfers</th></tr></thead><tbody id="transfers-values"></tbody></table></details>
+</section>
 <footer><p>Prices cover the Toronto area, not all of Ontario. They are nominal sale averages, not a quality-adjusted HPI. The index compares relative changes since the first shared month. For example, 120 means 20% above that month’s value. The tooltip also shows the original percentage and price.</p><details><summary>Definitions & data sources</summary><div id="definitions"></div><p>“Arrears” and “delinquency” both mean 90+ days overdue here. The monthly price line breaks at the change in TRREB report coverage around 2024. The plot is limited to the period covered by both series, so the bank forecast stops at the latest available price month. Straight lines connect published observations without inventing intervening data. Rising arrears alone do not establish a house-price bottom.</p><ol id="source-list"></ol><p id="snapshot"></p></details></footer>
 </main>
-<script id="dataset" type="application/json">__DATA__</script><script>__TIMELINE__</script><script>__HOVER__</script><script>__APP__</script>
+<script id="dataset" type="application/json">__DATA__</script><script>__TIMELINE__</script><script>__HOVER__</script><script>__APP__</script><script>__POWER_SALE__</script>
 </body></html>

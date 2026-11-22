@@ -34,7 +34,7 @@ permalink: /interactive/
 ## Economics & Finance
 
 - [Ontario Mortgage Stress](/StaticSites/canada-mortgage-stress/output/canada-mortgage-stress.html)
-  — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plotted over their shared available period.
+  — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, with monthly GTA power-of-sale listings and annual Ontario registered power-of-sale transfers.
 - [Free cash flow vs. the macro backdrop](/StaticSites/fcf-macro-indicators/output/fcf-macro-indicators.html)
   — quarterly free cash flow and cash balances of a basket of large public companies against M2 money supply, the S&P 500, and the 3M / 2Y / 10Y / 30Y Treasury curve, rebased to a chosen anchor date.
 - [Margin debt vs. the S&P 500](/StaticSites/margin-sp500-m2-visualization/output/margin-sp500-m2-visualization.html)

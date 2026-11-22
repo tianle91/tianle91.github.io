@@ -39,7 +39,7 @@ for (const source of DATA.sources) {
   li.append(link);
   $('source-list').append(li);
 }
-$('snapshot').textContent = 'Snapshot retrieved ' + DATA.retrieved_at.slice(0,10) +
+$('snapshot').textContent = 'Dataset updated ' + DATA.retrieved_at.slice(0,10) +
   '. Rebuilds use committed data; refresh only with make data.';
 
 function xAt(date) {
