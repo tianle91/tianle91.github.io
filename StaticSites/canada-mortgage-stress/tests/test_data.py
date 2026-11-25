@@ -153,8 +153,9 @@ def test_required_source_failure_does_not_publish(data, tmp_path):
 @pytest.mark.parametrize('damage', [None, 'terminal', 'prior_year', 'future'])
 def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypatch, damage):
     """A readable but truncated latest PDF must never replace published history."""
-    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy([g for g in data['groups'] if g['id'] not in {'power_sale', 'power_sale_homes', 'power_sale_transfers', 'prices', 'annual'}]))
+    monkeypatch.setattr(fetch_data, 'parse_cmhc', lambda _: deepcopy([g for g in data['groups'] if g['id'] not in {'power_sale', 'power_sale_homes', 'power_sale_transfers', 'benchmark', 'mortgage_rates', 'prices', 'annual'}]))
     monkeypatch.setattr(fetch_data, 'parse_annual', lambda _: data['groups'][-1]['series'][0]['points'])
+    monkeypatch.setattr(fetch_data, 'collect_benchmark', lambda _: deepcopy([g for g in data['groups'] if g['id'] in {'benchmark','mortgage_rates'}]))
 
     def parse_fixture(content, source):
         vintage = {'mw2112.pdf': '2021', 'mw2312.pdf': '2023',
@@ -191,7 +192,7 @@ def test_latest_report_coverage_is_anchored_to_filename(data, tmp_path, monkeypa
 def test_offline_build_is_deterministic_and_embeds_sources(data, tmp_path, monkeypatch):
     source = tmp_path / 'src'
     source.mkdir()
-    for filename in ('page.html','style.css','timeline.js','app.js','power-sale.js'):
+    for filename in ('page.html','style.css','timeline.js','app.js','power-sale.js','mortgage-costs.js','benchmark.js'):
         (source / filename).write_bytes((ROOT / 'src' / filename).read_bytes())
     inputs = tmp_path / 'data'
     inputs.mkdir()
@@ -206,7 +207,7 @@ def test_offline_build_is_deterministic_and_embeds_sources(data, tmp_path, monke
     assert build_site.build().read_bytes() == original
     assert target.stat().st_mtime_ns == mtime
     html = target.read_text()
-    assert all(marker not in html for marker in ('__DATA__','__TIMELINE__','__APP__','__STYLE__','__POWER_SALE__'))
+    assert all(marker not in html for marker in ('__DATA__','__TIMELINE__','__APP__','__STYLE__','__POWER_SALE__','__COST_MODEL__','__BENCHMARK__'))
     soup = BeautifulSoup(html,'html.parser')
     assert json.loads(soup.select_one('#dataset').string) == data
     assert not soup.select('script[src],link[rel=stylesheet]')

@@ -1,4 +1,4 @@
 [site]
 name = "canada-mortgage-stress"
 title = "Ontario Mortgage Stress"
-description = "Ontario Mortgage Stress — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, with monthly GTA power-of-sale listings and annual Ontario registered power-of-sale transfers."
+description = "Ontario Mortgage Stress — monthly Ontario bank mortgage arrears including CMHC forecasts and Toronto-area house prices, plus Toronto benchmark prices versus mortgage rates and borrowing costs, monthly GTA power-of-sale listings and annual Ontario registered transfers."

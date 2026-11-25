@@ -24,7 +24,9 @@ def build():
                           ('__TIMELINE__', (source / 'timeline.js').read_text()),
                           ('__HOVER__', (ASSETS / 'plots/hover.js').read_text()),
                           ('__APP__', (source / 'app.js').read_text()),
-                          ('__POWER_SALE__', (source / 'power-sale.js').read_text())]:
+                          ('__POWER_SALE__', (source / 'power-sale.js').read_text()),
+                          ('__COST_MODEL__', (source / 'mortgage-costs.js').read_text()),
+                          ('__BENCHMARK__', (source / 'benchmark.js').read_text())]:
         html = html.replace(marker, value)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     target = OUT_DIR / 'canada-mortgage-stress.html'
