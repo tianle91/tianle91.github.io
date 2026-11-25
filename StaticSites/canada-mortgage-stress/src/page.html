@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ontario arrears & house prices</title>
-<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, plus monthly GTA power-of-sale listings and annual Ontario registered transfers.">
+<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, Toronto benchmark prices versus mortgage rates and borrowing costs, plus power-of-sale indicators.">
 <style>__STYLE__</style>
 </head>
 <body>
@@ -15,6 +15,26 @@
 <div id="chart" class="chart"></div>
 <div class="inspection-status" role="status" aria-atomic="true"><p id="inspect-period"></p><div id="readout"></div></div>
 <p class="hint">Hover or tap the plot, or focus it and use the arrow keys, to inspect published observations.</p>
+</section>
+<section class="explorer benchmark-section" aria-labelledby="benchmark-title">
+<h2 id="benchmark-title">Toronto benchmark &amp; mortgage rates</h2>
+<p class="series-description">Greater Toronto composite benchmark (TRREB), not City of Toronto alone · Not seasonally adjusted</p>
+<p id="benchmark-window" class="series-label"></p>
+<div id="benchmark-chart" class="chart"></div>
+<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="benchmark-period"></strong><span>Benchmark <b id="benchmark-price"></b></span><span>Mortgage rate <b id="benchmark-rate"></b></span></div>
+<p class="hint">Hover, tap or focus either chart and use arrow keys. Both charts inspect the same month.</p>
+<p class="benchmark-note">Prices: <a href="https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/" target="_blank" rel="noopener">CREA MLS® HPI</a> composite benchmark. Rates: <a href="https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/" target="_blank" rel="noopener">Bank of Canada</a>, Canada-wide uninsured fixed mortgage funds advanced, terms of 5 years and over; includes renewals and refinancing. Separate axes preserve dollars and percentages.</p>
+</section>
+<section class="explorer benchmark-section" aria-labelledby="cost-title">
+<h2 id="cost-title">Benchmark prices, accounting for borrowing costs</h2>
+<div class="power-sale-controls"><label for="reference-rate">Reference mortgage rate</label><select id="reference-rate"><option value="2">2.0%</option><option value="3">3.0%</option><option value="4" selected>4.0%</option><option value="5">5.0%</option><option value="6">6.0%</option></select><span>20% down · 25-year amortization</span></div>
+<div class="legend"><span class="price-key"><i></i>Published benchmark</span><span class="adjusted-key"><i></i><span id="cost-reference-label"></span></span></div>
+<p id="cost-window" class="series-label"></p>
+<div id="cost-chart" class="chart"></div>
+<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="cost-period"></strong><span>Benchmark <b id="cost-actual"></b></span><span>Same-payment price <b id="cost-equivalent"></b></span><span>Principal &amp; interest <b id="cost-payment"></b></span></div>
+<p id="cost-explanation" class="benchmark-note"></p>
+<p class="hint">Hover, tap or use arrow keys to inspect a month. Changing the reference rate updates the dashed line.</p>
+<details class="benchmark-method"><summary>How the borrowing-cost comparison works</summary><p>For each month, estimate the benchmark home's principal-and-interest payment at that month's mortgage rate. Then find the home price with the same payment at the selected reference rate. Both calculations assume 20% down, a fresh 25-year amortization and Canadian fixed-rate semi-annual compounding, with monthly payments.</p><p>A higher same-payment price means a greater financing burden relative to the reference rate. This is a modelled payment comparison, not a new market valuation, inflation adjustment or income-based affordability measure. It excludes taxes, maintenance, condo fees, insurance and transaction costs. It does not model the future rate at renewal or an existing owner's outstanding loan.</p></details>
 </section>
 <section class="explorer power-sale" aria-labelledby="power-sale-title">
 <h2 id="power-sale-title">GTA power-of-sale listings</h2>
@@ -43,5 +63,5 @@
 </section>
 <footer><p>Prices cover the Toronto area, not all of Ontario. They are nominal sale averages, not a quality-adjusted HPI. The index compares relative changes since the first shared month. For example, 120 means 20% above that month’s value. The tooltip also shows the original percentage and price.</p><details><summary>Definitions & data sources</summary><div id="definitions"></div><p>“Arrears” and “delinquency” both mean 90+ days overdue here. The monthly price line breaks at the change in TRREB report coverage around 2024. The plot is limited to the period covered by both series, so the bank forecast stops at the latest available price month. Straight lines connect published observations without inventing intervening data. Rising arrears alone do not establish a house-price bottom.</p><ol id="source-list"></ol><p id="snapshot"></p></details></footer>
 </main>
-<script id="dataset" type="application/json">__DATA__</script><script>__TIMELINE__</script><script>__HOVER__</script><script>__APP__</script><script>__POWER_SALE__</script>
+<script id="dataset" type="application/json">__DATA__</script><script>__TIMELINE__</script><script>__HOVER__</script><script>__APP__</script><script>__POWER_SALE__</script><script>__COST_MODEL__</script><script>__BENCHMARK__</script>
 </body></html>

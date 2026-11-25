@@ -22,6 +22,7 @@ from pypdf import PdfReader
 import requests
 from distress_data import (HOMELEADER, HOMELEADER_CSV, TERANET, parse_homeleader,
                            parse_teranet, validate_distress_group)
+from benchmark_data import collect_benchmark, validate_comparison_group
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / 'data'
@@ -186,11 +187,15 @@ def validate_dataset(data):
         raise ValueError('Missing power-of-sale group')
     if not {'power_sale_homes', 'power_sale_transfers'}.issubset(ids):
         raise ValueError('Missing refreshable distress groups')
+    if not {'benchmark', 'mortgage_rates'}.issubset(ids):
+        raise ValueError('Missing benchmark price or mortgage rate group')
     for group in data['groups']:
         if group['id'] == 'power_sale':
             validate_power_sale(group)
         elif group['id'] in {'power_sale_homes', 'power_sale_transfers'}:
             validate_distress_group(group)
+        elif group['id'] in {'benchmark', 'mortgage_rates'}:
+            validate_comparison_group(group)
         for series in group['series']:
             periods = [p['period'] for p in series['points']]
             if not periods or periods != sorted(set(periods)):
@@ -290,13 +295,15 @@ def collect(get):
     sources.append({'name': 'Valery — GTA new power-of-sale listings, October 28, 2026 report',
                     'url': POWER_SALE})
     groups[-2:-2] = [parse_homeleader(get(HOMELEADER_CSV).text), parse_teranet(get(TERANET).text)]
+    comparison = collect_benchmark(get)
+    groups[-2:-2] = comparison
+    sources += [{'name': group['source'], 'url': group['source_url']} for group in comparison]
     sources += [{'name': 'Homeleader Realty — GTA Power of Sale Tracker', 'url': HOMELEADER},
                 {'name': 'Homeleader Realty — monthly aggregate CSV', 'url': HOMELEADER_CSV},
                 {'name': 'Teranet — Q1 2026 Market Insights, Figure 4A', 'url': TERANET}]
     return validate_dataset({'schema_version': 1, 'sources': sources, 'groups': groups,
         'gaps': [
             {'metric': 'Active listing inventory', 'detail': 'Available in individual TRREB monthly reports, but a consistent historical series has not yet been assembled. The roughly 26,000 figure is not plotted as a time series.'},
-            {'metric': 'Comparable resale benchmark / HPI', 'detail': 'This version uses TRREB average prices. A consistently revised monthly benchmark series is still needed for a stronger cycle-timing study.'},
         ]})
 
 

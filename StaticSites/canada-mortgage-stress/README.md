@@ -93,6 +93,66 @@ PropertyMesh is not silently substituted if the source fails. Neither source
 is a direct MLS connection. New-source failures abort refresh before publishing.
 The original CMHC/TRREB data were preserved while adding these new sources.
 
+## Toronto benchmark prices and borrowing costs
+
+Two additional sections compare the **Greater Toronto (TRREB) composite MLS®
+HPI benchmark** with **Canada-wide uninsured fixed mortgage rates, terms of five
+years and over**. Greater Toronto is not City of Toronto alone. The original
+average-sale-price/arrears plot is retained; benchmark prices are a separate,
+quality-adjusted measure and are never spliced into that average-price history.
+
+- **Raw comparison:** benchmark dollars and mortgage percentages in vertically
+  aligned plots with the same monthly time axis and inspection cursor. Each has
+  its own labelled original-unit axis; dollar prices and rates are not rebased
+  onto an arbitrary common scale.
+- **Borrowing-cost comparison:** the published benchmark and the home price
+  that would generate the same mortgage payment at a chosen reference rate.
+  The reference defaults to 4%; options are 2–6%. Each month's readout also
+  shows its estimated principal-and-interest payment. The down payment is 20%
+  and amortization is 25 years for both sides of the comparison.
+
+A higher same-payment equivalent means a greater financing burden relative to
+that reference rate. It is a derived payment comparison, not a market valuation,
+inflation adjustment, total cost of ownership or income-based affordability
+index. It excludes taxes, maintenance, condo fees, insurance and transaction
+costs. Each month models a fresh loan at that month's rate; it does not track
+an existing loan or predict rates at renewal.
+
+For a nominal annual mortgage rate `r` (as a fraction), the equivalent monthly
+rate is `i = (1 + r/2)^(1/6) - 1`, using Canadian fixed-rate semi-annual
+compounding. With `n = 300` monthly payments, the payment factor is
+`a(r) = i / (1 - (1+i)^(-n))`; at zero interest it is `1/n`. Monthly payment is
+`benchmark × 0.8 × a(r)`. The same-payment price at reference rate `r0` is
+`benchmark × a(r) / a(r0)`. The identical down-payment fraction cancels in that
+price ratio. The calculation is checked against FCAC's published example:
+a $300,000 loan, 25 years, 5% produces $1,744.81/month.
+
+The November 2026 CREA download supplies a single revised vintage of monthly
+non-seasonally-adjusted `GREATER_TORONTO / Composite_Benchmark` observations,
+January 2005–October 2026. Historical revisions are preserved as one consistent
+vintage; separate past reports are not joined. The Bank of Canada series
+`V122667786` supplies January 2013–September 2026. It measures rates on funds
+advanced by chartered banks, including renewals/refinancing; it is not a posted
+rate, policy rate, Toronto-specific quote or outstanding-balance rate.
+
+Both new charts use their exact common window, **January 2013–September 2026**.
+October's benchmark is retained in the source JSON but has no matching rate and
+is not plotted or used for a payment estimate. There is no interpolation,
+carry-forward, forecast or rate substitution. Hover/tap and keyboard arrows
+inspect both charts together; Home/End jump to the first/last common month.
+
+Explicit `make data` discovers the current official CREA ZIP link and parses
+`Not Seasonally Adjusted (M).xlsx` with the already-declared `openpyxl` dependency.
+Only the Toronto composite benchmark column is selected, not the national
+aggregate, an HPI index level or average sale prices. Coverage must reach the
+month preceding the release vintage. The Bank of Canada Valet history is
+checked against an independently requested latest observation. Missing data,
+changed definitions or failure of either source aborts publication of the whole
+combined dataset. Offline builds/tests use the committed observations. Fixtures
+retain the exact Toronto worksheet values (other boards omitted) and the rate
+API response. Existing arrears, average-price and power-of-sale observations
+were preserved when these two new series were acquired on November 25, 2026.
+
 ## Visual snapshots
 
 [Desktop (1440 × 900)](tests/snapshots/desktop.jpg) ·
@@ -100,19 +160,23 @@ The original CMHC/TRREB data were preserved while adding these new sources.
 [Power-of-sale desktop](tests/snapshots/power-sale-desktop.jpg) ·
 [Power-of-sale mobile](tests/snapshots/power-sale-mobile.jpg) ·
 [Transfers desktop](tests/snapshots/transfers-desktop.jpg) ·
-[Transfers mobile](tests/snapshots/transfers-mobile.jpg)
+[Transfers mobile](tests/snapshots/transfers-mobile.jpg) ·
+[Benchmark desktop](tests/snapshots/benchmark-desktop.jpg) ·
+[Benchmark mobile](tests/snapshots/benchmark-mobile.jpg) ·
+[Borrowing-cost desktop](tests/snapshots/borrowing-cost-desktop.jpg) ·
+[Borrowing-cost mobile](tests/snapshots/borrowing-cost-mobile.jpg)
 
 Generate review images of the actual HTML page:
 
 ```sh
 make snapshot-browser  # explicit headless Chromium setup; repeat after Playwright upgrades
-make snapshots         # rebuild from committed data, then capture all three panels at both sizes
+make snapshots         # rebuild from committed data, then capture all five sections at both sizes
 ```
 
 Capture uses a temporary loopback server and fresh light-mode contexts. Mobile
 uses touch emulation. All plots, the inspection readout, fonts and responsive
 geometry must finish rendering before capture; page errors, external requests
-and horizontal overflow fail the command. All six captures must succeed before
+and horizontal overflow fail the command. All ten captures must succeed before
 existing review images are replaced. These JPEGs show the initial viewport;
 longer pages continue below the image. They are visual review references, not
 automated pixel comparisons.
@@ -144,6 +208,7 @@ make data        # explicit network refresh, then rebuild
 make clean       # remove generated HTML
 make clean-deps  # remove environment/stamp; clean-venv is an alias
 node tests/test_timeline.cjs # optional checks, Node 18+, no npm dependencies
+node tests/test_mortgage_costs.cjs # mortgage math and exact-month coverage checks
 ```
 
 Build within this checkout: the Makefile includes `../python-project.mk`.
@@ -154,7 +219,8 @@ an incomplete environment. Missing/stale locks fail without being rewritten.
 
 Fetching uses requests, BeautifulSoup for CMHC accessible chart tables, and
 pypdf layout extraction for TRREB PDFs, the Homeleader aggregate CSV, and
-Teranet’s embedded annual chart JSON. Valery remains a fixed reviewed CSV snapshot. All required inputs must validate before
+Teranet’s embedded annual chart JSON, the CREA benchmark workbook and Bank of
+Canada Valet mortgage-rate data. Valery remains a fixed reviewed CSV snapshot. All required inputs must validate before
 one `data/series.json` is replaced atomically. Missing periods, duplicates,
 implausible values, truncated tables and missing report links fail the refresh.
 Homeleader must contain consecutive GTA-only totals from January 2025 through
@@ -173,10 +239,23 @@ TRREB archive reports may need extending when a new year creates a history gap.
 
 Sources live in `src/`; `timeline.js` holds the date/selection model and `app.js`
 renders the indexed SVG plot; `power-sale.js` renders the listing and transfer
-count panels. `distress_data.py` parses and validates the new public sources. `tests/` contains parser fixtures and model checks.
+count panels. `distress_data.py` parses the listing/transfer sources.
+`benchmark_data.py` parses the benchmark/rate sources; `mortgage-costs.js` holds
+the payment model and exact-month join, and `benchmark.js` renders the two new
+comparison sections. `tests/` contains parser fixtures and model checks.
 The committed artifact is `output/canada-mortgage-stress.html`.
 
 ## Data sources
+
+- [CREA MLS® HPI Tool](https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/):
+  official monthly ZIP discovery; [November 2026 workbook bundle](https://www.crea.ca/files/mls-hpi-data/MLS_HPI-Nov-2026.zip),
+  not seasonally adjusted, `GREATER_TORONTO / Composite_Benchmark` in dollars.
+- [Bank of Canada mortgage rates](https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/):
+  [Valet series V122667786](https://www.bankofcanada.ca/valet/observations/V122667786/json?start_date=2013-01-01),
+  uninsured fixed rates of five years and over, funds advanced.
+  [Funds-advanced definition](https://www.bankofcanada.ca/rates/banking-and-financial-statistics/funds-advanced-and-outstanding-balances-for-new-and-existing-lending-by-chartered-banks/).
+- [FCAC mortgage-interest examples](https://www.canada.ca/en/financial-consumer-agency/services/mortgages/interest-on-mortgages.html):
+  independent reference payment used by the calculation test.
 
 - [Homeleader GTA Power of Sale Tracker](https://homeleaderrealty.com/power-of-sale-tracker/):
   methodology and [monthly aggregate CSV](https://homeleaderrealty.com/api/hlr/v1/pos/csv).

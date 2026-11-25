@@ -46,3 +46,11 @@ footer ol { padding-left:18px; }
 .power-sale-controls select { padding:7px; max-width:100%; min-width:0; }
 .partial-key { color:var(--muted); }.partial-key i { background:repeating-linear-gradient(135deg,var(--latest) 0 2px,transparent 2px 5px); border:1px solid var(--latest); }
 .transfers { --latest:var(--bank); }
+
+.benchmark-section { margin-top:20px; --adjusted:#5846b5; }
+.benchmark-section h2 { margin:0 0 8px; font-size:20px; line-height:1.3; letter-spacing:-.3px; }
+.benchmark-readout { display:flex; gap:4px 18px; flex-wrap:wrap; align-items:baseline; font-size:11px; margin:8px 0; font-variant-numeric:tabular-nums; }
+.benchmark-readout>strong { flex-basis:100%; font-size:12px; }
+.benchmark-note,.benchmark-method { font-size:11px; color:var(--muted); margin:10px 0 0; }
+.benchmark-method p { margin:8px 0; }
+.adjusted-key { color:var(--adjusted); }.adjusted-key i { background:repeating-linear-gradient(to right,var(--adjusted) 0 6px,transparent 6px 10px); }

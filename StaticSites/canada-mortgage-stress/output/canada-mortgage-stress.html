@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ontario arrears & house prices</title>
-<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, plus monthly GTA power-of-sale listings and annual Ontario registered transfers.">
+<meta name="description" content="Ontario bank mortgage arrears and Toronto-area house prices, Toronto benchmark prices versus mortgage rates and borrowing costs, plus power-of-sale indicators.">
 <style>* { box-sizing:border-box; }
 body { margin:0; background:var(--paper); color:var(--ink); font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
 main { max-width:1200px; margin:auto; padding:35px 28px; }
@@ -83,6 +83,14 @@ footer ol { padding-left:18px; }
 .power-sale-controls select { padding:7px; max-width:100%; min-width:0; }
 .partial-key { color:var(--muted); }.partial-key i { background:repeating-linear-gradient(135deg,var(--latest) 0 2px,transparent 2px 5px); border:1px solid var(--latest); }
 .transfers { --latest:var(--bank); }
+
+.benchmark-section { margin-top:20px; --adjusted:#5846b5; }
+.benchmark-section h2 { margin:0 0 8px; font-size:20px; line-height:1.3; letter-spacing:-.3px; }
+.benchmark-readout { display:flex; gap:4px 18px; flex-wrap:wrap; align-items:baseline; font-size:11px; margin:8px 0; font-variant-numeric:tabular-nums; }
+.benchmark-readout>strong { flex-basis:100%; font-size:12px; }
+.benchmark-note,.benchmark-method { font-size:11px; color:var(--muted); margin:10px 0 0; }
+.benchmark-method p { margin:8px 0; }
+.adjusted-key { color:var(--adjusted); }.adjusted-key i { background:repeating-linear-gradient(to right,var(--adjusted) 0 6px,transparent 6px 10px); }
 @media(max-width:640px) {
   main { padding:23px 14px; }
   .explorer { padding:14px; }
@@ -525,6 +533,26 @@ body.site-tool {
 <div class="inspection-status" role="status" aria-atomic="true"><p id="inspect-period"></p><div id="readout"></div></div>
 <p class="hint">Hover or tap the plot, or focus it and use the arrow keys, to inspect published observations.</p>
 </section>
+<section class="explorer benchmark-section" aria-labelledby="benchmark-title">
+<h2 id="benchmark-title">Toronto benchmark &amp; mortgage rates</h2>
+<p class="series-description">Greater Toronto composite benchmark (TRREB), not City of Toronto alone · Not seasonally adjusted</p>
+<p id="benchmark-window" class="series-label"></p>
+<div id="benchmark-chart" class="chart"></div>
+<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="benchmark-period"></strong><span>Benchmark <b id="benchmark-price"></b></span><span>Mortgage rate <b id="benchmark-rate"></b></span></div>
+<p class="hint">Hover, tap or focus either chart and use arrow keys. Both charts inspect the same month.</p>
+<p class="benchmark-note">Prices: <a href="https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/" target="_blank" rel="noopener">CREA MLS® HPI</a> composite benchmark. Rates: <a href="https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/" target="_blank" rel="noopener">Bank of Canada</a>, Canada-wide uninsured fixed mortgage funds advanced, terms of 5 years and over; includes renewals and refinancing. Separate axes preserve dollars and percentages.</p>
+</section>
+<section class="explorer benchmark-section" aria-labelledby="cost-title">
+<h2 id="cost-title">Benchmark prices, accounting for borrowing costs</h2>
+<div class="power-sale-controls"><label for="reference-rate">Reference mortgage rate</label><select id="reference-rate"><option value="2">2.0%</option><option value="3">3.0%</option><option value="4" selected>4.0%</option><option value="5">5.0%</option><option value="6">6.0%</option></select><span>20% down · 25-year amortization</span></div>
+<div class="legend"><span class="price-key"><i></i>Published benchmark</span><span class="adjusted-key"><i></i><span id="cost-reference-label"></span></span></div>
+<p id="cost-window" class="series-label"></p>
+<div id="cost-chart" class="chart"></div>
+<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="cost-period"></strong><span>Benchmark <b id="cost-actual"></b></span><span>Same-payment price <b id="cost-equivalent"></b></span><span>Principal &amp; interest <b id="cost-payment"></b></span></div>
+<p id="cost-explanation" class="benchmark-note"></p>
+<p class="hint">Hover, tap or use arrow keys to inspect a month. Changing the reference rate updates the dashed line.</p>
+<details class="benchmark-method"><summary>How the borrowing-cost comparison works</summary><p>For each month, estimate the benchmark home's principal-and-interest payment at that month's mortgage rate. Then find the home price with the same payment at the selected reference rate. Both calculations assume 20% down, a fresh 25-year amortization and Canadian fixed-rate semi-annual compounding, with monthly payments.</p><p>A higher same-payment price means a greater financing burden relative to the reference rate. This is a modelled payment comparison, not a new market valuation, inflation adjustment or income-based affordability measure. It excludes taxes, maintenance, condo fees, insurance and transaction costs. It does not model the future rate at renewal or an existing owner's outstanding loan.</p></details>
+</section>
 <section class="explorer power-sale" aria-labelledby="power-sale-title">
 <h2 id="power-sale-title">GTA power-of-sale listings</h2>
 <div class="power-sale-controls"><label for="power-sale-source">Source &amp; counting method</label><select id="power-sale-source"><option value="power_sale_homes">Homeleader · homes, relists consolidated</option><option value="power_sale">Valery · listing events, includes relists</option></select></div>
@@ -598,6 +626,14 @@ body.site-tool {
     {
       "name": "Teranet — Q1 2026 Market Insights, Figure 4A",
       "url": "https://teraintelligence.teranet.ca/market_insights/market-insights-q1-2026/"
+    },
+    {
+      "name": "CREA MLS® HPI, GREATER_TORONTO, Composite_Benchmark, not seasonally adjusted",
+      "url": "https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/"
+    },
+    {
+      "name": "Bank of Canada, V122667786, funds advanced",
+      "url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/"
     }
   ],
   "groups": [
@@ -8379,6 +8415,2178 @@ body.site-tool {
       ]
     },
     {
+      "id": "benchmark",
+      "title": "Greater Toronto composite benchmark price",
+      "unit": "CAD",
+      "frequency": "Monthly",
+      "geography": "Greater Toronto (TRREB), not City of Toronto alone",
+      "source": "CREA MLS® HPI, GREATER_TORONTO, Composite_Benchmark, not seasonally adjusted",
+      "source_url": "https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/",
+      "download_url": "https://www.crea.ca/files/mls-hpi-data/MLS_HPI-Nov-2026.zip",
+      "vintage": "MLS_HPI-Nov-2026.zip",
+      "note": "Quality-adjusted composite benchmark from a single current CREA workbook vintage; historical values may be revised. Nominal Canadian dollars, not an average sale price. Greater Toronto / TRREB coverage, not City of Toronto alone.",
+      "series": [
+        {
+          "name": "Composite benchmark price",
+          "points": [
+            {
+              "period": "2005-01",
+              "value": 315300,
+              "status": "observed"
+            },
+            {
+              "period": "2005-02",
+              "value": 317800,
+              "status": "observed"
+            },
+            {
+              "period": "2005-03",
+              "value": 321800,
+              "status": "observed"
+            },
+            {
+              "period": "2005-04",
+              "value": 324400,
+              "status": "observed"
+            },
+            {
+              "period": "2005-05",
+              "value": 326500,
+              "status": "observed"
+            },
+            {
+              "period": "2005-06",
+              "value": 328700,
+              "status": "observed"
+            },
+            {
+              "period": "2005-07",
+              "value": 327800,
+              "status": "observed"
+            },
+            {
+              "period": "2005-08",
+              "value": 329900,
+              "status": "observed"
+            },
+            {
+              "period": "2005-09",
+              "value": 330400,
+              "status": "observed"
+            },
+            {
+              "period": "2005-10",
+              "value": 331900,
+              "status": "observed"
+            },
+            {
+              "period": "2005-11",
+              "value": 332100,
+              "status": "observed"
+            },
+            {
+              "period": "2005-12",
+              "value": 330400,
+              "status": "observed"
+            },
+            {
+              "period": "2006-01",
+              "value": 334300,
+              "status": "observed"
+            },
+            {
+              "period": "2006-02",
+              "value": 338000,
+              "status": "observed"
+            },
+            {
+              "period": "2006-03",
+              "value": 341700,
+              "status": "observed"
+            },
+            {
+              "period": "2006-04",
+              "value": 345200,
+              "status": "observed"
+            },
+            {
+              "period": "2006-05",
+              "value": 346700,
+              "status": "observed"
+            },
+            {
+              "period": "2006-06",
+              "value": 347100,
+              "status": "observed"
+            },
+            {
+              "period": "2006-07",
+              "value": 345200,
+              "status": "observed"
+            },
+            {
+              "period": "2006-08",
+              "value": 345500,
+              "status": "observed"
+            },
+            {
+              "period": "2006-09",
+              "value": 347600,
+              "status": "observed"
+            },
+            {
+              "period": "2006-10",
+              "value": 345800,
+              "status": "observed"
+            },
+            {
+              "period": "2006-11",
+              "value": 346200,
+              "status": "observed"
+            },
+            {
+              "period": "2006-12",
+              "value": 344600,
+              "status": "observed"
+            },
+            {
+              "period": "2007-01",
+              "value": 346200,
+              "status": "observed"
+            },
+            {
+              "period": "2007-02",
+              "value": 352900,
+              "status": "observed"
+            },
+            {
+              "period": "2007-03",
+              "value": 356900,
+              "status": "observed"
+            },
+            {
+              "period": "2007-04",
+              "value": 361300,
+              "status": "observed"
+            },
+            {
+              "period": "2007-05",
+              "value": 364000,
+              "status": "observed"
+            },
+            {
+              "period": "2007-06",
+              "value": 367300,
+              "status": "observed"
+            },
+            {
+              "period": "2007-07",
+              "value": 367900,
+              "status": "observed"
+            },
+            {
+              "period": "2007-08",
+              "value": 370100,
+              "status": "observed"
+            },
+            {
+              "period": "2007-09",
+              "value": 372600,
+              "status": "observed"
+            },
+            {
+              "period": "2007-10",
+              "value": 374400,
+              "status": "observed"
+            },
+            {
+              "period": "2007-11",
+              "value": 374600,
+              "status": "observed"
+            },
+            {
+              "period": "2007-12",
+              "value": 373700,
+              "status": "observed"
+            },
+            {
+              "period": "2008-01",
+              "value": 377000,
+              "status": "observed"
+            },
+            {
+              "period": "2008-02",
+              "value": 379300,
+              "status": "observed"
+            },
+            {
+              "period": "2008-03",
+              "value": 379900,
+              "status": "observed"
+            },
+            {
+              "period": "2008-04",
+              "value": 381500,
+              "status": "observed"
+            },
+            {
+              "period": "2008-05",
+              "value": 380900,
+              "status": "observed"
+            },
+            {
+              "period": "2008-06",
+              "value": 379300,
+              "status": "observed"
+            },
+            {
+              "period": "2008-07",
+              "value": 375800,
+              "status": "observed"
+            },
+            {
+              "period": "2008-08",
+              "value": 374100,
+              "status": "observed"
+            },
+            {
+              "period": "2008-09",
+              "value": 372100,
+              "status": "observed"
+            },
+            {
+              "period": "2008-10",
+              "value": 367700,
+              "status": "observed"
+            },
+            {
+              "period": "2008-11",
+              "value": 362500,
+              "status": "observed"
+            },
+            {
+              "period": "2008-12",
+              "value": 354700,
+              "status": "observed"
+            },
+            {
+              "period": "2009-01",
+              "value": 350400,
+              "status": "observed"
+            },
+            {
+              "period": "2009-02",
+              "value": 349400,
+              "status": "observed"
+            },
+            {
+              "period": "2009-03",
+              "value": 351500,
+              "status": "observed"
+            },
+            {
+              "period": "2009-04",
+              "value": 355900,
+              "status": "observed"
+            },
+            {
+              "period": "2009-05",
+              "value": 361900,
+              "status": "observed"
+            },
+            {
+              "period": "2009-06",
+              "value": 368400,
+              "status": "observed"
+            },
+            {
+              "period": "2009-07",
+              "value": 373400,
+              "status": "observed"
+            },
+            {
+              "period": "2009-08",
+              "value": 378900,
+              "status": "observed"
+            },
+            {
+              "period": "2009-09",
+              "value": 384700,
+              "status": "observed"
+            },
+            {
+              "period": "2009-10",
+              "value": 390300,
+              "status": "observed"
+            },
+            {
+              "period": "2009-11",
+              "value": 394600,
+              "status": "observed"
+            },
+            {
+              "period": "2009-12",
+              "value": 398500,
+              "status": "observed"
+            },
+            {
+              "period": "2010-01",
+              "value": 400700,
+              "status": "observed"
+            },
+            {
+              "period": "2010-02",
+              "value": 408100,
+              "status": "observed"
+            },
+            {
+              "period": "2010-03",
+              "value": 411400,
+              "status": "observed"
+            },
+            {
+              "period": "2010-04",
+              "value": 413600,
+              "status": "observed"
+            },
+            {
+              "period": "2010-05",
+              "value": 412200,
+              "status": "observed"
+            },
+            {
+              "period": "2010-06",
+              "value": 410600,
+              "status": "observed"
+            },
+            {
+              "period": "2010-07",
+              "value": 406700,
+              "status": "observed"
+            },
+            {
+              "period": "2010-08",
+              "value": 406900,
+              "status": "observed"
+            },
+            {
+              "period": "2010-09",
+              "value": 407300,
+              "status": "observed"
+            },
+            {
+              "period": "2010-10",
+              "value": 408100,
+              "status": "observed"
+            },
+            {
+              "period": "2010-11",
+              "value": 408800,
+              "status": "observed"
+            },
+            {
+              "period": "2010-12",
+              "value": 409200,
+              "status": "observed"
+            },
+            {
+              "period": "2011-01",
+              "value": 413200,
+              "status": "observed"
+            },
+            {
+              "period": "2011-02",
+              "value": 420500,
+              "status": "observed"
+            },
+            {
+              "period": "2011-03",
+              "value": 426100,
+              "status": "observed"
+            },
+            {
+              "period": "2011-04",
+              "value": 431400,
+              "status": "observed"
+            },
+            {
+              "period": "2011-05",
+              "value": 435900,
+              "status": "observed"
+            },
+            {
+              "period": "2011-06",
+              "value": 439000,
+              "status": "observed"
+            },
+            {
+              "period": "2011-07",
+              "value": 441000,
+              "status": "observed"
+            },
+            {
+              "period": "2011-08",
+              "value": 442500,
+              "status": "observed"
+            },
+            {
+              "period": "2011-09",
+              "value": 444200,
+              "status": "observed"
+            },
+            {
+              "period": "2011-10",
+              "value": 445400,
+              "status": "observed"
+            },
+            {
+              "period": "2011-11",
+              "value": 447400,
+              "status": "observed"
+            },
+            {
+              "period": "2011-12",
+              "value": 448300,
+              "status": "observed"
+            },
+            {
+              "period": "2012-01",
+              "value": 453300,
+              "status": "observed"
+            },
+            {
+              "period": "2012-02",
+              "value": 461100,
+              "status": "observed"
+            },
+            {
+              "period": "2012-03",
+              "value": 467200,
+              "status": "observed"
+            },
+            {
+              "period": "2012-04",
+              "value": 473300,
+              "status": "observed"
+            },
+            {
+              "period": "2012-05",
+              "value": 475800,
+              "status": "observed"
+            },
+            {
+              "period": "2012-06",
+              "value": 475000,
+              "status": "observed"
+            },
+            {
+              "period": "2012-07",
+              "value": 474300,
+              "status": "observed"
+            },
+            {
+              "period": "2012-08",
+              "value": 471300,
+              "status": "observed"
+            },
+            {
+              "period": "2012-09",
+              "value": 471600,
+              "status": "observed"
+            },
+            {
+              "period": "2012-10",
+              "value": 470400,
+              "status": "observed"
+            },
+            {
+              "period": "2012-11",
+              "value": 467000,
+              "status": "observed"
+            },
+            {
+              "period": "2012-12",
+              "value": 469200,
+              "status": "observed"
+            },
+            {
+              "period": "2013-01",
+              "value": 469800,
+              "status": "observed"
+            },
+            {
+              "period": "2013-02",
+              "value": 476400,
+              "status": "observed"
+            },
+            {
+              "period": "2013-03",
+              "value": 482500,
+              "status": "observed"
+            },
+            {
+              "period": "2013-04",
+              "value": 487200,
+              "status": "observed"
+            },
+            {
+              "period": "2013-05",
+              "value": 490900,
+              "status": "observed"
+            },
+            {
+              "period": "2013-06",
+              "value": 491500,
+              "status": "observed"
+            },
+            {
+              "period": "2013-07",
+              "value": 491800,
+              "status": "observed"
+            },
+            {
+              "period": "2013-08",
+              "value": 492000,
+              "status": "observed"
+            },
+            {
+              "period": "2013-09",
+              "value": 493800,
+              "status": "observed"
+            },
+            {
+              "period": "2013-10",
+              "value": 497200,
+              "status": "observed"
+            },
+            {
+              "period": "2013-11",
+              "value": 498600,
+              "status": "observed"
+            },
+            {
+              "period": "2013-12",
+              "value": 498700,
+              "status": "observed"
+            },
+            {
+              "period": "2014-01",
+              "value": 502700,
+              "status": "observed"
+            },
+            {
+              "period": "2014-02",
+              "value": 513700,
+              "status": "observed"
+            },
+            {
+              "period": "2014-03",
+              "value": 519400,
+              "status": "observed"
+            },
+            {
+              "period": "2014-04",
+              "value": 525000,
+              "status": "observed"
+            },
+            {
+              "period": "2014-05",
+              "value": 528500,
+              "status": "observed"
+            },
+            {
+              "period": "2014-06",
+              "value": 531600,
+              "status": "observed"
+            },
+            {
+              "period": "2014-07",
+              "value": 531100,
+              "status": "observed"
+            },
+            {
+              "period": "2014-08",
+              "value": 531600,
+              "status": "observed"
+            },
+            {
+              "period": "2014-09",
+              "value": 534400,
+              "status": "observed"
+            },
+            {
+              "period": "2014-10",
+              "value": 536600,
+              "status": "observed"
+            },
+            {
+              "period": "2014-11",
+              "value": 537400,
+              "status": "observed"
+            },
+            {
+              "period": "2014-12",
+              "value": 539400,
+              "status": "observed"
+            },
+            {
+              "period": "2015-01",
+              "value": 548400,
+              "status": "observed"
+            },
+            {
+              "period": "2015-02",
+              "value": 559000,
+              "status": "observed"
+            },
+            {
+              "period": "2015-03",
+              "value": 567800,
+              "status": "observed"
+            },
+            {
+              "period": "2015-04",
+              "value": 577300,
+              "status": "observed"
+            },
+            {
+              "period": "2015-05",
+              "value": 581500,
+              "status": "observed"
+            },
+            {
+              "period": "2015-06",
+              "value": 585900,
+              "status": "observed"
+            },
+            {
+              "period": "2015-07",
+              "value": 588900,
+              "status": "observed"
+            },
+            {
+              "period": "2015-08",
+              "value": 590300,
+              "status": "observed"
+            },
+            {
+              "period": "2015-09",
+              "value": 593000,
+              "status": "observed"
+            },
+            {
+              "period": "2015-10",
+              "value": 593900,
+              "status": "observed"
+            },
+            {
+              "period": "2015-11",
+              "value": 596200,
+              "status": "observed"
+            },
+            {
+              "period": "2015-12",
+              "value": 597100,
+              "status": "observed"
+            },
+            {
+              "period": "2016-01",
+              "value": 607800,
+              "status": "observed"
+            },
+            {
+              "period": "2016-02",
+              "value": 624200,
+              "status": "observed"
+            },
+            {
+              "period": "2016-03",
+              "value": 640000,
+              "status": "observed"
+            },
+            {
+              "period": "2016-04",
+              "value": 658000,
+              "status": "observed"
+            },
+            {
+              "period": "2016-05",
+              "value": 673200,
+              "status": "observed"
+            },
+            {
+              "period": "2016-06",
+              "value": 683700,
+              "status": "observed"
+            },
+            {
+              "period": "2016-07",
+              "value": 691000,
+              "status": "observed"
+            },
+            {
+              "period": "2016-08",
+              "value": 699400,
+              "status": "observed"
+            },
+            {
+              "period": "2016-09",
+              "value": 710000,
+              "status": "observed"
+            },
+            {
+              "period": "2016-10",
+              "value": 717500,
+              "status": "observed"
+            },
+            {
+              "period": "2016-11",
+              "value": 723200,
+              "status": "observed"
+            },
+            {
+              "period": "2016-12",
+              "value": 728500,
+              "status": "observed"
+            },
+            {
+              "period": "2017-01",
+              "value": 751700,
+              "status": "observed"
+            },
+            {
+              "period": "2017-02",
+              "value": 796100,
+              "status": "observed"
+            },
+            {
+              "period": "2017-03",
+              "value": 840400,
+              "status": "observed"
+            },
+            {
+              "period": "2017-04",
+              "value": 854200,
+              "status": "observed"
+            },
+            {
+              "period": "2017-05",
+              "value": 838100,
+              "status": "observed"
+            },
+            {
+              "period": "2017-06",
+              "value": 812800,
+              "status": "observed"
+            },
+            {
+              "period": "2017-07",
+              "value": 785300,
+              "status": "observed"
+            },
+            {
+              "period": "2017-08",
+              "value": 772100,
+              "status": "observed"
+            },
+            {
+              "period": "2017-09",
+              "value": 764400,
+              "status": "observed"
+            },
+            {
+              "period": "2017-10",
+              "value": 760300,
+              "status": "observed"
+            },
+            {
+              "period": "2017-11",
+              "value": 753100,
+              "status": "observed"
+            },
+            {
+              "period": "2017-12",
+              "value": 747300,
+              "status": "observed"
+            },
+            {
+              "period": "2018-01",
+              "value": 749600,
+              "status": "observed"
+            },
+            {
+              "period": "2018-02",
+              "value": 756000,
+              "status": "observed"
+            },
+            {
+              "period": "2018-03",
+              "value": 763700,
+              "status": "observed"
+            },
+            {
+              "period": "2018-04",
+              "value": 768300,
+              "status": "observed"
+            },
+            {
+              "period": "2018-05",
+              "value": 768600,
+              "status": "observed"
+            },
+            {
+              "period": "2018-06",
+              "value": 763800,
+              "status": "observed"
+            },
+            {
+              "period": "2018-07",
+              "value": 762100,
+              "status": "observed"
+            },
+            {
+              "period": "2018-08",
+              "value": 757900,
+              "status": "observed"
+            },
+            {
+              "period": "2018-09",
+              "value": 761200,
+              "status": "observed"
+            },
+            {
+              "period": "2018-10",
+              "value": 759500,
+              "status": "observed"
+            },
+            {
+              "period": "2018-11",
+              "value": 755000,
+              "status": "observed"
+            },
+            {
+              "period": "2018-12",
+              "value": 751500,
+              "status": "observed"
+            },
+            {
+              "period": "2019-01",
+              "value": 753200,
+              "status": "observed"
+            },
+            {
+              "period": "2019-02",
+              "value": 760500,
+              "status": "observed"
+            },
+            {
+              "period": "2019-03",
+              "value": 766200,
+              "status": "observed"
+            },
+            {
+              "period": "2019-04",
+              "value": 770700,
+              "status": "observed"
+            },
+            {
+              "period": "2019-05",
+              "value": 773400,
+              "status": "observed"
+            },
+            {
+              "period": "2019-06",
+              "value": 773800,
+              "status": "observed"
+            },
+            {
+              "period": "2019-07",
+              "value": 774200,
+              "status": "observed"
+            },
+            {
+              "period": "2019-08",
+              "value": 774100,
+              "status": "observed"
+            },
+            {
+              "period": "2019-09",
+              "value": 776100,
+              "status": "observed"
+            },
+            {
+              "period": "2019-10",
+              "value": 781700,
+              "status": "observed"
+            },
+            {
+              "period": "2019-11",
+              "value": 784000,
+              "status": "observed"
+            },
+            {
+              "period": "2019-12",
+              "value": 785100,
+              "status": "observed"
+            },
+            {
+              "period": "2020-01",
+              "value": 799400,
+              "status": "observed"
+            },
+            {
+              "period": "2020-02",
+              "value": 825000,
+              "status": "observed"
+            },
+            {
+              "period": "2020-03",
+              "value": 837100,
+              "status": "observed"
+            },
+            {
+              "period": "2020-04",
+              "value": 823600,
+              "status": "observed"
+            },
+            {
+              "period": "2020-05",
+              "value": 827700,
+              "status": "observed"
+            },
+            {
+              "period": "2020-06",
+              "value": 836600,
+              "status": "observed"
+            },
+            {
+              "period": "2020-07",
+              "value": 848700,
+              "status": "observed"
+            },
+            {
+              "period": "2020-08",
+              "value": 862500,
+              "status": "observed"
+            },
+            {
+              "period": "2020-09",
+              "value": 865800,
+              "status": "observed"
+            },
+            {
+              "period": "2020-10",
+              "value": 869600,
+              "status": "observed"
+            },
+            {
+              "period": "2020-11",
+              "value": 881800,
+              "status": "observed"
+            },
+            {
+              "period": "2020-12",
+              "value": 892400,
+              "status": "observed"
+            },
+            {
+              "period": "2021-01",
+              "value": 924500,
+              "status": "observed"
+            },
+            {
+              "period": "2021-02",
+              "value": 966600,
+              "status": "observed"
+            },
+            {
+              "period": "2021-03",
+              "value": 994100,
+              "status": "observed"
+            },
+            {
+              "period": "2021-04",
+              "value": 1006200,
+              "status": "observed"
+            },
+            {
+              "period": "2021-05",
+              "value": 1028700,
+              "status": "observed"
+            },
+            {
+              "period": "2021-06",
+              "value": 1026400,
+              "status": "observed"
+            },
+            {
+              "period": "2021-07",
+              "value": 1032800,
+              "status": "observed"
+            },
+            {
+              "period": "2021-08",
+              "value": 1040300,
+              "status": "observed"
+            },
+            {
+              "period": "2021-09",
+              "value": 1067000,
+              "status": "observed"
+            },
+            {
+              "period": "2021-10",
+              "value": 1090600,
+              "status": "observed"
+            },
+            {
+              "period": "2021-11",
+              "value": 1116700,
+              "status": "observed"
+            },
+            {
+              "period": "2021-12",
+              "value": 1138400,
+              "status": "observed"
+            },
+            {
+              "period": "2022-01",
+              "value": 1213500,
+              "status": "observed"
+            },
+            {
+              "period": "2022-02",
+              "value": 1279800,
+              "status": "observed"
+            },
+            {
+              "period": "2022-03",
+              "value": 1276200,
+              "status": "observed"
+            },
+            {
+              "period": "2022-04",
+              "value": 1240800,
+              "status": "observed"
+            },
+            {
+              "period": "2022-05",
+              "value": 1199100,
+              "status": "observed"
+            },
+            {
+              "period": "2022-06",
+              "value": 1149400,
+              "status": "observed"
+            },
+            {
+              "period": "2022-07",
+              "value": 1101500,
+              "status": "observed"
+            },
+            {
+              "period": "2022-08",
+              "value": 1075000,
+              "status": "observed"
+            },
+            {
+              "period": "2022-09",
+              "value": 1064400,
+              "status": "observed"
+            },
+            {
+              "period": "2022-10",
+              "value": 1048100,
+              "status": "observed"
+            },
+            {
+              "period": "2022-11",
+              "value": 1039200,
+              "status": "observed"
+            },
+            {
+              "period": "2022-12",
+              "value": 1027500,
+              "status": "observed"
+            },
+            {
+              "period": "2023-01",
+              "value": 1028400,
+              "status": "observed"
+            },
+            {
+              "period": "2023-02",
+              "value": 1044500,
+              "status": "observed"
+            },
+            {
+              "period": "2023-03",
+              "value": 1068700,
+              "status": "observed"
+            },
+            {
+              "period": "2023-04",
+              "value": 1096000,
+              "status": "observed"
+            },
+            {
+              "period": "2023-05",
+              "value": 1119700,
+              "status": "observed"
+            },
+            {
+              "period": "2023-06",
+              "value": 1120400,
+              "status": "observed"
+            },
+            {
+              "period": "2023-07",
+              "value": 1109800,
+              "status": "observed"
+            },
+            {
+              "period": "2023-08",
+              "value": 1091300,
+              "status": "observed"
+            },
+            {
+              "period": "2023-09",
+              "value": 1079100,
+              "status": "observed"
+            },
+            {
+              "period": "2023-10",
+              "value": 1054800,
+              "status": "observed"
+            },
+            {
+              "period": "2023-11",
+              "value": 1032100,
+              "status": "observed"
+            },
+            {
+              "period": "2023-12",
+              "value": 1023000,
+              "status": "observed"
+            },
+            {
+              "period": "2024-01",
+              "value": 1027000,
+              "status": "observed"
+            },
+            {
+              "period": "2024-02",
+              "value": 1051600,
+              "status": "observed"
+            },
+            {
+              "period": "2024-03",
+              "value": 1069300,
+              "status": "observed"
+            },
+            {
+              "period": "2024-04",
+              "value": 1067300,
+              "status": "observed"
+            },
+            {
+              "period": "2024-05",
+              "value": 1060400,
+              "status": "observed"
+            },
+            {
+              "period": "2024-06",
+              "value": 1053200,
+              "status": "observed"
+            },
+            {
+              "period": "2024-07",
+              "value": 1037200,
+              "status": "observed"
+            },
+            {
+              "period": "2024-08",
+              "value": 1022600,
+              "status": "observed"
+            },
+            {
+              "period": "2024-09",
+              "value": 1015900,
+              "status": "observed"
+            },
+            {
+              "period": "2024-10",
+              "value": 1007600,
+              "status": "observed"
+            },
+            {
+              "period": "2024-11",
+              "value": 1010300,
+              "status": "observed"
+            },
+            {
+              "period": "2024-12",
+              "value": 1005900,
+              "status": "observed"
+            },
+            {
+              "period": "2025-01",
+              "value": 1017600,
+              "status": "observed"
+            },
+            {
+              "period": "2025-02",
+              "value": 1019100,
+              "status": "observed"
+            },
+            {
+              "period": "2025-03",
+              "value": 1017300,
+              "status": "observed"
+            },
+            {
+              "period": "2025-04",
+              "value": 1010100,
+              "status": "observed"
+            },
+            {
+              "period": "2025-05",
+              "value": 1014300,
+              "status": "observed"
+            },
+            {
+              "period": "2025-06",
+              "value": 994600,
+              "status": "observed"
+            },
+            {
+              "period": "2025-07",
+              "value": 980100,
+              "status": "observed"
+            },
+            {
+              "period": "2025-08",
+              "value": 969100,
+              "status": "observed"
+            },
+            {
+              "period": "2025-09",
+              "value": 962300,
+              "status": "observed"
+            },
+            {
+              "period": "2025-10",
+              "value": 957200,
+              "status": "observed"
+            },
+            {
+              "period": "2025-11",
+              "value": 951700,
+              "status": "observed"
+            },
+            {
+              "period": "2025-12",
+              "value": 942300,
+              "status": "observed"
+            },
+            {
+              "period": "2026-01",
+              "value": 935200,
+              "status": "observed"
+            },
+            {
+              "period": "2026-02",
+              "value": 938800,
+              "status": "observed"
+            },
+            {
+              "period": "2026-03",
+              "value": 941800,
+              "status": "observed"
+            },
+            {
+              "period": "2026-04",
+              "value": 944100,
+              "status": "observed"
+            },
+            {
+              "period": "2026-05",
+              "value": 946500,
+              "status": "observed"
+            },
+            {
+              "period": "2026-06",
+              "value": 940800,
+              "status": "observed"
+            },
+            {
+              "period": "2026-07",
+              "value": 934600,
+              "status": "observed"
+            },
+            {
+              "period": "2026-08",
+              "value": 925900,
+              "status": "observed"
+            },
+            {
+              "period": "2026-09",
+              "value": 917600,
+              "status": "observed"
+            },
+            {
+              "period": "2026-10",
+              "value": 916400,
+              "status": "observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mortgage_rates",
+      "title": "Uninsured fixed mortgage rate, 5 years and over",
+      "unit": "%",
+      "frequency": "Monthly",
+      "geography": "Canada, chartered banks",
+      "source": "Bank of Canada, V122667786, funds advanced",
+      "source_url": "https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/",
+      "download_url": "https://www.bankofcanada.ca/valet/observations/V122667786/json?start_date=2013-01-01",
+      "note": "Canada-wide average rate on uninsured residential mortgage funds advanced by chartered banks, fixed terms of five years and over. Includes new credit, renewals and refinancing; not a Toronto-specific quote, posted rate, policy rate or rate on outstanding balances.",
+      "series": [
+        {
+          "name": "Fixed mortgage rate (5+ years, uninsured)",
+          "points": [
+            {
+              "period": "2013-01",
+              "value": 3.18,
+              "status": "observed"
+            },
+            {
+              "period": "2013-02",
+              "value": 3.16,
+              "status": "observed"
+            },
+            {
+              "period": "2013-03",
+              "value": 3.07,
+              "status": "observed"
+            },
+            {
+              "period": "2013-04",
+              "value": 3.01,
+              "status": "observed"
+            },
+            {
+              "period": "2013-05",
+              "value": 2.99,
+              "status": "observed"
+            },
+            {
+              "period": "2013-06",
+              "value": 2.98,
+              "status": "observed"
+            },
+            {
+              "period": "2013-07",
+              "value": 3.07,
+              "status": "observed"
+            },
+            {
+              "period": "2013-08",
+              "value": 3.19,
+              "status": "observed"
+            },
+            {
+              "period": "2013-09",
+              "value": 3.36,
+              "status": "observed"
+            },
+            {
+              "period": "2013-10",
+              "value": 3.53,
+              "status": "observed"
+            },
+            {
+              "period": "2013-11",
+              "value": 3.65,
+              "status": "observed"
+            },
+            {
+              "period": "2013-12",
+              "value": 3.67,
+              "status": "observed"
+            },
+            {
+              "period": "2014-01",
+              "value": 3.66,
+              "status": "observed"
+            },
+            {
+              "period": "2014-02",
+              "value": 3.57,
+              "status": "observed"
+            },
+            {
+              "period": "2014-03",
+              "value": 3.42,
+              "status": "observed"
+            },
+            {
+              "period": "2014-04",
+              "value": 3.21,
+              "status": "observed"
+            },
+            {
+              "period": "2014-05",
+              "value": 3.14,
+              "status": "observed"
+            },
+            {
+              "period": "2014-06",
+              "value": 3.11,
+              "status": "observed"
+            },
+            {
+              "period": "2014-07",
+              "value": 3.09,
+              "status": "observed"
+            },
+            {
+              "period": "2014-08",
+              "value": 3.09,
+              "status": "observed"
+            },
+            {
+              "period": "2014-09",
+              "value": 3.09,
+              "status": "observed"
+            },
+            {
+              "period": "2014-10",
+              "value": 3.07,
+              "status": "observed"
+            },
+            {
+              "period": "2014-11",
+              "value": 3.11,
+              "status": "observed"
+            },
+            {
+              "period": "2014-12",
+              "value": 3.1,
+              "status": "observed"
+            },
+            {
+              "period": "2015-01",
+              "value": 3.09,
+              "status": "observed"
+            },
+            {
+              "period": "2015-02",
+              "value": 2.96,
+              "status": "observed"
+            },
+            {
+              "period": "2015-03",
+              "value": 2.87,
+              "status": "observed"
+            },
+            {
+              "period": "2015-04",
+              "value": 2.8,
+              "status": "observed"
+            },
+            {
+              "period": "2015-05",
+              "value": 2.75,
+              "status": "observed"
+            },
+            {
+              "period": "2015-06",
+              "value": 2.75,
+              "status": "observed"
+            },
+            {
+              "period": "2015-07",
+              "value": 2.74,
+              "status": "observed"
+            },
+            {
+              "period": "2015-08",
+              "value": 2.76,
+              "status": "observed"
+            },
+            {
+              "period": "2015-09",
+              "value": 2.76,
+              "status": "observed"
+            },
+            {
+              "period": "2015-10",
+              "value": 2.76,
+              "status": "observed"
+            },
+            {
+              "period": "2015-11",
+              "value": 2.77,
+              "status": "observed"
+            },
+            {
+              "period": "2015-12",
+              "value": 2.82,
+              "status": "observed"
+            },
+            {
+              "period": "2016-01",
+              "value": 2.86,
+              "status": "observed"
+            },
+            {
+              "period": "2016-02",
+              "value": 2.93,
+              "status": "observed"
+            },
+            {
+              "period": "2016-03",
+              "value": 2.9,
+              "status": "observed"
+            },
+            {
+              "period": "2016-04",
+              "value": 2.8,
+              "status": "observed"
+            },
+            {
+              "period": "2016-05",
+              "value": 2.7,
+              "status": "observed"
+            },
+            {
+              "period": "2016-06",
+              "value": 2.63,
+              "status": "observed"
+            },
+            {
+              "period": "2016-07",
+              "value": 2.59,
+              "status": "observed"
+            },
+            {
+              "period": "2016-08",
+              "value": 2.58,
+              "status": "observed"
+            },
+            {
+              "period": "2016-09",
+              "value": 2.57,
+              "status": "observed"
+            },
+            {
+              "period": "2016-10",
+              "value": 2.57,
+              "status": "observed"
+            },
+            {
+              "period": "2016-11",
+              "value": 2.57,
+              "status": "observed"
+            },
+            {
+              "period": "2016-12",
+              "value": 2.63,
+              "status": "observed"
+            },
+            {
+              "period": "2017-01",
+              "value": 2.72,
+              "status": "observed"
+            },
+            {
+              "period": "2017-02",
+              "value": 2.8,
+              "status": "observed"
+            },
+            {
+              "period": "2017-03",
+              "value": 2.82,
+              "status": "observed"
+            },
+            {
+              "period": "2017-04",
+              "value": 2.81,
+              "status": "observed"
+            },
+            {
+              "period": "2017-05",
+              "value": 2.73,
+              "status": "observed"
+            },
+            {
+              "period": "2017-06",
+              "value": 2.68,
+              "status": "observed"
+            },
+            {
+              "period": "2017-07",
+              "value": 2.67,
+              "status": "observed"
+            },
+            {
+              "period": "2017-08",
+              "value": 2.78,
+              "status": "observed"
+            },
+            {
+              "period": "2017-09",
+              "value": 2.95,
+              "status": "observed"
+            },
+            {
+              "period": "2017-10",
+              "value": 3.08,
+              "status": "observed"
+            },
+            {
+              "period": "2017-11",
+              "value": 3.22,
+              "status": "observed"
+            },
+            {
+              "period": "2017-12",
+              "value": 3.29,
+              "status": "observed"
+            },
+            {
+              "period": "2018-01",
+              "value": 3.33,
+              "status": "observed"
+            },
+            {
+              "period": "2018-02",
+              "value": 3.38,
+              "status": "observed"
+            },
+            {
+              "period": "2018-03",
+              "value": 3.41,
+              "status": "observed"
+            },
+            {
+              "period": "2018-04",
+              "value": 3.43,
+              "status": "observed"
+            },
+            {
+              "period": "2018-05",
+              "value": 3.47,
+              "status": "observed"
+            },
+            {
+              "period": "2018-06",
+              "value": 3.51,
+              "status": "observed"
+            },
+            {
+              "period": "2018-07",
+              "value": 3.5,
+              "status": "observed"
+            },
+            {
+              "period": "2018-08",
+              "value": 3.58,
+              "status": "observed"
+            },
+            {
+              "period": "2018-09",
+              "value": 3.63,
+              "status": "observed"
+            },
+            {
+              "period": "2018-10",
+              "value": 3.65,
+              "status": "observed"
+            },
+            {
+              "period": "2018-11",
+              "value": 3.77,
+              "status": "observed"
+            },
+            {
+              "period": "2018-12",
+              "value": 3.77,
+              "status": "observed"
+            },
+            {
+              "period": "2019-01",
+              "value": 3.77,
+              "status": "observed"
+            },
+            {
+              "period": "2019-02",
+              "value": 3.71,
+              "status": "observed"
+            },
+            {
+              "period": "2019-03",
+              "value": 3.61,
+              "status": "observed"
+            },
+            {
+              "period": "2019-04",
+              "value": 3.4,
+              "status": "observed"
+            },
+            {
+              "period": "2019-05",
+              "value": 3.26,
+              "status": "observed"
+            },
+            {
+              "period": "2019-06",
+              "value": 3.12,
+              "status": "observed"
+            },
+            {
+              "period": "2019-07",
+              "value": 2.96,
+              "status": "observed"
+            },
+            {
+              "period": "2019-08",
+              "value": 2.9,
+              "status": "observed"
+            },
+            {
+              "period": "2019-09",
+              "value": 2.85,
+              "status": "observed"
+            },
+            {
+              "period": "2019-10",
+              "value": 2.85,
+              "status": "observed"
+            },
+            {
+              "period": "2019-11",
+              "value": 2.9,
+              "status": "observed"
+            },
+            {
+              "period": "2019-12",
+              "value": 2.94,
+              "status": "observed"
+            },
+            {
+              "period": "2020-01",
+              "value": 2.97,
+              "status": "observed"
+            },
+            {
+              "period": "2020-02",
+              "value": 2.96,
+              "status": "observed"
+            },
+            {
+              "period": "2020-03",
+              "value": 2.78,
+              "status": "observed"
+            },
+            {
+              "period": "2020-04",
+              "value": 2.71,
+              "status": "observed"
+            },
+            {
+              "period": "2020-05",
+              "value": 2.69,
+              "status": "observed"
+            },
+            {
+              "period": "2020-06",
+              "value": 2.6,
+              "status": "observed"
+            },
+            {
+              "period": "2020-07",
+              "value": 2.46,
+              "status": "observed"
+            },
+            {
+              "period": "2020-08",
+              "value": 2.26,
+              "status": "observed"
+            },
+            {
+              "period": "2020-09",
+              "value": 2.15,
+              "status": "observed"
+            },
+            {
+              "period": "2020-10",
+              "value": 2.05,
+              "status": "observed"
+            },
+            {
+              "period": "2020-11",
+              "value": 2.0,
+              "status": "observed"
+            },
+            {
+              "period": "2020-12",
+              "value": 1.97,
+              "status": "observed"
+            },
+            {
+              "period": "2021-01",
+              "value": 1.96,
+              "status": "observed"
+            },
+            {
+              "period": "2021-02",
+              "value": 1.94,
+              "status": "observed"
+            },
+            {
+              "period": "2021-03",
+              "value": 1.96,
+              "status": "observed"
+            },
+            {
+              "period": "2021-04",
+              "value": 2.03,
+              "status": "observed"
+            },
+            {
+              "period": "2021-05",
+              "value": 2.11,
+              "status": "observed"
+            },
+            {
+              "period": "2021-06",
+              "value": 2.14,
+              "status": "observed"
+            },
+            {
+              "period": "2021-07",
+              "value": 2.28,
+              "status": "observed"
+            },
+            {
+              "period": "2021-08",
+              "value": 2.31,
+              "status": "observed"
+            },
+            {
+              "period": "2021-09",
+              "value": 2.33,
+              "status": "observed"
+            },
+            {
+              "period": "2021-10",
+              "value": 2.22,
+              "status": "observed"
+            },
+            {
+              "period": "2021-11",
+              "value": 2.35,
+              "status": "observed"
+            },
+            {
+              "period": "2021-12",
+              "value": 2.51,
+              "status": "observed"
+            },
+            {
+              "period": "2022-01",
+              "value": 2.61,
+              "status": "observed"
+            },
+            {
+              "period": "2022-02",
+              "value": 2.81,
+              "status": "observed"
+            },
+            {
+              "period": "2022-03",
+              "value": 3.02,
+              "status": "observed"
+            },
+            {
+              "period": "2022-04",
+              "value": 3.26,
+              "status": "observed"
+            },
+            {
+              "period": "2022-05",
+              "value": 3.41,
+              "status": "observed"
+            },
+            {
+              "period": "2022-06",
+              "value": 3.7,
+              "status": "observed"
+            },
+            {
+              "period": "2022-07",
+              "value": 4.05,
+              "status": "observed"
+            },
+            {
+              "period": "2022-08",
+              "value": 4.44,
+              "status": "observed"
+            },
+            {
+              "period": "2022-09",
+              "value": 4.8,
+              "status": "observed"
+            },
+            {
+              "period": "2022-10",
+              "value": 5.01,
+              "status": "observed"
+            },
+            {
+              "period": "2022-11",
+              "value": 5.17,
+              "status": "observed"
+            },
+            {
+              "period": "2022-12",
+              "value": 5.22,
+              "status": "observed"
+            },
+            {
+              "period": "2023-01",
+              "value": 5.2,
+              "status": "observed"
+            },
+            {
+              "period": "2023-02",
+              "value": 5.09,
+              "status": "observed"
+            },
+            {
+              "period": "2023-03",
+              "value": 5.11,
+              "status": "observed"
+            },
+            {
+              "period": "2023-04",
+              "value": 5.08,
+              "status": "observed"
+            },
+            {
+              "period": "2023-05",
+              "value": 5.04,
+              "status": "observed"
+            },
+            {
+              "period": "2023-06",
+              "value": 5.12,
+              "status": "observed"
+            },
+            {
+              "period": "2023-07",
+              "value": 5.31,
+              "status": "observed"
+            },
+            {
+              "period": "2023-08",
+              "value": 5.46,
+              "status": "observed"
+            },
+            {
+              "period": "2023-09",
+              "value": 5.69,
+              "status": "observed"
+            },
+            {
+              "period": "2023-10",
+              "value": 5.79,
+              "status": "observed"
+            },
+            {
+              "period": "2023-11",
+              "value": 6.0,
+              "status": "observed"
+            },
+            {
+              "period": "2023-12",
+              "value": 5.96,
+              "status": "observed"
+            },
+            {
+              "period": "2024-01",
+              "value": 5.67,
+              "status": "observed"
+            },
+            {
+              "period": "2024-02",
+              "value": 5.57,
+              "status": "observed"
+            },
+            {
+              "period": "2024-03",
+              "value": 5.51,
+              "status": "observed"
+            },
+            {
+              "period": "2024-04",
+              "value": 5.3,
+              "status": "observed"
+            },
+            {
+              "period": "2024-05",
+              "value": 5.34,
+              "status": "observed"
+            },
+            {
+              "period": "2024-06",
+              "value": 5.21,
+              "status": "observed"
+            },
+            {
+              "period": "2024-07",
+              "value": 5.15,
+              "status": "observed"
+            },
+            {
+              "period": "2024-08",
+              "value": 5.11,
+              "status": "observed"
+            },
+            {
+              "period": "2024-09",
+              "value": 4.93,
+              "status": "observed"
+            },
+            {
+              "period": "2024-10",
+              "value": 4.82,
+              "status": "observed"
+            },
+            {
+              "period": "2024-11",
+              "value": 4.68,
+              "status": "observed"
+            },
+            {
+              "period": "2024-12",
+              "value": 4.61,
+              "status": "observed"
+            },
+            {
+              "period": "2025-01",
+              "value": 4.59,
+              "status": "observed"
+            },
+            {
+              "period": "2025-02",
+              "value": 4.61,
+              "status": "observed"
+            },
+            {
+              "period": "2025-03",
+              "value": 4.52,
+              "status": "observed"
+            },
+            {
+              "period": "2025-04",
+              "value": 4.3,
+              "status": "observed"
+            },
+            {
+              "period": "2025-05",
+              "value": 4.24,
+              "status": "observed"
+            },
+            {
+              "period": "2025-06",
+              "value": 4.25,
+              "status": "observed"
+            },
+            {
+              "period": "2025-07",
+              "value": 4.27,
+              "status": "observed"
+            },
+            {
+              "period": "2025-08",
+              "value": 4.31,
+              "status": "observed"
+            },
+            {
+              "period": "2025-09",
+              "value": 4.37,
+              "status": "observed"
+            },
+            {
+              "period": "2025-10",
+              "value": 4.4,
+              "status": "observed"
+            },
+            {
+              "period": "2025-11",
+              "value": 4.26,
+              "status": "observed"
+            },
+            {
+              "period": "2025-12",
+              "value": 4.31,
+              "status": "observed"
+            },
+            {
+              "period": "2026-01",
+              "value": 4.33,
+              "status": "observed"
+            },
+            {
+              "period": "2026-02",
+              "value": 4.31,
+              "status": "observed"
+            },
+            {
+              "period": "2026-03",
+              "value": 4.22,
+              "status": "observed"
+            },
+            {
+              "period": "2026-04",
+              "value": 4.17,
+              "status": "observed"
+            },
+            {
+              "period": "2026-05",
+              "value": 4.3,
+              "status": "observed"
+            },
+            {
+              "period": "2026-06",
+              "value": 4.35,
+              "status": "observed"
+            },
+            {
+              "period": "2026-07",
+              "value": 4.49,
+              "status": "observed"
+            },
+            {
+              "period": "2026-08",
+              "value": 4.58,
+              "status": "observed"
+            },
+            {
+              "period": "2026-09",
+              "value": 4.66,
+              "status": "observed"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "prices",
       "title": "Toronto-area monthly sale prices",
       "unit": "CAD",
@@ -9136,13 +11344,9 @@ body.site-tool {
     {
       "metric": "Active listing inventory",
       "detail": "Available in individual TRREB monthly reports, but a consistent historical series has not yet been assembled. The roughly 26,000 figure is not plotted as a time series."
-    },
-    {
-      "metric": "Comparable resale benchmark / HPI",
-      "detail": "This version uses TRREB average prices. A consistently revised monthly benchmark series is still needed for a stronger cycle-timing study."
     }
   ],
-  "retrieved_at": "2026-11-22T03:18:54+00:00"
+  "retrieved_at": "2026-11-25T22:28:58+00:00"
 }</script><script>/* Pure selection and date math, shared by the renderer and offline checks.
  * Both metrics use one calendar domain, regardless of their reporting cadence.
  */
@@ -9722,6 +11926,151 @@ render();
   sourceChoice.addEventListener('change', render);
   let timer;
   window.addEventListener('resize', () => {clearTimeout(timer); timer = setTimeout(render, 100);});
+  render();
+})();
+</script><script>/* Fixed-rate Canadian mortgage convention: nominal annual, compounded semi-annually. */
+(function(root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.MortgageCosts = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, () => {
+  function paymentFactor(rate, years=25) {
+    if (!Number.isFinite(rate) || rate < 0 || rate > 25 || !Number.isFinite(years) || years < 1 || years > 50)
+      throw new Error('Invalid mortgage rate or amortization');
+    const n = years * 12;
+    if (rate === 0) return 1/n;
+    const monthly = Math.expm1(Math.log1p(rate/200)/6);
+    return monthly / -Math.expm1(-n * Math.log1p(monthly));
+  }
+  function monthlyPayment(price, rate, down=20, years=25) {
+    if (!Number.isFinite(price) || price < 0 || !Number.isFinite(down) || down < 0 || down >= 100)
+      throw new Error('Invalid price or down payment');
+    return price * (1-down/100) * paymentFactor(rate, years);
+  }
+  function samePaymentPrice(price, rate, reference=4, years=25) {
+    if (!Number.isFinite(price) || price < 0) throw new Error('Invalid price');
+    return price * paymentFactor(rate,years) / paymentFactor(reference,years);
+  }
+  function observations(data, reference=4) {
+    const prices = data.groups.find(group => group.id === 'benchmark').series[0].points;
+    const rates = data.groups.find(group => group.id === 'mortgage_rates').series[0].points;
+    const byMonth = new Map(rates.filter(point=>point.status === 'observed').map(point=>[point.period,point.value]));
+    // Exact monthly join only: never interpolate, extend or substitute forecasts.
+    const rows = prices.filter(point=>point.status === 'observed' && byMonth.has(point.period)).map(point=>{
+      const rate = byMonth.get(point.period);
+      return {period:point.period,price:point.value,rate,
+        payment:monthlyPayment(point.value,rate), equivalent:samePaymentPrice(point.value,rate,reference)};
+    });
+    if (rows.length < 2) throw new Error('No shared benchmark and mortgage-rate history');
+    return rows;
+  }
+  return {paymentFactor,monthlyPayment,samePaymentPrice,observations};
+});
+</script><script>/* Aligned original-unit plots plus a separately labelled payment-equivalent price. */
+(() => {
+  const reference = $('reference-rate');
+  let rows, index, plots = [];
+  const money = value => '$' + Math.round(value).toLocaleString('en-CA');
+  const month = period => new Date(period+'-01T00:00:00Z').toLocaleDateString('en-CA',
+    {month:'short',year:'numeric',timeZone:'UTC'});
+  function inspect(next) {
+    index = Math.max(0, Math.min(rows.length-1,next));
+    const row = rows[index];
+    for (const plot of plots) {
+      plot.cursor.setAttribute('x1',plot.xAt(index));
+      plot.cursor.setAttribute('x2',plot.xAt(index));
+    }
+    $('benchmark-period').textContent = month(row.period);
+    $('benchmark-price').textContent = money(row.price);
+    $('benchmark-rate').textContent = row.rate.toFixed(2)+'%';
+    $('cost-period').textContent = month(row.period);
+    $('cost-actual').textContent = money(row.price);
+    $('cost-equivalent').textContent = money(row.equivalent);
+    $('cost-payment').textContent = money(row.payment)+'/month';
+    $('cost-reference-label').textContent = `Same-payment price at ${Number(reference.value).toFixed(1)}%`;
+    $('cost-explanation').textContent = `The ${money(row.price)} benchmark at ${row.rate.toFixed(2)}% costs about ${money(row.payment)}/month in principal and interest. `+
+      `At ${Number(reference.value).toFixed(1)}%, a ${money(row.equivalent)} home would have the same payment, with the same 20% down and 25-year amortization.`;
+  }
+  function draw(id, panels) {
+    const container = $(id);
+    const width = container.clientWidth;
+    const left = width < 480 ? 53 : 72, right = 18, top = 28;
+    const panelHeight = panels.length === 2 ? (width < 480 ? 160 : 170) : (width < 480 ? 230 : 270);
+    const gap = 38, bottom = 42;
+    const height = top + panels.length*panelHeight + (panels.length-1)*gap + bottom;
+    const xAt = i => left + i/(rows.length-1)*(width-left-right);
+    const svg = svgNode('svg',{viewBox:`0 0 ${width} ${height}`,role:'img',tabindex:'0',
+      'aria-label':(panels.length===2 ? 'Greater Toronto benchmark price and Canadian mortgage rate, in aligned panels with separate units.' :
+        `Greater Toronto benchmark and same-payment price at ${reference.value} percent.`)+
+        ' Use left and right arrows to inspect months. Home and End jump to the edges.'});
+    container.replaceChildren(svg);
+    panels.forEach((panel,panelIndex)=>{
+      const panelTop = top+panelIndex*(panelHeight+gap);
+      const maximum = Math.max(...rows.flatMap(row=>panel.lines.map(line=>row[line.key])));
+      const step = panel.rate ? Math.max(1,Math.ceil(maximum/4)) : Math.max(100000,Math.ceil(maximum/400000)*100000);
+      const high = Math.ceil(maximum/step)*step;
+      const yAt = value => panelTop+panelHeight-value/high*panelHeight;
+      svg.append(svgNode('text',{x:left,y:panelTop-10,class:'axis-title'},width < 480 ? panel.shortTitle : panel.title));
+      for (let value=0;value<=high;value+=step) {
+        const y = yAt(value);
+        svg.append(svgNode('line',{x1:left,x2:width-right,y1:y,y2:y,class:'gridline'}));
+        svg.append(svgNode('text',{x:left-8,y:y+4,'text-anchor':'end',class:'axis'},
+          panel.rate ? value+'%' : '$'+(value/1000000).toFixed(1)+'m'));
+      }
+      for (const line of panel.lines) {
+        const path = rows.map((row,i)=>(i?'L':'M')+xAt(i).toFixed(2)+','+yAt(row[line.key]).toFixed(2)).join(' ');
+        svg.append(svgNode('path',{d:path,stroke:line.color,class:'series-line benchmark-line',
+          'data-series':line.key,...(line.dashed?{'stroke-dasharray':'6 4'}:{})}));
+      }
+    });
+    let previousRight = -Infinity;
+    const spacing = width < 480 ? 36 : 24;
+    rows.forEach((row,i)=>{
+      const last = i===rows.length-1;
+      if (i !== 0 && !last && i%spacing!==0) return;
+      const x = xAt(i), label = row.period.slice(0,4);
+      const start = i===0 ? x : last ? x-28 : x-14;
+      if (!last && i!==0 && (start<previousRight+8 || start+36>width-right-28)) return;
+      svg.append(svgNode('text',{x,y:height-18,'text-anchor':i===0?'start':last?'end':'middle',class:'axis benchmark-tick'},label));
+      previousRight=start+28;
+    });
+    const cursor=svgNode('line',{x1:0,x2:0,y1:top,y2:height-bottom,stroke:'var(--ink)',
+      'stroke-dasharray':'2 4',class:'benchmark-guide'});
+    svg.append(cursor);
+    const overlay=svgNode('rect',{x:left,y:top,width:width-left-right,height:height-top-bottom,fill:'transparent'});
+    svg.append(overlay);
+    const pointer=event=>{
+      const bounds=svg.getBoundingClientRect();
+      const x=(event.clientX-bounds.left)/bounds.width*width;
+      inspect(Math.round((x-left)/(width-left-right)*(rows.length-1)));
+    };
+    overlay.addEventListener('pointermove',event=>{if(event.pointerType!=='touch')pointer(event);});
+    overlay.addEventListener('pointerdown',pointer);
+    svg.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();
+      inspect(event.key==='Home'?0:event.key==='End'?rows.length-1:index+(event.key==='ArrowLeft'?-1:1));
+    });
+    plots.push({cursor,xAt});
+  }
+  function render() {
+    rows=MortgageCosts.observations(DATA,Number(reference.value));
+    plots=[];
+    const dates=`${month(rows[0].period)}–${month(rows.at(-1).period)} · Shared monthly observations only`;
+    $('benchmark-window').textContent=dates;
+    $('cost-window').textContent=dates;
+    draw('benchmark-chart',[
+      {title:'Composite benchmark · CAD',shortTitle:'Benchmark · CAD',lines:[{key:'price',color:'var(--price)'}]},
+      {title:'Uninsured fixed mortgage rate · 5+ years',shortTitle:'Mortgage rate · %',rate:true,lines:[{key:'rate',color:'var(--bank)'}]},
+    ]);
+    draw('cost-chart',[{title:'Nominal price and same-payment equivalent · CAD',shortTitle:'Price · CAD',lines:[
+      {key:'price',color:'var(--price)'},{key:'equivalent',color:'var(--adjusted)',dashed:true},
+    ]}]);
+    inspect(index ?? rows.length-1);
+  }
+  reference.addEventListener('change',render);
+  let timer;
+  window.addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(render,100);});
   render();
 })();
 </script>
