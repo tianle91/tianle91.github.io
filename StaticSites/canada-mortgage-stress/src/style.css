@@ -54,3 +54,5 @@ footer ol { padding-left:18px; }
 .benchmark-note,.benchmark-method { font-size:11px; color:var(--muted); margin:10px 0 0; }
 .benchmark-method p { margin:8px 0; }
 .adjusted-key { color:var(--adjusted); }.adjusted-key i { background:repeating-linear-gradient(to right,var(--adjusted) 0 6px,transparent 6px 10px); }
+
+.benchmark-index-readout { font-size:11px; margin:6px 0; color:var(--muted); font-variant-numeric:tabular-nums; }

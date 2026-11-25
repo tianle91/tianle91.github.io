@@ -91,6 +91,8 @@ footer ol { padding-left:18px; }
 .benchmark-note,.benchmark-method { font-size:11px; color:var(--muted); margin:10px 0 0; }
 .benchmark-method p { margin:8px 0; }
 .adjusted-key { color:var(--adjusted); }.adjusted-key i { background:repeating-linear-gradient(to right,var(--adjusted) 0 6px,transparent 6px 10px); }
+
+.benchmark-index-readout { font-size:11px; margin:6px 0; color:var(--muted); font-variant-numeric:tabular-nums; }
 @media(max-width:640px) {
   main { padding:23px 14px; }
   .explorer { padding:14px; }
@@ -543,15 +545,16 @@ body.site-tool {
 <p class="benchmark-note">Prices: <a href="https://www.crea.ca/housing-market-stats/mls-home-price-index/hpi-tool/" target="_blank" rel="noopener">CREA MLS® HPI</a> composite benchmark. Rates: <a href="https://www.bankofcanada.ca/rates/banking-and-financial-statistics/interest-rates-for-new-and-existing-lending-by-chartered-banks/" target="_blank" rel="noopener">Bank of Canada</a>, Canada-wide uninsured fixed mortgage funds advanced, terms of 5 years and over; includes renewals and refinancing. Separate axes preserve dollars and percentages.</p>
 </section>
 <section class="explorer benchmark-section" aria-labelledby="cost-title">
-<h2 id="cost-title">Benchmark prices, accounting for borrowing costs</h2>
-<div class="power-sale-controls"><label for="reference-rate">Reference mortgage rate</label><select id="reference-rate"><option value="2">2.0%</option><option value="3">3.0%</option><option value="4" selected>4.0%</option><option value="5">5.0%</option><option value="6">6.0%</option></select><span>20% down · 25-year amortization</span></div>
-<div class="legend"><span class="price-key"><i></i>Published benchmark</span><span class="adjusted-key"><i></i><span id="cost-reference-label"></span></span></div>
+<h2 id="cost-title">Prices &amp; mortgage-payment burden</h2>
+<p class="series-description">Each month's historical mortgage rate · 20% down · 25-year amortization</p>
+<div class="legend"><span class="price-key"><i></i>Benchmark price index</span><span class="adjusted-key"><i></i>Mortgage-payment index</span></div>
 <p id="cost-window" class="series-label"></p>
 <div id="cost-chart" class="chart"></div>
-<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="cost-period"></strong><span>Benchmark <b id="cost-actual"></b></span><span>Same-payment price <b id="cost-equivalent"></b></span><span>Principal &amp; interest <b id="cost-payment"></b></span></div>
+<div class="benchmark-readout" role="status" aria-atomic="true"><strong id="cost-period"></strong><span>Benchmark <b id="cost-actual"></b></span><span>Mortgage rate <b id="cost-rate"></b></span><span>Principal &amp; interest <b id="cost-payment"></b></span></div>
+<p class="benchmark-index-readout">Price index <b id="cost-price-index"></b> · Payment index <b id="cost-payment-index"></b></p>
 <p id="cost-explanation" class="benchmark-note"></p>
-<p class="hint">Hover, tap or use arrow keys to inspect a month. Changing the reference rate updates the dashed line.</p>
-<details class="benchmark-method"><summary>How the borrowing-cost comparison works</summary><p>For each month, estimate the benchmark home's principal-and-interest payment at that month's mortgage rate. Then find the home price with the same payment at the selected reference rate. Both calculations assume 20% down, a fresh 25-year amortization and Canadian fixed-rate semi-annual compounding, with monthly payments.</p><p>A higher same-payment price means a greater financing burden relative to the reference rate. This is a modelled payment comparison, not a new market valuation, inflation adjustment or income-based affordability measure. It excludes taxes, maintenance, condo fees, insurance and transaction costs. It does not model the future rate at renewal or an existing owner's outstanding loan.</p></details>
+<p class="hint">Hover, tap or use arrow keys to inspect a month. Both indexes start at 100 in the first shared month.</p>
+<details class="benchmark-method"><summary>How the borrowing-cost comparison works</summary><p>For every month, calculate the benchmark home's principal-and-interest payment using that month's observed mortgage rate, 20% down and a fresh 25-year amortization. Canadian fixed-rate semi-annual compounding is converted to monthly payments. There is no single fixed mortgage rate applied across the history.</p><p>Both price and payment start at an index of 100 in the first shared month. For example, a payment index of 200 means twice that starting month's payment. If the payment index rises faster than the price index, borrowing costs have increased the modelled payment burden relative to price growth.</p><p>This is a modelled payment comparison, not a market valuation, inflation adjustment or income-based affordability measure. It excludes taxes, maintenance, condo fees, insurance and transaction costs. It does not model future rates at renewal or an existing owner's outstanding loan.</p></details>
 </section>
 <section class="explorer power-sale" aria-labelledby="power-sale-title">
 <h2 id="power-sale-title">GTA power-of-sale listings</h2>
@@ -11947,11 +11950,7 @@ render();
       throw new Error('Invalid price or down payment');
     return price * (1-down/100) * paymentFactor(rate, years);
   }
-  function samePaymentPrice(price, rate, reference=4, years=25) {
-    if (!Number.isFinite(price) || price < 0) throw new Error('Invalid price');
-    return price * paymentFactor(rate,years) / paymentFactor(reference,years);
-  }
-  function observations(data, reference=4) {
+  function observations(data) {
     const prices = data.groups.find(group => group.id === 'benchmark').series[0].points;
     const rates = data.groups.find(group => group.id === 'mortgage_rates').series[0].points;
     const byMonth = new Map(rates.filter(point=>point.status === 'observed').map(point=>[point.period,point.value]));
@@ -11959,16 +11958,16 @@ render();
     const rows = prices.filter(point=>point.status === 'observed' && byMonth.has(point.period)).map(point=>{
       const rate = byMonth.get(point.period);
       return {period:point.period,price:point.value,rate,
-        payment:monthlyPayment(point.value,rate), equivalent:samePaymentPrice(point.value,rate,reference)};
+        payment:monthlyPayment(point.value,rate)};
     });
     if (rows.length < 2) throw new Error('No shared benchmark and mortgage-rate history');
-    return rows;
+    const base = rows[0];
+    return rows.map(row=>({...row,priceIndex:row.price/base.price*100,paymentIndex:row.payment/base.payment*100}));
   }
-  return {paymentFactor,monthlyPayment,samePaymentPrice,observations};
+  return {paymentFactor,monthlyPayment,observations};
 });
-</script><script>/* Aligned original-unit plots plus a separately labelled payment-equivalent price. */
+</script><script>/* Historical monthly rates drive each payment; price and payment indexes share a base month. */
 (() => {
-  const reference = $('reference-rate');
   let rows, index, plots = [];
   const money = value => '$' + Math.round(value).toLocaleString('en-CA');
   const month = period => new Date(period+'-01T00:00:00Z').toLocaleDateString('en-CA',
@@ -11985,11 +11984,13 @@ render();
     $('benchmark-rate').textContent = row.rate.toFixed(2)+'%';
     $('cost-period').textContent = month(row.period);
     $('cost-actual').textContent = money(row.price);
-    $('cost-equivalent').textContent = money(row.equivalent);
+    $('cost-rate').textContent = row.rate.toFixed(2)+'%';
+    $('cost-price-index').textContent = row.priceIndex.toFixed(1);
+    $('cost-payment-index').textContent = row.paymentIndex.toFixed(1);
     $('cost-payment').textContent = money(row.payment)+'/month';
-    $('cost-reference-label').textContent = `Same-payment price at ${Number(reference.value).toFixed(1)}%`;
-    $('cost-explanation').textContent = `The ${money(row.price)} benchmark at ${row.rate.toFixed(2)}% costs about ${money(row.payment)}/month in principal and interest. `+
-      `At ${Number(reference.value).toFixed(1)}%, a ${money(row.equivalent)} home would have the same payment, with the same 20% down and 25-year amortization.`;
+    $('cost-explanation').textContent = `At ${month(row.period)}'s observed ${row.rate.toFixed(2)}% mortgage rate, `+
+      `the ${money(row.price)} benchmark costs about ${money(row.payment)}/month in principal and interest. `+
+      `The index compares this with ${month(rows[0].period)} (${money(rows[0].payment)}/month at ${rows[0].rate.toFixed(2)}%).`;
   }
   function draw(id, panels) {
     const container = $(id);
@@ -12001,13 +12002,13 @@ render();
     const xAt = i => left + i/(rows.length-1)*(width-left-right);
     const svg = svgNode('svg',{viewBox:`0 0 ${width} ${height}`,role:'img',tabindex:'0',
       'aria-label':(panels.length===2 ? 'Greater Toronto benchmark price and Canadian mortgage rate, in aligned panels with separate units.' :
-        `Greater Toronto benchmark and same-payment price at ${reference.value} percent.`)+
+        'Greater Toronto benchmark price and mortgage-payment burden, both indexed to the first shared month using historical monthly mortgage rates.')+
         ' Use left and right arrows to inspect months. Home and End jump to the edges.'});
     container.replaceChildren(svg);
     panels.forEach((panel,panelIndex)=>{
       const panelTop = top+panelIndex*(panelHeight+gap);
       const maximum = Math.max(...rows.flatMap(row=>panel.lines.map(line=>row[line.key])));
-      const step = panel.rate ? Math.max(1,Math.ceil(maximum/4)) : Math.max(100000,Math.ceil(maximum/400000)*100000);
+      const step = panel.rate ? Math.max(1,Math.ceil(maximum/4)) : panel.index ? 50 : Math.max(100000,Math.ceil(maximum/400000)*100000);
       const high = Math.ceil(maximum/step)*step;
       const yAt = value => panelTop+panelHeight-value/high*panelHeight;
       svg.append(svgNode('text',{x:left,y:panelTop-10,class:'axis-title'},width < 480 ? panel.shortTitle : panel.title));
@@ -12015,7 +12016,7 @@ render();
         const y = yAt(value);
         svg.append(svgNode('line',{x1:left,x2:width-right,y1:y,y2:y,class:'gridline'}));
         svg.append(svgNode('text',{x:left-8,y:y+4,'text-anchor':'end',class:'axis'},
-          panel.rate ? value+'%' : '$'+(value/1000000).toFixed(1)+'m'));
+          panel.rate ? value+'%' : panel.index ? String(value) : '$'+(value/1000000).toFixed(1)+'m'));
       }
       for (const line of panel.lines) {
         const path = rows.map((row,i)=>(i?'L':'M')+xAt(i).toFixed(2)+','+yAt(row[line.key]).toFixed(2)).join(' ');
@@ -12054,7 +12055,7 @@ render();
     plots.push({cursor,xAt});
   }
   function render() {
-    rows=MortgageCosts.observations(DATA,Number(reference.value));
+    rows=MortgageCosts.observations(DATA);
     plots=[];
     const dates=`${month(rows[0].period)}–${month(rows.at(-1).period)} · Shared monthly observations only`;
     $('benchmark-window').textContent=dates;
@@ -12063,12 +12064,11 @@ render();
       {title:'Composite benchmark · CAD',shortTitle:'Benchmark · CAD',lines:[{key:'price',color:'var(--price)'}]},
       {title:'Uninsured fixed mortgage rate · 5+ years',shortTitle:'Mortgage rate · %',rate:true,lines:[{key:'rate',color:'var(--bank)'}]},
     ]);
-    draw('cost-chart',[{title:'Nominal price and same-payment equivalent · CAD',shortTitle:'Price · CAD',lines:[
-      {key:'price',color:'var(--price)'},{key:'equivalent',color:'var(--adjusted)',dashed:true},
+    draw('cost-chart',[{title:`Index (${month(rows[0].period)} = 100)`,shortTitle:`Index (${rows[0].period} = 100)`,index:true,lines:[
+      {key:'priceIndex',color:'var(--price)'},{key:'paymentIndex',color:'var(--adjusted)',dashed:true},
     ]}]);
     inspect(index ?? rows.length-1);
   }
-  reference.addEventListener('change',render);
   let timer;
   window.addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(render,100);});
   render();

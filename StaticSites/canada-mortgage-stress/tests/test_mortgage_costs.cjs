@@ -8,13 +8,6 @@ const data = JSON.parse(fs.readFileSync(path.join(__dirname,'../data/series.json
 assert.equal(M.monthlyPayment(300000,5,0).toFixed(2),'1744.81');
 assert.ok(Math.abs(M.monthlyPayment(300000,0,0)-1000)<1e-8);
 assert.ok(Math.abs(M.monthlyPayment(500000,0,20)-400000/300)<1e-8);
-for (const rate of [0,2,4,6]) {
-  assert.ok(Math.abs(M.samePaymentPrice(900000,rate,rate)-900000)<1e-8);
-  const equivalent=M.samePaymentPrice(900000,rate,4);
-  assert.ok(Math.abs(M.monthlyPayment(equivalent,4)-M.monthlyPayment(900000,rate))<1e-8);
-}
-assert.ok(M.samePaymentPrice(900000,6,4)>900000);
-assert.ok(M.samePaymentPrice(900000,2,4)<900000);
 assert.ok(M.monthlyPayment(900000,6)>M.monthlyPayment(900000,4));
 assert.ok(M.monthlyPayment(900000,4,20,30)<M.monthlyPayment(900000,4,20,25));
 assert.throws(()=>M.paymentFactor(-1));
@@ -25,10 +18,24 @@ assert.equal(rows.at(-1).period,'2026-09'); // October's benchmark has no matchi
 assert.equal(rows.length,165);
 assert.equal(rows.at(-1).price,917600);
 assert.equal(rows.at(-1).rate,4.66);
+assert.equal(rows[0].priceIndex,100);
+assert.equal(rows[0].paymentIndex,100);
+for (const row of rows) {
+  assert.ok(Math.abs(row.payment-M.monthlyPayment(row.price,row.rate))<1e-8);
+  assert.ok(Math.abs(row.paymentIndex-row.payment/rows[0].payment*100)<1e-8);
+}
+const constantPrices=structuredClone(data);
+for (const point of constantPrices.groups.find(g=>g.id==='benchmark').series[0].points) point.value=900000;
+const rateOnly=M.observations(constantPrices);
+assert.ok(rateOnly.every(row=>row.priceIndex===100));
+assert.ok(rateOnly.at(-1).paymentIndex>100); // Later historical rate exceeds starting rate.
+const constantRates=structuredClone(data);
+for (const point of constantRates.groups.find(g=>g.id==='mortgage_rates').series[0].points) point.value=4;
+assert.ok(M.observations(constantRates).every(row=>Math.abs(row.priceIndex-row.paymentIndex)<1e-8));
 const missing=structuredClone(data);
 missing.groups.find(g=>g.id==='mortgage_rates').series[0].points.pop();
 assert.equal(M.observations(missing).at(-1).period,'2026-08');
 const forecast=structuredClone(data);
 forecast.groups.find(g=>g.id==='mortgage_rates').series[0].points.at(-1).status='forecast';
 assert.equal(M.observations(forecast).at(-1).period,'2026-08');
-console.log('Mortgage-cost checks passed: FCAC payment, zero rate, same-payment identity, direction, exact-month join and forecast exclusion.');
+console.log('Mortgage-cost checks passed: FCAC payment, zero rate, historical monthly rates, price/payment indexes, direction, exact-month join and forecast exclusion.');

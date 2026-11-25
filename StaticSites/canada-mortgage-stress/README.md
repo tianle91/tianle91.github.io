@@ -105,27 +105,30 @@ quality-adjusted measure and are never spliced into that average-price history.
   aligned plots with the same monthly time axis and inspection cursor. Each has
   its own labelled original-unit axis; dollar prices and rates are not rebased
   onto an arbitrary common scale.
-- **Borrowing-cost comparison:** the published benchmark and the home price
-  that would generate the same mortgage payment at a chosen reference rate.
-  The reference defaults to 4%; options are 2–6%. Each month's readout also
-  shows its estimated principal-and-interest payment. The down payment is 20%
-  and amortization is 25 years for both sides of the comparison.
+- **Borrowing-cost comparison:** benchmark price and estimated mortgage-payment
+  burden, both indexed to 100 in the first shared month. Every month's payment
+  uses that month's observed mortgage rate, not one fixed reference rate. The
+  readout shows the original benchmark price, applicable mortgage rate, monthly
+  principal-and-interest payment, and both indexes. The down payment is held at
+  20% and amortization at 25 years throughout.
 
-A higher same-payment equivalent means a greater financing burden relative to
-that reference rate. It is a derived payment comparison, not a market valuation,
-inflation adjustment, total cost of ownership or income-based affordability
-index. It excludes taxes, maintenance, condo fees, insurance and transaction
-costs. Each month models a fresh loan at that month's rate; it does not track
-an existing loan or predict rates at renewal.
+For example, a payment index of 200 means twice the first month's estimated
+payment. If payments rise faster than benchmark prices, the change in borrowing
+costs has added to the modelled payment burden. This is a derived payment
+comparison, not a market valuation, inflation adjustment, total cost of ownership
+or income-based affordability index. It excludes taxes, maintenance, condo fees,
+insurance and transaction costs. Each month models a fresh loan at that month's
+rate; it does not track an existing loan or predict rates at renewal.
 
 For a nominal annual mortgage rate `r` (as a fraction), the equivalent monthly
 rate is `i = (1 + r/2)^(1/6) - 1`, using Canadian fixed-rate semi-annual
 compounding. With `n = 300` monthly payments, the payment factor is
 `a(r) = i / (1 - (1+i)^(-n))`; at zero interest it is `1/n`. Monthly payment is
-`benchmark × 0.8 × a(r)`. The same-payment price at reference rate `r0` is
-`benchmark × a(r) / a(r0)`. The identical down-payment fraction cancels in that
-price ratio. The calculation is checked against FCAC's published example:
-a $300,000 loan, 25 years, 5% produces $1,744.81/month.
+`benchmark × 0.8 × a(r)`. The price index is `benchmark / first benchmark × 100`;
+the payment index is `payment / first payment × 100`. The calculation is checked
+against FCAC's published example: a $300,000 loan, 25 years, 5% produces
+$1,744.81/month. Additional tests hold price constant to isolate the effect of
+historical rates and hold rates constant to confirm the two indexes coincide.
 
 The November 2026 CREA download supplies a single revised vintage of monthly
 non-seasonally-adjusted `GREATER_TORONTO / Composite_Benchmark` observations,

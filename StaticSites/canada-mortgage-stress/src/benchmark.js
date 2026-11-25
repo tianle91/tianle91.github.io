@@ -1,6 +1,5 @@
-/* Aligned original-unit plots plus a separately labelled payment-equivalent price. */
+/* Historical monthly rates drive each payment; price and payment indexes share a base month. */
 (() => {
-  const reference = $('reference-rate');
   let rows, index, plots = [];
   const money = value => '$' + Math.round(value).toLocaleString('en-CA');
   const month = period => new Date(period+'-01T00:00:00Z').toLocaleDateString('en-CA',
@@ -17,11 +16,13 @@
     $('benchmark-rate').textContent = row.rate.toFixed(2)+'%';
     $('cost-period').textContent = month(row.period);
     $('cost-actual').textContent = money(row.price);
-    $('cost-equivalent').textContent = money(row.equivalent);
+    $('cost-rate').textContent = row.rate.toFixed(2)+'%';
+    $('cost-price-index').textContent = row.priceIndex.toFixed(1);
+    $('cost-payment-index').textContent = row.paymentIndex.toFixed(1);
     $('cost-payment').textContent = money(row.payment)+'/month';
-    $('cost-reference-label').textContent = `Same-payment price at ${Number(reference.value).toFixed(1)}%`;
-    $('cost-explanation').textContent = `The ${money(row.price)} benchmark at ${row.rate.toFixed(2)}% costs about ${money(row.payment)}/month in principal and interest. `+
-      `At ${Number(reference.value).toFixed(1)}%, a ${money(row.equivalent)} home would have the same payment, with the same 20% down and 25-year amortization.`;
+    $('cost-explanation').textContent = `At ${month(row.period)}'s observed ${row.rate.toFixed(2)}% mortgage rate, `+
+      `the ${money(row.price)} benchmark costs about ${money(row.payment)}/month in principal and interest. `+
+      `The index compares this with ${month(rows[0].period)} (${money(rows[0].payment)}/month at ${rows[0].rate.toFixed(2)}%).`;
   }
   function draw(id, panels) {
     const container = $(id);
@@ -33,13 +34,13 @@
     const xAt = i => left + i/(rows.length-1)*(width-left-right);
     const svg = svgNode('svg',{viewBox:`0 0 ${width} ${height}`,role:'img',tabindex:'0',
       'aria-label':(panels.length===2 ? 'Greater Toronto benchmark price and Canadian mortgage rate, in aligned panels with separate units.' :
-        `Greater Toronto benchmark and same-payment price at ${reference.value} percent.`)+
+        'Greater Toronto benchmark price and mortgage-payment burden, both indexed to the first shared month using historical monthly mortgage rates.')+
         ' Use left and right arrows to inspect months. Home and End jump to the edges.'});
     container.replaceChildren(svg);
     panels.forEach((panel,panelIndex)=>{
       const panelTop = top+panelIndex*(panelHeight+gap);
       const maximum = Math.max(...rows.flatMap(row=>panel.lines.map(line=>row[line.key])));
-      const step = panel.rate ? Math.max(1,Math.ceil(maximum/4)) : Math.max(100000,Math.ceil(maximum/400000)*100000);
+      const step = panel.rate ? Math.max(1,Math.ceil(maximum/4)) : panel.index ? 50 : Math.max(100000,Math.ceil(maximum/400000)*100000);
       const high = Math.ceil(maximum/step)*step;
       const yAt = value => panelTop+panelHeight-value/high*panelHeight;
       svg.append(svgNode('text',{x:left,y:panelTop-10,class:'axis-title'},width < 480 ? panel.shortTitle : panel.title));
@@ -47,7 +48,7 @@
         const y = yAt(value);
         svg.append(svgNode('line',{x1:left,x2:width-right,y1:y,y2:y,class:'gridline'}));
         svg.append(svgNode('text',{x:left-8,y:y+4,'text-anchor':'end',class:'axis'},
-          panel.rate ? value+'%' : '$'+(value/1000000).toFixed(1)+'m'));
+          panel.rate ? value+'%' : panel.index ? String(value) : '$'+(value/1000000).toFixed(1)+'m'));
       }
       for (const line of panel.lines) {
         const path = rows.map((row,i)=>(i?'L':'M')+xAt(i).toFixed(2)+','+yAt(row[line.key]).toFixed(2)).join(' ');
@@ -86,7 +87,7 @@
     plots.push({cursor,xAt});
   }
   function render() {
-    rows=MortgageCosts.observations(DATA,Number(reference.value));
+    rows=MortgageCosts.observations(DATA);
     plots=[];
     const dates=`${month(rows[0].period)}–${month(rows.at(-1).period)} · Shared monthly observations only`;
     $('benchmark-window').textContent=dates;
@@ -95,12 +96,11 @@
       {title:'Composite benchmark · CAD',shortTitle:'Benchmark · CAD',lines:[{key:'price',color:'var(--price)'}]},
       {title:'Uninsured fixed mortgage rate · 5+ years',shortTitle:'Mortgage rate · %',rate:true,lines:[{key:'rate',color:'var(--bank)'}]},
     ]);
-    draw('cost-chart',[{title:'Nominal price and same-payment equivalent · CAD',shortTitle:'Price · CAD',lines:[
-      {key:'price',color:'var(--price)'},{key:'equivalent',color:'var(--adjusted)',dashed:true},
+    draw('cost-chart',[{title:`Index (${month(rows[0].period)} = 100)`,shortTitle:`Index (${rows[0].period} = 100)`,index:true,lines:[
+      {key:'priceIndex',color:'var(--price)'},{key:'paymentIndex',color:'var(--adjusted)',dashed:true},
     ]}]);
     inspect(index ?? rows.length-1);
   }
-  reference.addEventListener('change',render);
   let timer;
   window.addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(render,100);});
   render();

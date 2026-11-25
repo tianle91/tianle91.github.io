@@ -17,11 +17,7 @@
       throw new Error('Invalid price or down payment');
     return price * (1-down/100) * paymentFactor(rate, years);
   }
-  function samePaymentPrice(price, rate, reference=4, years=25) {
-    if (!Number.isFinite(price) || price < 0) throw new Error('Invalid price');
-    return price * paymentFactor(rate,years) / paymentFactor(reference,years);
-  }
-  function observations(data, reference=4) {
+  function observations(data) {
     const prices = data.groups.find(group => group.id === 'benchmark').series[0].points;
     const rates = data.groups.find(group => group.id === 'mortgage_rates').series[0].points;
     const byMonth = new Map(rates.filter(point=>point.status === 'observed').map(point=>[point.period,point.value]));
@@ -29,10 +25,11 @@
     const rows = prices.filter(point=>point.status === 'observed' && byMonth.has(point.period)).map(point=>{
       const rate = byMonth.get(point.period);
       return {period:point.period,price:point.value,rate,
-        payment:monthlyPayment(point.value,rate), equivalent:samePaymentPrice(point.value,rate,reference)};
+        payment:monthlyPayment(point.value,rate)};
     });
     if (rows.length < 2) throw new Error('No shared benchmark and mortgage-rate history');
-    return rows;
+    const base = rows[0];
+    return rows.map(row=>({...row,priceIndex:row.price/base.price*100,paymentIndex:row.payment/base.payment*100}));
   }
-  return {paymentFactor,monthlyPayment,samePaymentPrice,observations};
+  return {paymentFactor,monthlyPayment,observations};
 });
